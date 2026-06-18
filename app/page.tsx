@@ -1,20 +1,26 @@
 export default function Home() {
   return (
-    <main style={{padding:"40px", fontFamily:"Arial"}}>
+    <main style={{padding:"30px"}}>
       <h1>BAMToolz</h1>
-      <h2>Ball Advanced Maintenance Tools</h2>
+
+      <h3>AI Maintenance Scanner</h3>
 
       <p>
-        AI powered manufacturing maintenance and equipment intelligence platform.
+        Upload equipment tags, machine plates,
+        wiring diagrams, and maintenance logs.
       </p>
 
-      <ul>
-        <li>Scan machine tags</li>
-        <li>Store equipment manuals</li>
-        <li>Create spare parts lists</li>
-        <li>Troubleshoot downtime</li>
-        <li>Support PLC and controls documentation</li>
-      </ul>
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+      />
+
+      <br/><br/>
+
+      <button>
+        Scan Equipment
+      </button>
     </main>
   );
 }
