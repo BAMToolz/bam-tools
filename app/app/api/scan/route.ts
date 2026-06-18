@@ -1,52 +1,40 @@
-"use client";
+import { NextResponse } from "next/server";
 
-import { useState } from "react";
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
 
-export default function Home() {
-  const [file, setFile] = useState<File | null>(null);
-  const [result, setResult] = useState("");
-  const [loading, setLoading] = useState(false);
+    const image = formData.get("image") as File | null;
 
-  async function scanFile() {
-    if (!file) return alert("Choose a picture first");
+    if (!image) {
+      return NextResponse.json(
+        { error: "No image uploaded" },
+        { status: 400 }
+      );
+    }
 
-    setLoading(true);
-    setResult("");
+    return NextResponse.json({
+      result: `
+BAMToolz Scan Complete ✅
 
-    const formData = new FormData();
-    formData.append("file", file);
+File received:
+${image.name}
 
-    const res = await fetch("/api/scan", {
-      method: "POST",
-      body: formData,
+AI Maintenance System Ready:
+
+• Equipment Tag Reading
+• Model & Serial Numbers
+• Parts Identification
+• Manuals
+• Troubleshooting
+• Controls Support
+      `,
     });
 
-    const data = await res.json();
-    setResult(data.result || data.error || "No result");
-    setLoading(false);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "BAMToolz scan failed" },
+      { status: 500 }
+    );
   }
-
-  return (
-    <main style={{ padding: "30px", fontFamily: "Arial" }}>
-      <h1>BAMToolz</h1>
-      <h3>AI Maintenance Scanner</h3>
-
-      <input
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onChange={(e) => setFile(e.target.files?.[0] || null)}
-      />
-
-      <br /><br />
-
-      <button onClick={scanFile}>
-        {loading ? "Reading..." : "Read Picture / File"}
-      </button>
-
-      <pre style={{ whiteSpace: "pre-wrap", marginTop: "20px" }}>
-        {result}
-      </pre>
-    </main>
-  );
 }
