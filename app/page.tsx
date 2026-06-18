@@ -3,97 +3,30 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [file, setFile] = useState<File | null>(null);
-  const [result, setResult] = useState(
-    "BAMToolz ready. Take a photo."
-  );
+  const [text, setText] = useState("Ready");
 
   async function scan() {
-    if (!file) {
-      setResult("Please take a photo first.");
-      return;
-    }
+    setText("Button clicked...");
 
-    setResult("Scanning... please wait.");
+    const res = await fetch("/api/scan", {
+      method: "POST",
+      body: new FormData(),
+    });
 
-    const form = new FormData();
-    form.append("image", file);
+    const data = await res.json();
 
-    try {
-      const res = await fetch("/api/scan", {
-        method: "POST",
-        body: form,
-      });
-
-      const data = await res.json();
-
-      setResult(
-        data.result || data.error || "Scan finished."
-      );
-
-    } catch (error) {
-      setResult(
-        "Connection error. Scanner did not answer."
-      );
-    }
+    setText(JSON.stringify(data));
   }
 
   return (
-    <main
-      style={{
-        padding: 30,
-        fontFamily: "Arial",
-      }}
-    >
+    <main style={{ padding: 30 }}>
       <h1>BAMToolz 🔧</h1>
 
-      <h3>
-        Ball Advanced Maintenance Tools
-      </h3>
-
-      <p>
-        AI Manufacturing Maintenance Assistant
-      </p>
-
-      <input
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onChange={(e) => {
-          const picked =
-            e.target.files?.[0] || null;
-
-          setFile(picked);
-
-          if (picked) {
-            setResult(
-              "Photo loaded. Press Scan Equipment."
-            );
-          }
-        }}
-      />
-
-      <br />
-      <br />
-
-      <button
-        onClick={scan}
-        style={{
-          padding: 15,
-          fontSize: 18,
-        }}
-      >
-        Scan Equipment
+      <button onClick={scan}>
+        TEST SCANNER
       </button>
 
-      <pre
-        style={{
-          marginTop: 20,
-          whiteSpace: "pre-wrap",
-        }}
-      >
-        {result}
-      </pre>
+      <h2>{text}</h2>
     </main>
   );
 }
