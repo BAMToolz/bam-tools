@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
-  const [result, setResult] = useState("Ready. Take a photo.");
+  const [result, setResult] = useState("Ready. Choose a photo.");
 
   async function scan() {
     if (!file) {
@@ -12,18 +12,22 @@ export default function Home() {
       return;
     }
 
-    setResult("Scanning... please wait.");
+    setResult("Scanning...");
 
     const form = new FormData();
     form.append("image", file);
 
-    const res = await fetch("/api/scan", {
-      method: "POST",
-      body: form,
-    });
+    try {
+      const res = await fetch("/api/scan", {
+        method: "POST",
+        body: form,
+      });
 
-    const data = await res.json();
-    setResult(data.result || data.error);
+      const data = await res.json();
+      setResult(data.result || data.error);
+    } catch {
+      setResult("Upload failed. Try a smaller photo.");
+    }
   }
 
   return (
@@ -33,11 +37,14 @@ export default function Home() {
       <input
         type="file"
         accept="image/*"
-        capture="environment"
         onChange={(e) => {
           const picked = e.target.files?.[0] || null;
           setFile(picked);
-          setResult("Photo loaded. Tap Scan Equipment.");
+          setResult(
+            picked
+              ? `Photo loaded: ${picked.name}`
+              : "No photo selected."
+          );
         }}
       />
 
@@ -46,7 +53,7 @@ export default function Home() {
 
       <button onClick={scan}>Scan Equipment</button>
 
-      <pre>{result}</pre>
+      <pre style={{ whiteSpace: "pre-wrap" }}>{result}</pre>
     </main>
   );
 }
