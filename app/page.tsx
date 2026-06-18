@@ -3,30 +3,50 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [text, setText] = useState("Ready");
+  const [file, setFile] = useState<File | null>(null);
+  const [result, setResult] = useState("Ready. Take a photo.");
 
   async function scan() {
-    setText("Button clicked...");
+    if (!file) {
+      setResult("No photo selected.");
+      return;
+    }
+
+    setResult("Scanning... please wait.");
+
+    const form = new FormData();
+    form.append("image", file);
 
     const res = await fetch("/api/scan", {
       method: "POST",
-      body: new FormData(),
+      body: form,
     });
 
     const data = await res.json();
-
-    setText(JSON.stringify(data));
+    setResult(data.result || data.error);
   }
 
   return (
     <main style={{ padding: 30 }}>
       <h1>BAMToolz 🔧</h1>
 
-      <button onClick={scan}>
-        TEST SCANNER
-      </button>
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onChange={(e) => {
+          const picked = e.target.files?.[0] || null;
+          setFile(picked);
+          setResult("Photo loaded. Tap Scan Equipment.");
+        }}
+      />
 
-      <h2>{text}</h2>
+      <br />
+      <br />
+
+      <button onClick={scan}>Scan Equipment</button>
+
+      <pre>{result}</pre>
     </main>
   );
 }
