@@ -3,26 +3,35 @@
 import { useState } from "react";
 
 export default function ScannerPage() {
+  const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState("");
 
   async function runScan() {
-    setResult("Testing BAM Scan connection...");
+    if (!file) {
+      setResult("Select equipment photo first.");
+      return;
+    }
+
+    setResult("🔵 BAM Scan AI analyzing equipment...");
+
+    const formData = new FormData();
+    formData.append("image", file);
 
     try {
-      const res = await fetch("/api/scan", {
+      const response = await fetch("/api/scan", {
         method: "POST",
+        body: formData,
       });
 
-      const text = await res.text();
+      const data = await response.json();
 
       setResult(
-        "STATUS: " +
-          res.status +
-          "\n\nRESPONSE:\n" +
-          text
+        data.result ||
+          data.error ||
+          "No scan result returned."
       );
     } catch (error) {
-      setResult("BAM Scan connection failed before reaching API.");
+      setResult("Scanner connection failed.");
     }
   }
 
@@ -30,28 +39,43 @@ export default function ScannerPage() {
     <main
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(180deg, #003b73, #001f3f)",
+        background: "#123b70",
         color: "white",
-        padding: "28px",
+        padding: "40px",
         fontFamily: "Arial",
       }}
     >
       <h1>BAMToolz™</h1>
-      <h2>BAM Scan™ API Test</h2>
 
-      <button onClick={runScan}>TEST API CONNECTION</button>
+      <h2>BAM Scan™ AI</h2>
+
+      <p>
+        Upload machine tags, motors, panels,
+        fault screens, or equipment labels.
+      </p>
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) =>
+          setFile(e.target.files?.[0] || null)
+        }
+      />
+
+      <br />
+      <br />
+
+      <button onClick={runScan}>
+        📸 RUN AI SCAN
+      </button>
 
       <pre
         style={{
           marginTop: "25px",
-          background: "#d9e3ec",
-          color: "#003b73",
-          padding: "18px",
-          borderRadius: "12px",
           whiteSpace: "pre-wrap",
         }}
       >
-        {result || "No test yet."}
+        {result}
       </pre>
 
       <a href="/" style={{ color: "white" }}>
