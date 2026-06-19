@@ -3,27 +3,53 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(180deg,#003b73,#001f3f)",
-        color: "white",
+        background: "linear-gradient(180deg,#02050a,#061629,#000000)",
+        color: "#e8f4ff",
         padding: "30px",
         fontFamily: "Arial",
       }}
     >
-      <section style={{ textAlign: "center" }}>
+      <section
+        style={{
+          textAlign: "center",
+          border: "1px solid #0a84ff",
+          borderRadius: "22px",
+          padding: "35px",
+          boxShadow: "0 0 35px rgba(10,132,255,0.35)",
+        }}
+      >
         <div style={{ fontSize: "55px" }}>⚙️</div>
 
-        <h1 style={{ fontSize: "88px", margin: "0", letterSpacing: "8px" }}>
+        <h1
+          style={{
+            fontSize: "90px",
+            margin: "0",
+            letterSpacing: "10px",
+            color: "#0a84ff",
+            fontWeight: "900",
+          }}
+        >
           BAM
         </h1>
 
-        <h1 style={{ fontSize: "50px", margin: "0", letterSpacing: "10px" }}>
+        <h1
+          style={{
+            fontSize: "52px",
+            margin: "0",
+            letterSpacing: "12px",
+            color: "#e8f4ff",
+            fontWeight: "900",
+          }}
+        >
           TOOLZ™
         </h1>
 
-        <p>Ball Advanced Maintenance Tools</p>
+        <p style={{ color: "#8fc7ff" }}>
+          Ball Advanced Maintenance Tools
+        </p>
 
         <h2>Preserving Presence™</h2>
-        <h3>In Every Machine</h3>
+        <h3 style={{ color: "#0a84ff" }}>In Every Machine</h3>
 
         <p>
           AI-powered equipment intelligence for manufacturing, aerospace,
@@ -33,40 +59,48 @@ export default function Home() {
         <a
           href="/scanner"
           style={{
-            background: "#d9e3ec",
-            color: "#003b73",
-            padding: "16px 28px",
-            borderRadius: "14px",
+            background: "#0a84ff",
+            color: "black",
+            padding: "16px 30px",
+            borderRadius: "10px",
             display: "inline-block",
             marginTop: "20px",
             fontWeight: "900",
             textDecoration: "none",
+            boxShadow: "0 0 20px rgba(10,132,255,0.8)",
           }}
         >
           📸 Launch BAM Scan™
         </a>
       </section>
 
-      <section style={{ marginTop: "50px" }}>
+      <section
+        style={{
+          marginTop: "35px",
+          border: "1px solid #0a84ff",
+          borderRadius: "18px",
+          padding: "25px",
+          background: "rgba(10,132,255,0.08)",
+        }}
+      >
         <h2>🏷 Existing Tag Integration</h2>
         <p>
-          BAMToolz works with barcodes, QR codes, asset tags, serial plates, and
-          equipment IDs already used by facilities.
+          BAMToolz works with barcodes, QR codes, asset tags, serial plates,
+          and equipment IDs already used by facilities.
         </p>
         <h3>Don’t replace facility knowledge. Unlock it.</h3>
       </section>
 
       <section
         style={{
-          marginTop: "40px",
-          background: "#d9e3ec",
-          color: "#003b73",
-          padding: "25px",
+          marginTop: "35px",
+          border: "1px solid #0a84ff",
           borderRadius: "18px",
-          fontWeight: "bold",
+          padding: "25px",
+          background: "rgba(255,255,255,0.04)",
         }}
       >
-        <h2>🏭 BAM Hub™</h2>
+        <h2 style={{ color: "#0a84ff" }}>🏭 BAM Hub™</h2>
         <h3>Every Machine Gets a Memory.</h3>
 
         <p>⚙ Equipment profiles</p>
@@ -80,17 +114,17 @@ export default function Home() {
 
       <section
         style={{
-          marginTop: "40px",
-          border: "2px solid #d9e3ec",
+          marginTop: "35px",
+          border: "1px solid #0a84ff",
           borderRadius: "18px",
           padding: "25px",
+          background: "rgba(10,132,255,0.08)",
         }}
       >
         <h2>💰 Asset-Based Pricing</h2>
 
         <p>
-          BAMToolz is designed to scale by the number of machines protected in
-          each facility.
+          BAMToolz scales by the number of machines protected in each facility.
         </p>
 
         <h3>Starter Facility</h3>
@@ -108,13 +142,19 @@ export default function Home() {
         </p>
       </section>
 
-      <section style={{ marginTop: "40px" }}>
+      <section
+        style={{
+          marginTop: "35px",
+          borderTop: "1px solid #0a84ff",
+          paddingTop: "25px",
+        }}
+      >
         <h2>BAMToolz™ Trust</h2>
         <p>🔒 Customer equipment data belongs to the customer.</p>
         <p>Built by maintenance. For maintenance.</p>
       </section>
 
-      <footer style={{ textAlign: "center", marginTop: "50px" }}>
+      <footer style={{ textAlign: "center", marginTop: "50px", color: "#8fc7ff" }}>
         © 2026 BAMToolz™
       </footer>
     </main>
