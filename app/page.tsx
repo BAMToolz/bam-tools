@@ -178,20 +178,43 @@ export default function Home() {
         }}
       >
         <h2>💰 Asset-Based Pricing</h2>
-        <p>BAMToolz scales by the number of machines protected in each facility.</p>
+
+        <p>
+          BAMToolz scales by the number of machines protected in each facility.
+        </p>
 
         <h3>Starter Facility</h3>
-        <p>100 assets × $5 per asset/month = $500/month</p>
+        <p>100 assets</p>
+        <p>$5 per asset / month</p>
 
         <h3>Medium Facility</h3>
-        <p>1,000 assets × $3 per asset/month = $3,000/month</p>
+        <p>1,000 assets</p>
+        <p>$3 per asset / month</p>
 
         <h3>Large Facility</h3>
-        <p>10,000 assets × $1.50 per asset/month = $15,000/month</p>
+        <p>10,000 assets</p>
+        <p>$1.50 per asset / month</p>
 
         <p>
           Every machine gets a memory. Every asset becomes searchable,
           traceable, and easier to maintain.
+        </p>
+      </section>
+
+      <section
+        style={{
+          marginTop: "35px",
+          border: "1px solid #0a84ff",
+          borderRadius: "18px",
+          padding: "25px",
+          background: "rgba(255,255,255,0.04)",
+        }}
+      >
+        <h2>No Breaks In The Future™</h2>
+
+        <p>
+          Machines should not lose their history. Facilities should not lose
+          their knowledge. Technicians should not start from zero.
         </p>
       </section>
 
@@ -207,7 +230,13 @@ export default function Home() {
         <p>Built by maintenance. For maintenance.</p>
       </section>
 
-      <footer style={{ textAlign: "center", marginTop: "50px", color: "#8fc7ff" }}>
+      <footer
+        style={{
+          textAlign: "center",
+          marginTop: "50px",
+          color: "#8fc7ff",
+        }}
+      >
         © 2026 BAMToolz™
       </footer>
     </main>
