@@ -13,7 +13,7 @@ export default function Home() {
           and build better maintenance history.
         </p>
 
-        <<a className="scanButton" href="/scanner">
+        <a className="scanButton" href="/scanner">
           📸 SCAN EQUIPMENT
         </a>
       </section>
