@@ -3,61 +3,37 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        background: "#000000",
+        background: "#000",
         color: "#e8f4ff",
         padding: "22px",
         fontFamily:
           "Arial Rounded MT Bold, Arial, Helvetica, sans-serif",
       }}
     >
-      <section
-        style={{
-          textAlign: "center",
-          border: "2px solid #0077ff",
-          borderRadius: "28px",
-          padding: "30px 18px",
-          background: "#03070d",
-          boxShadow: "0 0 40px rgba(0,119,255,.45)",
-        }}
-      >
+
+      <section style={card}>
         <h1
           style={{
-            color: "#0077ff",
-            fontSize: "46px",
-            fontStyle: "italic",
+            color:"#0077ff",
+            fontSize:"46px",
+            fontStyle:"italic",
           }}
         >
           BAMToolz™
         </h1>
 
-        <h2 style={{ color: "#0077ff" }}>
+        <h2 style={{color:"#0077ff"}}>
           Preserving Presence™
         </h2>
 
         <h3>In Every Machine</h3>
 
         <p>
-          Ball Advanced Maintenance Tools
-        </p>
-
-        <p>
           AI-powered equipment intelligence for manufacturing,
-          aerospace, hospitals, and critical facilities.
+          hospitals, aerospace, and critical facilities.
         </p>
 
-        <a
-          href="/scanner"
-          style={{
-            display: "inline-block",
-            marginTop: "20px",
-            background: "#0077ff",
-            color: "#000",
-            padding: "18px 32px",
-            borderRadius: "999px",
-            fontWeight: "900",
-            textDecoration: "none",
-          }}
-        >
+        <a href="/scanner" style={button}>
           📸 Launch BAM Scan™
         </a>
       </section>
@@ -71,21 +47,21 @@ export default function Home() {
           asset tags, serial plates, and equipment IDs.
         </p>
 
-        <h3 style={{ color:"#0077ff" }}>
-          Don’t replace facility knowledge.
-          Unlock it.
+        <h3 style={{color:"#0077ff"}}>
+          Don’t replace facility knowledge. Unlock it.
         </h3>
       </section>
 
 
       <section style={card}>
-        <h2 style={{ color:"#0077ff" }}>
+        <h2 style={{color:"#0077ff"}}>
           🏭 BAM Hub™
         </h2>
 
         <h3>Every Machine Gets a Memory™</h3>
 
         <p>⚙ Equipment Profiles</p>
+        <p>📍 Locations</p>
         <p>📚 Manuals & Schematics</p>
         <p>🔧 Parts Intelligence</p>
         <p>🛠 Repair History</p>
@@ -94,7 +70,38 @@ export default function Home() {
 
 
       <section style={card}>
-        <h2 style={{ color:"#0077ff" }}>
+        <h2 style={{color:"#0077ff"}}>
+          🏥 Tagged Repair Tracking™
+        </h2>
+
+        <h3>
+          Tag It. Track It. Return It Safely.
+        </h3>
+
+        <p>
+          Designed for hospitals, manufacturing floors,
+          and critical facilities where equipment moves.
+        </p>
+
+        <p>🏷 Scan asset tags and barcodes</p>
+        <p>📍 Track room, department, and location</p>
+        <p>🛠 Needs Repair</p>
+        <p>⏳ Waiting On Parts</p>
+        <p>🔧 Under Repair</p>
+        <p>✅ Back In Service</p>
+        <p>👷 Technician assignment</p>
+        <p>📋 Repair notes and timestamps</p>
+        <p>🔒 Chain of custody tracking</p>
+
+        <h3 style={{color:"#0077ff"}}>
+          Know what is down, where it is,
+          and when it returns.
+        </h3>
+      </section>
+
+
+      <section style={card}>
+        <h2 style={{color:"#0077ff"}}>
           🦺 BAM Safety™
         </h2>
 
@@ -102,13 +109,13 @@ export default function Home() {
           Safety Intelligence Before The Repair Starts
         </h3>
 
-        <p>🔒 Lockout / Tagout Information</p>
+        <p>🔒 Lockout / Tagout</p>
         <p>⚡ Electrical Hazards</p>
         <p>💨 Hydraulic & Pneumatic Energy</p>
         <p>🔥 Machine Hazards</p>
-        <p>📋 Safety Procedures</p>
+        <p>📋 Procedures</p>
 
-        <h3 style={{ color:"#0077ff" }}>
+        <h3 style={{color:"#0077ff"}}>
           Protect The Technician.
           Protect The Facility.
         </h3>
@@ -122,24 +129,21 @@ export default function Home() {
           BAMToolz scales by machines protected.
         </p>
 
-        <h3 style={{ color:"#0077ff" }}>
+        <h3 style={{color:"#0077ff"}}>
           Starter Facility
         </h3>
-
         <p>100 assets</p>
         <p>$5 per asset / month</p>
 
-        <h3 style={{ color:"#0077ff" }}>
+        <h3 style={{color:"#0077ff"}}>
           Medium Facility
         </h3>
-
         <p>1,000 assets</p>
         <p>$3 per asset / month</p>
 
-        <h3 style={{ color:"#0077ff" }}>
+        <h3 style={{color:"#0077ff"}}>
           Large Facility
         </h3>
-
         <p>10,000 assets</p>
         <p>$1.50 per asset / month</p>
       </section>
@@ -173,31 +177,18 @@ export default function Home() {
         </p>
 
         <p>
-          Preserving Presence™
-        </p>
-
-        <p>
-          <a href="/terms" style={link}>
-            Terms
-          </a>
-
+          <a href="/terms" style={link}>Terms</a>
           {" | "}
-
-          <a href="/privacy" style={link}>
-            Privacy
-          </a>
-
+          <a href="/privacy" style={link}>Privacy</a>
           {" | "}
-
-          <a href="/contact" style={link}>
-            Contact
-          </a>
+          <a href="/contact" style={link}>Contact</a>
         </p>
 
         <p>
           Ball Advanced Maintenance Tools
         </p>
       </footer>
+
     </main>
   );
 }
@@ -212,7 +203,17 @@ const card = {
 };
 
 
+const button = {
+  display:"inline-block",
+  background:"#0077ff",
+  color:"#000",
+  padding:"17px 32px",
+  borderRadius:"999px",
+  fontWeight:"900",
+  textDecoration:"none",
+};
+
+
 const link = {
   color:"#0077ff",
-  textDecoration:"underline",
 };
