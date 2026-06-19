@@ -5,8 +5,9 @@ export default function Home() {
         minHeight: "100vh",
         background: "linear-gradient(180deg,#02050a,#061629,#000000)",
         color: "#e8f4ff",
-        padding: "30px",
+        padding: "22px",
         fontFamily: "Arial",
+        overflowX: "hidden",
       }}
     >
       <section
@@ -14,51 +15,49 @@ export default function Home() {
           textAlign: "center",
           border: "1px solid #0a84ff",
           borderRadius: "22px",
-          padding: "35px",
+          padding: "28px 18px",
           boxShadow: "0 0 35px rgba(10,132,255,0.35)",
         }}
       >
         <div
           style={{
-            margin: "0 auto 25px",
-            width: "170px",
-            height: "110px",
+            margin: "0 auto 22px",
+            width: "145px",
+            height: "95px",
             position: "relative",
           }}
         >
           <div
             style={{
               position: "absolute",
-              left: "10px",
+              left: "8px",
               top: "5px",
-              width: "70px",
-              height: "100px",
+              width: "62px",
+              height: "85px",
               background: "#0a84ff",
               clipPath: "polygon(0 0, 100% 25%, 100% 75%, 0 100%)",
               boxShadow: "0 0 25px rgba(10,132,255,0.8)",
             }}
           />
-
           <div
             style={{
               position: "absolute",
-              right: "10px",
-              top: "18px",
-              width: "55px",
-              height: "75px",
+              right: "8px",
+              top: "16px",
+              width: "50px",
+              height: "65px",
               background: "#4db5ff",
               clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 80%)",
               boxShadow: "0 0 18px rgba(77,181,255,0.8)",
             }}
           />
-
           <div
             style={{
               position: "absolute",
-              left: "70px",
-              top: "35px",
-              width: "45px",
-              height: "40px",
+              left: "58px",
+              top: "32px",
+              width: "38px",
+              height: "34px",
               border: "6px solid #9bd7ff",
               transform: "rotate(-18deg)",
               background: "#061629",
@@ -68,19 +67,33 @@ export default function Home() {
 
         <h1
           style={{
-            fontSize: "58px",
+            fontSize: "74px",
             margin: "0",
-            letterSpacing: "2px",
+            lineHeight: "0.9",
+            letterSpacing: "8px",
             color: "#e8f4ff",
             fontWeight: "900",
           }}
         >
-          BAMToolz™
+          BAM
+        </h1>
+
+        <h1
+          style={{
+            fontSize: "46px",
+            margin: "8px 0 0",
+            lineHeight: "1",
+            letterSpacing: "7px",
+            color: "#e8f4ff",
+            fontWeight: "900",
+          }}
+        >
+          TOOLZ™
         </h1>
 
         <h2
           style={{
-            marginTop: "25px",
+            marginTop: "26px",
             color: "#0a84ff",
             letterSpacing: "2px",
           }}
@@ -165,10 +178,7 @@ export default function Home() {
         }}
       >
         <h2>💰 Asset-Based Pricing</h2>
-
-        <p>
-          BAMToolz scales by the number of machines protected in each facility.
-        </p>
+        <p>BAMToolz scales by the number of machines protected in each facility.</p>
 
         <h3>Starter Facility</h3>
         <p>100 assets × $5 per asset/month = $500/month</p>
@@ -197,13 +207,7 @@ export default function Home() {
         <p>Built by maintenance. For maintenance.</p>
       </section>
 
-      <footer
-        style={{
-          textAlign: "center",
-          marginTop: "50px",
-          color: "#8fc7ff",
-        }}
-      >
+      <footer style={{ textAlign: "center", marginTop: "50px", color: "#8fc7ff" }}>
         © 2026 BAMToolz™
       </footer>
     </main>
