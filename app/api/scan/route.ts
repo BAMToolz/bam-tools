@@ -2,21 +2,28 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const hasKey = !!process.env.OPENAI_API_KEY;
-
     const formData = await req.formData();
     const image = formData.get("image") as File | null;
 
     if (!image) {
-      return NextResponse.json({
-        error: "No image uploaded.",
-        hasKey,
-      });
+      return NextResponse.json(
+        { error: "No image uploaded." },
+        { status: 400 }
+      );
+    }
+
+    const hasKey = !!process.env.OPENAI_API_KEY;
+
+    if (!hasKey) {
+      return NextResponse.json(
+        { error: "OPENAI_API_KEY is missing in Vercel." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({
-      result: "✅ API reached successfully.",
-      hasKey,
+      result:
+        "✅ BAM Scan reached API. Image received. OpenAI key detected. Next step: reconnect vision.",
       imageName: image.name,
       imageType: image.type,
       imageSize: image.size,
@@ -26,8 +33,3 @@ export async function POST(req: Request) {
       {
         error: "BAM Scan API failed.",
         details: String(error?.message || error),
-      },
-      { status: 500 }
-    );
-  }
-}
