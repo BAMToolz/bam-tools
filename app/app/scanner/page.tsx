@@ -3,38 +3,16 @@
 import { useState } from "react";
 
 export default function ScannerPage() {
-  const [file, setFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState("");
   const [result, setResult] = useState("");
 
-  async function scan() {
-    if (!file) {
+  function runScan() {
+    if (!fileName) {
       setResult("Choose a photo first.");
       return;
     }
 
-    setResult("Scanning equipment...");
-
-    const form = new FormData();
-    form.append("image", file);
-
-    try {
-      const res = await fetch("/app/api/scan", {
-        method: "POST",
-        body: form,
-      });
-
-      const data = await res.json();
-
-      setResult(
-        data.result ||
-          data.error ||
-          "No scanner response."
-      );
-    } catch {
-      setResult(
-        "Scanner connection failed. Check API route."
-      );
-    }
+    setResult("✅ BAMToolz test scan working. Photo selected: " + fileName);
   }
 
   return (
@@ -47,38 +25,28 @@ export default function ScannerPage() {
         fontFamily: "Arial",
       }}
     >
-      <h1>BAMToolz Scanner</h1>
+      <h1>BAMToolz</h1>
+      <h2>AI Equipment Scanner</h2>
 
-      <p>
-        Upload equipment tags, motors,
-        panels, or machine plates.
-      </p>
+      <p>Upload a photo of a machine tag, motor plate, panel, or fault screen.</p>
 
       <input
         type="file"
         accept="image/*"
-        onChange={(e) =>
-          setFile(e.target.files?.[0] || null)
-        }
+        onChange={(e) => setFileName(e.target.files?.[0]?.name || "")}
       />
 
       <br />
       <br />
 
-      <button onClick={scan}>
-        📸 RUN SCAN
-      </button>
+      <button onClick={runScan}>📸 RUN SCAN</button>
 
       <h3>Result:</h3>
-
       <p>{result}</p>
 
       <br />
 
-      <a
-        href="/"
-        style={{ color: "white" }}
-      >
+      <a href="/" style={{ color: "white" }}>
         ← Back Home
       </a>
     </main>
