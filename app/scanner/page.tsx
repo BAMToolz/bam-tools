@@ -1,1 +1,1 @@
-scanner/page.tsx
+"use client";
