@@ -10,13 +10,7 @@ export default function Home() {
         fontFamily: "Arial",
       }}
     >
-      <section
-        style={{
-          textAlign: "center",
-          maxWidth: "900px",
-          margin: "0 auto",
-        }}
-      >
+      <section style={{ textAlign: "center" }}>
         <div
           style={{
             background: "#d9e3ec",
@@ -35,7 +29,6 @@ export default function Home() {
             fontSize: "78px",
             margin: "20px 0 0",
             letterSpacing: "6px",
-            fontWeight: "900",
           }}
         >
           BAM
@@ -46,7 +39,6 @@ export default function Home() {
             fontSize: "55px",
             margin: "0",
             letterSpacing: "8px",
-            fontWeight: "900",
           }}
         >
           TOOLZ™
@@ -54,23 +46,16 @@ export default function Home() {
 
         <h2>Ball Advanced Maintenance Tools</h2>
 
-        <h3>
-          AI Maintenance Intelligence Platform
-        </h3>
+        <h3>AI Maintenance Intelligence Platform</h3>
 
-        <p
-          style={{
-            fontSize: "20px",
-            lineHeight: "1.5",
-          }}
-        >
+        <p style={{ fontSize: "20px" }}>
           AI-powered equipment intelligence for manufacturing,
-          aerospace, and critical facilities.
+          aerospace, hospitals, and critical facilities.
         </p>
 
         <p>
-          Turning decades of maintenance knowledge into
-          instant equipment intelligence.
+          Turning decades of maintenance knowledge into instant
+          equipment intelligence.
         </p>
 
         <a
@@ -86,37 +71,57 @@ export default function Home() {
             fontWeight: "900",
           }}
         >
-          📸 LAUNCH BAM SCAN
+          📸 LAUNCH BAM SCAN™
         </a>
+      </section>
+
+      <section style={{ marginTop: "50px" }}>
+        <h2>⚙ Equipment ID</h2>
+        <p>Identify machines, motors, panels, and assets.</p>
+
+        <h2>🔧 Parts Intelligence</h2>
+        <p>Find parts and maintenance information faster.</p>
+
+        <h2>📚 Knowledge Hub</h2>
+        <p>Capture manuals, repairs, and technician knowledge.</p>
+
+        <h2>⚡ Controls Support</h2>
+        <p>PLC, VFD, sensors, wiring, and troubleshooting.</p>
       </section>
 
       <section
         style={{
-          marginTop: "50px",
-          display: "grid",
-          gap: "18px",
+          marginTop: "45px",
+          background: "#d9e3ec",
+          color: "#003b73",
+          padding: "25px",
+          borderRadius: "18px",
+          fontWeight: "bold",
         }}
       >
-        {[
-          ["⚙ Equipment ID", "Identify machines, motors, tags, and assets."],
-          ["🔧 Parts Intelligence", "Find parts and maintenance information faster."],
-          ["📚 Knowledge Hub", "Store manuals, notes, and repair history."],
-          ["⚡ Controls Support", "Assist PLC, VFD, sensors, and troubleshooting."],
-        ].map(([title, text]) => (
-          <div
-            key={title}
-            style={{
-              background: "#d9e3ec",
-              color: "#003b73",
-              padding: "22px",
-              borderRadius: "18px",
-              fontWeight: "bold",
-            }}
-          >
-            <h2>{title}</h2>
-            <p>{text}</p>
-          </div>
-        ))}
+        <h2>🏭 BAM Hub™</h2>
+
+        <h3>Every Machine Gets a Memory.</h3>
+
+        <p>
+          A facility intelligence hub that keeps equipment knowledge
+          organized, searchable, and available instantly.
+        </p>
+
+        <p>⚙ Equipment profiles and asset history</p>
+        <p>📍 Facility maps, locations, and asset tracking</p>
+        <p>🏢 Building, floor, room, and machine location</p>
+        <p>📚 Manuals, schematics, and documentation</p>
+        <p>🔧 Spare parts and replacement information</p>
+        <p>🛠 Technician repair notes and tribal knowledge</p>
+        <p>⚡ Faster troubleshooting and reduced downtime</p>
+
+        <h3>BAM Scan™ + BAM Hub™</h3>
+
+        <p>
+          Scan equipment → identify asset → locate machine →
+          access history → solve problems faster.
+        </p>
       </section>
 
       <section
@@ -132,6 +137,7 @@ export default function Home() {
         <p>🔒 Customer equipment data belongs to the customer.</p>
         <p>🏭 Built from real maintenance experience.</p>
         <p>🛠 Designed for technicians first.</p>
+        <p>📚 Protects facility knowledge.</p>
         <p>⚡ Built to reduce downtime safely.</p>
       </section>
 
