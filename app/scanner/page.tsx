@@ -12,7 +12,7 @@ export default function ScannerPage() {
       return;
     }
 
-    setResult("🔵 BAM Scan AI analyzing equipment...");
+    setResult("🔵 BAM Scan™ AI analyzing equipment...");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -28,10 +28,10 @@ export default function ScannerPage() {
       setResult(
         data.result ||
           data.error ||
-          "No scan result returned."
+          "No response returned."
       );
     } catch (error) {
-      setResult("Scanner connection failed.");
+      setResult("BAM Scan connection failed.");
     }
   }
 
@@ -39,19 +39,36 @@ export default function ScannerPage() {
     <main
       style={{
         minHeight: "100vh",
-        background: "#123b70",
+        background:
+          "linear-gradient(180deg,#003b73,#001f3f)",
         color: "white",
-        padding: "40px",
+        padding: "30px",
         fontFamily: "Arial",
       }}
     >
-      <h1>BAMToolz™</h1>
+      <h1
+        style={{
+          fontSize: "55px",
+          marginBottom: 0,
+        }}
+      >
+        BAM
+      </h1>
+
+      <h1
+        style={{
+          marginTop: 0,
+          letterSpacing: "5px",
+        }}
+      >
+        TOOLZ™
+      </h1>
 
       <h2>BAM Scan™ AI</h2>
 
       <p>
-        Upload machine tags, motors, panels,
-        fault screens, or equipment labels.
+        Scan equipment tags, motors, panels,
+        fault screens, and machine labels.
       </p>
 
       <input
@@ -65,18 +82,30 @@ export default function ScannerPage() {
       <br />
       <br />
 
-      <button onClick={runScan}>
+      <button
+        onClick={runScan}
+        style={{
+          padding: "15px",
+          fontWeight: "bold",
+        }}
+      >
         📸 RUN AI SCAN
       </button>
 
-      <pre
+      <div
         style={{
           marginTop: "25px",
+          background: "#d9e3ec",
+          color: "#003b73",
+          padding: "20px",
+          borderRadius: "15px",
           whiteSpace: "pre-wrap",
         }}
       >
-        {result}
-      </pre>
+        {result || "Waiting for scan."}
+      </div>
+
+      <br />
 
       <a href="/" style={{ color: "white" }}>
         ← Back Home
