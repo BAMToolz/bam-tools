@@ -1,36 +1,4 @@
-"use client";
-
-import { useState } from "react";
-
-export default function ScannerPage() {
-  const [file, setFile] = useState<File | null>(null);
-  const [result, setResult] = useState("");
-
-  async function scan() {
-    if (!file) {
-      setResult("Choose a photo first.");
-      return;
-    }
-
-    setResult("Scanning equipment...");
-
-    const form = new FormData();
-    form.append("image", file);
-
-    try {
-      const res = await fetch("/api/scan", {
-        method: "POST",
-        body: form,
-      });
-
-      const data = await res.json();
-
-      setResult(data.result || data.error || "No result returned.");
-    } catch {
-      setResult("Scanner connection failed.");
-    }
-  }
-
+export default function Home() {
   return (
     <main
       style={{
@@ -41,26 +9,87 @@ export default function ScannerPage() {
         fontFamily: "Arial",
       }}
     >
-      <h1>Scan Equipment</h1>
+      <section style={{ textAlign: "center" }}>
+        <h1
+          style={{
+            fontSize: "72px",
+            margin: "0",
+            fontWeight: "900",
+            letterSpacing: "5px",
+          }}
+        >
+          BAM
+        </h1>
 
-      <p>Upload a photo of a machine tag, motor plate, panel, or fault screen.</p>
+        <h1
+          style={{
+            fontSize: "54px",
+            margin: "0",
+            fontWeight: "900",
+            letterSpacing: "7px",
+          }}
+        >
+          TOOLZ™
+        </h1>
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => setFile(e.target.files?.[0] || null)}
-      />
+        <h2>Ball Advanced Maintenance Tools</h2>
 
-      <br />
-      <br />
+        <p style={{ fontSize: "20px" }}>
+          AI powered manufacturing, hospital facility, and industrial
+          maintenance intelligence.
+        </p>
 
-      <button onClick={scan}>📸 RUN SCAN</button>
+        <a
+          href="/scanner"
+          style={{
+            display: "inline-block",
+            background: "#d9e3ec",
+            color: "#003b73",
+            padding: "18px 35px",
+            borderRadius: "15px",
+            fontWeight: "bold",
+            textDecoration: "none",
+            marginTop: "25px",
+          }}
+        >
+          📸 SCAN EQUIPMENT
+        </a>
+      </section>
 
-      <p>{result}</p>
+      <section style={{ marginTop: "50px" }}>
+        <h2>⚙ Equipment ID</h2>
+        <p>Scan machine tags, motors, panels, and equipment information.</p>
 
-      <a href="/" style={{ color: "white" }}>
-        ← Back Home
-      </a>
+        <h2>🔧 Parts Finder</h2>
+        <p>Identify components and build spare parts lists.</p>
+
+        <h2>📚 Manuals</h2>
+        <p>Store equipment manuals and troubleshooting history.</p>
+
+        <h2>⚡ Controls Support</h2>
+        <p>PLC, VFD, sensors, wiring, and industrial automation support.</p>
+      </section>
+
+      <section
+        style={{
+          marginTop: "50px",
+          background: "#d9e3ec",
+          color: "#003b73",
+          padding: "25px",
+          borderRadius: "18px",
+        }}
+      >
+        <h2>BAMToolz™ Trust Principles</h2>
+        <p>🔒 Customer equipment data belongs to the customer.</p>
+        <p>🏭 Built from real maintenance and manufacturing experience.</p>
+        <p>🛠 Designed for technicians first.</p>
+        <p>📚 Improves access to knowledge without using private data.</p>
+        <p>⚡ Built to reduce downtime safely and responsibly.</p>
+      </section>
+
+      <footer style={{ marginTop: "50px", textAlign: "center" }}>
+        © 2026 BAMToolz™ — Built by maintenance. For maintenance.
+      </footer>
     </main>
   );
 }
