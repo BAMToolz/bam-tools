@@ -18,38 +18,34 @@ export default function Home() {
           boxShadow: "0 0 35px rgba(10,132,255,0.35)",
         }}
       >
-        <div style={{ fontSize: "55px" }}>⚙️</div>
-
-        <h1
+        <img
+          src="/logo.png"
+          alt="BAMToolz Logo"
           style={{
-            fontSize: "90px",
-            margin: "0",
-            letterSpacing: "10px",
+            width: "280px",
+            maxWidth: "90%",
+            borderRadius: "14px",
+            boxShadow: "0 0 35px rgba(10,132,255,0.6)",
+            background: "white",
+            padding: "10px",
+          }}
+        />
+
+        <h2
+          style={{
+            marginTop: "25px",
             color: "#0a84ff",
-            fontWeight: "900",
+            letterSpacing: "2px",
           }}
         >
-          BAM
-        </h1>
+          Preserving Presence™
+        </h2>
 
-        <h1
-          style={{
-            fontSize: "52px",
-            margin: "0",
-            letterSpacing: "12px",
-            color: "#e8f4ff",
-            fontWeight: "900",
-          }}
-        >
-          TOOLZ™
-        </h1>
+        <h3>In Every Machine</h3>
 
         <p style={{ color: "#8fc7ff" }}>
           Ball Advanced Maintenance Tools
         </p>
-
-        <h2>Preserving Presence™</h2>
-        <h3 style={{ color: "#0a84ff" }}>In Every Machine</h3>
 
         <p>
           AI-powered equipment intelligence for manufacturing, aerospace,
@@ -154,7 +150,13 @@ export default function Home() {
         <p>Built by maintenance. For maintenance.</p>
       </section>
 
-      <footer style={{ textAlign: "center", marginTop: "50px", color: "#8fc7ff" }}>
+      <footer
+        style={{
+          textAlign: "center",
+          marginTop: "50px",
+          color: "#8fc7ff",
+        }}
+      >
         © 2026 BAMToolz™
       </footer>
     </main>
