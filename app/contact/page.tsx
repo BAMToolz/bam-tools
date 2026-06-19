@@ -12,19 +12,12 @@ export default function ContactPage() {
       <h1 style={{ color: "#0077ff" }}>Contact BAMToolz™</h1>
 
       <p>
-        BAMToolz™ is building facility intelligence for maintenance,
-        safety, and machine knowledge.
-      </p>
-
-      <h2>BAMToolz™ Support</h2>
-
-      <p>
-        For demos, support, partnerships, or early facility conversations,
+        For support, demos, partnerships, or early facility conversations,
         contact BAMToolz™.
       </p>
 
       <a
-        href="mailto:your-email@example.com?subject=BAMToolz%20Contact"
+        href="mailto:bamtoolz@gmail.com?subject=BAMToolz%20Contact"
         style={{
           display: "inline-block",
           background: "#0077ff",
