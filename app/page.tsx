@@ -18,18 +18,65 @@ export default function Home() {
           boxShadow: "0 0 35px rgba(10,132,255,0.35)",
         }}
       >
-        <img
-          src="/logo.png"
-          alt="BAMToolz Logo"
+        <div
           style={{
-            width: "280px",
-            maxWidth: "90%",
-            borderRadius: "14px",
-            boxShadow: "0 0 35px rgba(10,132,255,0.6)",
-            background: "white",
-            padding: "10px",
+            margin: "0 auto 25px",
+            width: "170px",
+            height: "110px",
+            position: "relative",
           }}
-        />
+        >
+          <div
+            style={{
+              position: "absolute",
+              left: "10px",
+              top: "5px",
+              width: "70px",
+              height: "100px",
+              background: "#0a84ff",
+              clipPath: "polygon(0 0, 100% 25%, 100% 75%, 0 100%)",
+              boxShadow: "0 0 25px rgba(10,132,255,0.8)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "18px",
+              width: "55px",
+              height: "75px",
+              background: "#4db5ff",
+              clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 80%)",
+              boxShadow: "0 0 18px rgba(77,181,255,0.8)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              left: "70px",
+              top: "35px",
+              width: "45px",
+              height: "40px",
+              border: "6px solid #9bd7ff",
+              transform: "rotate(-18deg)",
+              background: "#061629",
+            }}
+          />
+        </div>
+
+        <h1
+          style={{
+            fontSize: "58px",
+            margin: "0",
+            letterSpacing: "2px",
+            color: "#e8f4ff",
+            fontWeight: "900",
+          }}
+        >
+          BAMToolz™
+        </h1>
 
         <h2
           style={{
