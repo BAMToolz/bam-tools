@@ -6,17 +6,13 @@ export default function ScannerPage() {
   const [fileName, setFileName] = useState("");
   const [result, setResult] = useState("");
 
-  function scan() {
+  function runScan() {
     if (!fileName) {
       setResult("Choose a photo first.");
       return;
     }
 
-    setResult(
-      "✅ BAMToolz scanner page is working. Photo selected: " +
-        fileName +
-        ". Next step is reconnecting the API."
-    );
+    setResult("✅ BAMToolz scanner page works. Photo selected: " + fileName);
   }
 
   return (
@@ -42,7 +38,7 @@ export default function ScannerPage() {
       <br />
       <br />
 
-      <button onClick={scan}>📸 RUN SCAN</button>
+      <button onClick={runScan}>📸 RUN SCAN</button>
 
       <h3>Result:</h3>
       <p>{result}</p>
