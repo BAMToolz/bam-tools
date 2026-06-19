@@ -6,110 +6,81 @@ export default function Home() {
         background: "linear-gradient(180deg,#02050a,#061629,#000000)",
         color: "#e8f4ff",
         padding: "22px",
-        fontFamily: "Arial",
+        fontFamily:
+          "Arial Rounded MT Bold, Arial, Helvetica, sans-serif",
         overflowX: "hidden",
       }}
     >
       <section
         style={{
           textAlign: "center",
-          border: "1px solid #0a84ff",
-          borderRadius: "22px",
-          padding: "28px 18px",
-          boxShadow: "0 0 35px rgba(10,132,255,0.35)",
+          border: "2px solid #0a84ff",
+          borderRadius: "28px",
+          padding: "30px 18px",
+          boxShadow: "0 0 40px rgba(10,132,255,0.45)",
+          background: "rgba(0,20,45,0.75)",
         }}
       >
         <div
           style={{
-            margin: "0 auto 22px",
-            width: "145px",
-            height: "95px",
-            position: "relative",
+            margin: "0 auto 24px",
+            width: "285px",
+            maxWidth: "92%",
+            padding: "18px 24px",
+            borderRadius: "999px",
+            border: "4px solid #dff3ff",
+            background:
+              "linear-gradient(180deg,#063d91,#001a4d)",
+            boxShadow:
+              "0 0 22px rgba(10,132,255,0.9), inset 0 0 18px rgba(255,255,255,0.25)",
           }}
         >
           <div
             style={{
-              position: "absolute",
-              left: "8px",
-              top: "5px",
-              width: "62px",
-              height: "85px",
-              background: "#0a84ff",
-              clipPath: "polygon(0 0, 100% 25%, 100% 75%, 0 100%)",
-              boxShadow: "0 0 25px rgba(10,132,255,0.8)",
+              color: "white",
+              fontSize: "45px",
+              fontWeight: "900",
+              fontStyle: "italic",
+              letterSpacing: "-2px",
+              textShadow: "0 2px 4px rgba(0,0,0,0.8)",
             }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              right: "8px",
-              top: "16px",
-              width: "50px",
-              height: "65px",
-              background: "#4db5ff",
-              clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 80%)",
-              boxShadow: "0 0 18px rgba(77,181,255,0.8)",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              left: "58px",
-              top: "32px",
-              width: "38px",
-              height: "34px",
-              border: "6px solid #9bd7ff",
-              transform: "rotate(-18deg)",
-              background: "#061629",
-            }}
-          />
+          >
+            BAMToolz
+          </div>
         </div>
-
-        <h1
-          style={{
-            fontSize: "74px",
-            margin: "0",
-            lineHeight: "0.9",
-            letterSpacing: "8px",
-            color: "#e8f4ff",
-            fontWeight: "900",
-          }}
-        >
-          BAM
-        </h1>
-
-        <h1
-          style={{
-            fontSize: "46px",
-            margin: "8px 0 0",
-            lineHeight: "1",
-            letterSpacing: "7px",
-            color: "#e8f4ff",
-            fontWeight: "900",
-          }}
-        >
-          TOOLZ™
-        </h1>
 
         <h2
           style={{
-            marginTop: "26px",
+            marginTop: "10px",
             color: "#0a84ff",
             letterSpacing: "2px",
+            fontWeight: "900",
           }}
         >
           Preserving Presence™
         </h2>
 
-        <h3>In Every Machine</h3>
+        <h3
+          style={{
+            fontWeight: "900",
+            fontSize: "24px",
+          }}
+        >
+          In Every Machine
+        </h3>
 
-        <p style={{ color: "#8fc7ff" }}>
+        <p style={{ color: "#8fc7ff", fontWeight: "bold" }}>
           Ball Advanced Maintenance Tools
         </p>
 
-        <p>
-          AI-powered equipment intelligence for manufacturing, aerospace,
-          hospitals, and critical facilities.
+        <p
+          style={{
+            fontSize: "18px",
+            lineHeight: "1.45",
+          }}
+        >
+          AI-powered equipment intelligence for manufacturing,
+          aerospace, hospitals, and critical facilities.
         </p>
 
         <a
@@ -117,13 +88,14 @@ export default function Home() {
           style={{
             background: "#0a84ff",
             color: "black",
-            padding: "16px 30px",
-            borderRadius: "10px",
+            padding: "17px 32px",
+            borderRadius: "999px",
             display: "inline-block",
             marginTop: "20px",
             fontWeight: "900",
             textDecoration: "none",
-            boxShadow: "0 0 20px rgba(10,132,255,0.8)",
+            boxShadow: "0 0 22px rgba(10,132,255,0.9)",
+            fontSize: "18px",
           }}
         >
           📸 Launch BAM Scan™
@@ -133,16 +105,16 @@ export default function Home() {
       <section
         style={{
           marginTop: "35px",
-          border: "1px solid #0a84ff",
-          borderRadius: "18px",
+          border: "2px solid #0a84ff",
+          borderRadius: "24px",
           padding: "25px",
           background: "rgba(10,132,255,0.08)",
         }}
       >
         <h2>🏷 Existing Tag Integration</h2>
         <p>
-          BAMToolz works with barcodes, QR codes, asset tags, serial plates,
-          and equipment IDs already used by facilities.
+          BAMToolz works with barcodes, QR codes, asset tags,
+          serial plates, and equipment IDs already used by facilities.
         </p>
         <h3>Don’t replace facility knowledge. Unlock it.</h3>
       </section>
@@ -150,8 +122,8 @@ export default function Home() {
       <section
         style={{
           marginTop: "35px",
-          border: "1px solid #0a84ff",
-          borderRadius: "18px",
+          border: "2px solid #0a84ff",
+          borderRadius: "24px",
           padding: "25px",
           background: "rgba(255,255,255,0.04)",
         }}
@@ -171,8 +143,8 @@ export default function Home() {
       <section
         style={{
           marginTop: "35px",
-          border: "1px solid #0a84ff",
-          borderRadius: "18px",
+          border: "2px solid #0a84ff",
+          borderRadius: "24px",
           padding: "25px",
           background: "rgba(10,132,255,0.08)",
         }}
@@ -180,7 +152,8 @@ export default function Home() {
         <h2>💰 Asset-Based Pricing</h2>
 
         <p>
-          BAMToolz scales by the number of machines protected in each facility.
+          BAMToolz scales by the number of machines protected
+          in each facility.
         </p>
 
         <h3>Starter Facility</h3>
@@ -204,8 +177,8 @@ export default function Home() {
       <section
         style={{
           marginTop: "35px",
-          border: "1px solid #0a84ff",
-          borderRadius: "18px",
+          border: "2px solid #0a84ff",
+          borderRadius: "24px",
           padding: "25px",
           background: "rgba(255,255,255,0.04)",
         }}
@@ -213,15 +186,15 @@ export default function Home() {
         <h2>No Breaks In The Future™</h2>
 
         <p>
-          Machines should not lose their history. Facilities should not lose
-          their knowledge. Technicians should not start from zero.
+          Machines should not lose their history. Facilities should not
+          lose their knowledge. Technicians should not start from zero.
         </p>
       </section>
 
       <section
         style={{
           marginTop: "35px",
-          borderTop: "1px solid #0a84ff",
+          borderTop: "2px solid #0a84ff",
           paddingTop: "25px",
         }}
       >
@@ -235,6 +208,7 @@ export default function Home() {
           textAlign: "center",
           marginTop: "50px",
           color: "#8fc7ff",
+          fontWeight: "bold",
         }}
       >
         © 2026 BAMToolz™
