@@ -3,19 +3,39 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        background: "#003b73",
+        background:
+          "linear-gradient(180deg, #003b73 0%, #001f3f 100%)",
         color: "white",
-        padding: "30px",
+        padding: "28px",
         fontFamily: "Arial",
       }}
     >
-      <section style={{ textAlign: "center" }}>
+      <section
+        style={{
+          textAlign: "center",
+          maxWidth: "900px",
+          margin: "0 auto",
+        }}
+      >
+        <div
+          style={{
+            background: "#d9e3ec",
+            color: "#003b73",
+            display: "inline-block",
+            padding: "10px 18px",
+            borderRadius: "20px",
+            fontWeight: "900",
+          }}
+        >
+          PROTOTYPE 2026
+        </div>
+
         <h1
           style={{
-            fontSize: "72px",
-            margin: "0",
+            fontSize: "78px",
+            margin: "20px 0 0",
+            letterSpacing: "6px",
             fontWeight: "900",
-            letterSpacing: "5px",
           }}
         >
           BAM
@@ -23,10 +43,10 @@ export default function Home() {
 
         <h1
           style={{
-            fontSize: "54px",
+            fontSize: "55px",
             margin: "0",
+            letterSpacing: "8px",
             fontWeight: "900",
-            letterSpacing: "7px",
           }}
         >
           TOOLZ™
@@ -34,61 +54,96 @@ export default function Home() {
 
         <h2>Ball Advanced Maintenance Tools</h2>
 
-        <p style={{ fontSize: "20px" }}>
-          AI powered manufacturing, hospital facility, and industrial
-          maintenance intelligence.
+        <h3>
+          AI Maintenance Intelligence Platform
+        </h3>
+
+        <p
+          style={{
+            fontSize: "20px",
+            lineHeight: "1.5",
+          }}
+        >
+          AI-powered equipment intelligence for manufacturing,
+          aerospace, and critical facilities.
+        </p>
+
+        <p>
+          Turning decades of maintenance knowledge into
+          instant equipment intelligence.
         </p>
 
         <a
           href="/scanner"
           style={{
             display: "inline-block",
+            marginTop: "25px",
             background: "#d9e3ec",
             color: "#003b73",
             padding: "18px 35px",
             borderRadius: "15px",
-            fontWeight: "bold",
             textDecoration: "none",
-            marginTop: "25px",
+            fontWeight: "900",
           }}
         >
-          📸 SCAN EQUIPMENT
+          📸 LAUNCH BAM SCAN
         </a>
-      </section>
-
-      <section style={{ marginTop: "50px" }}>
-        <h2>⚙ Equipment ID</h2>
-        <p>Scan machine tags, motors, panels, and equipment information.</p>
-
-        <h2>🔧 Parts Finder</h2>
-        <p>Identify components and build spare parts lists.</p>
-
-        <h2>📚 Manuals</h2>
-        <p>Store equipment manuals and troubleshooting history.</p>
-
-        <h2>⚡ Controls Support</h2>
-        <p>PLC, VFD, sensors, wiring, and industrial automation support.</p>
       </section>
 
       <section
         style={{
           marginTop: "50px",
-          background: "#d9e3ec",
-          color: "#003b73",
-          padding: "25px",
+          display: "grid",
+          gap: "18px",
+        }}
+      >
+        {[
+          ["⚙ Equipment ID", "Identify machines, motors, tags, and assets."],
+          ["🔧 Parts Intelligence", "Find parts and maintenance information faster."],
+          ["📚 Knowledge Hub", "Store manuals, notes, and repair history."],
+          ["⚡ Controls Support", "Assist PLC, VFD, sensors, and troubleshooting."],
+        ].map(([title, text]) => (
+          <div
+            key={title}
+            style={{
+              background: "#d9e3ec",
+              color: "#003b73",
+              padding: "22px",
+              borderRadius: "18px",
+              fontWeight: "bold",
+            }}
+          >
+            <h2>{title}</h2>
+            <p>{text}</p>
+          </div>
+        ))}
+      </section>
+
+      <section
+        style={{
+          marginTop: "45px",
+          border: "2px solid #d9e3ec",
           borderRadius: "18px",
+          padding: "22px",
         }}
       >
         <h2>BAMToolz™ Trust Principles</h2>
+
         <p>🔒 Customer equipment data belongs to the customer.</p>
-        <p>🏭 Built from real maintenance and manufacturing experience.</p>
+        <p>🏭 Built from real maintenance experience.</p>
         <p>🛠 Designed for technicians first.</p>
-        <p>📚 Improves access to knowledge without using private data.</p>
-        <p>⚡ Built to reduce downtime safely and responsibly.</p>
+        <p>⚡ Built to reduce downtime safely.</p>
       </section>
 
-      <footer style={{ marginTop: "50px", textAlign: "center" }}>
-        © 2026 BAMToolz™ — Built by maintenance. For maintenance.
+      <footer
+        style={{
+          textAlign: "center",
+          marginTop: "40px",
+        }}
+      >
+        © 2026 BAMToolz™
+        <br />
+        Built by maintenance. For maintenance.
       </footer>
     </main>
   );
