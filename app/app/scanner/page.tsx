@@ -18,16 +18,22 @@ export default function ScannerPage() {
     form.append("image", file);
 
     try {
-      const res = await fetch("/api/scan", {
+      const res = await fetch("/app/api/scan", {
         method: "POST",
         body: form,
       });
 
       const data = await res.json();
 
-      setResult(data.result || data.error || "No result returned.");
+      setResult(
+        data.result ||
+          data.error ||
+          "No scanner response."
+      );
     } catch {
-      setResult("Scanner connection failed.");
+      setResult(
+        "Scanner connection failed. Check API route."
+      );
     }
   }
 
@@ -41,24 +47,38 @@ export default function ScannerPage() {
         fontFamily: "Arial",
       }}
     >
-      <h1>Scan Equipment</h1>
+      <h1>BAMToolz Scanner</h1>
 
-      <p>Upload a photo of a machine tag, motor plate, panel, or fault screen.</p>
+      <p>
+        Upload equipment tags, motors,
+        panels, or machine plates.
+      </p>
 
       <input
         type="file"
         accept="image/*"
-        onChange={(e) => setFile(e.target.files?.[0] || null)}
+        onChange={(e) =>
+          setFile(e.target.files?.[0] || null)
+        }
       />
 
       <br />
       <br />
 
-      <button onClick={scan}>📸 RUN SCAN</button>
+      <button onClick={scan}>
+        📸 RUN SCAN
+      </button>
+
+      <h3>Result:</h3>
 
       <p>{result}</p>
 
-      <a href="/" style={{ color: "white" }}>
+      <br />
+
+      <a
+        href="/"
+        style={{ color: "white" }}
+      >
         ← Back Home
       </a>
     </main>
