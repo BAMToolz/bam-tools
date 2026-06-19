@@ -219,7 +219,15 @@ export default function Home() {
 
         <p>
           Preserving Presence™
-        </p>
+        </p> <p>
+  <a href="/terms" style={{ color: "#0077ff" }}>
+    Terms
+  </a>
+  {" | "}
+  <a href="/privacy" style={{ color: "#0077ff" }}>
+    Privacy
+  </a>
+</p>
       </footer>
     </main>
   );
