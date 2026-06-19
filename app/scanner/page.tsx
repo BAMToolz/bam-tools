@@ -8,11 +8,11 @@ export default function ScannerPage() {
 
   async function runScan() {
     if (!file) {
-      setResult("Upload equipment image first.");
+      setResult("Select equipment photo first.");
       return;
     }
 
-    setResult("🔵 BAM Scan™ analyzing equipment...");
+    setResult("🔵 BAM Scan™ AI analyzing equipment...");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -27,8 +27,23 @@ export default function ScannerPage() {
 
       setResult(
         data.result ||
-          data.error ||
-          "No equipment data returned."
+          `🦺 BAM Safety™
+Safety check first:
+• Review Lockout / Tagout
+• Verify stored energy
+• Check electrical, hydraulic, pneumatic hazards
+
+🏷 Asset Identification:
+Waiting for equipment data
+
+🔧 Parts Intelligence:
+Ready to identify components
+
+📚 Documentation:
+Manuals and schematics ready
+
+🧠 Machine Memory:
+Capture technician knowledge`
       );
     } catch {
       setResult("BAM Scan connection failed.");
@@ -39,7 +54,7 @@ export default function ScannerPage() {
     <main
       style={{
         minHeight: "100vh",
-        background: "#000000",
+        background: "#000",
         color: "#e8f4ff",
         padding: "22px",
         fontFamily:
@@ -53,29 +68,22 @@ export default function ScannerPage() {
           borderRadius: "28px",
           padding: "30px 18px",
           background: "#03070d",
-          boxShadow: "0 0 40px rgba(0,119,255,0.45)",
+          boxShadow: "0 0 40px rgba(0,119,255,.45)",
         }}
       >
-
         <div
           style={{
-            margin: "0 auto 25px",
-            width: "285px",
-            maxWidth: "92%",
-            padding: "18px",
-            borderRadius: "999px",
             border: "4px solid #0077ff",
-            background: "#000",
+            borderRadius: "999px",
+            padding: "18px",
             boxShadow: "0 0 25px #0077ff",
           }}
         >
           <h1
             style={{
-              margin: 0,
               color: "#0077ff",
-              fontSize: "42px",
               fontStyle: "italic",
-              fontWeight: "900",
+              margin: 0,
             }}
           >
             BAMToolz™
@@ -91,8 +99,8 @@ export default function ScannerPage() {
         </h3>
 
         <p>
-          Scan machine tags, barcodes, motors,
-          panels, fault screens, and equipment labels.
+          Scan equipment tags, barcodes,
+          fault screens, motors, and panels.
         </p>
 
         <input
@@ -115,8 +123,6 @@ export default function ScannerPage() {
             borderRadius: "999px",
             border: "none",
             fontWeight: "900",
-            fontSize: "17px",
-            boxShadow: "0 0 22px #0077ff",
           }}
         >
           📸 RUN AI SCAN
@@ -129,32 +135,20 @@ export default function ScannerPage() {
             borderRadius: "20px",
             padding: "20px",
             background: "#000",
-            minHeight: "120px",
             textAlign: "left",
             whiteSpace: "pre-wrap",
-            boxShadow:
-              "inset 0 0 20px rgba(0,119,255,.25)",
+            minHeight: "200px",
           }}
         >
-          {result || "Waiting for equipment scan..."}
+          {result ||
+            `🦺 BAM Safety™
+Ready for safety intelligence.
+
+🏷 Asset Identification
+🔧 Parts Intelligence
+📚 Manuals
+🧠 Machine Memory`}
         </div>
-
-        <section
-          style={{
-            marginTop: "30px",
-            textAlign: "left",
-          }}
-        >
-          <h2 style={{ color: "#0077ff" }}>
-            Machine Memory
-          </h2>
-
-          <p>🏷 Asset identification</p>
-          <p>🔧 Parts recognition</p>
-          <p>📚 Manuals & schematics</p>
-          <p>🧠 Technician knowledge capture</p>
-          <p>⚙ Maintenance intelligence</p>
-        </section>
 
         <a
           href="/"
@@ -167,7 +161,6 @@ export default function ScannerPage() {
         >
           ← Back Home
         </a>
-
       </section>
     </main>
   );
