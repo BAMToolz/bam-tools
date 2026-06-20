@@ -52,6 +52,7 @@ If text is blurry or unclear, say that clearly.`,
             {
               type: "input_image",
               image_url: `data:${image.type};base64,${base64}`,
+              detail: "auto",
             },
           ],
         },
@@ -63,9 +64,7 @@ If text is blurry or unclear, say that clearly.`,
     });
   } catch (error: any) {
     return NextResponse.json(
-      {
-        error: error?.message || "AI scan failed.",
-      },
+      { error: error?.message || "AI scan failed." },
       { status: 500 }
     );
   }
