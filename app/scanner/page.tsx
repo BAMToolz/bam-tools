@@ -12,7 +12,7 @@ export default function ScannerPage() {
       return;
     }
 
-    setResult("BAM Scan™ sending photo to AI...");
+    setResult("BAM Scan™ is analyzing equipment intelligence...");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -42,39 +42,73 @@ export default function ScannerPage() {
 
   return (
     <main style={main}>
-      <section style={card}>
-        <h1 style={logo}>BAMToolz™</h1>
-        <h2 style={blue}>BAM Scan™ AI</h2>
+      <section style={panel}>
+        <div style={topLine}>BAM INTELLIGENCE SYSTEM</div>
 
-        <div style={systemBadge}>
-          <h3 style={badgeTitle}>◈ Equipment Intelligence ◈</h3>
-          <p style={badgeText}>Scan. Identify. Protect. Remember.</p>
+        <h1 style={logo}>BAM Scan™</h1>
+        <p style={subtitle}>Equipment intelligence for modern maintenance</p>
+
+        <div style={statusGrid}>
+          <div style={statusCard}>
+            <span style={statusLabel}>SYSTEM</span>
+            <strong>ONLINE</strong>
+          </div>
+          <div style={statusCard}>
+            <span style={statusLabel}>MODE</span>
+            <strong>VISION AI</strong>
+          </div>
+          <div style={statusCard}>
+            <span style={statusLabel}>OUTPUT</span>
+            <strong>REPORT</strong>
+          </div>
         </div>
 
-        <p>Scan equipment tags, motors, fault screens, and panels.</p>
+        <div style={uploadBox}>
+          <p style={sectionTitle}>◈ Equipment Image</p>
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
-        />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files?.[0] || null)}
+          />
 
-        <br />
-        <br />
+          <button onClick={runScan} style={button}>
+            RUN EQUIPMENT SCAN
+          </button>
+        </div>
 
-        <button onClick={runScan} style={button}>
-          RUN AI SCAN
-        </button>
+        <div style={reportBox}>
+          <p style={sectionTitle}>◈ BAM Scan™ Report</p>
 
-        <div style={resultBox}>
-          {result ||
-            `BAM Safety™
-Ready for safety intelligence.
+          <div style={reportText}>
+            {result ||
+              `Awaiting equipment image.
 
-Asset Identification
-Parts Intelligence
-Manuals
-Machine Memory`}
+◈ Asset Intelligence
+Manufacturer:
+Model:
+Serial:
+Location:
+
+◈ Safety Analysis
+Risk Level:
+Energy Sources:
+Required Actions:
+
+◈ Component Intelligence
+Detected Parts:
+Replacement Data:
+Critical Spares:
+
+◈ Troubleshooting
+Observed Issue:
+Next Test:
+Recommended Action:
+
+◈ Technician Notes
+Machine Memory:
+Confidence:`}
+          </div>
         </div>
 
         <a href="/" style={backLink}>
@@ -87,73 +121,106 @@ Machine Memory`}
 
 const main = {
   minHeight: "100vh",
-  background: "#000",
+  background:
+    "radial-gradient(circle at top, #062444 0%, #020711 45%, #000 100%)",
   color: "#e8f4ff",
   padding: "22px",
   fontFamily: "Arial, Helvetica, sans-serif",
 };
 
-const card = {
-  textAlign: "center" as const,
-  border: "1px solid #0077ff",
-  borderRadius: "28px",
-  padding: "30px 18px",
-  background: "linear-gradient(180deg, #04111f, #02050a)",
-  boxShadow: "0 0 35px rgba(0,119,255,.35)",
+const panel = {
+  border: "1px solid rgba(0,119,255,.8)",
+  borderRadius: "30px",
+  padding: "26px",
+  background: "rgba(3, 7, 13, .88)",
+  boxShadow: "0 0 45px rgba(0,119,255,.35)",
+};
+
+const topLine = {
+  color: "#8fc7ff",
+  fontSize: "12px",
+  letterSpacing: "3px",
+  fontWeight: "900",
 };
 
 const logo = {
   color: "#0077ff",
+  fontSize: "48px",
+  marginBottom: "4px",
   fontStyle: "italic",
-  margin: 0,
   letterSpacing: "1px",
 };
 
-const blue = {
-  color: "#0077ff",
+const subtitle = {
+  color: "#b9dcff",
+  marginTop: 0,
 };
 
-const systemBadge = {
-  margin: "22px 0",
-  padding: "16px",
-  border: "1px solid #0077ff",
-  borderRadius: "18px",
+const statusGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "10px",
+  margin: "24px 0",
+};
+
+const statusCard = {
+  border: "1px solid rgba(0,119,255,.7)",
+  borderRadius: "16px",
+  padding: "12px",
   background: "rgba(0,119,255,.08)",
+  textAlign: "center" as const,
 };
 
-const badgeTitle = {
-  margin: 0,
-  color: "#e8f4ff",
-};
-
-const badgeText = {
-  marginBottom: 0,
+const statusLabel = {
+  display: "block",
   color: "#8fc7ff",
+  fontSize: "10px",
+  letterSpacing: "2px",
+};
+
+const uploadBox = {
+  border: "1px solid rgba(0,119,255,.7)",
+  borderRadius: "22px",
+  padding: "18px",
+  background: "#02050a",
+};
+
+const sectionTitle = {
+  color: "#8fc7ff",
+  fontWeight: "900",
+  letterSpacing: "1px",
 };
 
 const button = {
-  background: "#0077ff",
+  display: "block",
+  width: "100%",
+  marginTop: "18px",
+  background: "linear-gradient(90deg, #0077ff, #5bb6ff)",
   color: "#000",
-  padding: "16px 30px",
+  padding: "16px",
   borderRadius: "999px",
   border: "none",
   fontWeight: "900",
+  letterSpacing: "1px",
 };
 
-const resultBox = {
-  marginTop: "30px",
-  border: "1px solid #0077ff",
-  borderRadius: "20px",
-  padding: "20px",
-  background: "#000",
-  textAlign: "left" as const,
+const reportBox = {
+  marginTop: "24px",
+  border: "1px solid rgba(0,119,255,.7)",
+  borderRadius: "22px",
+  padding: "18px",
+  background: "rgba(0,0,0,.75)",
+};
+
+const reportText = {
   whiteSpace: "pre-wrap" as const,
-  minHeight: "200px",
+  lineHeight: "1.6",
+  color: "#e8f4ff",
 };
 
 const backLink = {
   display: "block",
-  marginTop: "30px",
-  color: "#0077ff",
+  marginTop: "26px",
+  color: "#8fc7ff",
   fontWeight: "900",
 };
