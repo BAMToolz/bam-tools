@@ -1,228 +1,284 @@
 export default function ExamplesPage() {
   return (
     <main style={main}>
-      <section style={hero}>
-        <p style={topLine}>BAM™ • BALL ADVANCED MANAGEMENT</p>
 
-        <h1 style={logo}>BAMToolz™ Examples</h1>
+      <section style={panel}>
 
-        <h2 style={blue}>Industrial Intelligence In Action</h2>
-
-        <p>
-          Built by BAMLabs™ to turn equipment, facilities, and technician
-          knowledge into connected intelligence systems.
+        <p style={topLine}>
+          BAMLabs™ • BALL ADVANCED MANAGEMENT
         </p>
 
-        <div style={scannerWrap}>
-          <div style={scanner}>
-            <div style={scannerHead}>
-              <div style={camera}></div>
-              <div style={cameraSmall}></div>
-            </div>
+        <h1 style={logo}>
+          BAMToolz™
+        </h1>
 
-            <div style={screen}>
-              <h2 style={screenLogo}>BAMToolz™</h2>
-              <p style={screenSub}>AI Industrial Scanner</p>
+        <h2 style={blue}>
+          Industrial AI Equipment Platform
+        </h2>
 
-              <div style={screenTile}>BAM Scan™</div>
-              <div style={screenTile}>BAM Assist™</div>
-              <div style={screenTile}>BAM Hub™</div>
-              <div style={screenTile}>BAM Safety™</div>
-            </div>
+        <p>
+          Aerospace-grade intelligence system designed
+          for manufacturing, maintenance, and critical facilities.
+        </p>
 
-            <div style={trigger}></div>
-            <div style={handle}></div>
+
+        <section style={device}>
+
+          <div style={statusBar}>
+            BAM SCANNER // ONLINE
           </div>
 
-          <h2 style={blue}>Prototype Handheld Scanner</h2>
-          <p>
-            Rugged concept device for scanning equipment tags, QR codes,
-            fault screens, panels, motors, and asset records.
-          </p>
-        </div>
+          <div style={screen}>
+
+            <h2 style={screenTitle}>
+              BAM Intelligence™
+            </h2>
+
+            <p style={data}>
+              ASSET ID: READY
+            </p>
+
+            <p style={data}>
+              AI MODEL: ACTIVE
+            </p>
+
+            <p style={data}>
+              MEMORY HUB: CONNECTED
+            </p>
+
+            <div style={scanLine}>
+              SCAN EQUIPMENT
+            </div>
+
+          </div>
+
+
+          <div style={modules}>
+
+            <div style={module}>
+              BAM Scan™
+            </div>
+
+            <div style={module}>
+              BAM Assist™
+            </div>
+
+            <div style={module}>
+              BAM Hub™
+            </div>
+
+            <div style={module}>
+              BAM Safety™
+            </div>
+
+          </div>
+
+        </section>
+
       </section>
+
+
 
       <section style={card}>
         <h2 style={blue}>◈ BAM Scan™</h2>
-        <p>Scans equipment images and creates asset intelligence.</p>
+
+        <p>
+          Identifies equipment tags, serial numbers,
+          manuals, and asset data.
+        </p>
+
       </section>
 
+
+
       <section style={card}>
+
         <h2 style={blue}>◈ BAM Assist™</h2>
-        <p>Asks follow-up questions and guides troubleshooting.</p>
+
+        <p>
+          AI troubleshooting with guided technician
+          questions and repair intelligence.
+        </p>
+
       </section>
 
+
+
       <section style={card}>
+
         <h2 style={blue}>◈ BAM Hub™</h2>
-        <p>Stores machine memory, repair history, manuals, parts, and notes.</p>
+
+        <p>
+          Machine memory preserving repair history,
+          experience, and knowledge.
+        </p>
+
       </section>
 
+
+
       <section style={card}>
+
         <h2 style={blue}>◈ BAMSystems™</h2>
-        <p>Future integration with automation, controls, sensors, and PLC data.</p>
+
+        <p>
+          Automation, controls, sensors,
+          PLC data, and facility integration.
+        </p>
+
       </section>
+
 
       <footer style={footer}>
-        <a href="/" style={button}>Back Home</a>
+
+        <a href="/" style={button}>
+          Back Home
+        </a>
+
       </footer>
+
     </main>
   );
 }
 
+
+
 const main = {
-  minHeight: "100vh",
-  background: "radial-gradient(circle at top,#062444,#020711,#000)",
-  color: "#e8f4ff",
-  padding: "22px",
-  fontFamily: "Arial, Helvetica, sans-serif",
+  minHeight:"100vh",
+  background:
+    "linear-gradient(135deg,#000,#03111f,#000)",
+  color:"#e8f4ff",
+  padding:"22px",
+  fontFamily:"Arial",
 };
 
-const hero = {
-  border: "1px solid #0077ff",
-  borderRadius: "28px",
-  padding: "28px",
-  background: "linear-gradient(180deg,#04111f,#02050a)",
-  boxShadow: "0 0 35px rgba(0,119,255,.35)",
+
+
+const panel = {
+  border:"1px solid #008cff",
+  padding:"28px",
+  background:"#02060b",
+  boxShadow:
+    "0 0 45px rgba(0,140,255,.3)",
 };
 
-const scannerWrap = {
-  marginTop: "28px",
-  padding: "24px",
-  border: "1px solid #0077ff",
-  borderRadius: "26px",
-  background: "rgba(0,119,255,.08)",
-  textAlign: "center" as const,
-};
 
-const scanner = {
-  position: "relative" as const,
-  width: "230px",
-  height: "430px",
-  margin: "10px auto 30px",
-};
-
-const scannerHead = {
-  position: "absolute" as const,
-  top: "0",
-  left: "35px",
-  width: "160px",
-  height: "70px",
-  borderRadius: "28px",
-  background: "#05070a",
-  border: "3px solid #0077ff",
-  boxShadow: "0 0 25px rgba(0,119,255,.55)",
-};
-
-const camera = {
-  position: "absolute" as const,
-  top: "18px",
-  left: "42px",
-  width: "34px",
-  height: "34px",
-  borderRadius: "999px",
-  background: "#111",
-  border: "2px solid #8fc7ff",
-};
-
-const cameraSmall = {
-  position: "absolute" as const,
-  top: "24px",
-  right: "38px",
-  width: "22px",
-  height: "22px",
-  borderRadius: "999px",
-  background: "#0077ff",
-};
-
-const screen = {
-  position: "absolute" as const,
-  top: "58px",
-  left: "25px",
-  width: "180px",
-  minHeight: "250px",
-  borderRadius: "24px",
-  background: "#03070d",
-  border: "3px solid #1b2c3f",
-  padding: "18px",
-  boxShadow: "inset 0 0 20px rgba(0,119,255,.25)",
-};
-
-const screenLogo = {
-  color: "#0077ff",
-  margin: "0",
-};
-
-const screenSub = {
-  color: "#8fc7ff",
-  fontSize: "12px",
-};
-
-const screenTile = {
-  marginTop: "12px",
-  padding: "10px",
-  border: "1px solid #0077ff",
-  borderRadius: "14px",
-  background: "rgba(0,119,255,.12)",
-  fontWeight: "900",
-};
-
-const trigger = {
-  position: "absolute" as const,
-  top: "280px",
-  left: "95px",
-  width: "42px",
-  height: "34px",
-  borderRadius: "14px",
-  background: "#0077ff",
-};
-
-const handle = {
-  position: "absolute" as const,
-  top: "305px",
-  left: "76px",
-  width: "78px",
-  height: "120px",
-  borderRadius: "16px 16px 32px 32px",
-  background: "linear-gradient(180deg,#111,#030303)",
-  border: "3px solid #1b2c3f",
-};
 
 const topLine = {
-  color: "#8fc7ff",
-  fontSize: "12px",
-  letterSpacing: "3px",
-  fontWeight: "900",
+  color:"#8fc7ff",
+  letterSpacing:"4px",
+  fontSize:"12px",
 };
 
-const card = {
-  marginTop: "28px",
-  border: "1px solid #0077ff",
-  borderRadius: "24px",
-  padding: "24px",
-  background: "#03070d",
-};
+
 
 const logo = {
-  color: "#0077ff",
-  fontSize: "42px",
-  fontStyle: "italic",
+  color:"#008cff",
+  fontSize:"52px",
+  letterSpacing:"2px",
 };
+
+
 
 const blue = {
-  color: "#0077ff",
+  color:"#008cff",
 };
+
+
+
+const device = {
+  marginTop:"30px",
+  border:"2px solid #263849",
+  padding:"18px",
+  background:
+    "linear-gradient(180deg,#111923,#020406)",
+};
+
+
+
+const statusBar = {
+  background:"#008cff",
+  color:"#000",
+  padding:"10px",
+  fontWeight:"900",
+  letterSpacing:"3px",
+};
+
+
+
+const screen = {
+  marginTop:"18px",
+  padding:"22px",
+  background:"#000",
+  border:"1px solid #008cff",
+};
+
+
+
+const screenTitle = {
+  color:"#8fc7ff",
+};
+
+
+
+const data = {
+  fontFamily:"monospace",
+  color:"#8fc7ff",
+};
+
+
+
+const scanLine = {
+  marginTop:"25px",
+  border:"1px solid #008cff",
+  padding:"18px",
+  textAlign:"center" as const,
+  fontWeight:"900",
+  letterSpacing:"3px",
+};
+
+
+
+const modules = {
+  display:"grid",
+  gridTemplateColumns:
+    "repeat(2,1fr)",
+  gap:"12px",
+  marginTop:"18px",
+};
+
+
+
+const module = {
+  border:"1px solid #008cff",
+  padding:"18px",
+  background:"#07111d",
+  textAlign:"center" as const,
+  fontWeight:"900",
+};
+
+
+
+const card = {
+  marginTop:"25px",
+  padding:"22px",
+  border:"1px solid #008cff",
+  background:"#03070d",
+};
+
+
 
 const footer = {
-  textAlign: "center" as const,
-  marginTop: "40px",
+  marginTop:"40px",
+  textAlign:"center" as const,
 };
 
+
+
 const button = {
-  display: "inline-block",
-  background: "#0077ff",
-  color: "#000",
-  padding: "15px 30px",
-  borderRadius: "999px",
-  fontWeight: "900",
-  textDecoration: "none",
+  background:"#008cff",
+  color:"#000",
+  padding:"15px 35px",
+  textDecoration:"none",
+  fontWeight:"900",
 };
