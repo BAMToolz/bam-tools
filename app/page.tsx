@@ -1,17 +1,12 @@
 export default function Home() {
   return (
     <main style={main}>
-
       <section style={heroCard}>
-        <p style={topLine}>
-          BAM™ • BALL ADVANCED MANAGEMENT
-        </p>
+        <p style={topLine}>BAM™ • BALL ADVANCED MANAGEMENT</p>
 
         <h1 style={logo}>BAMToolz™</h1>
 
-        <h2 style={blue}>
-          Industrial Intelligence Platform
-        </h2>
+        <h2 style={blue}>Industrial Intelligence Platform</h2>
 
         <div style={systemBadge}>
           <h2 style={badgeTitle}>◈ Preserving Presence ◈</h2>
@@ -21,28 +16,24 @@ export default function Home() {
         </div>
 
         <p>
-          Built by BAMLabs™ for manufacturing, hospitals,
-          aerospace, and critical facilities.
+          Built by BAMLabs™ for manufacturing, hospitals, aerospace, and
+          critical facilities.
         </p>
 
         <div>
           <a href="/scanner" style={button}>
-            Launch BAM Scan™
+            Launch BAM Intelligence™
           </a>
 
-          <br /><br />
-
-          <a href="/assist" style={button}>
-            Chat With BAM Assist™
-          </a>
-
-          <br /><br />
+          <br />
+          <br />
 
           <a href="/examples" style={button}>
             View BAM Examples™
           </a>
 
-          <br /><br />
+          <br />
+          <br />
 
           <a href="/contact" style={button}>
             Contact Support
@@ -73,7 +64,6 @@ export default function Home() {
         <p>BAMLabs™ • BAMToolz™ • BAMSystems™</p>
         <p>BAMToolzsupport@gmail.com</p>
       </footer>
-
     </main>
   );
 }
