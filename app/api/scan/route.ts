@@ -35,7 +35,19 @@ export async function POST(req: Request) {
           content: [
             {
               type: "input_text",
-              text: "Analyze this equipment image for a maintenance technician. Identify visible text, equipment type, safety risks, parts, and troubleshooting notes.",
+              text: `You are BAM Scan AI.
+
+Analyze this equipment image for a maintenance technician.
+
+Return clear sections:
+🦺 Safety
+🏷 Asset Identification
+🔧 Parts Intelligence
+📚 Manuals / Documentation Clues
+🛠 Troubleshooting Steps
+🧠 Technician Notes
+
+If text is blurry or unclear, say that clearly.`,
             },
             {
               type: "input_image",
