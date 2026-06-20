@@ -1,154 +1,254 @@
 export default function Home() {
   return (
-    <main style={styles.page}>
+    <main style={main}>
 
-      <section style={styles.hero}>
+      <section style={scannerFrame}>
 
-        <h1 style={styles.logoText}>
+        <p style={topLine}>
+          BAM™ • BALL ADVANCED MANAGEMENT
+        </p>
+
+        <p style={prototype}>
+          BAMLabs™ Prototype Interface
+        </p>
+
+        <h1 style={logo}>
           BAMToolz™
         </h1>
 
-        <h2 style={styles.subtitle}>
-          Ball Advanced Management
+        <h2 style={subtitle}>
+          Industrial Intelligence Platform
         </h2>
 
-        <p style={styles.text}>
-          AI Industrial Intelligence Platform built by BAMLabs™.
-          Bringing machine intelligence, technician support,
-          and industrial knowledge together.
-        </p>
 
+        <section style={screen}>
 
-        <div style={styles.productBox}>
-
-          <h2>
-            BAMToolz™ AI Industrial Scanner
+          <h2 style={blue}>
+            ◈ BAM Intelligence™
           </h2>
 
           <p>
-            Rugged handheld industrial scanner designed
-            for technicians, manufacturing, aerospace,
-            and facility maintenance.
+            Scan equipment. Assist technicians.
+            Preserve machine memory.
           </p>
 
-          <h3>◈ BAM Scan™</h3>
-          <p>
-            Scan equipment tags, QR codes, manuals,
-            parts, and machine information.
-          </p>
 
-          <h3>◈ BAM Assist™</h3>
-          <p>
-            AI troubleshooting assistant that asks questions,
-            guides repairs, and helps diagnose failures.
-          </p>
+          <div style={grid}>
 
-          <h3>◈ BAM Hub™</h3>
-          <p>
-            Machine memory storing repairs, history,
-            documents, and technician knowledge.
-          </p>
+            <div style={tile}>
+              BAM Scan™
+            </div>
 
-          <h3>◈ BAM Safety™</h3>
-          <p>
-            Safety awareness, lockout reminders,
-            and protection for people and facilities.
-          </p>
+            <div style={tile}>
+              BAM Assist™
+            </div>
 
-        </div>
+            <div style={tile}>
+              BAM Hub™
+            </div>
+
+            <div style={tile}>
+              BAM Safety™
+            </div>
+
+          </div>
+
+        </section>
 
 
-        <div style={styles.card}>
-          <h2>BAMLabs™</h2>
-          <p>
-            Research • AI Development • Prototypes • Future Technology
-          </p>
-        </div>
+        <a href="/scanner" style={button}>
+          Launch BAM Intelligence™
+        </a>
 
+        <a href="/examples" style={button}>
+          View BAM Examples™
+        </a>
 
-        <div style={styles.card}>
-          <h2>BAMSystems™</h2>
-          <p>
-            Automation • Controls • PLC Integration • Industrial Solutions
-          </p>
-        </div>
+        <a href="/contact" style={button}>
+          Contact Support
+        </a>
 
-
-        <footer style={styles.footer}>
-
-          © BAMLabs™
-          <br />
-          Ball Advanced Management
-          <br />
-          Support:
-          <br />
-          BAMToolzsupport@gmail.com
-
-        </footer>
 
       </section>
+
+
+      <section style={card}>
+        <h2 style={blue}>BAMLabs™</h2>
+
+        <p>
+          Research • AI • Innovation • Future Technology
+        </p>
+
+        <p>
+          Creating the intelligence behind BAMToolz™.
+        </p>
+
+      </section>
+
+
+      <section style={card}>
+        <h2 style={blue}>BAMToolz™</h2>
+
+        <p>
+          BAM Scan™ • BAM Assist™ • BAM Hub™ • BAM Safety™
+        </p>
+
+        <p>
+          Every machine gains history, knowledge,
+          and intelligence.
+        </p>
+
+      </section>
+
+
+      <section style={card}>
+        <h2 style={blue}>BAMSystems™</h2>
+
+        <p>
+          Automation • Controls • Sensors • Integration
+        </p>
+
+      </section>
+
+
+      <footer style={footer}>
+
+        © 2026 Ball Advanced Management™
+
+        <br />
+
+        BAMLabs™ • BAMToolz™ • BAMSystems™
+
+        <br />
+
+        BAMToolzsupport@gmail.com
+
+      </footer>
+
 
     </main>
   );
 }
 
 
-const styles = {
 
-  page: {
-    minHeight: "100vh",
-    background:
-      "linear-gradient(#020202,#00111f)",
-    color: "white",
-    padding: "25px",
-    fontFamily: "Arial",
-  },
+const main = {
+  minHeight: "100vh",
+  background:
+    "radial-gradient(circle at top,#082b52,#020711,#000)",
+  color: "#e8f4ff",
+  padding: "22px",
+  fontFamily: "Arial",
+};
 
-  hero: {
-    maxWidth: "900px",
-    margin: "auto",
-    textAlign: "center" as const,
-  },
 
-  logoText: {
-    fontSize: "55px",
-    color: "#168cff",
-    fontWeight: "bold",
-  },
 
-  subtitle: {
-    fontSize: "24px",
-    color: "#cccccc",
-  },
+const scannerFrame = {
+  border: "2px solid #0077ff",
+  borderRadius: "32px",
+  padding: "26px",
+  background:
+    "linear-gradient(180deg,#06192d,#02050a)",
+  boxShadow:
+    "0 0 40px rgba(0,119,255,.4)",
+};
 
-  text: {
-    fontSize: "19px",
-    lineHeight: "1.6",
-  },
 
-  productBox: {
-    background: "#050505",
-    border: "2px solid #168cff",
-    borderRadius: "25px",
-    padding: "25px",
-    marginTop: "30px",
-    textAlign: "left" as const,
-    boxShadow:
-      "0 0 40px rgba(22,140,255,.35)",
-  },
 
-  card: {
-    background: "#111",
-    border:
-      "1px solid rgba(22,140,255,.5)",
-    borderRadius: "20px",
-    padding: "20px",
-    marginTop: "20px",
-  },
+const topLine = {
+  color: "#8fc7ff",
+  textAlign: "center" as const,
+  letterSpacing: "3px",
+  fontWeight: "900",
+};
 
-  footer: {
-    marginTop: "40px",
-    color: "#999",
-    fontSize: "15px",
-  },
+
+
+const prototype = {
+  textAlign: "center" as const,
+  color: "#8fc7ff",
+};
+
+
+
+const logo = {
+  textAlign: "center" as const,
+  color: "#0077ff",
+  fontSize: "50px",
+};
+
+
+
+const subtitle = {
+  textAlign: "center" as const,
+};
+
+
+
+const screen = {
+  margin: "25px 0",
+  padding: "20px",
+  border:
+    "1px solid rgba(0,119,255,.8)",
+  borderRadius: "22px",
+  background: "#000",
+};
+
+
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns:
+    "repeat(2, minmax(0,1fr))",
+  gap: "12px",
+};
+
+
+
+const tile = {
+  padding: "15px",
+  border:
+    "1px solid #0077ff",
+  borderRadius: "16px",
+  textAlign: "center" as const,
+};
+
+
+
+const card = {
+  marginTop: "25px",
+  padding: "22px",
+  border:
+    "1px solid #0077ff",
+  borderRadius: "22px",
+  background: "#03070d",
+};
+
+
+
+const blue = {
+  color: "#0077ff",
+};
+
+
+
+const button = {
+  display: "block",
+  marginTop: "15px",
+  background:
+    "linear-gradient(90deg,#0077ff,#5bb6ff)",
+  color: "#000",
+  padding: "15px",
+  borderRadius: "999px",
+  textAlign: "center" as const,
+  fontWeight: "900",
+  textDecoration: "none",
+};
+
+
+
+const footer = {
+  marginTop: "40px",
+  textAlign: "center" as const,
+  color: "#8fc7ff",
 };
