@@ -1,15 +1,12 @@
-import OpenAI from "openai";
 import { NextResponse } from "next/server";
-
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export async function POST(req: Request) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "OPENAI_API_KEY is missing in Vercel." },
+        { error: "Missing GEMINI_API_KEY" },
         { status: 500 }
       );
     }
@@ -19,85 +16,98 @@ export async function POST(req: Request) {
 
     if (!image) {
       return NextResponse.json(
-        { error: "No image uploaded." },
+        { error: "No image uploaded" },
         { status: 400 }
       );
     }
 
     const bytes = await image.arrayBuffer();
-    const base64 = Buffer.from(bytes).toString("base64");
 
-    const ai = await client.responses.create({
-      model: "gpt-4o-mini",
-      input: [
-        {
-          role: "user",
-          content: [
+    const base64Image =
+      Buffer.from(bytes).toString("base64");
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          contents: [
             {
-              type: "input_text",
-              text: `You are BAM Scan™, an AI equipment intelligence system for maintenance technicians.
+              parts: [
+                {
+                  text: `
+You are BAM Scan™ created by BAMLabs™.
 
-Analyze the uploaded equipment image and return a clean modern maintenance report.
+Analyze this equipment image.
 
-Use this exact format:
+Return a professional industrial report:
 
 BAM Scan™ Report
-━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━
 
 ◈ Asset Intelligence
 Manufacturer:
 Equipment Type:
 Model:
 Serial:
-Visible Ratings:
-Location Clues:
+Ratings:
+Location:
 
-◈ Safety Analysis
-Risk Level:
+◈ Safety Intelligence
+Hazards:
 Energy Sources:
-Required Safety Actions:
-Lockout / Tagout Notes:
+Lockout / Tagout:
 
-◈ Component Intelligence
-Visible Components:
-Likely Replacement Parts:
-Part Numbers Seen:
+◈ Parts Intelligence
+Components:
+Replacement Parts:
 Critical Spares:
 
 ◈ Troubleshooting
-Observed Condition:
-What To Check First:
-Recommended Tests:
-Next Technician Action:
+Observed Issues:
+Tests:
+Recommended Action:
 
-◈ Documentation Clues
-Manual Search Terms:
-Nameplate Data:
-Missing Photo Needed:
+◈ BAM Hub™ Machine Memory
+Repair Notes:
+Knowledge Captured:
+Future Prevention:
 
-◈ Technician Notes
-Machine Memory:
-Confidence:
-Limitations:
+Do not invent unreadable numbers.
+Say if information is unclear.
+                  `,
+                },
 
-If the text in the image is blurry, say what cannot be read clearly. Do not invent serial numbers or model numbers.`,
-            },
-            {
-              type: "input_image",
-              image_url: `data:${image.type};base64,${base64}`,
-              detail: "auto",
+                {
+                  inline_data: {
+                    mime_type: image.type,
+                    data: base64Image,
+                  },
+                },
+              ],
             },
           ],
-        },
-      ],
-    });
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    const text =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "BAM Scan completed but no text returned.";
 
     return NextResponse.json({
-      result: ai.output_text || "AI returned no text.",
+      result: text,
     });
+
   } catch (error: any) {
     return NextResponse.json(
-      { error: error?.message || "AI scan failed." },
+      { error: error.message },
       { status: 500 }
     );
   }
