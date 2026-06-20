@@ -1,223 +1,139 @@
 export default function Home() {
   return (
-    <main style={main}>
+    <main style={styles.page}>
 
-      <section style={heroCard}>
-        <p style={topLine}>
-          BAM™ • BALL ADVANCED MANAGEMENT
-        </p>
+      <section style={styles.hero}>
 
-        <h1 style={logo}>
+        <img
+          src="/logo.png"
+          alt="BAMToolz Logo"
+          style={styles.logo}
+        />
+
+        <h1 style={styles.title}>
           BAMToolz™
         </h1>
 
-        <h2 style={blue}>
-          Industrial Intelligence Platform
+        <h2 style={styles.subtitle}>
+          Ball Advanced Management
         </h2>
 
-        <div style={systemBadge}>
-          <h2 style={badgeTitle}>
-            ◈ Preserving Presence ◈
-          </h2>
+        <p style={styles.text}>
+          AI Industrial Intelligence Platform built by BAMLabs™.
+          Scan equipment. Assist technicians. Save machine knowledge.
+          Protect people and facilities.
+        </p>
 
-          <p style={badgeText}>
-            Asset intelligence. Knowledge systems. Machine memory.
+        <img
+          src="/bam-scanner.png"
+          alt="BAMToolz AI Industrial Scanner"
+          style={styles.scanner}
+        />
+
+        <div style={styles.card}>
+          <h2>BAM Scan™</h2>
+          <p>
+            Identify machines, read equipment tags,
+            capture manuals, parts, and history.
           </p>
         </div>
 
-        <p>
-          Built by BAMLabs™ for manufacturing,
-          hospitals, aerospace, and critical facilities.
-        </p>
-
-        <div>
-          <a href="/scanner" style={button}>
-            Launch BAM Intelligence™
-          </a>
-
-          <br />
-          <br />
-
-          <a href="/examples" style={button}>
-            View BAM Examples™
-          </a>
-
-          <br />
-          <br />
-
-          <a href="/contact" style={button}>
-            Contact Support
-          </a>
+        <div style={styles.card}>
+          <h2>BAM Assist™</h2>
+          <p>
+            AI guided troubleshooting with technician
+            questions and repair support.
+          </p>
         </div>
+
+        <div style={styles.card}>
+          <h2>BAM Hub™</h2>
+          <p>
+            Machine memory storing repairs,
+            knowledge, manuals, and experience.
+          </p>
+        </div>
+
+        <div style={styles.card}>
+          <h2>BAM Safety™</h2>
+          <p>
+            Safety awareness, LOTO reminders,
+            and facility protection.
+          </p>
+        </div>
+
+        <footer style={styles.footer}>
+          © BAMLabs™ | Ball Advanced Management
+          <br />
+          Support: BAMToolzsupport@gmail.com
+        </footer>
+
       </section>
-
-
-      <section style={card}>
-        <h2 style={blue}>
-          BAMLabs™
-        </h2>
-
-        <p>
-          Research • AI • Innovation • Future Technology
-        </p>
-
-        <p>
-          Creating the intelligence behind BAMToolz™.
-        </p>
-      </section>
-
-
-      <section style={card}>
-        <h2 style={blue}>
-          BAMToolz™
-        </h2>
-
-        <p>
-          BAM Scan™ • BAM Assist™ • BAM Hub™ • BAM Safety™
-        </p>
-
-        <p>
-          Every asset gets knowledge, history,
-          and memory.
-        </p>
-      </section>
-
-
-      <section style={card}>
-        <h2 style={blue}>
-          BAMSystems™
-        </h2>
-
-        <p>
-          Automation • Controls • Integration • Smart Facilities
-        </p>
-
-        <p>
-          Where industrial intelligence connects
-          to the real world.
-        </p>
-      </section>
-
-
-      <footer style={footer}>
-
-        <p>
-          © 2026 Ball Advanced Management™.
-          All Rights Reserved.
-        </p>
-
-        <p>
-          BAMLabs™ • BAMToolz™ • BAMSystems™
-        </p>
-
-        <p>
-          Support:
-        </p>
-
-        <a
-          href="mailto:BAMToolzsupport@gmail.com"
-          style={supportLink}
-        >
-          BAMToolzsupport@gmail.com
-        </a>
-
-      </footer>
 
     </main>
   );
 }
 
 
-const main = {
-  minHeight:"100vh",
-  background:
-    "radial-gradient(circle at top,#062444,#020711,#000)",
-  color:"#e8f4ff",
-  padding:"22px",
-  fontFamily:"Arial, Helvetica, sans-serif",
-};
+const styles = {
 
+  page: {
+    minHeight: "100vh",
+    background: "#050505",
+    color: "white",
+    padding: "25px",
+    fontFamily: "Arial",
+  },
 
-const heroCard = {
-  marginTop:"20px",
-  border:"1px solid #0077ff",
-  borderRadius:"28px",
-  padding:"28px",
-  background:"linear-gradient(180deg,#04111f,#02050a)",
-  boxShadow:"0 0 35px rgba(0,119,255,.35)",
-};
+  hero: {
+    maxWidth: "950px",
+    margin: "auto",
+    textAlign: "center" as const,
+  },
 
+  logo: {
+    width: "130px",
+    marginBottom: "20px",
+  },
 
-const topLine = {
-  color:"#8fc7ff",
-  fontSize:"12px",
-  letterSpacing:"3px",
-  fontWeight:"900",
-};
+  title: {
+    fontSize: "48px",
+    color: "#168cff",
+    marginBottom: "5px",
+  },
 
+  subtitle: {
+    fontSize: "22px",
+    color: "#cccccc",
+  },
 
-const card = {
-  marginTop:"28px",
-  border:"1px solid #0077ff",
-  borderRadius:"24px",
-  padding:"24px",
-  background:"#03070d",
-};
+  text: {
+    fontSize: "18px",
+    lineHeight: "1.6",
+    marginBottom: "25px",
+  },
 
+  scanner: {
+    width: "100%",
+    borderRadius: "25px",
+    border: "1px solid #168cff",
+    boxShadow:
+      "0 0 45px rgba(22,140,255,.45)",
+    marginBottom: "35px",
+  },
 
-const logo = {
-  color:"#0077ff",
-  fontSize:"46px",
-  fontStyle:"italic",
-};
+  card: {
+    background: "#111",
+    border:
+      "1px solid rgba(22,140,255,.5)",
+    borderRadius: "20px",
+    padding: "20px",
+    marginBottom: "18px",
+  },
 
-
-const blue = {
-  color:"#0077ff",
-};
-
-
-const systemBadge = {
-  margin:"22px 0",
-  padding:"16px",
-  border:"1px solid #0077ff",
-  borderRadius:"18px",
-  background:"rgba(0,119,255,.08)",
-};
-
-
-const badgeTitle = {
-  margin:0,
-  color:"#e8f4ff",
-};
-
-
-const badgeText = {
-  color:"#8fc7ff",
-};
-
-
-const button = {
-  display:"inline-block",
-  background:"#0077ff",
-  color:"#000",
-  padding:"16px 30px",
-  borderRadius:"999px",
-  fontWeight:"900",
-  textDecoration:"none",
-};
-
-
-const footer = {
-  textAlign:"center" as const,
-  marginTop:"50px",
-  color:"#8fc7ff",
-  fontWeight:"bold",
-};
-
-
-const supportLink = {
-  color:"#8fc7ff",
-  fontWeight:"900",
-  textDecoration:"none",
+  footer: {
+    marginTop: "40px",
+    color: "#888",
+    fontSize: "14px",
+  },
 };
