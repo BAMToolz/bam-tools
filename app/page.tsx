@@ -3,19 +3,14 @@ export default function Home() {
     <main style={main}>
       <section style={scannerFrame}>
         <p style={topLine}>BAM™ • BALL ADVANCED MANAGEMENT</p>
-
         <p style={prototype}>BAMLabs™ Prototype Interface</p>
 
         <h1 style={logo}>BAMToolz™</h1>
-
         <h2 style={subtitle}>Industrial Intelligence Platform</h2>
 
         <section style={screen}>
           <h2 style={blue}>◈ BAM Intelligence™</h2>
-
-          <p>
-            Scan equipment. Assist technicians. Preserve machine memory.
-          </p>
+          <p>Scan equipment. Assist technicians. Preserve machine memory.</p>
 
           <div style={grid}>
             <div style={tile}>BAM Scan™</div>
@@ -25,17 +20,9 @@ export default function Home() {
           </div>
         </section>
 
-        <a href="/scanner" style={button}>
-          Launch BAM Intelligence™
-        </a>
-
-        <a href="/examples" style={button}>
-          View BAM Examples™
-        </a>
-
-        <a href="/contact" style={button}>
-          Contact Support
-        </a>
+        <a href="/scanner" style={button}>Launch BAM Intelligence™</a>
+        <a href="/examples" style={button}>View BAM Examples™</a>
+        <a href="/contact" style={button}>Contact Support</a>
       </section>
 
       <section style={card}>
@@ -65,7 +52,44 @@ export default function Home() {
 
       <section style={card}>
         <h2 style={blue}>BAMSystems™</h2>
-        <p>Automation • Controls • Sensors • Integration</p>
+
+        <p>
+          Industrial intelligence integration connecting equipment, controls,
+          facilities, and data.
+        </p>
+
+        <p>
+          BAMSystems™ brings machine information from the physical world into
+          BAMToolz™.
+        </p>
+
+        <p>
+          ◈ PLC & Automation Connections
+          <br />
+          Connect industrial controllers, sensors, production equipment, and
+          machine signals.
+        </p>
+
+        <p>
+          ◈ Smart Facility Monitoring
+          <br />
+          Support future monitoring of equipment health, downtime events,
+          alarms, and maintenance needs.
+        </p>
+
+        <p>
+          ◈ Control Documentation
+          <br />
+          Preserve wiring information, I/O mapping, electrical drawings, and
+          system knowledge.
+        </p>
+
+        <p>
+          ◈ Industrial Solutions
+          <br />
+          Helping manufacturers, hospitals, aerospace, and critical facilities
+          build smarter operations.
+        </p>
       </section>
 
       <footer style={footer}>
