@@ -1,284 +1,171 @@
 export default function ExamplesPage() {
   return (
     <main style={main}>
+      <section style={hero}>
+        <p style={eyebrow}>BAMLabs™ Prototype Series</p>
 
-      <section style={panel}>
+        <h1 style={title}>BAMToolz™ Scanner</h1>
 
-        <p style={topLine}>
-          BAMLabs™ • BALL ADVANCED MANAGEMENT
+        <p style={subtitle}>
+          A premium industrial AI scanner concept for equipment intelligence,
+          technician guidance, machine memory, and facility safety.
         </p>
 
-        <h1 style={logo}>
-          BAMToolz™
-        </h1>
-
-        <h2 style={blue}>
-          Industrial AI Equipment Platform
-        </h2>
-
-        <p>
-          Aerospace-grade intelligence system designed
-          for manufacturing, maintenance, and critical facilities.
-        </p>
-
-
-        <section style={device}>
-
-          <div style={statusBar}>
-            BAM SCANNER // ONLINE
+        <div style={productCard}>
+          <div style={device}>
+            <div style={sensorBar}></div>
+            <div style={glassScreen}>
+              <h2 style={deviceLogo}>BAMToolz™</h2>
+              <p style={deviceText}>AI Equipment Scanner</p>
+              <div style={smallLine}></div>
+              <p style={deviceText}>Scan • Assist • Hub • Safety</p>
+            </div>
+            <div style={grip}></div>
           </div>
-
-          <div style={screen}>
-
-            <h2 style={screenTitle}>
-              BAM Intelligence™
-            </h2>
-
-            <p style={data}>
-              ASSET ID: READY
-            </p>
-
-            <p style={data}>
-              AI MODEL: ACTIVE
-            </p>
-
-            <p style={data}>
-              MEMORY HUB: CONNECTED
-            </p>
-
-            <div style={scanLine}>
-              SCAN EQUIPMENT
-            </div>
-
-          </div>
-
-
-          <div style={modules}>
-
-            <div style={module}>
-              BAM Scan™
-            </div>
-
-            <div style={module}>
-              BAM Assist™
-            </div>
-
-            <div style={module}>
-              BAM Hub™
-            </div>
-
-            <div style={module}>
-              BAM Safety™
-            </div>
-
-          </div>
-
-        </section>
-
+        </div>
       </section>
-
-
 
       <section style={card}>
-        <h2 style={blue}>◈ BAM Scan™</h2>
-
-        <p>
-          Identifies equipment tags, serial numbers,
-          manuals, and asset data.
-        </p>
-
+        <h2 style={blue}>BAM Scan™</h2>
+        <p>AI equipment recognition for tags, nameplates, panels, motors, and fault screens.</p>
       </section>
-
-
 
       <section style={card}>
-
-        <h2 style={blue}>◈ BAM Assist™</h2>
-
-        <p>
-          AI troubleshooting with guided technician
-          questions and repair intelligence.
-        </p>
-
+        <h2 style={blue}>BAM Assist™</h2>
+        <p>Guided troubleshooting that asks smart technician follow-up questions.</p>
       </section>
-
-
 
       <section style={card}>
-
-        <h2 style={blue}>◈ BAM Hub™</h2>
-
-        <p>
-          Machine memory preserving repair history,
-          experience, and knowledge.
-        </p>
-
+        <h2 style={blue}>BAM Hub™</h2>
+        <p>Machine memory for repair history, manuals, parts, and technician knowledge.</p>
       </section>
-
-
 
       <section style={card}>
-
-        <h2 style={blue}>◈ BAMSystems™</h2>
-
-        <p>
-          Automation, controls, sensors,
-          PLC data, and facility integration.
-        </p>
-
+        <h2 style={blue}>BAM Safety™</h2>
+        <p>Safety awareness for lockout, stored energy, hazards, and facility protection.</p>
       </section>
-
 
       <footer style={footer}>
-
-        <a href="/" style={button}>
-          Back Home
-        </a>
-
+        <a href="/" style={button}>Back Home</a>
       </footer>
-
     </main>
   );
 }
 
-
-
 const main = {
-  minHeight:"100vh",
-  background:
-    "linear-gradient(135deg,#000,#03111f,#000)",
-  color:"#e8f4ff",
-  padding:"22px",
-  fontFamily:"Arial",
+  minHeight: "100vh",
+  background: "radial-gradient(circle at top,#071d33,#02060b,#000)",
+  color: "#e8f4ff",
+  padding: "24px",
+  fontFamily: "Arial, Helvetica, sans-serif",
 };
 
-
-
-const panel = {
-  border:"1px solid #008cff",
-  padding:"28px",
-  background:"#02060b",
-  boxShadow:
-    "0 0 45px rgba(0,140,255,.3)",
+const hero = {
+  maxWidth: "950px",
+  margin: "auto",
+  textAlign: "center" as const,
 };
 
-
-
-const topLine = {
-  color:"#8fc7ff",
-  letterSpacing:"4px",
-  fontSize:"12px",
+const eyebrow = {
+  color: "#8fc7ff",
+  letterSpacing: "3px",
+  fontSize: "12px",
+  fontWeight: "900",
 };
 
-
-
-const logo = {
-  color:"#008cff",
-  fontSize:"52px",
-  letterSpacing:"2px",
+const title = {
+  color: "#168cff",
+  fontSize: "52px",
+  marginBottom: "8px",
 };
 
-
-
-const blue = {
-  color:"#008cff",
+const subtitle = {
+  fontSize: "18px",
+  lineHeight: "1.6",
+  color: "#cfe8ff",
 };
 
-
+const productCard = {
+  marginTop: "30px",
+  padding: "35px",
+  border: "1px solid rgba(22,140,255,.5)",
+  background: "linear-gradient(180deg,#08131f,#03070d)",
+  boxShadow: "0 0 45px rgba(22,140,255,.25)",
+};
 
 const device = {
-  marginTop:"30px",
-  border:"2px solid #263849",
-  padding:"18px",
-  background:
-    "linear-gradient(180deg,#111923,#020406)",
+  position: "relative" as const,
+  width: "250px",
+  height: "460px",
+  margin: "auto",
+  background: "linear-gradient(145deg,#1b2633,#05070a)",
+  border: "2px solid #24384d",
+  boxShadow: "0 25px 60px rgba(0,0,0,.7)",
 };
 
-
-
-const statusBar = {
-  background:"#008cff",
-  color:"#000",
-  padding:"10px",
-  fontWeight:"900",
-  letterSpacing:"3px",
+const sensorBar = {
+  height: "58px",
+  background: "linear-gradient(90deg,#05070a,#168cff,#05070a)",
+  borderBottom: "2px solid #168cff",
 };
 
-
-
-const screen = {
-  marginTop:"18px",
-  padding:"22px",
-  background:"#000",
-  border:"1px solid #008cff",
+const glassScreen = {
+  margin: "22px",
+  padding: "22px",
+  minHeight: "210px",
+  background: "linear-gradient(180deg,#02060b,#061626)",
+  border: "1px solid #168cff",
+  boxShadow: "inset 0 0 30px rgba(22,140,255,.25)",
 };
 
-
-
-const screenTitle = {
-  color:"#8fc7ff",
+const deviceLogo = {
+  color: "#168cff",
+  fontSize: "28px",
 };
 
-
-
-const data = {
-  fontFamily:"monospace",
-  color:"#8fc7ff",
+const deviceText = {
+  color: "#cfe8ff",
+  fontSize: "14px",
 };
 
-
-
-const scanLine = {
-  marginTop:"25px",
-  border:"1px solid #008cff",
-  padding:"18px",
-  textAlign:"center" as const,
-  fontWeight:"900",
-  letterSpacing:"3px",
+const smallLine = {
+  height: "1px",
+  background: "#168cff",
+  margin: "18px 0",
 };
 
-
-
-const modules = {
-  display:"grid",
-  gridTemplateColumns:
-    "repeat(2,1fr)",
-  gap:"12px",
-  marginTop:"18px",
+const grip = {
+  position: "absolute" as const,
+  bottom: "-110px",
+  left: "82px",
+  width: "86px",
+  height: "120px",
+  background: "linear-gradient(180deg,#111,#050505)",
+  border: "2px solid #24384d",
 };
-
-
-
-const module = {
-  border:"1px solid #008cff",
-  padding:"18px",
-  background:"#07111d",
-  textAlign:"center" as const,
-  fontWeight:"900",
-};
-
-
 
 const card = {
-  marginTop:"25px",
-  padding:"22px",
-  border:"1px solid #008cff",
-  background:"#03070d",
+  maxWidth: "950px",
+  margin: "24px auto 0",
+  padding: "24px",
+  background: "rgba(3,7,13,.9)",
+  border: "1px solid rgba(22,140,255,.45)",
 };
 
-
+const blue = {
+  color: "#168cff",
+};
 
 const footer = {
-  marginTop:"40px",
-  textAlign:"center" as const,
+  textAlign: "center" as const,
+  marginTop: "140px",
 };
 
-
-
 const button = {
-  background:"#008cff",
-  color:"#000",
-  padding:"15px 35px",
-  textDecoration:"none",
-  fontWeight:"900",
+  display: "inline-block",
+  background: "#168cff",
+  color: "#000",
+  padding: "15px 32px",
+  fontWeight: "900",
+  textDecoration: "none",
 };
