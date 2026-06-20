@@ -12,7 +12,7 @@ export default function ScannerPage() {
       return;
     }
 
-    setResult("🔵 BAM Scan™ AI analyzing equipment...");
+    setResult("🔵 BAM Scan™ sending photo...");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -25,25 +25,16 @@ export default function ScannerPage() {
 
       const data = await response.json();
 
+      if (!response.ok) {
+        setResult(data.error || "BAM Scan failed.");
+        return;
+      }
+
       setResult(
         data.result ||
-          `🦺 BAM Safety™
-Safety check first:
-• Review Lockout / Tagout
-• Verify stored energy
-• Check electrical, hydraulic, pneumatic hazards
-
-🏷 Asset Identification:
-Waiting for equipment data
-
-🔧 Parts Intelligence:
-Ready to identify components
-
-📚 Documentation:
-Manuals and schematics ready
-
-🧠 Machine Memory:
-Capture technician knowledge`
+          data.message ||
+          `✅ BAM Scan connected.
+Image reached the API route.`
       );
     } catch {
       setResult("BAM Scan connection failed.");
@@ -57,8 +48,7 @@ Capture technician knowledge`
         background: "#000",
         color: "#e8f4ff",
         padding: "22px",
-        fontFamily:
-          "Arial Rounded MT Bold, Arial, Helvetica, sans-serif",
+        fontFamily: "Arial Rounded MT Bold, Arial, Helvetica, sans-serif",
       }}
     >
       <section
@@ -71,44 +61,20 @@ Capture technician knowledge`
           boxShadow: "0 0 40px rgba(0,119,255,.45)",
         }}
       >
-        <div
-          style={{
-            border: "4px solid #0077ff",
-            borderRadius: "999px",
-            padding: "18px",
-            boxShadow: "0 0 25px #0077ff",
-          }}
-        >
-          <h1
-            style={{
-              color: "#0077ff",
-              fontStyle: "italic",
-              margin: 0,
-            }}
-          >
-            BAMToolz™
-          </h1>
-        </div>
+        <h1 style={{ color: "#0077ff", fontStyle: "italic" }}>
+          BAMToolz™
+        </h1>
 
-        <h2 style={{ color: "#0077ff" }}>
-          BAM Scan™ AI
-        </h2>
+        <h2 style={{ color: "#0077ff" }}>BAM Scan™ AI</h2>
 
-        <h3>
-          Preserving Presence™
-        </h3>
+        <h3>Preserving Presence™</h3>
 
-        <p>
-          Scan equipment tags, barcodes,
-          fault screens, motors, and panels.
-        </p>
+        <p>Scan equipment tags, motors, fault screens, and panels.</p>
 
         <input
           type="file"
           accept="image/*"
-          onChange={(e) =>
-            setFile(e.target.files?.[0] || null)
-          }
+          onChange={(e) => setFile(e.target.files?.[0] || null)}
         />
 
         <br />
