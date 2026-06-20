@@ -5,46 +5,33 @@ export async function POST(req: Request) {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return NextResponse.json(
-        { error: "Missing GEMINI_API_KEY" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Missing GEMINI_API_KEY" }, { status: 500 });
     }
 
     const formData = await req.formData();
     const image = formData.get("image") as File | null;
 
     if (!image) {
-      return NextResponse.json(
-        { error: "No image uploaded" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "No image uploaded" }, { status: 400 });
     }
 
     const bytes = await image.arrayBuffer();
-
-    const base64Image =
-      Buffer.from(bytes).toString("base64");
+    const base64Image = Buffer.from(bytes).toString("base64");
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [
             {
+              role: "user",
               parts: [
                 {
-                  text: `
-You are BAM Scan™ created by BAMLabs™.
+                  text: `You are BAM Scan™ created by BAMLabs™.
 
-Analyze this equipment image.
-
-Return a professional industrial report:
+Analyze this equipment image and return:
 
 BAM Scan™ Report
 ━━━━━━━━━━━━
@@ -55,7 +42,6 @@ Equipment Type:
 Model:
 Serial:
 Ratings:
-Location:
 
 ◈ Safety Intelligence
 Hazards:
@@ -65,26 +51,17 @@ Lockout / Tagout:
 ◈ Parts Intelligence
 Components:
 Replacement Parts:
-Critical Spares:
 
 ◈ Troubleshooting
 Observed Issues:
 Tests:
 Recommended Action:
 
-◈ BAM Hub™ Machine Memory
-Repair Notes:
-Knowledge Captured:
-Future Prevention:
-
-Do not invent unreadable numbers.
-Say if information is unclear.
-                  `,
+Do not invent unreadable numbers.`,
                 },
-
                 {
                   inline_data: {
-                    mime_type: image.type,
+                    mime_type: image.type || "image/jpeg",
                     data: base64Image,
                   },
                 },
@@ -97,17 +74,24 @@ Say if information is unclear.
 
     const data = await response.json();
 
-    const text =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "BAM Scan completed but no text returned.";
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: data?.error?.message || "Gemini API error" },
+        { status: response.status }
+      );
+    }
+
+    const text = data?.candidates?.[0]?.content?.parts
+      ?.map((part: any) => part.text)
+      ?.filter(Boolean)
+      ?.join("\n");
 
     return NextResponse.json({
-      result: text,
+      result: text || JSON.stringify(data, null, 2),
     });
-
   } catch (error: any) {
     return NextResponse.json(
-      { error: error.message },
+      { error: error?.message || "Gemini scan failed" },
       { status: 500 }
     );
   }
