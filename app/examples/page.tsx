@@ -1,94 +1,90 @@
 export default function ExamplesPage() {
   return (
     <main style={main}>
-      <section style={heroCard}>
+      <section style={hero}>
         <p style={topLine}>BAM™ • BALL ADVANCED MANAGEMENT</p>
+
         <h1 style={logo}>BAMToolz™ Examples</h1>
-        <h2 style={blue}>How Industrial Intelligence Works</h2>
+
+        <h2 style={blue}>Industrial Intelligence In Action</h2>
 
         <p>
-          BAMToolz™ turns equipment photos, asset tags, manuals, and technician
-          knowledge into organized machine intelligence.
+          Built by BAMLabs™ to turn equipment, facilities, and technician
+          knowledge into connected intelligence systems.
         </p>
 
-        <a href="/" style={button}>← Back Home</a>
+        <img
+          src="/bam-scanner.png"
+          alt="BAMToolz prototype handheld scanner"
+          style={prototypeImage}
+        />
       </section>
 
       <section style={card}>
-        <h2 style={blue}>◈ Example 1: Motor Nameplate Scan</h2>
+        <h2 style={blue}>◈ Prototype Scanner</h2>
         <p>
-          A technician scans a motor tag. BAM Scan™ reads voltage, horsepower,
-          model, serial number, RPM, and manufacturer data.
-        </p>
-        <p>
-          Result: faster part lookup, safer troubleshooting, and cleaner
-          equipment records.
-        </p>
-      </section>
-
-      <section style={card}>
-        <h2 style={blue}>◈ Example 2: Hospital Asset Tracking</h2>
-        <p>
-          A hospital scans a pump, bed, cart, or critical facility asset.
-          BAM Hub™ stores location, repair status, assigned technician, and
-          return-to-service notes.
-        </p>
-        <p>
-          Result: the facility knows what is down, where it is, and when it
-          returns.
+          A rugged handheld scanner concept designed for equipment tags,
+          barcodes, QR codes, fault screens, panels, motors, and asset records.
         </p>
       </section>
 
       <section style={card}>
-        <h2 style={blue}>◈ Example 3: Machine Memory</h2>
+        <h2 style={blue}>◈ BAM Scan™</h2>
         <p>
-          A senior technician adds notes after fixing a recurring issue.
-          BAM Hub™ saves the repair history so the next technician does not
-          start from zero.
-        </p>
-        <p>
-          Result: technician knowledge stays with the machine.
+          Scans equipment images and creates asset intelligence for technicians.
         </p>
       </section>
 
       <section style={card}>
-        <h2 style={blue}>◈ Example 4: Safety Before Repair</h2>
+        <h2 style={blue}>◈ BAM Assist™</h2>
         <p>
-          Before opening a panel or servicing equipment, BAM Safety™ highlights
-          lockout/tagout, stored energy, electrical hazards, and required checks.
-        </p>
-        <p>
-          Result: protect the technician and protect the facility.
+          Asks follow-up troubleshooting questions and guides the technician.
         </p>
       </section>
 
       <section style={card}>
-        <h2 style={blue}>◈ Example 5: BAMSystems™ Integration</h2>
+        <h2 style={blue}>◈ BAM Hub™</h2>
         <p>
-          Once BAMToolz™ proves the equipment data, BAMSystems™ can connect
-          controls, sensors, PLC data, automation, and facility systems.
-        </p>
-        <p>
-          Result: industrial intelligence moves from app to infrastructure.
+          Stores machine memory, repair history, manuals, parts, and notes.
         </p>
       </section>
+
+      <section style={card}>
+        <h2 style={blue}>◈ BAMSystems™</h2>
+        <p>
+          Future integration with automation, controls, sensors, PLC data, and
+          smart facilities.
+        </p>
+      </section>
+
+      <footer style={footer}>
+        <a href="/" style={button}>Back Home</a>
+      </footer>
     </main>
   );
 }
 
 const main = {
   minHeight: "100vh",
-  background: "radial-gradient(circle at top, #062444 0%, #020711 45%, #000 100%)",
+  background: "radial-gradient(circle at top,#062444,#020711,#000)",
   color: "#e8f4ff",
   padding: "22px",
   fontFamily: "Arial, Helvetica, sans-serif",
 };
 
-const heroCard = {
+const hero = {
   border: "1px solid #0077ff",
   borderRadius: "28px",
   padding: "28px",
-  background: "linear-gradient(180deg, #04111f, #02050a)",
+  background: "linear-gradient(180deg,#04111f,#02050a)",
+  boxShadow: "0 0 35px rgba(0,119,255,.35)",
+};
+
+const prototypeImage = {
+  width: "100%",
+  marginTop: "24px",
+  borderRadius: "24px",
+  border: "1px solid #0077ff",
   boxShadow: "0 0 35px rgba(0,119,255,.35)",
 };
 
@@ -117,12 +113,16 @@ const blue = {
   color: "#0077ff",
 };
 
+const footer = {
+  textAlign: "center" as const,
+  marginTop: "40px",
+};
+
 const button = {
   display: "inline-block",
-  marginTop: "10px",
   background: "#0077ff",
   color: "#000",
-  padding: "14px 26px",
+  padding: "15px 30px",
   borderRadius: "999px",
   fontWeight: "900",
   textDecoration: "none",
