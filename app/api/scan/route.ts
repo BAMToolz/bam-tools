@@ -1,15 +1,40 @@
 import { NextResponse } from "next/server";
 
+function demoReport() {
+  return `BAM Scan™ Demo Report
+━━━━━━━━━━━━
+
+◈ Asset Intelligence
+Manufacturer: Demo mode
+Equipment Type: Industrial equipment / asset tag
+Model: Add AI credits to read live model data
+Serial: Add AI credits to read live serial data
+Ratings: Voltage / HP / amps detected when AI is active
+
+◈ Safety Intelligence
+Hazards: Verify electrical, mechanical, hydraulic, and pneumatic energy
+Energy Sources: Confirm before service
+Lockout / Tagout: Required before repair or panel access
+
+◈ Parts Intelligence
+Components: Motor, tag, panel, sensor, pump, or machine components
+Replacement Parts: AI will suggest visible parts when active
+Critical Spares: Bearings, belts, sensors, fuses, contactors, motors
+
+◈ Troubleshooting
+Observed Issues: Demo mode cannot inspect the image yet
+Tests: Check power, fuses, overloads, sensors, wiring, and fault codes
+Recommended Action: Add AI credits or quota to enable live image reading
+
+◈ BAM Hub™ Machine Memory
+Repair Notes: Save technician notes here
+Knowledge Captured: Machine history stays with the asset
+Future Prevention: Build repeatable repair knowledge`;
+}
+
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      return NextResponse.json(
-        { error: "Missing GEMINI_API_KEY" },
-        { status: 500 }
-      );
-    }
 
     const formData = await req.formData();
     const image = formData.get("image") as File | null;
@@ -19,6 +44,12 @@ export async function POST(req: Request) {
         { error: "No image uploaded" },
         { status: 400 }
       );
+    }
+
+    if (!apiKey) {
+      return NextResponse.json({
+        result: demoReport(),
+      });
     }
 
     const bytes = await image.arrayBuffer();
@@ -88,10 +119,9 @@ Do not invent unreadable numbers. Say clearly if text is blurry or unclear.`,
     const data = await response.json();
 
     if (!response.ok) {
-      return NextResponse.json(
-        { error: data?.error?.message || "Gemini API error" },
-        { status: response.status }
-      );
+      return NextResponse.json({
+        result: demoReport(),
+      });
     }
 
     const text = data?.candidates?.[0]?.content?.parts
@@ -100,12 +130,11 @@ Do not invent unreadable numbers. Say clearly if text is blurry or unclear.`,
       ?.join("\n");
 
     return NextResponse.json({
-      result: text || "BAM Scan completed but no text returned.",
+      result: text || demoReport(),
     });
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: error?.message || "Gemini scan failed" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({
+      result: demoReport(),
+    });
   }
 }
