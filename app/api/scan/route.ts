@@ -5,24 +5,32 @@ export async function POST(req: Request) {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      return NextResponse.json({ error: "Missing GEMINI_API_KEY" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Missing GEMINI_API_KEY" },
+        { status: 500 }
+      );
     }
 
     const formData = await req.formData();
     const image = formData.get("image") as File | null;
 
     if (!image) {
-      return NextResponse.json({ error: "No image uploaded" }, { status: 400 });
+      return NextResponse.json(
+        { error: "No image uploaded" },
+        { status: 400 }
+      );
     }
 
     const bytes = await image.arrayBuffer();
     const base64Image = Buffer.from(bytes).toString("base64");
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           contents: [
             {
@@ -57,7 +65,12 @@ Observed Issues:
 Tests:
 Recommended Action:
 
-Do not invent unreadable numbers.`,
+◈ BAM Hub™ Machine Memory
+Repair Notes:
+Knowledge Captured:
+Future Prevention:
+
+Do not invent unreadable numbers. Say clearly if text is blurry or unclear.`,
                 },
                 {
                   inline_data: {
@@ -87,7 +100,7 @@ Do not invent unreadable numbers.`,
       ?.join("\n");
 
     return NextResponse.json({
-      result: text || JSON.stringify(data, null, 2),
+      result: text || "BAM Scan completed but no text returned.",
     });
   } catch (error: any) {
     return NextResponse.json(
