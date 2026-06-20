@@ -2,19 +2,21 @@ export default function Home() {
   return (
     <main style={main}>
       <section style={heroCard}>
+        <p style={topLine}>BAM™ • BALL ADVANCED MANAGEMENT</p>
+
         <h1 style={logo}>BAMToolz™</h1>
-        <h2 style={blue}>Preserving Presence™</h2>
+        <h2 style={blue}>Industrial Intelligence Platform</h2>
 
         <div style={systemBadge}>
-          <h2 style={badgeTitle}>◈ Preserving Knowledge ◈</h2>
-          <p style={badgeText}>Intelligent Maintenance Systems</p>
+          <h2 style={badgeTitle}>◈ Preserving Presence ◈</h2>
+          <p style={badgeText}>
+            Asset intelligence. Knowledge systems. Machine memory.
+          </p>
         </div>
 
-        <h3>In Every Machine</h3>
-
         <p>
-          AI-powered equipment intelligence for manufacturing, hospitals,
-          aerospace, and critical facilities.
+          Built by BAMLabs™ for manufacturing, hospitals, aerospace,
+          and critical facilities.
         </p>
 
         <a href="/scanner" style={button}>
@@ -23,36 +25,26 @@ export default function Home() {
       </section>
 
       <section style={card}>
-        <h2 style={blue}>Asset Intelligence</h2>
-        <p>
-          Connect barcodes, QR codes, asset tags, serial plates, and equipment
-          IDs.
-        </p>
+        <h2 style={blue}>BAMLabs™</h2>
+        <p>Research • AI • Innovation • Future Technology</p>
+        <p>Creating the intelligence behind BAMToolz™.</p>
       </section>
 
       <section style={card}>
-        <h2 style={blue}>BAM Hub™</h2>
-        <h3>Every Machine Gets a Memory™</h3>
-        <p>Equipment Profiles</p>
-        <p>Locations</p>
-        <p>Manuals & Schematics</p>
-        <p>Parts Intelligence</p>
-        <p>Repair History</p>
-        <p>Technician Knowledge</p>
+        <h2 style={blue}>BAMToolz™</h2>
+        <p>BAM Scan™ • BAM Hub™ • BAM Safety™</p>
+        <p>Every asset gets knowledge, history, and memory.</p>
       </section>
 
       <section style={card}>
-        <h2 style={blue}>BAM Safety™</h2>
-        <p>Lockout / Tagout</p>
-        <p>Electrical Hazards</p>
-        <p>Stored Energy</p>
-        <p>Procedures</p>
+        <h2 style={blue}>BAMSystems™</h2>
+        <p>Automation • Controls • Integration • Smart Facilities</p>
+        <p>Where industrial intelligence connects to the real world.</p>
       </section>
 
       <footer style={footer}>
-        <p>© 2026 BAMToolz™. All Rights Reserved.</p>
-        <p>BAM Scan™ • BAM Hub™ • BAM Safety™</p>
-        <p>Ball Advanced Maintenance Tools</p>
+        <p>© 2026 Ball Advanced Management™. All Rights Reserved.</p>
+        <p>BAMLabs™ • BAMToolz™ • BAMSystems™</p>
       </footer>
     </main>
   );
@@ -60,7 +52,8 @@ export default function Home() {
 
 const main = {
   minHeight: "100vh",
-  background: "#000",
+  background:
+    "radial-gradient(circle at top, #062444 0%, #020711 45%, #000 100%)",
   color: "#e8f4ff",
   padding: "22px",
   fontFamily: "Arial, Helvetica, sans-serif",
@@ -73,6 +66,13 @@ const heroCard = {
   padding: "28px",
   background: "linear-gradient(180deg, #04111f, #02050a)",
   boxShadow: "0 0 35px rgba(0,119,255,.35)",
+};
+
+const topLine = {
+  color: "#8fc7ff",
+  fontSize: "12px",
+  letterSpacing: "3px",
+  fontWeight: "900",
 };
 
 const card = {
