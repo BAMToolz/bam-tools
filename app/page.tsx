@@ -4,13 +4,7 @@ export default function Home() {
 
       <section style={styles.hero}>
 
-        <img
-          src="/logo.png"
-          alt="BAMToolz Logo"
-          style={styles.logo}
-        />
-
-        <h1 style={styles.title}>
+        <h1 style={styles.logoText}>
           BAMToolz™
         </h1>
 
@@ -20,52 +14,76 @@ export default function Home() {
 
         <p style={styles.text}>
           AI Industrial Intelligence Platform built by BAMLabs™.
-          Scan equipment. Assist technicians. Save machine knowledge.
-          Protect people and facilities.
+          Bringing machine intelligence, technician support,
+          and industrial knowledge together.
         </p>
 
-        <img
-          src="/bam-scanner.png"
-          alt="BAMToolz AI Industrial Scanner"
-          style={styles.scanner}
-        />
+
+        <div style={styles.productBox}>
+
+          <h2>
+            BAMToolz™ AI Industrial Scanner
+          </h2>
+
+          <p>
+            Rugged handheld industrial scanner designed
+            for technicians, manufacturing, aerospace,
+            and facility maintenance.
+          </p>
+
+          <h3>◈ BAM Scan™</h3>
+          <p>
+            Scan equipment tags, QR codes, manuals,
+            parts, and machine information.
+          </p>
+
+          <h3>◈ BAM Assist™</h3>
+          <p>
+            AI troubleshooting assistant that asks questions,
+            guides repairs, and helps diagnose failures.
+          </p>
+
+          <h3>◈ BAM Hub™</h3>
+          <p>
+            Machine memory storing repairs, history,
+            documents, and technician knowledge.
+          </p>
+
+          <h3>◈ BAM Safety™</h3>
+          <p>
+            Safety awareness, lockout reminders,
+            and protection for people and facilities.
+          </p>
+
+        </div>
+
 
         <div style={styles.card}>
-          <h2>BAM Scan™</h2>
+          <h2>BAMLabs™</h2>
           <p>
-            Identify machines, read equipment tags,
-            capture manuals, parts, and history.
+            Research • AI Development • Prototypes • Future Technology
           </p>
         </div>
 
+
         <div style={styles.card}>
-          <h2>BAM Assist™</h2>
+          <h2>BAMSystems™</h2>
           <p>
-            AI guided troubleshooting with technician
-            questions and repair support.
+            Automation • Controls • PLC Integration • Industrial Solutions
           </p>
         </div>
 
-        <div style={styles.card}>
-          <h2>BAM Hub™</h2>
-          <p>
-            Machine memory storing repairs,
-            knowledge, manuals, and experience.
-          </p>
-        </div>
-
-        <div style={styles.card}>
-          <h2>BAM Safety™</h2>
-          <p>
-            Safety awareness, LOTO reminders,
-            and facility protection.
-          </p>
-        </div>
 
         <footer style={styles.footer}>
-          © BAMLabs™ | Ball Advanced Management
+
+          © BAMLabs™
           <br />
-          Support: BAMToolzsupport@gmail.com
+          Ball Advanced Management
+          <br />
+          Support:
+          <br />
+          BAMToolzsupport@gmail.com
+
         </footer>
 
       </section>
@@ -79,47 +97,44 @@ const styles = {
 
   page: {
     minHeight: "100vh",
-    background: "#050505",
+    background:
+      "linear-gradient(#020202,#00111f)",
     color: "white",
     padding: "25px",
     fontFamily: "Arial",
   },
 
   hero: {
-    maxWidth: "950px",
+    maxWidth: "900px",
     margin: "auto",
     textAlign: "center" as const,
   },
 
-  logo: {
-    width: "130px",
-    marginBottom: "20px",
-  },
-
-  title: {
-    fontSize: "48px",
+  logoText: {
+    fontSize: "55px",
     color: "#168cff",
-    marginBottom: "5px",
+    fontWeight: "bold",
   },
 
   subtitle: {
-    fontSize: "22px",
+    fontSize: "24px",
     color: "#cccccc",
   },
 
   text: {
-    fontSize: "18px",
+    fontSize: "19px",
     lineHeight: "1.6",
-    marginBottom: "25px",
   },
 
-  scanner: {
-    width: "100%",
+  productBox: {
+    background: "#050505",
+    border: "2px solid #168cff",
     borderRadius: "25px",
-    border: "1px solid #168cff",
+    padding: "25px",
+    marginTop: "30px",
+    textAlign: "left" as const,
     boxShadow:
-      "0 0 45px rgba(22,140,255,.45)",
-    marginBottom: "35px",
+      "0 0 40px rgba(22,140,255,.35)",
   },
 
   card: {
@@ -128,12 +143,12 @@ const styles = {
       "1px solid rgba(22,140,255,.5)",
     borderRadius: "20px",
     padding: "20px",
-    marginBottom: "18px",
+    marginTop: "20px",
   },
 
   footer: {
     marginTop: "40px",
-    color: "#888",
-    fontSize: "14px",
+    color: "#999",
+    fontSize: "15px",
   },
 };
