@@ -7,6 +7,13 @@ const client = new OpenAI({
 
 export async function POST(req: Request) {
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json(
+        { error: "OPENAI_API_KEY is missing in Vercel." },
+        { status: 500 }
+      );
+    }
+
     const formData = await req.formData();
     const image = formData.get("image") as File | null;
 
@@ -20,16 +27,15 @@ export async function POST(req: Request) {
     const bytes = await image.arrayBuffer();
     const base64 = Buffer.from(bytes).toString("base64");
 
-    const response = await client.responses.create({
-      model: "gpt-4.1-mini",
+    const ai = await client.responses.create({
+      model: "gpt-4o-mini",
       input: [
         {
           role: "user",
           content: [
             {
               type: "input_text",
-              text:
-                "You are BAM Scan AI. Analyze this equipment image for a maintenance technician. Identify visible equipment tags, model numbers, serial numbers, voltage, HP, part numbers, safety risks, likely components, and next troubleshooting steps. If text is unclear, say what is unclear. Format with sections: Safety, Asset Identification, Parts Intelligence, Troubleshooting, Technician Notes.",
+              text: "Analyze this equipment image for a maintenance technician. Identify visible text, equipment type, safety risks, parts, and troubleshooting notes.",
             },
             {
               type: "input_image",
@@ -41,11 +47,13 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({
-      result: response.output_text,
+      result: ai.output_text || "AI returned no text.",
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
-      { error: "AI scan failed. Check API key and deployment logs." },
+      {
+        error: error?.message || "AI scan failed.",
+      },
       { status: 500 }
     );
   }
