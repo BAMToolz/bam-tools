@@ -1,4 +1,4 @@
-export default function Home() {
+ export default function Home() {
   return (
     <main className="min-h-screen bg-[#04162b] text-white px-5 py-6">
       <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl bg-gradient-to-br from-[#08aeea] via-[#0874a8] to-[#061a33] p-6 md:p-10 border-4 border-white">
