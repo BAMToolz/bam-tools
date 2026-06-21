@@ -17,6 +17,7 @@ export async function POST(req: Request) {
 
     const bytes = await file.arrayBuffer();
     const base64 = Buffer.from(bytes).toString("base64");
+    const imageUrl = `data:${file.type};base64,${base64}`;
 
     const response = await openai.responses.create({
       model: "gpt-4.1-mini",
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
               type: "input_text",
               text: `You are BAM Scan™, an industrial maintenance AI.
 
-Analyze this equipment image and return a technician-style report:
+Analyze this equipment image and return:
 
 Equipment:
 Manufacturer:
@@ -47,7 +48,8 @@ Confidence:`,
             },
             {
               type: "input_image",
-              image_url: `data:${file.type};base64,${base64}`,
+              image_url: imageUrl,
+              detail: "auto",
             },
           ],
         },
@@ -65,4 +67,4 @@ Confidence:`,
       { status: 500 }
     );
   }
- }
+}
