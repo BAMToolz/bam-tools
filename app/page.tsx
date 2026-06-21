@@ -8,11 +8,7 @@ export default function Home() {
             <div className="inline-flex items-center justify-center bg-white text-[#0a8fc2] font-black text-2xl px-5 py-1 rounded-xl shadow">
               BAM
             </div>
-
-            <h1 className="text-4xl md:text-5xl font-black mt-3">
-              BAMToolz™
-            </h1>
-
+            <h1 className="text-4xl md:text-5xl font-black mt-3">BAMToolz™</h1>
             <p className="text-sm md:text-base font-bold text-blue-100 mt-2">
               Ball Advanced Maintenance Tools™
             </p>
@@ -20,104 +16,132 @@ export default function Home() {
 
           <nav className="flex flex-wrap gap-3">
             <NavButton text="Platform™" />
-            <NavButton text="Products™" />
             <NavButton text="Safety™" />
             <NavButton text="Hub™" />
-            <NavButton text="Scan™" />
+            <NavButton text="Roadmap™" />
+            <NavButton text="Support™" />
           </nav>
         </header>
 
-        <Section label="THE FUTURE OF INDUSTRIAL INTELLIGENCE™" title="Connecting Machines, Robotics, Technicians and AI.">
+        <Section
+          label="INDUSTRIAL SAFETY & MAINTENANCE INTELLIGENCE™"
+          title="Build the platform first. Power the scanner next."
+        >
           <p className="text-gray-200 mt-6 max-w-5xl text-base md:text-lg">
-            BAMToolz™ is being built as an industrial intelligence platform for
-            maintenance teams, manufacturing facilities, hospitals, aerospace,
-            robotics, machine controls, parts, manuals, repair history, safety
-            verification, and technician knowledge.
+            BAMToolz™ is being built as a safety-first maintenance intelligence
+            platform for facilities, technicians, equipment data, manuals, parts,
+            repair history, inspections, and secure building knowledge.
           </p>
 
           <div className="flex flex-wrap gap-4 mt-8">
             <button className="bg-cyan-400 text-[#061a33] font-black px-6 py-3 rounded-xl">
-              Scan Equipment™
+              View Platform™
             </button>
-
             <button className="bg-[#061a33] border border-cyan-400 text-cyan-200 font-black px-6 py-3 rounded-xl">
-              Safety First™
+              Hardware In Development™
             </button>
           </div>
         </Section>
 
-        <Section label="BAM PLATFORM™" title="One system for the machine side of the world.">
+        <Section label="BAM PLATFORM™" title="The software foundation for facility intelligence.">
           <p className="text-gray-200 mt-5 max-w-5xl">
-            BAMToolz™ turns scattered machine information into an organized
-            AI-powered maintenance brain. Instead of manuals, notes, photos,
-            parts lists, drawings, and repair history being spread everywhere,
-            BAM connects the data to the equipment profile.
+            The first version of BAMToolz™ focuses on the platform: equipment
+            profiles, safety checks, manuals, repair notes, parts data, and AI
+            assistance. The scanner hardware comes later as a dedicated device
+            powered by the same system.
           </p>
 
           <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <MiniCard title="Equipment Profiles" text="Each machine can have its own digital record, photos, notes, manuals, parts, and repair history." />
-            <MiniCard title="Manual Library" text="Store machine manuals, wiring drawings, troubleshooting guides, and facility procedures." />
-            <MiniCard title="Repair History" text="Save what failed, what fixed it, who worked on it, and what parts were used." />
-            <MiniCard title="Parts Intelligence" text="Connect equipment to spare parts, part numbers, suppliers, and replacement notes." />
-            <MiniCard title="Technician Notes" text="Capture real field knowledge before experienced workers leave or retire." />
-            <MiniCard title="AI Assistant" text="Help technicians search facility knowledge, understand issues, and follow safe steps." />
+            <MiniCard title="Equipment Profiles" text="Digital records for machines, photos, manuals, safety notes, parts, and repair history." />
+            <MiniCard title="Manual Library" text="Store manuals, drawings, troubleshooting guides, and procedures by machine or area." />
+            <MiniCard title="Repair History" text="Track failures, fixes, parts used, technicians, dates, and recurring issues." />
+            <MiniCard title="Parts Data" text="Connect equipment to part numbers, spare parts, suppliers, and replacement notes." />
+            <MiniCard title="Technician Knowledge" text="Capture real field experience before knowledge is lost." />
+            <MiniCard title="AI Assistant" text="Help technicians search facility knowledge and follow safer repair steps." />
           </div>
         </Section>
 
-        <Section label="BAM SAFETY SCAN™" title="Safety first. Repair second.">
+        <Section label="BAM SAFETY™" title="Safety first. Maintenance second.">
           <p className="text-gray-200 mt-5 max-w-5xl">
-            BAM Safety Scan™ is designed to help technicians verify safety
-            information before work begins. The goal is not to replace company
-            safety programs, but to help organize and display safety information
-            at the machine.
+            BAMToolz™ should be positioned as OSHA-aligned safety support, not
+            OSHA-approved. The goal is to help facilities organize safety
+            information, inspections, PPE requirements, hazards, and procedure
+            records.
           </p>
 
           <div className="grid md:grid-cols-4 gap-4 mt-8">
-            <MiniCard title="PPE" text="Required protective equipment before starting work." />
-            <MiniCard title="Hazards" text="Machine-specific risks, warnings, pinch points, heat, motion, and stored energy notes." />
-            <MiniCard title="LOTO Support" text="Lockout/tagout reference support for energy sources and safe work preparation." />
-            <MiniCard title="Inspections" text="Safety inspection records, photos, corrective actions, and due dates." />
+            <MiniCard title="PPE" text="Show required protective equipment before work starts." />
+            <MiniCard title="Hazards" text="Display machine-specific risks, warnings, and stored energy notes." />
+            <MiniCard title="LOTO Support" text="Support lockout/tagout reference information and safe preparation." />
+            <MiniCard title="Audit Records" text="Save inspections, photos, corrective actions, and repair documentation." />
           </div>
         </Section>
 
-        <Section label="BAM HUB™" title="Each building gets its own secure brain.">
+        <Section label="BAM HUB™" title="Each building keeps its own secure brain.">
           <p className="text-gray-200 mt-5 max-w-5xl">
-            BAM Hub™ is the local facility brain. Scanners connect to the hub
-            inside the building for faster response, lower lag, and safer data
-            control. The hub keeps that building’s machine knowledge, safety
-            records, manuals, repair history, and technician notes protected.
+            BAM Hub™ is the future local facility hub. It keeps building-specific
+            data secure, connects future scanners with low lag, and preserves
+            machine knowledge inside the facility.
           </p>
 
           <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <MiniCard title="Local Data" text="Facility information stays inside the building instead of depending only on the cloud." />
-            <MiniCard title="No-Lag System" text="BAM Scan™ devices connect directly to the hub for fast equipment lookup and repair support." />
-            <MiniCard title="Secure Knowledge" text="Manuals, drawings, procedures, and notes stay controlled by the facility." />
-            <MiniCard title="Cloud Later" text="Future BAM Cloud™ can add backups, updates, enterprise dashboards, and multi-site support." />
-            <MiniCard title="Audit Trail" text="Track scans, inspections, repairs, safety checks, and technician activity." />
-            <MiniCard title="Building Memory" text="The building keeps its knowledge even when people transfer, quit, or retire." />
+            <MiniCard title="Local Data" text="Facility knowledge stays controlled inside the building." />
+            <MiniCard title="Fast Access" text="Future scanners connect to the hub instead of waiting only on cloud systems." />
+            <MiniCard title="Secure Knowledge" text="Manuals, drawings, procedures, photos, and notes stay organized and protected." />
+            <MiniCard title="Building Memory" text="The facility keeps its repair knowledge even when workers leave or retire." />
+            <MiniCard title="Cloud Later" text="Future BAM Cloud™ can support backups, updates, and multi-site dashboards." />
+            <MiniCard title="Enterprise Ready" text="Built toward hospitals, aerospace, manufacturing, data centers, and robotics." />
           </div>
         </Section>
 
-        <Section label="TARGET MARKETS™" title="Built for critical facilities.">
-          <div className="grid md:grid-cols-5 gap-4 mt-6">
-            <MiniCard title="Aerospace" text="Machine safety, process knowledge, maintenance records, and controlled documentation." />
-            <MiniCard title="Hospitals" text="Facility equipment, generators, pumps, safety inspections, and emergency readiness." />
-            <MiniCard title="Manufacturing" text="Downtime tracking, equipment profiles, parts, controls, and repair knowledge." />
-            <MiniCard title="Data Centers" text="Critical infrastructure, uptime support, inspections, and secure local documentation." />
-            <MiniCard title="Robotics" text="Robot cells, controls, sensors, safety checks, and technician troubleshooting." />
+        <Section label="HARDWARE ROADMAP™" title="BAM Scan™ is a concept in development.">
+          <p className="text-gray-200 mt-5 max-w-5xl">
+            BAM Scan™ is the future dedicated scanner device. The current path is
+            to prove the software first through the app, then move the same
+            platform into purpose-built scanner hardware.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-5 mt-8">
+            <MiniCard title="Phone App First" text="Use the current app to prove scanning, equipment profiles, notes, and AI assistance." />
+            <MiniCard title="Prototype Scanner" text="Build a rugged test unit after the software workflow is useful and repeatable." />
+            <MiniCard title="Facility Rollout" text="Connect scanners to BAM Hub™ when the hub and platform are ready for scale." />
           </div>
         </Section>
 
         <Section label="PRODUCTS IN DEVELOPMENT™" title="The BAMToolz™ ecosystem.">
           <div className="grid md:grid-cols-3 gap-5 mt-6">
-            <MiniCard title="BAM Scan Core™" text="Entry AI maintenance scanner for daily equipment lookup, photos, notes, and repair history." />
-            <MiniCard title="BAM Scan Pro™" text="Rugged industrial scanner with stronger shell, better camera, lighting, battery, and faster hardware." />
-            <MiniCard title="BAM Safety Scan™" text="Safety-focused scanner mode for PPE, hazards, inspections, LOTO support, and records." />
-            <MiniCard title="BAM Hub™" text="Secure local facility server that connects scanners to building-specific machine knowledge." />
-            <MiniCard title="BAM Cloud™" text="Future enterprise layer for backups, updates, multi-location dashboards, and support." />
-            <MiniCard title="BAM Systems™" text="Integration services for maintenance, controls, robotics, safety programs, and facility teams." />
+            <MiniCard title="BAM Platform™" text="The main software system for facility safety, maintenance, and machine intelligence." />
+            <MiniCard title="BAM Safety™" text="Safety-first tools for PPE, hazards, inspections, LOTO support, and records." />
+            <MiniCard title="BAM Hub™" text="Future secure local facility server for building-specific knowledge." />
+            <MiniCard title="BAM Scan Core™" text="Future entry scanner hardware concept." />
+            <MiniCard title="BAM Scan Pro™" text="Future rugged industrial scanner hardware concept." />
+            <MiniCard title="BAM Systems™" text="Future support for controls, robotics, integration, and facility teams." />
           </div>
         </Section>
+
+        <footer className="mt-10 border-t border-cyan-400/30 pt-8 text-center">
+          <h3 className="text-2xl font-black">BAMToolz™</h3>
+
+          <p className="text-blue-100 mt-2">
+            Ball Advanced Maintenance Tools™
+          </p>
+
+          <p className="text-gray-300 mt-4 max-w-3xl mx-auto">
+            Building the future of industrial safety, maintenance intelligence,
+            facility knowledge, and connected equipment systems.
+          </p>
+
+          <div className="flex justify-center flex-wrap gap-6 mt-6 text-cyan-300 font-bold">
+            <a href="/privacy">Privacy Policy™</a>
+            <a href="/terms">Terms of Use™</a>
+            <a href="/contact">Contact™</a>
+            <a href="/support">Support™</a>
+          </div>
+
+          <p className="text-gray-400 text-sm mt-8">
+            © 2026 BAMToolz™. All rights reserved.
+          </p>
+        </footer>
 
       </div>
     </main>
@@ -138,11 +162,7 @@ function Section({
       <p className="text-cyan-300 font-black text-sm md:text-base tracking-wide">
         {label}
       </p>
-
-      <h2 className="text-3xl md:text-5xl font-black mt-3">
-        {title}
-      </h2>
-
+      <h2 className="text-3xl md:text-5xl font-black mt-3">{title}</h2>
       {children}
     </section>
   );
