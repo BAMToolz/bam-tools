@@ -14,7 +14,7 @@ export default function ScannerPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bam",
-      text: "BAM Assist™ ready. Upload an equipment image, run BAM Scan™, then ask follow-up troubleshooting questions.",
+      text: "BAM Assist™ ready. Upload an equipment image, run BAM Scan™, then ask simple questions like voltage, motor type, model, safety risk, or next check.",
     },
   ]);
 
@@ -47,35 +47,79 @@ export default function ScannerPage() {
     }
   }
 
+  function findLine(scanText: string, labels: string[]) {
+    const lines = scanText.split("\n");
+
+    for (const label of labels) {
+      const match = lines.find((line) =>
+        line.toLowerCase().startsWith(label.toLowerCase())
+      );
+
+      if (match) {
+        const value = match.split(":").slice(1).join(":").trim();
+        if (value && value.toLowerCase() !== "not visible") {
+          return value;
+        }
+      }
+    }
+
+    return "";
+  }
+
   function sendMessage() {
     if (!input.trim()) return;
 
     const techText = input.trim();
-    const currentScan = result || "No BAM Scan™ report has been created yet.";
+    const question = techText.toLowerCase();
+    const currentScan = result || "";
+
+    let answer = "";
+
+    const manufacturer = findLine(currentScan, ["Manufacturer"]);
+    const model = findLine(currentScan, ["Model"]);
+    const serial = findLine(currentScan, ["Serial", "Serial/Tag"]);
+    const voltage = findLine(currentScan, ["Voltage", "Ratings"]);
+    const parts = findLine(currentScan, ["Possible Parts", "Replacement Parts", "Visible Parts"]);
+    const safety = findLine(currentScan, ["Safety Notes", "Hazards", "Energy Sources"]);
+
+    if (!currentScan) {
+      answer =
+        "Run BAM Scan™ first so I can answer from the equipment data.";
+    } else if (question.includes("voltage") || question.includes("volt")) {
+      answer = voltage
+        ? `Voltage shown from scan: ${voltage}. Verify on the nameplate before testing.`
+        : "I do not see voltage clearly in the scan. Send a closer photo of the nameplate or electrical tag.";
+    } else if (question.includes("motor")) {
+      answer = model || manufacturer
+        ? `Motor/equipment info found: ${[manufacturer, model].filter(Boolean).join(" ")}. Send a closer nameplate photo if you need exact motor specs.`
+        : "I do not see the motor model clearly. Send the motor nameplate or tag.";
+    } else if (question.includes("model")) {
+      answer = model
+        ? `Model shown from scan: ${model}.`
+        : "I do not see the model clearly. Send a closer photo of the equipment tag.";
+    } else if (question.includes("serial") || question.includes("tag")) {
+      answer = serial
+        ? `Serial/tag shown from scan: ${serial}.`
+        : "I do not see the serial/tag clearly. Send a closer photo of the tag.";
+    } else if (question.includes("part") || question.includes("bearing") || question.includes("belt")) {
+      answer = parts
+        ? `Parts/info found from scan: ${parts}. Verify part numbers before ordering.`
+        : "I do not see exact part numbers in the scan. Send the model number, parts plate, or a closer component photo.";
+    } else if (question.includes("safe") || question.includes("safety") || question.includes("lockout") || question.includes("loto")) {
+      answer = safety
+        ? `Safety note from scan: ${safety}. Lockout/tagout before inspection or repair.`
+        : "Use lockout/tagout before inspection. I do not see enough safety detail from the scan.";
+    } else if (question.includes("next") || question.includes("check") || question.includes("do")) {
+      answer =
+        "Next check: verify the nameplate, confirm voltage/power off, look for fault codes, then send a closer photo of the issue area.";
+    } else {
+      answer =
+        "I can help. Ask me one direct equipment question like: what voltage, what motor, what model, what parts, what safety risk, or what should I check next.";
+    }
 
     const bamReply = `BAM Assist™
-━━━━━━━━━━━━
 
-Based on the current BAM Scan™ data:
-
-${currentScan}
-
-Technician Question:
-${techText}
-
-Simple Answer:
-Use the scan data above first. If the scan is missing model, serial, fault code, or parts information, ask the technician for the missing detail.
-
-Check Next:
-• Verify the visible equipment tag or model number
-• Confirm the symptom or fault code
-• Check safety risks before touching the equipment
-
-Recommended Action:
-Send a clearer photo, fault code, nameplate, or what changed before the issue.
-
-BAM Hub™ Memory:
-This scan and technician comment can later be saved to the machine history.`;
+${answer}`;
 
     setMessages((prev) => [
       ...prev,
@@ -142,7 +186,7 @@ This scan and technician comment can later be saved to the machine history.`;
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
             <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM ASSIST™</p>
-            <h3 className="mt-2 text-2xl font-black">CHAT</h3>
+            <h3 className="mt-2 text-2xl font-black">Q&A</h3>
           </div>
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
@@ -209,10 +253,10 @@ Future Prevention:`}
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">BAM Assist™ Chat</h2>
+          <h2 className="text-3xl font-black text-cyan-300">BAM Assist™ Q&A</h2>
 
           <p className="mt-4 text-slate-300">
-            Ask follow-up questions after the scan. BAM Assist™ will use the current BAM Scan™ report shown above.
+            Ask direct equipment questions: voltage, motor, model, serial/tag, parts, safety risk, or next check.
           </p>
 
           <div className="mt-6 space-y-4">
@@ -238,7 +282,7 @@ Future Prevention:`}
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask a follow-up troubleshooting question..."
+            placeholder="Example: What voltage is this? What motor is this? What should I check next?"
             className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white outline-none"
           />
 
@@ -246,7 +290,7 @@ Future Prevention:`}
             onClick={sendMessage}
             className="mt-4 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400"
           >
-            SEND QUESTION
+            ASK BAM ASSIST™
           </button>
         </section>
 
