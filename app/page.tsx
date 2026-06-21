@@ -30,11 +30,18 @@ export default function Home() {
   }
 
   const card = {
-    background: "rgba(15, 23, 42, 0.92)",
+    background: "rgba(15, 23, 42, 0.94)",
     border: "1px solid rgba(56,189,248,.45)",
     borderRadius: 24,
     padding: 24,
-    boxShadow: "0 0 30px rgba(14,165,233,.18)",
+    boxShadow: "0 0 30px rgba(14,165,233,.16)",
+  };
+
+  const smallCard = {
+    background: "#020617",
+    border: "1px solid rgba(56,189,248,.3)",
+    borderRadius: 18,
+    padding: 18,
   };
 
   const button = {
@@ -52,7 +59,7 @@ export default function Home() {
       style={{
         minHeight: "100vh",
         background:
-          "radial-gradient(circle at top, #0ea5e9 0%, #020617 35%, #000814 100%)",
+          "radial-gradient(circle at top, #0ea5e9 0%, #020617 34%, #000814 100%)",
         color: "white",
         padding: 24,
         fontFamily: "Arial, sans-serif",
@@ -95,18 +102,23 @@ export default function Home() {
         </div>
 
         <nav style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <button style={button} onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}>
-            Products™
-          </button>
-          <button style={button} onClick={() => document.getElementById("robotics")?.scrollIntoView({ behavior: "smooth" })}>
-            Robotics™
-          </button>
-          <button style={button} onClick={() => document.getElementById("scanner")?.scrollIntoView({ behavior: "smooth" })}>
-            Scan™
-          </button>
-          <button style={button} onClick={() => document.getElementById("support")?.scrollIntoView({ behavior: "smooth" })}>
-            Support™
-          </button>
+          {[
+            ["Platform™", "platform"],
+            ["Products™", "products"],
+            ["Robotics™", "robotics"],
+            ["Scan™", "scanner"],
+            ["Support™", "support"],
+          ].map(([label, id]) => (
+            <button
+              key={label}
+              style={button}
+              onClick={() =>
+                document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              {label}
+            </button>
+          ))}
         </nav>
       </header>
 
@@ -116,14 +128,7 @@ export default function Home() {
             THE FUTURE OF INDUSTRIAL INTELLIGENCE™
           </p>
 
-          <h2
-            style={{
-              fontSize: 56,
-              lineHeight: 1,
-              margin: "14px 0",
-              fontWeight: 900,
-            }}
-          >
+          <h2 style={{ fontSize: 56, lineHeight: 1, margin: "14px 0" }}>
             Connecting Machines,
             <br />
             Robotics, Technicians
@@ -131,11 +136,41 @@ export default function Home() {
             and AI.
           </h2>
 
-          <p style={{ color: "#dbeafe", fontSize: 18, maxWidth: 760 }}>
-            BAMToolz™ is an industrial AI platform for maintenance teams,
-            manufacturing facilities, hospitals, robotics, machine controls,
-            repair history, parts intelligence, and technician knowledge.
+          <p style={{ color: "#dbeafe", fontSize: 18, maxWidth: 780 }}>
+            BAMToolz™ is being built as an industrial intelligence platform for
+            maintenance teams, manufacturing facilities, hospitals, robotics,
+            machine controls, parts, manuals, repair history, and technician knowledge.
           </p>
+        </section>
+
+        <section id="platform" style={{ ...card, marginTop: 22 }}>
+          <p style={{ color: "#7dd3fc", fontWeight: 900 }}>
+            BAM PLATFORM™
+          </p>
+
+          <h3 style={{ fontSize: 38, margin: "8px 0" }}>
+            One system for the machine side of the world.
+          </h3>
+
+          <p style={{ color: "#cbd5e1", fontSize: 17 }}>
+            BAMToolz™ is designed to turn scattered machine information into an
+            organized AI-powered maintenance brain. Instead of manuals, notes,
+            photos, parts lists, and repair history being spread everywhere,
+            BAM Hub™ connects it all to the equipment profile.
+          </p>
+
+          <div style={{ display: "grid", gap: 14, marginTop: 18 }}>
+            {[
+              "Equipment profiles by machine, line, department, facility, and customer.",
+              "Manuals, photos, nameplates, wiring notes, parts lists, and PM records.",
+              "Repair history that grows stronger every time a technician fixes a problem.",
+              "AI-assisted troubleshooting built around real machine data, not guesswork.",
+            ].map((text) => (
+              <div key={text} style={smallCard}>
+                <p style={{ margin: 0, color: "#dbeafe" }}>{text}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section
@@ -144,19 +179,36 @@ export default function Home() {
             marginTop: 22,
             display: "grid",
             gap: 16,
-            gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
           }}
         >
           {[
-            ["BAM Scan™", "Handheld AI scanner for equipment tags, photos, panels, and machine data."],
-            ["BAM Hub™", "The machine knowledge center for manuals, parts, repair history, and facility intelligence."],
-            ["BAM AI™", "Diagnosis support, troubleshooting paths, repair recommendations, and learned fixes."],
-            ["BAM Systems™", "Industrial integration for controls, robotics, automation, sensors, and machine systems."],
-          ].map(([title, text]) => (
+            [
+              "BAM Scan™",
+              "The field tool.",
+              "A technician-facing scanner experience for equipment tags, machine photos, panel labels, QR/barcodes, robotic cells, and maintenance documentation.",
+            ],
+            [
+              "BAM Hub™",
+              "The knowledge center.",
+              "A central machine intelligence hub that stores manuals, parts, repair notes, photos, failures, PMs, and facility history by equipment.",
+            ],
+            [
+              "BAM AI™",
+              "The reasoning layer.",
+              "AI that reads machine data, compares history, suggests likely causes, recommends next checks, and turns every repair into reusable knowledge.",
+            ],
+            [
+              "BAM Systems™",
+              "The industrial integration side.",
+              "Support for controls, robotics, PLC/I/O, automation, sensors, wiring documentation, panel data, and machine-system workflows.",
+            ],
+          ].map(([title, tag, text]) => (
             <div key={title} style={card}>
               <h3 style={{ color: "#38bdf8", fontSize: 25, marginTop: 0 }}>
                 {title}
               </h3>
+              <p style={{ color: "#bfdbfe", fontWeight: 900 }}>{tag}</p>
               <p style={{ color: "#cbd5e1" }}>{text}</p>
             </div>
           ))}
@@ -168,14 +220,36 @@ export default function Home() {
           </p>
 
           <h3 style={{ fontSize: 38, margin: "8px 0" }}>
-            Robotics • PLC • I/O • Automation
+            Robotics • PLC • I/O • Automation • Controls
           </h3>
 
           <p style={{ color: "#cbd5e1", fontSize: 17 }}>
-            BAMToolz™ supports robotic controls, machine automation, sensors,
-            actuators, control panels, wiring documentation, PLC troubleshooting,
-            and repair history for real industrial environments.
+            BAMToolz™ is not only a scanner. The brand includes the controls and
+            automation side: robotic systems, sensors, actuators, PLC inputs and
+            outputs, control panels, wiring documentation, fault history, and
+            technician-guided troubleshooting.
           </p>
+
+          <div
+            style={{
+              display: "grid",
+              gap: 14,
+              marginTop: 18,
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            }}
+          >
+            {[
+              ["Robotic Cells", "Robot labels, alarms, teach points, safety zones, and service notes."],
+              ["PLC / I/O", "Inputs, outputs, sensors, relays, drives, and troubleshooting steps."],
+              ["Control Panels", "Panel photos, wire labels, terminal notes, and electrical repair history."],
+              ["Automation Support", "Machine sequences, fault patterns, downtime causes, and repair actions."],
+            ].map(([title, text]) => (
+              <div key={title} style={smallCard}>
+                <h4 style={{ color: "#38bdf8", marginTop: 0 }}>{title}</h4>
+                <p style={{ color: "#cbd5e1", marginBottom: 0 }}>{text}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section id="scanner" style={{ ...card, marginTop: 22 }}>
@@ -186,6 +260,12 @@ export default function Home() {
           <h3 style={{ fontSize: 36, margin: "8px 0" }}>
             Scan equipment into the BAM ecosystem.
           </h3>
+
+          <p style={{ color: "#cbd5e1" }}>
+            This demo shows the workflow: capture a machine photo, create a
+            machine profile, then connect that profile to manuals, parts, repair
+            history, controls notes, and BAM AI™ recommendations.
+          </p>
 
           <label
             style={{
@@ -251,15 +331,7 @@ export default function Home() {
             {scanning ? "Scanning Machine..." : "Run BAM Scan™"}
           </button>
 
-          <div
-            style={{
-              marginTop: 20,
-              padding: 18,
-              borderRadius: 18,
-              background: "#020617",
-              border: "1px solid rgba(56,189,248,.35)",
-            }}
-          >
+          <div style={{ ...smallCard, marginTop: 20 }}>
             <h4 style={{ color: "#38bdf8", marginTop: 0 }}>BAM AI™ Result</h4>
 
             {!result && !scanning && (
@@ -285,8 +357,8 @@ export default function Home() {
                 </p>
 
                 <p style={{ color: "#cbd5e1" }}>
-                  Save this machine profile, attach manuals, add parts lists,
-                  document repair history, and connect it to BAM Hub™.
+                  Next step: attach manuals, add parts list, document repair
+                  history, connect controls notes, and store it inside BAM Hub™.
                 </p>
               </div>
             )}
@@ -297,8 +369,9 @@ export default function Home() {
           <h3 style={{ color: "#38bdf8", fontSize: 30 }}>Support™</h3>
 
           <p style={{ color: "#cbd5e1" }}>
-            Support for machine profiles, scanner issues, controls,
-            robotics, manuals, parts, repair history, and BAM Hub™ setup.
+            BAMToolz™ support will cover machine profiles, scanner issues,
+            manuals, parts, robotic controls, PLC/I/O notes, repair history,
+            and BAM Hub™ setup.
           </p>
 
           <button
