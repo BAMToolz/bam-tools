@@ -56,11 +56,11 @@ export default function Home() {
         </div>
 
         <h1 style={{ fontSize: 42, margin: "16px 0 4px", fontWeight: 900 }}>
-          BAMToolz
+          BAMToolz™
         </h1>
 
         <p style={{ color: "#93c5fd", fontWeight: 700 }}>
-          Ball Advanced Maintenance Tools
+          Ball Advanced Maintenance Tools™
         </p>
       </header>
 
@@ -74,7 +74,7 @@ export default function Home() {
         }}
       >
         <p style={{ color: "#38bdf8", fontWeight: 900 }}>
-          MAINTENANCE AI SCANNER
+          BAM SCAN™ • MAINTENANCE AI SCANNER
         </p>
 
         <h2 style={{ fontSize: 48, lineHeight: 1, margin: "12px 0" }}>
@@ -86,8 +86,9 @@ export default function Home() {
         </h2>
 
         <p style={{ color: "#cbd5e1", fontSize: 17 }}>
-          Upload or take a photo of equipment. BAMToolz builds a machine profile,
-          connects manuals, tracks parts, and creates technician knowledge.
+          Upload or take a photo of equipment. BAMToolz™ builds a machine
+          profile, connects manuals, tracks parts, and creates technician
+          knowledge.
         </p>
 
         <label
@@ -109,9 +110,11 @@ export default function Home() {
             onChange={handleImageUpload}
             style={{ display: "none" }}
           />
+
           <strong style={{ color: "#38bdf8", fontSize: 20 }}>
             Tap to Take / Upload Machine Photo
           </strong>
+
           <p style={{ color: "#94a3b8" }}>
             Equipment tag, motor plate, panel label, or machine photo
           </p>
@@ -148,7 +151,7 @@ export default function Home() {
             boxShadow: "0 0 25px rgba(14,165,233,.5)",
           }}
         >
-          {scanning ? "Scanning Machine..." : "Run BAM Scan"}
+          {scanning ? "Scanning Machine..." : "Run BAM Scan™"}
         </button>
       </section>
 
@@ -161,11 +164,11 @@ export default function Home() {
           padding: 24,
         }}
       >
-        <h3 style={{ color: "#38bdf8", fontSize: 28 }}>BAM AI Result</h3>
+        <h3 style={{ color: "#38bdf8", fontSize: 28 }}>BAM AI™ Result</h3>
 
         {!result && !scanning && (
           <p style={{ color: "#cbd5e1" }}>
-            No scan yet. Upload a machine photo and press Run BAM Scan.
+            No scan yet. Upload a machine photo and press Run BAM Scan™.
           </p>
         )}
 
@@ -197,12 +200,50 @@ export default function Home() {
               <strong>Recommended Action:</strong>
               <p>
                 Save this machine profile, attach manuals, add parts list, and
-                build repair history.
+                build repair history inside BAM Hub™.
               </p>
             </div>
           </div>
         )}
       </section>
+
+      <section
+        style={{
+          marginTop: 24,
+          display: "grid",
+          gap: 14,
+        }}
+      >
+        {["BAM Scan™", "BAM Hub™", "BAM AI™", "BAM Systems™"].map((item) => (
+          <div
+            key={item}
+            style={{
+              background: "rgba(15, 23, 42, 0.9)",
+              border: "1px solid rgba(56,189,248,.35)",
+              borderRadius: 18,
+              padding: 18,
+            }}
+          >
+            <h4 style={{ color: "#38bdf8", fontSize: 22, margin: 0 }}>
+              {item}
+            </h4>
+            <p style={{ color: "#cbd5e1", marginBottom: 0 }}>
+              Building the future maintenance intelligence system.
+            </p>
+          </div>
+        ))}
+      </section>
+
+      <footer
+        style={{
+          marginTop: 30,
+          textAlign: "center",
+          color: "#94a3b8",
+          fontSize: 13,
+        }}
+      >
+        © 2026 BAMToolz™ — Building Smarter. Fixing Faster.
+      </footer>
     </main>
   );
 }
