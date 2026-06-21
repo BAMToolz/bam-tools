@@ -83,68 +83,116 @@ This conversation can later be saved as repair history and technician knowledge 
   }
 
   return (
-    <main style={main}>
-      <section style={panel}>
-        <header style={header}>
+    <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
+      <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
+        <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p style={topLine}>BALL ADVANCED MANAGEMENT™</p>
-            <h1 style={logo}>BAM Scan™</h1>
-            <h2 style={blue}>AI Equipment Intelligence™</h2>
-            <p style={subText}>
-              Connecting machines, technicians, facilities and AI.
+            <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
+              BAM
+            </div>
+
+            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+              BAM Scan™
+            </h1>
+
+            <p className="mt-2 text-sm font-medium text-cyan-50">
+              Ball Advanced Management™
             </p>
           </div>
 
-          <nav style={nav}>
-            <a href="/" style={navButton}>
-              Home
+          <nav className="flex flex-wrap gap-3">
+            <a
+              href="/"
+              className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg"
+            >
+              Home™
             </a>
-            <a href="/support" style={navButton}>
-              AI Support
+            <a
+              href="/support"
+              className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg"
+            >
+              Support™
             </a>
-            <a href="mailto:BAMToolzsupport@gmail.com" style={navButton}>
-              Contact
+            <a
+              href="mailto:BAMToolzsupport@gmail.com"
+              className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg"
+            >
+              Contact™
             </a>
           </nav>
         </header>
 
-        <div style={statusGrid}>
-          <div style={statusCard}>
-            <span style={statusLabel}>BAM SCAN™</span>
-            <strong>IMAGE</strong>
-          </div>
-          <div style={statusCard}>
-            <span style={statusLabel}>BAM ASSIST™</span>
-            <strong>CHAT</strong>
-          </div>
-          <div style={statusCard}>
-            <span style={statusLabel}>BAM HUB™</span>
-            <strong>MEMORY</strong>
-          </div>
-        </div>
+        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
+          <p className="text-sm font-black tracking-wide text-cyan-300">
+            AI EQUIPMENT INTELLIGENCE™
+          </p>
 
-        <div style={box}>
-          <p style={sectionTitle}>◈ Equipment Image</p>
-          <p style={helperText}>
-            Upload a machine tag, equipment label, panel, log, or component photo.
+          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
+            Scan machines, capture knowledge, support technicians.
+          </h2>
+
+          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
+            BAM Scan™ is part of the BAMToolz™ industrial intelligence platform
+            by Ball Advanced Management™. It is designed for equipment images,
+            machine tags, maintenance history, safety, parts, controls,
+            troubleshooting, and technician knowledge.
+          </p>
+        </section>
+
+        <section className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
+              BAM SCAN™
+            </p>
+            <h3 className="mt-2 text-2xl font-black">IMAGE</h3>
+          </div>
+
+          <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
+              BAM ASSIST™
+            </p>
+            <h3 className="mt-2 text-2xl font-black">CHAT</h3>
+          </div>
+
+          <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
+              BAM HUB™
+            </p>
+            <h3 className="mt-2 text-2xl font-black">MEMORY</h3>
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            Equipment Image
+          </h2>
+
+          <p className="mt-4 text-slate-300">
+            Upload a machine tag, equipment label, electrical panel, equipment
+            log, or component photo.
           </p>
 
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setFile(e.target.files?.[0] || null)}
-            style={fileInput}
+            className="mt-6 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-cyan-100"
           />
 
-          <button onClick={runScan} style={button}>
+          <button
+            onClick={runScan}
+            className="mt-6 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400"
+          >
             RUN BAM SCAN™
           </button>
-        </div>
+        </section>
 
-        <div style={box}>
-          <p style={sectionTitle}>◈ BAM Scan™ Report</p>
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM Scan™ Report
+          </h2>
 
-          <div style={reportText}>
+          <div className="mt-6 whitespace-pre-wrap rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
             {result ||
               `Awaiting equipment image.
 
@@ -174,19 +222,34 @@ Repair Notes:
 Knowledge Captured:
 Future Prevention:`}
           </div>
-        </div>
+        </section>
 
-        <div style={box}>
-          <p style={sectionTitle}>◈ BAM Assist™ Chat</p>
-          <p style={helperText}>
-            Ask follow-up questions after the scan. This is where technician knowledge becomes BAM Hub™ memory.
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM Assist™ Chat
+          </h2>
+
+          <p className="mt-4 text-slate-300">
+            Ask follow-up questions after the scan. This is where technician
+            knowledge becomes BAM Hub™ memory.
           </p>
 
-          <div style={chatBox}>
+          <div className="mt-6 space-y-4">
             {messages.map((msg, index) => (
-              <div key={index} style={msg.role === "tech" ? techBubble : bamBubble}>
-                <strong>{msg.role === "tech" ? "Technician" : "BAM Assist™"}</strong>
-                <p style={messageText}>{msg.text}</p>
+              <div
+                key={index}
+                className={
+                  msg.role === "tech"
+                    ? "rounded-xl border border-cyan-200/50 bg-white/5 p-5"
+                    : "rounded-xl border border-cyan-400/50 bg-cyan-500/10 p-5"
+                }
+              >
+                <strong className="text-cyan-300">
+                  {msg.role === "tech" ? "Technician" : "BAM Assist™"}
+                </strong>
+                <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
+                  {msg.text}
+                </p>
               </div>
             ))}
           </div>
@@ -195,236 +258,76 @@ Future Prevention:`}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask a follow-up troubleshooting question..."
-            style={textArea}
+            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white outline-none"
           />
 
-          <button onClick={sendMessage} style={button}>
+          <button
+            onClick={sendMessage}
+            className="mt-4 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400"
+          >
             SEND QUESTION
           </button>
-        </div>
+        </section>
 
-        <div style={supportBox}>
-          <p style={sectionTitle}>◈ BAMToolz™ Support</p>
-          <p style={helperText}>
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAMToolz™ Support
+          </h2>
+
+          <p className="mt-4 text-slate-300">
             Founder: Justin Ball | Company: Ball Advanced Management™
           </p>
-          <p style={helperText}>
+
+          <p className="mt-4 text-slate-300">
             Email:{" "}
-            <a href="mailto:BAMToolzsupport@gmail.com" style={inlineLink}>
+            <a
+              href="mailto:BAMToolzsupport@gmail.com"
+              className="font-black text-cyan-300 underline"
+            >
               BAMToolzsupport@gmail.com
             </a>
           </p>
-        </div>
 
-        <footer style={footer}>
-          <a href="/" style={backLink}>
-            ← BAMToolz™ Home
-          </a>
-          <a href="/privacy" style={backLink}>
-            Privacy
-          </a>
-          <a href="/terms" style={backLink}>
-            Terms
-          </a>
-          <a href="/support" style={backLink}>
-            BAMToolz™ AI Support
-          </a>
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="/"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              BAMToolz™ Home
+            </a>
+
+            <a
+              href="/support"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              BAMToolz™ AI Support
+            </a>
+
+            <a
+              href="mailto:BAMToolzsupport@gmail.com"
+              className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Email Support
+            </a>
+          </div>
+        </section>
+
+        <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
+          <p>© 2026 BAM Scan™ | BAMToolz™ | Ball Advanced Management™</p>
+
+          <div className="mt-4 flex justify-center gap-6">
+            <a href="/privacy" className="hover:text-white">
+              Privacy
+            </a>
+            <a href="/terms" className="hover:text-white">
+              Terms
+            </a>
+            <a href="/support" className="hover:text-white">
+              Support
+            </a>
+          </div>
         </footer>
-      </section>
+      </div>
     </main>
   );
 }
-
-const main = {
-  minHeight: "100vh",
-  background: "radial-gradient(circle at top,#0a8bd9,#04345f,#020711,#000)",
-  color: "#e8f4ff",
-  padding: "22px",
-  fontFamily: "Arial, Helvetica, sans-serif",
-};
-
-const panel = {
-  maxWidth: "1100px",
-  margin: "0 auto",
-  border: "1px solid rgba(143,199,255,.65)",
-  borderRadius: "32px",
-  padding: "24px",
-  background: "linear-gradient(180deg,#05294a,#04111f,#02050a)",
-  boxShadow: "0 0 40px rgba(0,119,255,.45)",
-};
-
-const header = {
-  display: "flex",
-  justifyContent: "space-between",
-  gap: "20px",
-  flexWrap: "wrap" as const,
-};
-
-const nav = {
-  display: "flex",
-  gap: "10px",
-  flexWrap: "wrap" as const,
-  alignItems: "flex-start",
-};
-
-const navButton = {
-  border: "1px solid rgba(143,199,255,.65)",
-  borderRadius: "12px",
-  padding: "10px 14px",
-  background: "rgba(0,0,0,.55)",
-  color: "#8fc7ff",
-  textDecoration: "none",
-  fontWeight: "900",
-};
-
-const topLine = {
-  color: "#8fc7ff",
-  fontSize: "12px",
-  letterSpacing: "3px",
-  fontWeight: "900",
-};
-
-const logo = {
-  marginTop: "10px",
-  color: "#5bb6ff",
-  fontSize: "48px",
-  fontStyle: "italic",
-  fontWeight: "900",
-};
-
-const blue = {
-  color: "#8fc7ff",
-  marginTop: "-8px",
-};
-
-const subText = {
-  maxWidth: "650px",
-  color: "#c8e7ff",
-  lineHeight: "1.6",
-};
-
-const statusGrid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gap: "10px",
-  margin: "24px 0",
-};
-
-const statusCard = {
-  border: "1px solid rgba(0,119,255,.7)",
-  borderRadius: "16px",
-  padding: "12px",
-  background: "rgba(0,119,255,.12)",
-  textAlign: "center" as const,
-};
-
-const statusLabel = {
-  display: "block",
-  color: "#8fc7ff",
-  fontSize: "10px",
-  letterSpacing: "2px",
-};
-
-const box = {
-  marginTop: "24px",
-  border: "1px solid rgba(0,119,255,.7)",
-  borderRadius: "22px",
-  padding: "18px",
-  background: "rgba(0,0,0,.72)",
-};
-
-const supportBox = {
-  marginTop: "24px",
-  border: "1px solid rgba(143,199,255,.55)",
-  borderRadius: "22px",
-  padding: "18px",
-  background: "rgba(0,119,255,.08)",
-};
-
-const sectionTitle = {
-  color: "#8fc7ff",
-  fontWeight: "900",
-  letterSpacing: "1px",
-};
-
-const helperText = {
-  color: "#b9dfff",
-  lineHeight: "1.6",
-};
-
-const fileInput = {
-  marginTop: "12px",
-  width: "100%",
-};
-
-const button = {
-  display: "block",
-  width: "100%",
-  marginTop: "18px",
-  background: "linear-gradient(90deg,#00b7ff,#5bb6ff)",
-  color: "#00111f",
-  padding: "16px",
-  borderRadius: "999px",
-  border: "none",
-  fontWeight: "900",
-};
-
-const reportText = {
-  whiteSpace: "pre-wrap" as const,
-  lineHeight: "1.6",
-};
-
-const chatBox = {
-  marginTop: "15px",
-};
-
-const bamBubble = {
-  marginBottom: "14px",
-  border: "1px solid rgba(0,119,255,.6)",
-  borderRadius: "18px",
-  padding: "14px",
-  background: "rgba(0,119,255,.1)",
-};
-
-const techBubble = {
-  marginBottom: "14px",
-  border: "1px solid rgba(143,199,255,.6)",
-  borderRadius: "18px",
-  padding: "14px",
-  background: "rgba(255,255,255,.05)",
-};
-
-const messageText = {
-  whiteSpace: "pre-wrap" as const,
-  lineHeight: "1.6",
-};
-
-const textArea = {
-  width: "100%",
-  minHeight: "90px",
-  marginTop: "12px",
-  borderRadius: "18px",
-  border: "1px solid #0077ff",
-  padding: "14px",
-  background: "#000",
-  color: "#e8f4ff",
-  fontSize: "16px",
-};
-
-const inlineLink = {
-  color: "#8fc7ff",
-  fontWeight: "900",
-};
-
-const footer = {
-  display: "flex",
-  gap: "18px",
-  flexWrap: "wrap" as const,
-  marginTop: "26px",
-};
-
-const backLink = {
-  color: "#8fc7ff",
-  fontWeight: "900",
-  textDecoration: "none",
-};
