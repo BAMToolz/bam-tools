@@ -16,25 +16,25 @@ export default function Home() {
         </p>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="/scanner"
+            className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-600"
           >
-<a
-  href="/scanner"
-  className="rounded-xl border border-blue-400 px-6 py-3 text-center font-bold text-blue-300 hover:bg-blue-950"
->
-  BAM Scan™
-</a>
+            Launch BAM Scan™
+          </a>
 
-<a
-  href="/support"
-  className="rounded-xl border border-blue-400 px-6 py-3 text-center font-bold text-blue-300 hover:bg-blue-950"
->
-  BAMToolz™ AI Support
-</a>
+          <a
+            href="/support"
+            className="rounded-xl border border-blue-400 px-6 py-3 font-bold text-blue-300 hover:bg-blue-950"
+          >
+            BAMToolz™ AI Support
+          </a>
+
           <a
             href="mailto:BAMToolzsupport@gmail.com"
             className="rounded-xl border border-blue-400 px-6 py-3 font-bold text-blue-300 hover:bg-blue-950"
           >
-            Contact BAMToolz™ Support
+            Contact Support
           </a>
         </div>
       </section>
@@ -54,32 +54,28 @@ export default function Home() {
             <div className="rounded-2xl bg-slate-950 p-5">
               <h3 className="text-xl font-bold">BAMToolz™</h3>
               <p className="mt-2 text-sm text-slate-400">
-                The main platform for technicians, facilities, and equipment
-                support.
+                The main platform for technicians, facilities, and equipment support.
               </p>
             </div>
 
             <div className="rounded-2xl bg-slate-950 p-5">
               <h3 className="text-xl font-bold">BAM Scan™</h3>
               <p className="mt-2 text-sm text-slate-400">
-                AI equipment intelligence for tags, logs, panels, parts, and
-                machine information.
+                AI equipment intelligence for tags, logs, panels, parts, and machine information.
               </p>
             </div>
 
             <div className="rounded-2xl bg-slate-950 p-5">
               <h3 className="text-xl font-bold">BAM Hub™</h3>
               <p className="mt-2 text-sm text-slate-400">
-                Preserving technician presence, knowledge, repair notes, and
-                facility memory.
+                Preserving technician presence, knowledge, repair notes, and facility memory.
               </p>
             </div>
 
             <div className="rounded-2xl bg-slate-950 p-5">
               <h3 className="text-xl font-bold">BAM Systems™</h3>
               <p className="mt-2 text-sm text-slate-400">
-                Automation, controls, robotics, integrations, and industrial
-                equipment solutions.
+                Automation, controls, robotics, integrations, and industrial equipment solutions.
               </p>
             </div>
           </div>
@@ -96,8 +92,8 @@ export default function Home() {
             <div className="rounded-2xl bg-slate-950 p-6">
               <h3 className="text-xl font-bold">BAM Scan™</h3>
               <p className="mt-3 text-slate-400">
-                AI-powered equipment intelligence for machine tags, labels,
-                electrical panels, equipment logs, and maintenance data.
+                AI-powered equipment intelligence for machine tags, labels, electrical panels,
+                equipment logs, and maintenance data.
               </p>
             </div>
 
@@ -128,7 +124,7 @@ export default function Home() {
 
           <p className="mt-4 text-slate-300">
             For support, facility demos, manufacturer integrations, partnerships,
-            equipment workflows, or BAM Scan™ questions, contact BAMToolz™.
+            equipment workflows, BAM Scan™ questions, or AI Support help, contact BAMToolz™.
           </p>
 
           <p className="mt-6 text-lg">
@@ -147,6 +143,13 @@ export default function Home() {
               className="rounded-xl bg-blue-500 px-6 py-3 text-center font-bold text-white hover:bg-blue-600"
             >
               Email Support
+            </a>
+
+            <a
+              href="/support"
+              className="rounded-xl border border-blue-400 px-6 py-3 text-center font-bold text-blue-300 hover:bg-blue-950"
+            >
+              BAMToolz™ AI Support
             </a>
 
             <a
