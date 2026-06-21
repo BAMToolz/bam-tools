@@ -2,7 +2,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#04162b] text-white px-5 py-6">
       <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl bg-gradient-to-br from-[#08aeea] via-[#0874a8] to-[#061a33] p-6 md:p-10 border-4 border-white">
-
         <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <div className="inline-flex items-center justify-center bg-white text-[#0a8fc2] font-black text-2xl px-5 py-1 rounded-xl shadow">
@@ -15,11 +14,11 @@ export default function Home() {
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <NavButton text="Platform™" />
-            <NavButton text="Safety™" />
-            <NavButton text="Hub™" />
-            <NavButton text="Roadmap™" />
-            <NavButton text="Support™" />
+            <NavButton text="Platform™" href="/platform" />
+            <NavButton text="Safety™" href="/safety" />
+            <NavButton text="Hub™" href="/hub" />
+            <NavButton text="Roadmap™" href="/roadmap" />
+            <NavButton text="Support™" href="/support" />
           </nav>
         </header>
 
@@ -34,12 +33,12 @@ export default function Home() {
           </p>
 
           <div className="flex flex-wrap gap-4 mt-8">
-            <button className="bg-cyan-400 text-[#061a33] font-black px-6 py-3 rounded-xl">
+            <a href="/platform" className="bg-cyan-400 text-[#061a33] font-black px-6 py-3 rounded-xl">
               View Platform™
-            </button>
-            <button className="bg-[#061a33] border border-cyan-400 text-cyan-200 font-black px-6 py-3 rounded-xl">
+            </a>
+            <a href="/roadmap" className="bg-[#061a33] border border-cyan-400 text-cyan-200 font-black px-6 py-3 rounded-xl">
               Hardware In Development™
-            </button>
+            </a>
           </div>
         </Section>
 
@@ -142,7 +141,6 @@ export default function Home() {
             © 2026 BAMToolz™. All rights reserved.
           </p>
         </footer>
-
       </div>
     </main>
   );
@@ -168,11 +166,11 @@ function Section({
   );
 }
 
-function NavButton({ text }: { text: string }) {
+function NavButton({ text, href }: { text: string; href: string }) {
   return (
-    <button className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm shadow">
+    <a href={href} className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm shadow">
       {text}
-    </button>
+    </a>
   );
 }
 
