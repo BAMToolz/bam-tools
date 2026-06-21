@@ -2,6 +2,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#04162b] text-white px-5 py-6">
       <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl bg-gradient-to-br from-[#08aeea] via-[#0874a8] to-[#061a33] p-6 md:p-10 border-4 border-white">
+
         <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <div className="inline-flex items-center justify-center bg-white text-[#0a8fc2] font-black text-2xl px-5 py-1 rounded-xl shadow">
@@ -9,7 +10,7 @@ export default function Home() {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-black mt-3">
-              BAM™
+              BAMToolz™
             </h1>
 
             <p className="text-sm md:text-base font-bold text-blue-100 mt-2">
@@ -18,7 +19,7 @@ export default function Home() {
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <NavButton text="BAMToolz™" href="/platform" />
+            <NavButton text="Platform™" href="/platform" />
             <NavButton text="Safety™" href="/scanner" />
             <NavButton text="Hub™" href="/hub" />
             <NavButton text="Roadmap™" href="/roadmap" />
@@ -26,214 +27,89 @@ export default function Home() {
           </nav>
         </header>
 
-        <Section
-          label="BALL ADVANCED MANAGEMENT™"
-          title="Building the future of industrial management intelligence."
-        >
-          <p className="text-gray-200 mt-6 max-w-5xl text-base md:text-lg">
-            BAM™ is being built as an industrial management ecosystem for
-            facilities, equipment, safety, maintenance, automation, technician
-            knowledge, and future AI-powered operations.
+
+        <section className="mt-10 rounded-3xl bg-[#0a1629]/90 border border-cyan-400/40 p-6 md:p-10 shadow-2xl">
+
+          <p className="text-cyan-300 font-black">
+            INDUSTRIAL SAFETY & MAINTENANCE INTELLIGENCE™
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
-            <a
-              href="/platform"
-              className="bg-cyan-400 text-[#061a33] font-black px-6 py-3 rounded-xl"
-            >
-              Explore BAMToolz™
-            </a>
+          <h2 className="text-4xl md:text-6xl font-black mt-4">
+            Connecting machines, technicians, facilities and AI.
+          </h2>
 
-            <a
-              href="/roadmap"
-              className="bg-[#061a33] border border-cyan-400 text-cyan-200 font-black px-6 py-3 rounded-xl"
-            >
-              View Roadmap™
-            </a>
-          </div>
-        </Section>
-
-        <Section
-          label="BAMToolz™"
-          title="The flagship platform by Ball Advanced Management™."
-        >
-          <p className="text-gray-200 mt-5 max-w-5xl">
-            BAMToolz™ is the first major product in the BAM™ ecosystem. It is
-            focused on helping technicians and facilities manage equipment
-            profiles, safety checks, manuals, repair notes, parts data, and AI
-            assistance.
+          <p className="text-gray-200 mt-6 max-w-5xl">
+            BAMToolz™ is an industrial intelligence platform by
+            Ball Advanced Management™ designed for equipment data,
+            maintenance history, safety, manuals, parts, controls,
+            and technician knowledge.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <MiniCard
-              title="Equipment Profiles"
-              text="Digital records for machines, photos, manuals, safety notes, parts, and repair history."
-            />
-            <MiniCard
-              title="Manual Library"
-              text="Store manuals, drawings, troubleshooting guides, and procedures by machine or area."
-            />
-            <MiniCard
-              title="Repair History"
-              text="Track failures, fixes, parts used, technicians, dates, and recurring issues."
-            />
-            <MiniCard
-              title="Parts Data"
-              text="Connect equipment to part numbers, spare parts, suppliers, and replacement notes."
-            />
-            <MiniCard
-              title="Technician Knowledge"
-              text="Capture real field experience before knowledge is lost."
-            />
-            <MiniCard
-              title="AI Assistant"
-              text="Help technicians search facility knowledge and follow safer repair steps."
-            />
-          </div>
-        </Section>
+        </section>
 
-        <Section label="BAM Safety™" title="Safety first. Management always.">
-          <p className="text-gray-200 mt-5 max-w-5xl">
-            BAM Safety™ is the safety intelligence layer of the ecosystem. It is
-            designed to help facilities organize PPE information, hazards,
-            inspections, lockout/tagout support, safety notes, and audit records.
-          </p>
 
-          <div className="grid md:grid-cols-4 gap-4 mt-8">
-            <MiniCard title="PPE" text="Show required protective equipment before work starts." />
-            <MiniCard title="Hazards" text="Display machine-specific risks, warnings, and stored energy notes." />
-            <MiniCard title="LOTO Support" text="Support lockout/tagout reference information and safe preparation." />
-            <MiniCard title="Audit Records" text="Save inspections, photos, corrective actions, and repair documentation." />
-          </div>
-        </Section>
+        <section className="grid md:grid-cols-3 gap-5 mt-8">
 
-        <Section label="BAM Hub™" title="Each building keeps its own secure brain.">
-          <p className="text-gray-200 mt-5 max-w-5xl">
-            BAM Hub™ is the future facility intelligence core. It keeps
-            building-specific data secure, connects future scanners with low lag,
-            and preserves machine knowledge inside the facility.
-          </p>
+          <Card title="BAM Hub™" text="Facility knowledge, equipment data, and maintenance intelligence." />
 
-          <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <MiniCard title="Local Data" text="Facility knowledge stays controlled inside the building." />
-            <MiniCard title="Fast Access" text="Future scanners connect to the hub instead of waiting only on cloud systems." />
-            <MiniCard title="Secure Knowledge" text="Manuals, drawings, procedures, photos, and notes stay organized and protected." />
-            <MiniCard title="Building Memory" text="The facility keeps its repair knowledge even when workers leave or retire." />
-            <MiniCard title="Cloud Later" text="Future BAM Cloud™ can support backups, updates, and multi-site dashboards." />
-            <MiniCard title="Enterprise Ready" text="Built toward hospitals, aerospace, manufacturing, data centers, and robotics." />
-          </div>
-        </Section>
+          <Card title="BAM Scan™" text="Future AI scanning tools for machines, parts, and troubleshooting." />
 
-        <Section label="BAM Systems™" title="Controls, robotics, and industrial integration.">
-          <p className="text-gray-200 mt-5 max-w-5xl">
-            BAM Systems™ represents the future integration side of Ball Advanced
-            Management™ — connecting controls, robotics, automation systems,
-            facility equipment, and technician workflows into one organized
-            intelligence structure.
-          </p>
+          <Card title="BAM Safety™" text="Safety information, inspections, hazards, and procedures." />
 
-          <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <MiniCard title="Controls" text="Future support for PLC notes, wiring documentation, panels, and machine controls." />
-            <MiniCard title="Robotics" text="Support for robot cells, automation systems, sensors, and technician troubleshooting." />
-            <MiniCard title="Integration" text="Connecting equipment, people, procedures, safety, and data into one management system." />
-          </div>
-        </Section>
+          <Card title="BAM Systems™" text="Controls, robotics, automation, and integration support." />
 
-        <Section
-          label="HARDWARE ROADMAP™"
-          title="BAM Scan™ is a future hardware concept."
-        >
-          <p className="text-gray-200 mt-5 max-w-5xl">
-            BAM Scan™ is the future dedicated scanner device. The current path is
-            to prove the software first through the app, then move the same
-            platform into purpose-built scanner hardware.
-          </p>
+          <Card title="BAMToolz™ Platform" text="Tools built for technicians and industrial teams." />
 
-          <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <MiniCard title="Internal AI Scan" text="AI scanning stays internal first for testing equipment photos, tags, notes, and analysis." />
-            <MiniCard title="Prototype Scanner" text="Build a rugged test unit after the software workflow is useful and repeatable." />
-            <MiniCard title="Facility Rollout" text="Connect scanners to BAM Hub™ when the hub and platform are ready for scale." />
-          </div>
-        </Section>
+          <Card title="Knowledge Preservation™" text="Saving experience before it disappears." />
 
-        <Section label="BAM™ Ecosystem" title="One company. Multiple industrial intelligence tools.">
-          <div className="grid md:grid-cols-3 gap-5 mt-6">
-            <MiniCard title="BAMToolz™" text="Maintenance intelligence tools for technicians and facilities." />
-            <MiniCard title="BAM Hub™" text="Secure local facility brain for building-specific knowledge." />
-            <MiniCard title="BAM Scan™" text="Future AI scanning workflow and hardware concept." />
-            <MiniCard title="BAM Safety™" text="Safety-first tools for PPE, hazards, inspections, LOTO support, and records." />
-            <MiniCard title="BAM Systems™" text="Future support for controls, robotics, automation, and integration." />
-            <MiniCard title="BAMLabs™" text="Future research, prototypes, and product development under BAM™." />
-          </div>
-        </Section>
+        </section>
+
 
         <footer className="mt-10 border-t border-cyan-400/30 pt-8 text-center">
-          <h3 className="text-2xl font-black">BAM™</h3>
+          <h3 className="text-2xl font-black">
+            BAMToolz™
+          </h3>
 
           <p className="text-blue-100 mt-2">
-            Ball Advanced Management™
-          </p>
-
-          <p className="text-gray-300 mt-4 max-w-3xl mx-auto">
-            Building industrial intelligence systems for equipment, safety,
-            maintenance, automation, facility knowledge, and the people who keep
-            the world running.
-          </p>
-
-          <div className="flex justify-center flex-wrap gap-6 mt-6 text-cyan-300 font-bold">
-            <a href="/privacy">Privacy Policy™</a>
-            <a href="/terms">Terms of Use™</a>
-            <a href="/contact">Contact™</a>
-            <a href="/support">Support™</a>
-          </div>
-
-          <p className="text-gray-400 text-sm mt-8">
-            © 2026 BAM™ / BAMToolz™. All rights reserved.
+            © 2026 Ball Advanced Management™
           </p>
         </footer>
+
       </div>
     </main>
   );
 }
 
-function Section({
-  label,
-  title,
-  children,
+
+function NavButton({
+  text,
+  href,
 }: {
-  label: string;
-  title: string;
-  children: React.ReactNode;
+  text: string;
+  href: string;
 }) {
-  return (
-    <section className="mt-6 rounded-3xl bg-[#0a1629]/90 border border-cyan-400/40 p-6 md:p-10 shadow-2xl">
-      <p className="text-cyan-300 font-black text-sm md:text-base tracking-wide">
-        {label}
-      </p>
-
-      <h2 className="text-3xl md:text-5xl font-black mt-3">{title}</h2>
-
-      {children}
-    </section>
-  );
-}
-
-function NavButton({ text, href }: { text: string; href: string }) {
   return (
     <a
       href={href}
-      className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm shadow"
+      className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm"
     >
       {text}
     </a>
   );
 }
 
-function MiniCard({ title, text }: { title: string; text: string }) {
+
+function Card({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}) {
   return (
     <div className="rounded-2xl bg-[#061225] border border-cyan-400/30 p-5">
       <h3 className="text-xl font-black text-cyan-300">{title}</h3>
-      <p className="text-gray-300 mt-2 text-sm">{text}</p>
+      <p className="text-gray-300 mt-2">{text}</p>
     </div>
   );
 }
