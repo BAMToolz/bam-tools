@@ -2,6 +2,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#04162b] text-white px-5 py-6">
       <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl bg-gradient-to-br from-[#08aeea] via-[#0874a8] to-[#061a33] p-6 md:p-10 border-4 border-white">
+
         <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <div className="inline-flex items-center justify-center bg-white text-[#0a8fc2] font-black text-2xl px-5 py-1 rounded-xl shadow">
@@ -13,16 +14,16 @@ export default function Home() {
             </h1>
 
             <p className="text-sm md:text-base font-bold text-blue-100 mt-2">
-              A Ball Advanced Management™ Platform
+              Ball Advanced Management™
             </p>
           </div>
 
           <nav className="flex flex-wrap gap-3">
             <NavButton text="Platform™" href="/platform" />
             <NavButton text="Safety™" href="/scanner" />
-            <NavButton text="Hub™" href="/hub" />
+            <NavButton text="Hub™" href="/platform" />
             <NavButton text="Roadmap™" href="/roadmap" />
-            <NavButton text="Support™" href="/support" />
+            <NavButton text="Support™" href="/contact" />
           </nav>
         </header>
 
@@ -36,9 +37,10 @@ export default function Home() {
           </h2>
 
           <p className="text-gray-200 mt-6 max-w-5xl">
-            BAMToolz™ is an industrial intelligence platform by Ball Advanced
-            Management™ designed for equipment data, maintenance history, safety,
-            manuals, parts, controls, and technician knowledge.
+            BAMToolz™ is an industrial intelligence platform by
+            Ball Advanced Management™ designed for equipment data,
+            maintenance history, safety, manuals, parts, controls,
+            and technician knowledge.
           </p>
         </section>
 
@@ -51,22 +53,10 @@ export default function Home() {
           <Card title="Knowledge Preservation™" text="Saving experience before it disappears." />
         </section>
 
-        <section className="mt-8 rounded-3xl bg-[#0a1629]/90 border border-cyan-400/40 p-6 md:p-10 shadow-2xl">
-          <p className="text-cyan-300 font-black">BAMToolz™ ECOSYSTEM</p>
-
-          <h2 className="text-3xl md:text-5xl font-black mt-3">
-            Platform first. Hardware later. Facility intelligence always.
-          </h2>
-
-          <p className="text-gray-200 mt-5 max-w-5xl">
-            BAMToolz™ is being built first as software that can organize real
-            facility knowledge. The future scanner and hub connect to that same
-            platform when the workflow is proven.
-          </p>
-        </section>
-
         <footer className="mt-10 border-t border-cyan-400/30 pt-8 text-center">
-          <h3 className="text-2xl font-black">BAMToolz™</h3>
+          <h3 className="text-2xl font-black">
+            BAMToolz™
+          </h3>
 
           <p className="text-blue-100 mt-2">
             A Ball Advanced Management™ Platform
@@ -82,13 +72,14 @@ export default function Home() {
             <a href="/privacy">Privacy Policy™</a>
             <a href="/terms">Terms of Use™</a>
             <a href="/contact">Contact™</a>
-            <a href="/support">Support™</a>
+            <a href="/contact">Support™</a>
           </div>
 
           <p className="text-gray-400 text-sm mt-8">
             © 2026 Ball Advanced Management™ / BAMToolz™. All rights reserved.
           </p>
         </footer>
+
       </div>
     </main>
   );
