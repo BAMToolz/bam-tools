@@ -15,10 +15,10 @@ export default function Home() {
 
           <nav className="flex flex-wrap gap-3">
             <NavButton text="Platform™" href="/platform" />
-            <NavButton text="Safety™" href="/safety" />
-            <NavButton text="Hub™" href="/hub" />
+            <NavButton text="Safety™" href="/scanner" />
+            <NavButton text="Hub™" href="/platform" />
             <NavButton text="Roadmap™" href="/roadmap" />
-            <NavButton text="Support™" href="/support" />
+            <NavButton text="Support™" href="/contact" />
           </nav>
         </header>
 
@@ -134,7 +134,7 @@ export default function Home() {
             <a href="/privacy">Privacy Policy™</a>
             <a href="/terms">Terms of Use™</a>
             <a href="/contact">Contact™</a>
-            <a href="/support">Support™</a>
+            <a href="/contact">Support™</a>
           </div>
 
           <p className="text-gray-400 text-sm mt-8">
@@ -168,7 +168,10 @@ function Section({
 
 function NavButton({ text, href }: { text: string; href: string }) {
   return (
-    <a href={href} className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm shadow">
+    <a
+      href={href}
+      className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm shadow"
+    >
       {text}
     </a>
   );
