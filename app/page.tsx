@@ -16,7 +16,7 @@ export default function Home() {
           <nav className="flex flex-wrap gap-3">
             <NavButton text="Platform™" href="/platform" />
             <NavButton text="Safety™" href="/scanner" />
-            <NavButton text="Hub™" href="/platform" />
+            <NavButton text="Hub™" href="/hub" />
             <NavButton text="Roadmap™" href="/roadmap" />
             <NavButton text="Support™" href="/support" />
           </nav>
@@ -120,11 +120,7 @@ export default function Home() {
 
         <footer className="mt-10 border-t border-cyan-400/30 pt-8 text-center">
           <h3 className="text-2xl font-black">BAMToolz™</h3>
-
-          <p className="text-blue-100 mt-2">
-            Ball Advanced Maintenance Tools™
-          </p>
-
+          <p className="text-blue-100 mt-2">Ball Advanced Maintenance Tools™</p>
           <p className="text-gray-300 mt-4 max-w-3xl mx-auto">
             Building the future of industrial safety, maintenance intelligence,
             facility knowledge, and connected equipment systems.
