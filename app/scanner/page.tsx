@@ -153,9 +153,33 @@ export default function ScannerPage() {
           </div>
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM HUB™</p>
-            <h3 className="mt-2 text-2xl font-black">MEMORY</h3>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM SAFETY™</p>
+            <h3 className="mt-2 text-2xl font-black">FIRST</h3>
           </div>
+        </section>
+
+        <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-yellow-200">
+            Safety First™ Warning
+          </h2>
+
+          <p className="mt-4 text-yellow-50">
+            BAM Scan™ and BAM Assist™ provide informational support only. They do
+            not replace trained technicians, OEM manuals, company procedures,
+            OSHA requirements, or site safety rules.
+          </p>
+
+          <p className="mt-4 text-yellow-50">
+            Always verify equipment condition, follow lockout/tagout procedures,
+            wear required PPE, and confirm electrical, hydraulic, pneumatic,
+            thermal, rotating, and stored-energy hazards before inspection,
+            troubleshooting, or repair.
+          </p>
+
+          <p className="mt-4 font-bold text-yellow-100">
+            Do not bypass guards, interlocks, safety devices, or approved
+            procedures.
+          </p>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
