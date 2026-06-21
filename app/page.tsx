@@ -2,27 +2,16 @@
 
 import { useState } from "react";
 
-type ScanResult = {
-  equipment: string;
-  confidence: string;
-  manufacturer: string;
-  model: string;
-  issue: string;
-  action: string;
-};
-
 export default function Home() {
   const [image, setImage] = useState<string | null>(null);
   const [scanning, setScanning] = useState(false);
-  const [result, setResult] = useState<ScanResult | null>(null);
+  const [result, setResult] = useState(false);
 
-  function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
+  function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
     if (!file) return;
-
-    const imageUrl = URL.createObjectURL(file);
-    setImage(imageUrl);
-    setResult(null);
+    setImage(URL.createObjectURL(file));
+    setResult(false);
   }
 
   function runScan() {
@@ -32,177 +21,187 @@ export default function Home() {
     }
 
     setScanning(true);
-    setResult(null);
+    setResult(false);
 
     setTimeout(() => {
-      setResult({
-        equipment: "Industrial Motor / Machine Tag",
-        confidence: "Demo Mode - 92%",
-        manufacturer: "BAMToolz AI Reading",
-        model: "Photo Data Detected",
-        issue: "Manual and parts data needed for deeper repair guidance.",
-        action:
-          "Save this machine profile, attach manuals, add parts list, and build repair history.",
-      });
-
       setScanning(false);
-    }, 1800);
+      setResult(true);
+    }, 1500);
   }
 
   return (
-    <main className="min-h-screen bg-[#020617] text-white">
-      <section className="mx-auto max-w-6xl px-5 py-6">
-        <header className="mb-8 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="rounded-xl bg-blue-500 px-4 py-2 text-2xl font-black text-white shadow-lg shadow-blue-500/40">
-              BAM
-            </div>
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #020617, #0f172a, #001f4d)",
+        color: "white",
+        padding: "24px",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <header style={{ marginBottom: 32 }}>
+        <div
+          style={{
+            display: "inline-block",
+            background: "#0ea5e9",
+            color: "white",
+            fontWeight: 900,
+            fontSize: 34,
+            padding: "10px 18px",
+            borderRadius: 14,
+            boxShadow: "0 0 30px #0ea5e9",
+          }}
+        >
+          BAM
+        </div>
 
-            <div>
-              <h1 className="text-2xl font-black tracking-wide text-white">
-                BAMToolz
-              </h1>
-              <p className="text-sm font-semibold text-blue-300">
-                Maintenance AI Scanner
-              </p>
-            </div>
-          </div>
+        <h1 style={{ fontSize: 42, margin: "16px 0 4px", fontWeight: 900 }}>
+          BAMToolz
+        </h1>
 
-          <div className="rounded-full border border-blue-400/40 px-4 py-2 text-xs font-bold text-blue-300">
-            DEMO BUILD
-          </div>
-        </header>
+        <p style={{ color: "#93c5fd", fontWeight: 700 }}>
+          Ball Advanced Maintenance Tools
+        </p>
+      </header>
 
-        <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-blue-500/30 bg-slate-900 p-6 shadow-2xl shadow-blue-500/10">
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-blue-400">
-              Ball Advanced Maintenance Tools
+      <section
+        style={{
+          background: "rgba(15, 23, 42, 0.9)",
+          border: "1px solid #38bdf8",
+          borderRadius: 24,
+          padding: 24,
+          boxShadow: "0 0 35px rgba(14,165,233,.25)",
+        }}
+      >
+        <p style={{ color: "#38bdf8", fontWeight: 900 }}>
+          MAINTENANCE AI SCANNER
+        </p>
+
+        <h2 style={{ fontSize: 48, lineHeight: 1, margin: "12px 0" }}>
+          Scan.
+          <br />
+          Recognize.
+          <br />
+          Fix Faster.
+        </h2>
+
+        <p style={{ color: "#cbd5e1", fontSize: 17 }}>
+          Upload or take a photo of equipment. BAMToolz builds a machine profile,
+          connects manuals, tracks parts, and creates technician knowledge.
+        </p>
+
+        <label
+          style={{
+            display: "block",
+            marginTop: 24,
+            padding: 24,
+            border: "2px dashed #38bdf8",
+            borderRadius: 18,
+            textAlign: "center",
+            background: "#020617",
+            cursor: "pointer",
+          }}
+        >
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            onChange={handleImageUpload}
+            style={{ display: "none" }}
+          />
+          <strong style={{ color: "#38bdf8", fontSize: 20 }}>
+            Tap to Take / Upload Machine Photo
+          </strong>
+          <p style={{ color: "#94a3b8" }}>
+            Equipment tag, motor plate, panel label, or machine photo
+          </p>
+        </label>
+
+        {image && (
+          <img
+            src={image}
+            alt="Machine preview"
+            style={{
+              marginTop: 20,
+              width: "100%",
+              maxHeight: 300,
+              objectFit: "cover",
+              borderRadius: 18,
+              border: "1px solid #38bdf8",
+            }}
+          />
+        )}
+
+        <button
+          onClick={runScan}
+          disabled={scanning}
+          style={{
+            width: "100%",
+            marginTop: 20,
+            padding: 18,
+            borderRadius: 16,
+            border: "none",
+            background: scanning ? "#64748b" : "#0ea5e9",
+            color: "white",
+            fontSize: 20,
+            fontWeight: 900,
+            boxShadow: "0 0 25px rgba(14,165,233,.5)",
+          }}
+        >
+          {scanning ? "Scanning Machine..." : "Run BAM Scan"}
+        </button>
+      </section>
+
+      <section
+        style={{
+          marginTop: 24,
+          background: "rgba(15, 23, 42, 0.9)",
+          border: "1px solid #38bdf8",
+          borderRadius: 24,
+          padding: 24,
+        }}
+      >
+        <h3 style={{ color: "#38bdf8", fontSize: 28 }}>BAM AI Result</h3>
+
+        {!result && !scanning && (
+          <p style={{ color: "#cbd5e1" }}>
+            No scan yet. Upload a machine photo and press Run BAM Scan.
+          </p>
+        )}
+
+        {scanning && (
+          <p style={{ color: "#93c5fd", fontWeight: 800 }}>
+            Reading equipment data...
+          </p>
+        )}
+
+        {result && (
+          <div>
+            <h4 style={{ fontSize: 30, marginBottom: 8 }}>
+              Industrial Motor / Machine Tag
+            </h4>
+
+            <p style={{ color: "#93c5fd", fontWeight: 800 }}>
+              Confidence: Demo Mode — 92%
             </p>
 
-            <h2 className="mb-4 text-4xl font-black leading-tight md:text-6xl">
-              Scan.
-              <br />
-              Recognize.
-              <br />
-              Fix Faster.
-            </h2>
-
-            <p className="mb-6 text-slate-300">
-              Upload or take a photo of equipment. BAMToolz will build a machine
-              profile, connect manuals, track parts, and turn repair history into
-              technician knowledge.
-            </p>
-
-            <div className="rounded-2xl border border-blue-400/20 bg-slate-950 p-4">
-              <label className="block cursor-pointer rounded-xl border border-dashed border-blue-400/50 bg-slate-900 p-6 text-center hover:bg-slate-800">
-                <input
-                  type="file"
-                  accept="image/*"
-                  capture="environment"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                />
-
-                <p className="text-lg font-black text-blue-300">
-                  Tap to Take / Upload Machine Photo
-                </p>
-                <p className="mt-2 text-sm text-slate-400">
-                  Equipment tag, motor plate, panel label, or machine photo
-                </p>
-              </label>
-
-              {image && (
-                <img
-                  src={image}
-                  alt="Uploaded machine"
-                  className="mt-4 max-h-72 w-full rounded-xl object-cover"
-                />
-              )}
-
-              <button
-                onClick={runScan}
-                disabled={scanning}
-                className="mt-4 w-full rounded-xl bg-blue-500 px-6 py-4 text-lg font-black text-white shadow-lg shadow-blue-500/30 hover:bg-blue-400 disabled:opacity-60"
-              >
-                {scanning ? "Scanning Machine..." : "Run BAM Scan"}
-              </button>
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-blue-500/30 bg-slate-900 p-6 shadow-2xl shadow-blue-500/10">
-            <h3 className="mb-4 text-2xl font-black text-blue-300">
-              BAM AI Result
-            </h3>
-
-            {!result && !scanning && (
-              <div className="rounded-2xl border border-slate-700 bg-slate-950 p-6 text-slate-400">
-                No scan yet. Upload a machine photo and press Run BAM Scan.
-              </div>
-            )}
-
-            {scanning && (
-              <div className="rounded-2xl border border-blue-400/40 bg-blue-500/10 p-6">
-                <p className="text-xl font-black text-blue-300">
-                  Reading equipment data...
-                </p>
-                <p className="mt-2 text-slate-300">
-                  BAMToolz is checking the image for machine tags, parts,
-                  labels, and maintenance clues.
-                </p>
-              </div>
-            )}
-
-            {result && (
-              <div className="space-y-4">
-                <div className="rounded-2xl bg-slate-950 p-5">
-                  <p className="text-sm text-slate-400">Detected Equipment</p>
-                  <h4 className="text-3xl font-black text-white">
-                    {result.equipment}
-                  </h4>
-                  <p className="mt-2 font-bold text-blue-300">
-                    Confidence: {result.confidence}
-                  </p>
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="rounded-2xl bg-slate-950 p-5">
-                    <p className="text-sm text-slate-400">Manufacturer</p>
-                    <p className="text-xl font-bold">{result.manufacturer}</p>
-                  </div>
-
-                  <div className="rounded-2xl bg-slate-950 p-5">
-                    <p className="text-sm text-slate-400">Model</p>
-                    <p className="text-xl font-bold">{result.model}</p>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-yellow-400/30 bg-yellow-500/10 p-5">
-                  <p className="font-black text-yellow-300">System Note</p>
-                  <p className="mt-2 text-slate-200">{result.issue}</p>
-                </div>
-
-                <div className="rounded-2xl border border-blue-400/30 bg-blue-500/10 p-5">
-                  <p className="font-black text-blue-300">Recommended Action</p>
-                  <p className="mt-2 text-slate-200">{result.action}</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-
-        <section className="mt-6 grid gap-4 md:grid-cols-4">
-          {["Scan", "Identify", "Store", "Repair"].map((step) => (
             <div
-              key={step}
-              className="rounded-2xl border border-blue-500/20 bg-slate-900 p-5 text-center"
+              style={{
+                marginTop: 16,
+                padding: 16,
+                borderRadius: 16,
+                background: "#020617",
+                border: "1px solid #38bdf8",
+              }}
             >
-              <p className="text-2xl font-black text-blue-400">{step}</p>
-              <p className="mt-2 text-sm text-slate-400">
-                Build the BAM Hub machine knowledge system.
+              <strong>Recommended Action:</strong>
+              <p>
+                Save this machine profile, attach manuals, add parts list, and
+                build repair history.
               </p>
             </div>
-          ))}
-        </section>
+          </div>
+        )}
       </section>
     </main>
   );
