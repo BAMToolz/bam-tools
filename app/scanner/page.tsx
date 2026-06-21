@@ -11,6 +11,7 @@ export default function ScannerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState("");
   const [input, setInput] = useState("");
+  const [hubRecord, setHubRecord] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bam",
@@ -45,6 +46,27 @@ export default function ScannerPage() {
     } catch (error: any) {
       setResult(error?.message || "BAM Scan™ connection failed.");
     }
+  }
+
+  function saveToHub() {
+    if (!result) {
+      setHubRecord("Run BAM Scan™ first before saving to BAM Hub™.");
+      return;
+    }
+
+    const record = `BAM Hub™ Prototype Record
+
+Source: BAM Scan™
+Status: Saved locally for prototype display
+Future Storage: BAM Hub™ machine memory database
+
+Saved Scan:
+${result}
+
+Next:
+Attach this scan to a machine profile in BAM Hub™ with facility, equipment ID, manufacturer, model, serial, voltage, controls system, repair notes, and technician knowledge.`;
+
+    setHubRecord(record);
   }
 
   async function sendMessage() {
@@ -115,6 +137,9 @@ export default function ScannerPage() {
             <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Home™
             </a>
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Hub™
+            </a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Support™
             </a>
@@ -153,8 +178,8 @@ export default function ScannerPage() {
           </div>
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM SAFETY™</p>
-            <h3 className="mt-2 text-2xl font-black">FIRST</h3>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM HUB™</p>
+            <h3 className="mt-2 text-2xl font-black">SAVE</h3>
           </div>
         </section>
 
@@ -237,6 +262,19 @@ Repair Notes:
 Knowledge Captured:
 Future Prevention:`}
           </div>
+
+          <button
+            onClick={saveToHub}
+            className="mt-6 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400"
+          >
+            SAVE SCAN TO BAM HUB™
+          </button>
+
+          {hubRecord && (
+            <div className="mt-6 whitespace-pre-wrap rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
+              {hubRecord}
+            </div>
+          )}
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
