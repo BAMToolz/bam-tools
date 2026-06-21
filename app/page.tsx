@@ -2,6 +2,16 @@
 
 import { useState } from "react";
 
+const navButton = {
+  background: "#020617",
+  color: "#38bdf8",
+  border: "1px solid #38bdf8",
+  padding: "12px 18px",
+  borderRadius: 14,
+  fontWeight: 900,
+  cursor: "pointer",
+};
+
 export default function Home() {
   const [image, setImage] = useState<string | null>(null);
   const [scanning, setScanning] = useState(false);
@@ -39,29 +49,71 @@ export default function Home() {
         fontFamily: "Arial, sans-serif",
       }}
     >
-      <header style={{ marginBottom: 32 }}>
-        <div
-          style={{
-            display: "inline-block",
-            background: "#0ea5e9",
-            color: "white",
-            fontWeight: 900,
-            fontSize: 34,
-            padding: "10px 18px",
-            borderRadius: 14,
-            boxShadow: "0 0 30px #0ea5e9",
-          }}
-        >
-          BAM
+      <header
+        style={{
+          marginBottom: 32,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 20,
+          flexWrap: "wrap",
+        }}
+      >
+        <div>
+          <div
+            style={{
+              display: "inline-block",
+              background: "#0ea5e9",
+              color: "white",
+              fontWeight: 900,
+              fontSize: 34,
+              padding: "10px 18px",
+              borderRadius: 14,
+              boxShadow: "0 0 30px #0ea5e9",
+            }}
+          >
+            BAM
+          </div>
+
+          <h1 style={{ fontSize: 42, margin: "16px 0 4px", fontWeight: 900 }}>
+            BAMToolz™
+          </h1>
+
+          <p style={{ color: "#93c5fd", fontWeight: 700 }}>
+            Ball Advanced Maintenance Tools™
+          </p>
         </div>
 
-        <h1 style={{ fontSize: 42, margin: "16px 0 4px", fontWeight: 900 }}>
-          BAMToolz™
-        </h1>
+        <nav style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <button
+            onClick={() =>
+              document.getElementById("hub")?.scrollIntoView({ behavior: "smooth" })
+            }
+            style={navButton}
+          >
+            BAM Hub™
+          </button>
 
-        <p style={{ color: "#93c5fd", fontWeight: 700 }}>
-          Ball Advanced Maintenance Tools™
-        </p>
+          <button
+            onClick={() =>
+              document
+                .getElementById("support")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            style={navButton}
+          >
+            Support™
+          </button>
+
+          <button
+            onClick={() => {
+              window.location.href = "mailto:support@bamtoolz.com";
+            }}
+            style={navButton}
+          >
+            Contact™
+          </button>
+        </nav>
       </header>
 
       <section
@@ -149,6 +201,7 @@ export default function Home() {
             fontSize: 20,
             fontWeight: 900,
             boxShadow: "0 0 25px rgba(14,165,233,.5)",
+            cursor: "pointer",
           }}
         >
           {scanning ? "Scanning Machine..." : "Run BAM Scan™"}
@@ -207,13 +260,7 @@ export default function Home() {
         )}
       </section>
 
-      <section
-        style={{
-          marginTop: 24,
-          display: "grid",
-          gap: 14,
-        }}
-      >
+      <section id="hub" style={{ marginTop: 24, display: "grid", gap: 14 }}>
         {["BAM Scan™", "BAM Hub™", "BAM AI™", "BAM Systems™"].map((item) => (
           <div
             key={item}
@@ -232,6 +279,44 @@ export default function Home() {
             </p>
           </div>
         ))}
+      </section>
+
+      <section
+        id="support"
+        style={{
+          marginTop: 24,
+          background: "rgba(15, 23, 42, 0.9)",
+          border: "1px solid #38bdf8",
+          borderRadius: 24,
+          padding: 24,
+        }}
+      >
+        <h3 style={{ color: "#38bdf8", fontSize: 28 }}>Support™</h3>
+        <p style={{ color: "#cbd5e1" }}>
+          Need help with a machine profile, scanner issue, manuals, parts, or
+          repair history?
+        </p>
+
+        <button
+          onClick={() => {
+            window.location.href =
+              "mailto:support@bamtoolz.com?subject=BAMToolz Support Request";
+          }}
+          style={{
+            marginTop: 12,
+            width: "100%",
+            padding: 16,
+            borderRadius: 16,
+            border: "1px solid #38bdf8",
+            background: "#0ea5e9",
+            color: "white",
+            fontSize: 18,
+            fontWeight: 900,
+            cursor: "pointer",
+          }}
+        >
+          Open Support Ticket™
+        </button>
       </section>
 
       <footer
