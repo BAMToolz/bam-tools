@@ -21,10 +21,10 @@ export default function Home() {
             <a href="#platform" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Platform™
             </a>
-            <a href="#machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Machines™
             </a>
-            <a href="#automation" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+            <a href="/automation" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Automation™
             </a>
             <a href="#safety" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
@@ -112,7 +112,9 @@ export default function Home() {
           </div>
 
           <div id="machines" className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">BAM Machines™</h3>
+            <a href="/machines" className="text-xl font-black text-cyan-300 hover:text-white">
+              BAM Machines™
+            </a>
             <p className="mt-3 text-sm leading-6 text-slate-300">
               Custom machine building, equipment concepts, fixtures, controls-ready systems,
               technician-built tools, and production support equipment.
@@ -120,7 +122,9 @@ export default function Home() {
           </div>
 
           <div id="automation" className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">BAM Automation™</h3>
+            <a href="/automation" className="text-xl font-black text-cyan-300 hover:text-white">
+              BAM Automation™
+            </a>
             <p className="mt-3 text-sm leading-6 text-slate-300">
               Complete plant automation, PLC/HMI support, robotics, system integration,
               process upgrades, and facility-wide control solutions.
