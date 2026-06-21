@@ -1,115 +1,71 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#04162b] text-white px-5 py-6">
-      <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl bg-gradient-to-br from-[#08aeea] via-[#0874a8] to-[#061a33] p-6 md:p-10 border-4 border-white">
-
-        <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <main className="min-h-screen bg-slate-950 text-white px-5 py-6">
+      <section className="mx-auto max-w-6xl rounded-3xl border-4 border-white bg-gradient-to-br from-cyan-500 via-blue-800 to-slate-950 p-6 md:p-10">
+        <header className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="inline-flex items-center justify-center bg-white text-[#0a8fc2] font-black text-2xl px-5 py-1 rounded-xl shadow">
+            <div className="inline-block rounded-xl bg-white px-5 py-1 text-2xl font-black text-cyan-600">
               BAM
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-black mt-3">
+            <h1 className="mt-3 text-4xl font-black md:text-6xl">
               BAMToolz™
             </h1>
 
-            <p className="text-sm md:text-base font-bold text-blue-100 mt-2">
+            <p className="mt-2 font-bold text-blue-100">
               Ball Advanced Management™
             </p>
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <NavButton text="Platform™" href="/platform" />
-            <NavButton text="Safety™" href="/scanner" />
-            <NavButton text="Hub™" href="/hub" />
-            <NavButton text="Roadmap™" href="/roadmap" />
-            <NavButton text="Support™" href="/support" />
+            <a className="nav-btn" href="/scanner">BAM Scan™</a>
+            <a className="nav-btn" href="/hub">Hub™</a>
+            <a className="nav-btn" href="/metrics">Metrics™</a>
+            <a className="nav-btn" href="/support">Support™</a>
           </nav>
         </header>
 
-
-        <section className="mt-10 rounded-3xl bg-[#0a1629]/90 border border-cyan-400/40 p-6 md:p-10 shadow-2xl">
-
-          <p className="text-cyan-300 font-black">
+        <div className="mt-10 rounded-3xl border border-cyan-300 bg-slate-950/90 p-6 md:p-10">
+          <p className="font-black text-cyan-300">
             INDUSTRIAL SAFETY & MAINTENANCE INTELLIGENCE™
           </p>
 
-          <h2 className="text-4xl md:text-6xl font-black mt-4">
+          <h2 className="mt-4 text-4xl font-black md:text-6xl">
             Connecting machines, technicians, facilities and AI.
           </h2>
 
-          <p className="text-gray-200 mt-6 max-w-5xl">
-            BAMToolz™ is an industrial intelligence platform by
-            Ball Advanced Management™ designed for equipment data,
-            maintenance history, safety, manuals, parts, controls,
-            and technician knowledge.
+          <p className="mt-6 max-w-4xl text-gray-200">
+            BAMToolz™ is an industrial intelligence platform designed for equipment data,
+            maintenance history, safety, manuals, parts, controls, technician knowledge,
+            and advanced facility metrics.
           </p>
+        </div>
 
-        </section>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <InfoCard title="BAM Scan™" text="AI scanning tools for equipment, parts, manuals, and troubleshooting." />
+          <InfoCard title="BAM Hub™" text="Facility knowledge, repair notes, machine data, and maintenance history." />
+          <InfoCard title="BAM Metrics™" text="Downtime analytics, machine efficiency, failure trends, and ROI reporting." />
+          <InfoCard title="BAM Safety™" text="Safety information, inspections, hazards, and procedures." />
+          <InfoCard title="BAM Systems™" text="Controls, robotics, automation, PLCs, and industrial integrations." />
+          <InfoCard title="Knowledge Preservation™" text="Saving technician experience before it disappears." />
+        </div>
 
-
-        <section className="grid md:grid-cols-3 gap-5 mt-8">
-
-          <Card title="BAM Hub™" text="Facility knowledge, equipment data, and maintenance intelligence." />
-
-          <Card title="BAM Scan™" text="Future AI scanning tools for machines, parts, and troubleshooting." />
-
-          <Card title="BAM Safety™" text="Safety information, inspections, hazards, and procedures." />
-
-          <Card title="BAM Systems™" text="Controls, robotics, automation, and integration support." />
-
-          <Card title="BAMToolz™ Platform" text="Tools built for technicians and industrial teams." />
-
-          <Card title="Knowledge Preservation™" text="Saving experience before it disappears." />
-
-        </section>
-
-
-        <footer className="mt-10 border-t border-cyan-400/30 pt-8 text-center">
-          <h3 className="text-2xl font-black">
-            BAMToolz™
-          </h3>
-
-          <p className="text-blue-100 mt-2">
+        <footer className="mt-10 border-t border-cyan-300/40 pt-8 text-center">
+          <h3 className="text-2xl font-black">BAMToolz™</h3>
+          <p className="mt-2 text-blue-100">
             © 2026 Ball Advanced Management™
           </p>
         </footer>
-
-      </div>
+      </section>
     </main>
   );
 }
 
-
-function NavButton({
-  text,
-  href,
-}: {
-  text: string;
-  href: string;
-}) {
+function InfoCard({ title, text }: { title: string; text: string }) {
   return (
-    <a
-      href={href}
-      className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm"
-    >
-      {text}
-    </a>
-  );
-}
-
-
-function Card({
-  title,
-  text,
-}: {
-  title: string;
-  text: string;
-}) {
-  return (
-    <div className="rounded-2xl bg-[#061225] border border-cyan-400/30 p-5">
+    <article className="rounded-2xl border border-cyan-300/40 bg-slate-950 p-5">
       <h3 className="text-xl font-black text-cyan-300">{title}</h3>
-      <p className="text-gray-300 mt-2">{text}</p>
-    </div>
+      <p className="mt-2 text-gray-300">{text}</p>
+    </article>
   );
 }
