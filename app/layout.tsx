@@ -1,6 +1,8 @@
+import "./globals.css";
+
 export const metadata = {
   title: "BAMToolz",
-  description: "Ball Advanced Maintenance Tools - AI Manufacturing Maintenance Platform",
+  description: "Ball Advanced Maintenance Tools",
 };
 
 export default function RootLayout({
@@ -10,9 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
