@@ -21,13 +21,15 @@ export default function Home() {
           <nav className="flex flex-wrap gap-3">
             <NavButton text="Platform™" href="/platform" />
             <NavButton text="Safety™" href="/scanner" />
-            <NavButton text="Hub™" href="/platform" />
+            <NavButton text="Hub™" href="/hub" />
             <NavButton text="Roadmap™" href="/roadmap" />
-            <NavButton text="Support™" href="/contact" />
+            <NavButton text="Support™" href="/support" />
           </nav>
         </header>
 
+
         <section className="mt-10 rounded-3xl bg-[#0a1629]/90 border border-cyan-400/40 p-6 md:p-10 shadow-2xl">
+
           <p className="text-cyan-300 font-black">
             INDUSTRIAL SAFETY & MAINTENANCE INTELLIGENCE™
           </p>
@@ -42,16 +44,26 @@ export default function Home() {
             maintenance history, safety, manuals, parts, controls,
             and technician knowledge.
           </p>
+
         </section>
 
+
         <section className="grid md:grid-cols-3 gap-5 mt-8">
+
           <Card title="BAM Hub™" text="Facility knowledge, equipment data, and maintenance intelligence." />
+
           <Card title="BAM Scan™" text="Future AI scanning tools for machines, parts, and troubleshooting." />
+
           <Card title="BAM Safety™" text="Safety information, inspections, hazards, and procedures." />
+
           <Card title="BAM Systems™" text="Controls, robotics, automation, and integration support." />
+
           <Card title="BAMToolz™ Platform" text="Tools built for technicians and industrial teams." />
+
           <Card title="Knowledge Preservation™" text="Saving experience before it disappears." />
+
         </section>
+
 
         <footer className="mt-10 border-t border-cyan-400/30 pt-8 text-center">
           <h3 className="text-2xl font-black">
@@ -59,24 +71,7 @@ export default function Home() {
           </h3>
 
           <p className="text-blue-100 mt-2">
-            A Ball Advanced Management™ Platform
-          </p>
-
-          <p className="text-gray-300 mt-4 max-w-3xl mx-auto">
-            Building industrial intelligence systems for equipment, safety,
-            maintenance, automation, facility knowledge, and the people who keep
-            the world running.
-          </p>
-
-          <div className="flex justify-center flex-wrap gap-6 mt-6 text-cyan-300 font-bold">
-            <a href="/privacy">Privacy Policy™</a>
-            <a href="/terms">Terms of Use™</a>
-            <a href="/contact">Contact™</a>
-            <a href="/contact">Support™</a>
-          </div>
-
-          <p className="text-gray-400 text-sm mt-8">
-            © 2026 Ball Advanced Management™ / BAMToolz™. All rights reserved.
+            © 2026 Ball Advanced Management™
           </p>
         </footer>
 
@@ -84,6 +79,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 function NavButton({
   text,
@@ -101,6 +97,7 @@ function NavButton({
     </a>
   );
 }
+
 
 function Card({
   title,
