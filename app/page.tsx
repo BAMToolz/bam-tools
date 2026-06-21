@@ -16,13 +16,20 @@ export default function Home() {
         </p>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <a
-            href="/scanner"
-            className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-600"
           >
-            Launch BAM Scan™
-          </a>
+<a
+  href="/scanner"
+  className="rounded-xl border border-blue-400 px-6 py-3 text-center font-bold text-blue-300 hover:bg-blue-950"
+>
+  BAM Scan™
+</a>
 
+<a
+  href="/support"
+  className="rounded-xl border border-blue-400 px-6 py-3 text-center font-bold text-blue-300 hover:bg-blue-950"
+>
+  BAMToolz™ AI Support
+</a>
           <a
             href="mailto:BAMToolzsupport@gmail.com"
             className="rounded-xl border border-blue-400 px-6 py-3 font-bold text-blue-300 hover:bg-blue-950"
