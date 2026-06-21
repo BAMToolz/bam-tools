@@ -1,163 +1,108 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#04162b] text-white px-5 py-6">
-      <div className="max-w-7xl mx-auto rounded-none md:rounded-3xl bg-gradient-to-br from-[#08aeea] via-[#0874a8] to-[#061a33] p-6 md:p-10 border-4 border-white">
+    <main className="min-h-screen bg-slate-950 text-white">
+      <section className="px-6 py-16 text-center">
+        <h1 className="text-4xl font-bold">BAMToolz™</h1>
+        <p className="mt-4 text-lg text-slate-300">
+          Ball Advanced Management tools for maintenance, equipment scanning, troubleshooting, and facility intelligence.
+        </p>
 
-        <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div>
-            <div className="inline-flex bg-white text-[#0a8fc2] font-black text-2xl px-5 py-1 rounded-xl">
-              BAM
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="/scanner"
+            className="rounded-xl bg-blue-500 px-6 py-3 font-semibold text-white hover:bg-blue-600"
+          >
+            Open AI Scanner
+          </a>
+
+          <a
+            href="mailto:BAMToolzsupport@gmail.com"
+            className="rounded-xl border border-blue-400 px-6 py-3 font-semibold text-blue-300 hover:bg-blue-950"
+          >
+            Contact Support
+          </a>
+        </div>
+      </section>
+
+      <section className="px-6 py-12">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-slate-800 bg-slate-900 p-8">
+          <h2 className="text-2xl font-bold text-blue-300">BAMToolz™ Platform</h2>
+          <p className="mt-4 text-slate-300">
+            BAMToolz™ is being built for industrial maintenance teams, service technicians,
+            manufacturers, and facilities that need faster equipment information, smarter
+            troubleshooting, and better downtime documentation.
+          </p>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="rounded-xl bg-slate-950 p-5">
+              <h3 className="font-bold text-white">AI Equipment Scan</h3>
+              <p className="mt-2 text-sm text-slate-400">
+                Scan equipment tags, labels, panels, and logs to help identify machine information.
+              </p>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-black mt-3">
-              BAMToolz™
-            </h1>
+            <div className="rounded-xl bg-slate-950 p-5">
+              <h3 className="font-bold text-white">Maintenance Intelligence</h3>
+              <p className="mt-2 text-sm text-slate-400">
+                Build repair notes, parts lists, manuals, and technician history by machine.
+              </p>
+            </div>
 
-            <p className="font-bold text-blue-100 mt-2">
-              Ball Advanced Management™
+            <div className="rounded-xl bg-slate-950 p-5">
+              <h3 className="font-bold text-white">Facility Workflow</h3>
+              <p className="mt-2 text-sm text-slate-400">
+                Designed for downtime tracking, troubleshooting, controls work, and equipment support.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="px-6 py-12">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-blue-500/40 bg-slate-900 p-8">
+          <h2 className="text-2xl font-bold text-blue-300">Contact BAMToolz™ Support</h2>
+
+          <p className="mt-4 text-slate-300">
+            For support, partnerships, manufacturer integrations, facility demos, or equipment
+            workflow questions, contact BAMToolz™ below.
+          </p>
+
+          <div className="mt-6 space-y-4">
+            <p className="text-lg">
+              Email:{" "}
+              <a
+                href="mailto:BAMToolzsupport@gmail.com"
+                className="font-semibold text-blue-300 underline"
+              >
+                BAMToolzsupport@gmail.com
+              </a>
             </p>
+
+            <a
+              href="mailto:BAMToolzsupport@gmail.com?subject=BAMToolz%20Support%20Request"
+              className="inline-block rounded-xl bg-blue-500 px-6 py-3 font-semibold text-white hover:bg-blue-600"
+            >
+              Email BAMToolz™ Support
+            </a>
           </div>
+        </div>
+      </section>
 
-          <nav className="flex flex-wrap gap-3">
-            <NavButton text="Platform™" href="/platform" />
-            <NavButton text="Safety™" href="/scanner" />
-            <NavButton text="Hub™" href="/hub" />
-            <NavButton text="Roadmap™" href="/roadmap" />
-            <NavButton text="Support™" href="/support" />
-          </nav>
-        </header>
+      <footer className="border-t border-slate-800 px-6 py-8 text-center text-sm text-slate-400">
+        <p>© 2026 BAMToolz™ | Ball Advanced Management™</p>
 
-
-        <section className="mt-10 rounded-3xl bg-[#0a1629]/90 border border-cyan-400/40 p-8">
-
-          <p className="text-cyan-300 font-black">
-            INDUSTRIAL SAFETY & MAINTENANCE INTELLIGENCE™
-          </p>
-
-          <h2 className="text-4xl md:text-6xl font-black mt-4">
-            Connecting machines, technicians, facilities and AI.
-          </h2>
-
-          <p className="text-gray-200 mt-6">
-            BAMToolz™ is an industrial intelligence platform by
-            Ball Advanced Management™ designed for equipment data,
-            maintenance history, manuals, parts, controls,
-            automation, and technician knowledge preservation.
-          </p>
-
-        </section>
-
-
-        <section className="grid md:grid-cols-3 gap-5 mt-8">
-
-          <Card
-            title="BAM Hub™"
-            text="Equipment history, facility data, and maintenance intelligence."
-          />
-
-          <Card
-            title="BAM Scan™"
-            text="AI equipment scanning, troubleshooting, and technician support."
-          />
-
-          <Card
-            title="BAM Safety™"
-            text="Safety procedures, inspections, and compliance tools."
-          />
-
-          <Card
-            title="BAM Systems™"
-            text="Controls, robotics, automation, PLC, and integrations."
-          />
-
-          <Card
-            title="BAMToolz™ Platform"
-            text="Industrial tools built for modern technicians."
-          />
-
-          <Card
-            title="Knowledge Preservation™"
-            text="Saving technician experience before it disappears."
-          />
-
-        </section>
-
-
-        <footer className="mt-12 border-t border-cyan-400/40 pt-8 text-center">
-
-          <h3 className="text-3xl font-black">
-            BAMToolz™
-          </h3>
-
-          <p className="text-blue-100 mt-2">
-            Building the future of industrial intelligence.
-          </p>
-
-
-          <div className="flex justify-center gap-6 flex-wrap mt-6 text-cyan-300 font-bold">
-
-            <a href="/privacy">
-              Privacy Policy™
-            </a>
-
-            <a href="/terms">
-              Terms of Service™
-            </a>
-
-            <a href="/support">
-              Contact Support™
-            </a>
-
-          </div>
-
-
-          <p className="text-blue-100 mt-6 text-sm">
-            © 2026 Ball Advanced Management™.
-            All Rights Reserved.
-          </p>
-
-        </footer>
-
-      </div>
+        <div className="mt-4 flex justify-center gap-6">
+          <a href="/privacy" className="hover:text-blue-300">
+            Privacy
+          </a>
+          <a href="/terms" className="hover:text-blue-300">
+            Terms
+          </a>
+          <a href="mailto:BAMToolzsupport@gmail.com" className="hover:text-blue-300">
+            Contact
+          </a>
+        </div>
+      </footer>
     </main>
-  );
-}
-
-
-function NavButton({
-  text,
-  href,
-}: {
-  text: string;
-  href: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="bg-[#071225] border border-cyan-400/50 text-cyan-300 font-black px-4 py-2 rounded-xl text-sm"
-    >
-      {text}
-    </a>
-  );
-}
-
-
-function Card({
-  title,
-  text,
-}: {
-  title: string;
-  text: string;
-}) {
-  return (
-    <div className="rounded-2xl bg-[#061225] border border-cyan-400/30 p-5">
-      <h3 className="text-xl font-black text-cyan-300">
-        {title}
-      </h3>
-
-      <p className="text-gray-300 mt-2">
-        {text}
-      </p>
-    </div>
   );
 }
