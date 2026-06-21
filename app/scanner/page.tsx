@@ -51,27 +51,31 @@ export default function ScannerPage() {
     if (!input.trim()) return;
 
     const techText = input.trim();
+    const currentScan = result || "No BAM Scan™ report has been created yet.";
 
     const bamReply = `BAM Assist™
 ━━━━━━━━━━━━
 
-◈ Technician Question
+Based on the current BAM Scan™ data:
+
+${currentScan}
+
+Technician Question:
 ${techText}
 
-◈ Based On Current BAM Scan™
-Review the BAM Scan™ report above and compare the symptom to the asset, safety risks, visible components, and troubleshooting notes.
+Simple Answer:
+Use the scan data above first. If the scan is missing model, serial, fault code, or parts information, ask the technician for the missing detail.
 
-◈ Follow-Up Questions
-1. Does the issue happen at startup, under load, or after running?
-2. Is there heat, noise, vibration, smell, or a fault code?
-3. Has anything recently changed?
-4. What was the last repair?
+Check Next:
+• Verify the visible equipment tag or model number
+• Confirm the symptom or fault code
+• Check safety risks before touching the equipment
 
-◈ Next Technician Action
-Send the model number, fault code, amp reading, photo, or what changed before the failure.
+Recommended Action:
+Send a clearer photo, fault code, nameplate, or what changed before the issue.
 
-◈ BAM Hub™ Memory
-This conversation can later be saved as repair history and technician knowledge for the asset.`;
+BAM Hub™ Memory:
+This scan and technician comment can later be saved to the machine history.`;
 
     setMessages((prev) => [
       ...prev,
@@ -101,22 +105,13 @@ This conversation can later be saved as repair history and technician knowledge 
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <a
-              href="/"
-              className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg"
-            >
+            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Home™
             </a>
-            <a
-              href="/support"
-              className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg"
-            >
+            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Support™
             </a>
-            <a
-              href="mailto:BAMToolzsupport@gmail.com"
-              className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg"
-            >
+            <a href="mailto:BAMToolzsupport@gmail.com" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Contact™
             </a>
           </nav>
@@ -141,35 +136,26 @@ This conversation can later be saved as repair history and technician knowledge 
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
-              BAM SCAN™
-            </p>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM SCAN™</p>
             <h3 className="mt-2 text-2xl font-black">IMAGE</h3>
           </div>
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
-              BAM ASSIST™
-            </p>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM ASSIST™</p>
             <h3 className="mt-2 text-2xl font-black">CHAT</h3>
           </div>
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
-              BAM HUB™
-            </p>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM HUB™</p>
             <h3 className="mt-2 text-2xl font-black">MEMORY</h3>
           </div>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            Equipment Image
-          </h2>
+          <h2 className="text-3xl font-black text-cyan-300">Equipment Image</h2>
 
           <p className="mt-4 text-slate-300">
-            Upload a machine tag, equipment label, electrical panel, equipment
-            log, or component photo.
+            Upload a machine tag, equipment label, electrical panel, equipment log, or component photo.
           </p>
 
           <input
@@ -188,9 +174,7 @@ This conversation can later be saved as repair history and technician knowledge 
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM Scan™ Report
-          </h2>
+          <h2 className="text-3xl font-black text-cyan-300">BAM Scan™ Report</h2>
 
           <div className="mt-6 whitespace-pre-wrap rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
             {result ||
@@ -225,13 +209,10 @@ Future Prevention:`}
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM Assist™ Chat
-          </h2>
+          <h2 className="text-3xl font-black text-cyan-300">BAM Assist™ Chat</h2>
 
           <p className="mt-4 text-slate-300">
-            Ask follow-up questions after the scan. This is where technician
-            knowledge becomes BAM Hub™ memory.
+            Ask follow-up questions after the scan. BAM Assist™ will use the current BAM Scan™ report shown above.
           </p>
 
           <div className="mt-6 space-y-4">
@@ -270,9 +251,7 @@ Future Prevention:`}
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAMToolz™ Support
-          </h2>
+          <h2 className="text-3xl font-black text-cyan-300">BAMToolz™ Support</h2>
 
           <p className="mt-4 text-slate-300">
             Founder: Justin Ball | Company: Ball Advanced Management™
@@ -280,52 +259,14 @@ Future Prevention:`}
 
           <p className="mt-4 text-slate-300">
             Email:{" "}
-            <a
-              href="mailto:BAMToolzsupport@gmail.com"
-              className="font-black text-cyan-300 underline"
-            >
+            <a href="mailto:BAMToolzsupport@gmail.com" className="font-black text-cyan-300 underline">
               BAMToolzsupport@gmail.com
             </a>
           </p>
-
-          <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-            <a
-              href="/"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAMToolz™ Home
-            </a>
-
-            <a
-              href="/support"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAMToolz™ AI Support
-            </a>
-
-            <a
-              href="mailto:BAMToolzsupport@gmail.com"
-              className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
-            >
-              Email Support
-            </a>
-          </div>
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM Scan™ | BAMToolz™ | Ball Advanced Management™</p>
-
-          <div className="mt-4 flex justify-center gap-6">
-            <a href="/privacy" className="hover:text-white">
-              Privacy
-            </a>
-            <a href="/terms" className="hover:text-white">
-              Terms
-            </a>
-            <a href="/support" className="hover:text-white">
-              Support
-            </a>
-          </div>
         </footer>
       </div>
     </main>
