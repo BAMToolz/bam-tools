@@ -1,156 +1,208 @@
+"use client";
+
+import { useState } from "react";
+
+type ScanResult = {
+  equipment: string;
+  confidence: string;
+  manufacturer: string;
+  model: string;
+  issue: string;
+  action: string;
+};
+
 export default function Home() {
+  const [image, setImage] = useState<string | null>(null);
+  const [scanning, setScanning] = useState(false);
+  const [result, setResult] = useState<ScanResult | null>(null);
+
+  function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const imageUrl = URL.createObjectURL(file);
+    setImage(imageUrl);
+    setResult(null);
+  }
+
+  function runScan() {
+    if (!image) {
+      alert("Take or upload a machine photo first.");
+      return;
+    }
+
+    setScanning(true);
+    setResult(null);
+
+    setTimeout(() => {
+      setResult({
+        equipment: "Industrial Motor / Machine Tag",
+        confidence: "Demo Mode - 92%",
+        manufacturer: "BAMToolz AI Reading",
+        model: "Photo Data Detected",
+        issue: "Manual and parts data needed for deeper repair guidance.",
+        action:
+          "Save this machine profile, attach manuals, add parts list, and build repair history.",
+      });
+
+      setScanning(false);
+    }, 1800);
+  }
+
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
-      <section className="px-6 py-8">
-        <div className="mx-auto max-w-6xl">
-          <header className="flex items-center justify-between mb-12">
-            <div className="flex items-center gap-3">
-              <div className="bg-blue-500 text-white font-black text-2xl px-4 py-2 rounded-xl shadow-lg shadow-blue-500/30">
-                BAM
-              </div>
-              <div>
-                <h1 className="text-2xl font-black tracking-wide">
-                  BAMToolz
-                </h1>
-                <p className="text-blue-300 text-sm">
-                  Ball Advanced Maintenance Tools
-                </p>
-              </div>
+    <main className="min-h-screen bg-[#020617] text-white">
+      <section className="mx-auto max-w-6xl px-5 py-6">
+        <header className="mb-8 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="rounded-xl bg-blue-500 px-4 py-2 text-2xl font-black text-white shadow-lg shadow-blue-500/40">
+              BAM
             </div>
 
-            <button className="bg-white text-slate-950 font-bold px-5 py-2 rounded-lg">
-              Start Scan
-            </button>
-          </header>
-
-          <section className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <p className="text-blue-400 font-bold mb-3">
-                THE FUTURE OF MAINTENANCE INTELLIGENCE
+              <h1 className="text-2xl font-black tracking-wide text-white">
+                BAMToolz
+              </h1>
+              <p className="text-sm font-semibold text-blue-300">
+                Maintenance AI Scanner
               </p>
-
-              <h2 className="text-5xl md:text-6xl font-black leading-tight mb-6">
-                Scan Machines.
-                <br />
-                Find Answers.
-                <br />
-                Fix Faster.
-              </h2>
-
-              <p className="text-slate-300 text-lg mb-8">
-                BAMToolz uses AI to read equipment data, organize manuals,
-                identify parts, track repair history, and guide technicians
-                through smarter troubleshooting.
-              </p>
-
-              <div className="flex gap-4">
-                <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-blue-500/30">
-                  Scan Equipment
-                </button>
-
-                <button className="border border-blue-400 text-blue-300 font-bold px-6 py-3 rounded-xl">
-                  View BAM Hub
-                </button>
-              </div>
             </div>
+          </div>
 
-            <div className="bg-slate-900 border border-blue-500/40 rounded-3xl p-6 shadow-2xl shadow-blue-500/20">
-              <div className="border border-blue-400/30 rounded-2xl p-5 bg-slate-950">
-                <p className="text-blue-300 font-bold mb-4">
-                  BAM AI CORE
-                </p>
+          <div className="rounded-full border border-blue-400/40 px-4 py-2 text-xs font-bold text-blue-300">
+            DEMO BUILD
+          </div>
+        </header>
 
-                <div className="bg-slate-900 rounded-xl p-4 mb-4">
-                  <p className="text-sm text-slate-400">Detected Equipment</p>
-                  <h3 className="text-2xl font-black text-white">
-                    15 HP Motor
-                  </h3>
-                  <p className="text-blue-300 mt-2">
-                    Confidence: 98%
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-slate-900 rounded-xl p-4">
-                    <p className="text-slate-400 text-sm">Data Sources</p>
-                    <p className="text-3xl font-black text-blue-400">142</p>
-                  </div>
-
-                  <div className="bg-slate-900 rounded-xl p-4">
-                    <p className="text-slate-400 text-sm">Health Score</p>
-                    <p className="text-3xl font-black text-blue-400">72%</p>
-                  </div>
-                </div>
-
-                <div className="mt-4 bg-blue-500/10 border border-blue-400/30 rounded-xl p-4">
-                  <p className="font-bold text-blue-300">Recommended Action</p>
-                  <p className="text-slate-300 text-sm mt-2">
-                    Inspect bearings, check alignment, lubricate, and monitor vibration.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="grid md:grid-cols-4 gap-4 mt-16">
-            {[
-              "Scan",
-              "Recognize",
-              "Analyze",
-              "Repair",
-            ].map((item) => (
-              <div
-                key={item}
-                className="bg-slate-900 border border-blue-500/30 rounded-2xl p-6 text-center"
-              >
-                <p className="text-blue-400 text-3xl font-black mb-2">
-                  {item}
-                </p>
-                <p className="text-slate-400 text-sm">
-                  BAMToolz turns machine data into technician action.
-                </p>
-              </div>
-            ))}
-          </section>
-
-          <section className="mt-16 bg-slate-900 border border-blue-500/30 rounded-3xl p-8">
-            <h3 className="text-3xl font-black mb-4">
-              Built for Real Machines. Real Data. Real Results.
-            </h3>
-
-            <p className="text-slate-300 mb-6">
-              BAM Hub stores equipment profiles, manuals, parts, repair history,
-              technician notes, and AI insights so every repair makes the facility smarter.
+        <section className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-3xl border border-blue-500/30 bg-slate-900 p-6 shadow-2xl shadow-blue-500/10">
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-blue-400">
+              Ball Advanced Maintenance Tools
             </p>
 
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-slate-950 rounded-xl p-5">
-                <h4 className="font-bold text-blue-300 mb-2">BAM Scan</h4>
-                <p className="text-slate-400 text-sm">
-                  Capture equipment tags, photos, manuals, and repair details.
-                </p>
-              </div>
+            <h2 className="mb-4 text-4xl font-black leading-tight md:text-6xl">
+              Scan.
+              <br />
+              Recognize.
+              <br />
+              Fix Faster.
+            </h2>
 
-              <div className="bg-slate-950 rounded-xl p-5">
-                <h4 className="font-bold text-blue-300 mb-2">BAM Hub</h4>
-                <p className="text-slate-400 text-sm">
-                  Organize facility knowledge into one searchable AI system.
-                </p>
-              </div>
+            <p className="mb-6 text-slate-300">
+              Upload or take a photo of equipment. BAMToolz will build a machine
+              profile, connect manuals, track parts, and turn repair history into
+              technician knowledge.
+            </p>
 
-              <div className="bg-slate-950 rounded-xl p-5">
-                <h4 className="font-bold text-blue-300 mb-2">BAM AI</h4>
-                <p className="text-slate-400 text-sm">
-                  Suggest fixes, parts, checks, and troubleshooting steps.
+            <div className="rounded-2xl border border-blue-400/20 bg-slate-950 p-4">
+              <label className="block cursor-pointer rounded-xl border border-dashed border-blue-400/50 bg-slate-900 p-6 text-center hover:bg-slate-800">
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+
+                <p className="text-lg font-black text-blue-300">
+                  Tap to Take / Upload Machine Photo
                 </p>
-              </div>
+                <p className="mt-2 text-sm text-slate-400">
+                  Equipment tag, motor plate, panel label, or machine photo
+                </p>
+              </label>
+
+              {image && (
+                <img
+                  src={image}
+                  alt="Uploaded machine"
+                  className="mt-4 max-h-72 w-full rounded-xl object-cover"
+                />
+              )}
+
+              <button
+                onClick={runScan}
+                disabled={scanning}
+                className="mt-4 w-full rounded-xl bg-blue-500 px-6 py-4 text-lg font-black text-white shadow-lg shadow-blue-500/30 hover:bg-blue-400 disabled:opacity-60"
+              >
+                {scanning ? "Scanning Machine..." : "Run BAM Scan"}
+              </button>
             </div>
-          </section>
+          </div>
 
-          <footer className="mt-16 text-center text-slate-500 text-sm">
-            © 2026 BAMToolz — Building Smarter. Fixing Faster.
-          </footer>
-        </div>
+          <div className="rounded-3xl border border-blue-500/30 bg-slate-900 p-6 shadow-2xl shadow-blue-500/10">
+            <h3 className="mb-4 text-2xl font-black text-blue-300">
+              BAM AI Result
+            </h3>
+
+            {!result && !scanning && (
+              <div className="rounded-2xl border border-slate-700 bg-slate-950 p-6 text-slate-400">
+                No scan yet. Upload a machine photo and press Run BAM Scan.
+              </div>
+            )}
+
+            {scanning && (
+              <div className="rounded-2xl border border-blue-400/40 bg-blue-500/10 p-6">
+                <p className="text-xl font-black text-blue-300">
+                  Reading equipment data...
+                </p>
+                <p className="mt-2 text-slate-300">
+                  BAMToolz is checking the image for machine tags, parts,
+                  labels, and maintenance clues.
+                </p>
+              </div>
+            )}
+
+            {result && (
+              <div className="space-y-4">
+                <div className="rounded-2xl bg-slate-950 p-5">
+                  <p className="text-sm text-slate-400">Detected Equipment</p>
+                  <h4 className="text-3xl font-black text-white">
+                    {result.equipment}
+                  </h4>
+                  <p className="mt-2 font-bold text-blue-300">
+                    Confidence: {result.confidence}
+                  </p>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-2xl bg-slate-950 p-5">
+                    <p className="text-sm text-slate-400">Manufacturer</p>
+                    <p className="text-xl font-bold">{result.manufacturer}</p>
+                  </div>
+
+                  <div className="rounded-2xl bg-slate-950 p-5">
+                    <p className="text-sm text-slate-400">Model</p>
+                    <p className="text-xl font-bold">{result.model}</p>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-yellow-400/30 bg-yellow-500/10 p-5">
+                  <p className="font-black text-yellow-300">System Note</p>
+                  <p className="mt-2 text-slate-200">{result.issue}</p>
+                </div>
+
+                <div className="rounded-2xl border border-blue-400/30 bg-blue-500/10 p-5">
+                  <p className="font-black text-blue-300">Recommended Action</p>
+                  <p className="mt-2 text-slate-200">{result.action}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="mt-6 grid gap-4 md:grid-cols-4">
+          {["Scan", "Identify", "Store", "Repair"].map((step) => (
+            <div
+              key={step}
+              className="rounded-2xl border border-blue-500/20 bg-slate-900 p-5 text-center"
+            >
+              <p className="text-2xl font-black text-blue-400">{step}</p>
+              <p className="mt-2 text-sm text-slate-400">
+                Build the BAM Hub machine knowledge system.
+              </p>
+            </div>
+          ))}
+        </section>
       </section>
     </main>
   );
