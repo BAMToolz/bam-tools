@@ -8,67 +8,62 @@ export default function SupportPage() {
   const [loading, setLoading] = useState(false);
 
   async function askAI() {
-    setLoading(true);
-    setAnswer("");
+    try {
+      setLoading(true);
+      setAnswer("");
 
-    const res = await fetch("/api/support", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message,
-      }),
-    });
+      const res = await fetch("/api/support", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    setAnswer(data.result);
-    setLoading(false);
+      setAnswer(data.result || data.error || "No response from BAM Support AI.");
+    } catch (error) {
+      setAnswer("BAM Support AI connection failed.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <main className="min-h-screen bg-[#04162b] text-white p-6">
-
-      <section className="max-w-4xl mx-auto">
-
-        <a href="/" className="text-cyan-300 font-bold">
+      <section className="mx-auto max-w-4xl">
+        <a href="/" className="font-bold text-cyan-300">
           ← BAMToolz™ Home
         </a>
 
-        <h1 className="text-5xl font-black mt-8">
-          BAM Support AI™
-        </h1>
+        <h1 className="mt-8 text-5xl font-black">BAM Support AI™</h1>
 
-        <p className="text-gray-300 mt-4">
+        <p className="mt-4 text-gray-300">
           Industrial support powered by Ball Advanced Management™.
         </p>
 
-
         <textarea
-          className="mt-8 w-full min-h-40 rounded-xl p-4 text-black"
+          className="mt-8 min-h-40 w-full rounded-xl p-4 text-black"
           placeholder="Ask BAM Support AI™..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
 
-
         <button
           onClick={askAI}
-          className="mt-4 bg-cyan-500 text-black font-black px-6 py-3 rounded-xl"
+          disabled={loading || !message.trim()}
+          className="mt-4 rounded-xl bg-cyan-500 px-6 py-3 font-black text-black disabled:opacity-50"
         >
           {loading ? "Thinking..." : "Ask BAM AI™"}
         </button>
 
-
         {answer && (
-          <div className="mt-8 rounded-xl bg-slate-900 border border-cyan-400 p-5 whitespace-pre-wrap">
+          <div className="mt-8 whitespace-pre-wrap rounded-xl border border-cyan-400 bg-slate-900 p-5">
             {answer}
           </div>
         )}
-
       </section>
-
     </main>
   );
 }
