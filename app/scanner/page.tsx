@@ -14,17 +14,17 @@ export default function ScannerPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bam",
-      text: "BAM Assist™ ready. Scan equipment first, then ask follow-up troubleshooting questions.",
+      text: "BAM Assist™ ready. Upload an equipment image, run BAM Scan™, then ask follow-up troubleshooting questions.",
     },
   ]);
 
   async function runScan() {
     if (!file) {
-      setResult("Select equipment photo first.");
+      setResult("Select an equipment photo first.");
       return;
     }
 
-    setResult("BAM Intelligence™ analyzing equipment...");
+    setResult("BAM Scan™ analyzing equipment intelligence...");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -40,10 +40,10 @@ export default function ScannerPage() {
       setResult(
         data.result ||
           data.message ||
-          "BAM Scan connected, but no result text returned."
+          "BAM Scan™ connected, but no result text returned."
       );
     } catch (error: any) {
-      setResult(error?.message || "BAM Scan connection failed.");
+      setResult(error?.message || "BAM Scan™ connection failed.");
     }
   }
 
@@ -58,7 +58,7 @@ export default function ScannerPage() {
 ◈ Technician Question
 ${techText}
 
-◈ Based On Current Scan
+◈ Based On Current BAM Scan™
 Review the BAM Scan™ report above and compare the symptom to the asset, safety risks, visible components, and troubleshooting notes.
 
 ◈ Follow-Up Questions
@@ -68,10 +68,10 @@ Review the BAM Scan™ report above and compare the symptom to the asset, safety
 4. What was the last repair?
 
 ◈ Next Technician Action
-Send the model number, fault code, amp reading, or what changed before the failure.
+Send the model number, fault code, amp reading, photo, or what changed before the failure.
 
 ◈ BAM Hub™ Memory
-This conversation can later be saved as repair history for the asset.`;
+This conversation can later be saved as repair history and technician knowledge for the asset.`;
 
     setMessages((prev) => [
       ...prev,
@@ -85,33 +85,55 @@ This conversation can later be saved as repair history for the asset.`;
   return (
     <main style={main}>
       <section style={panel}>
-        <p style={topLine}>BAM™ • BALL ADVANCED MANAGEMENT</p>
+        <header style={header}>
+          <div>
+            <p style={topLine}>BALL ADVANCED MANAGEMENT™</p>
+            <h1 style={logo}>BAM Scan™</h1>
+            <h2 style={blue}>AI Equipment Intelligence™</h2>
+            <p style={subText}>
+              Connecting machines, technicians, facilities and AI.
+            </p>
+          </div>
 
-        <h1 style={logo}>BAM Intelligence™</h1>
-        <h2 style={blue}>Scan. Assist. Remember.</h2>
+          <nav style={nav}>
+            <a href="/" style={navButton}>
+              Home
+            </a>
+            <a href="/support" style={navButton}>
+              AI Support
+            </a>
+            <a href="mailto:BAMToolzsupport@gmail.com" style={navButton}>
+              Contact
+            </a>
+          </nav>
+        </header>
 
         <div style={statusGrid}>
           <div style={statusCard}>
-            <span style={statusLabel}>SCAN</span>
+            <span style={statusLabel}>BAM SCAN™</span>
             <strong>IMAGE</strong>
           </div>
           <div style={statusCard}>
-            <span style={statusLabel}>ASSIST</span>
+            <span style={statusLabel}>BAM ASSIST™</span>
             <strong>CHAT</strong>
           </div>
           <div style={statusCard}>
-            <span style={statusLabel}>HUB</span>
+            <span style={statusLabel}>BAM HUB™</span>
             <strong>MEMORY</strong>
           </div>
         </div>
 
         <div style={box}>
           <p style={sectionTitle}>◈ Equipment Image</p>
+          <p style={helperText}>
+            Upload a machine tag, equipment label, panel, log, or component photo.
+          </p>
 
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setFile(e.target.files?.[0] || null)}
+            style={fileInput}
           />
 
           <button onClick={runScan} style={button}>
@@ -156,6 +178,9 @@ Future Prevention:`}
 
         <div style={box}>
           <p style={sectionTitle}>◈ BAM Assist™ Chat</p>
+          <p style={helperText}>
+            Ask follow-up questions after the scan. This is where technician knowledge becomes BAM Hub™ memory.
+          </p>
 
           <div style={chatBox}>
             {messages.map((msg, index) => (
@@ -169,7 +194,7 @@ Future Prevention:`}
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask a follow-up question..."
+            placeholder="Ask a follow-up troubleshooting question..."
             style={textArea}
           />
 
@@ -178,9 +203,33 @@ Future Prevention:`}
           </button>
         </div>
 
-        <a href="/" style={backLink}>
-          ← Back Home
-        </a>
+        <div style={supportBox}>
+          <p style={sectionTitle}>◈ BAMToolz™ Support</p>
+          <p style={helperText}>
+            Founder: Justin Ball | Company: Ball Advanced Management™
+          </p>
+          <p style={helperText}>
+            Email:{" "}
+            <a href="mailto:BAMToolzsupport@gmail.com" style={inlineLink}>
+              BAMToolzsupport@gmail.com
+            </a>
+          </p>
+        </div>
+
+        <footer style={footer}>
+          <a href="/" style={backLink}>
+            ← BAMToolz™ Home
+          </a>
+          <a href="/privacy" style={backLink}>
+            Privacy
+          </a>
+          <a href="/terms" style={backLink}>
+            Terms
+          </a>
+          <a href="/support" style={backLink}>
+            BAMToolz™ AI Support
+          </a>
+        </footer>
       </section>
     </main>
   );
@@ -188,18 +237,44 @@ Future Prevention:`}
 
 const main = {
   minHeight: "100vh",
-  background: "radial-gradient(circle at top,#062444,#020711,#000)",
+  background: "radial-gradient(circle at top,#0a8bd9,#04345f,#020711,#000)",
   color: "#e8f4ff",
   padding: "22px",
   fontFamily: "Arial, Helvetica, sans-serif",
 };
 
 const panel = {
-  border: "1px solid #0077ff",
-  borderRadius: "28px",
+  maxWidth: "1100px",
+  margin: "0 auto",
+  border: "1px solid rgba(143,199,255,.65)",
+  borderRadius: "32px",
   padding: "24px",
-  background: "linear-gradient(180deg,#04111f,#02050a)",
-  boxShadow: "0 0 35px rgba(0,119,255,.35)",
+  background: "linear-gradient(180deg,#05294a,#04111f,#02050a)",
+  boxShadow: "0 0 40px rgba(0,119,255,.45)",
+};
+
+const header = {
+  display: "flex",
+  justifyContent: "space-between",
+  gap: "20px",
+  flexWrap: "wrap" as const,
+};
+
+const nav = {
+  display: "flex",
+  gap: "10px",
+  flexWrap: "wrap" as const,
+  alignItems: "flex-start",
+};
+
+const navButton = {
+  border: "1px solid rgba(143,199,255,.65)",
+  borderRadius: "12px",
+  padding: "10px 14px",
+  background: "rgba(0,0,0,.55)",
+  color: "#8fc7ff",
+  textDecoration: "none",
+  fontWeight: "900",
 };
 
 const topLine = {
@@ -210,13 +285,22 @@ const topLine = {
 };
 
 const logo = {
-  color: "#0077ff",
-  fontSize: "42px",
+  marginTop: "10px",
+  color: "#5bb6ff",
+  fontSize: "48px",
   fontStyle: "italic",
+  fontWeight: "900",
 };
 
 const blue = {
-  color: "#0077ff",
+  color: "#8fc7ff",
+  marginTop: "-8px",
+};
+
+const subText = {
+  maxWidth: "650px",
+  color: "#c8e7ff",
+  lineHeight: "1.6",
 };
 
 const statusGrid = {
@@ -230,7 +314,7 @@ const statusCard = {
   border: "1px solid rgba(0,119,255,.7)",
   borderRadius: "16px",
   padding: "12px",
-  background: "rgba(0,119,255,.08)",
+  background: "rgba(0,119,255,.12)",
   textAlign: "center" as const,
 };
 
@@ -246,7 +330,15 @@ const box = {
   border: "1px solid rgba(0,119,255,.7)",
   borderRadius: "22px",
   padding: "18px",
-  background: "rgba(0,0,0,.75)",
+  background: "rgba(0,0,0,.72)",
+};
+
+const supportBox = {
+  marginTop: "24px",
+  border: "1px solid rgba(143,199,255,.55)",
+  borderRadius: "22px",
+  padding: "18px",
+  background: "rgba(0,119,255,.08)",
 };
 
 const sectionTitle = {
@@ -255,12 +347,22 @@ const sectionTitle = {
   letterSpacing: "1px",
 };
 
+const helperText = {
+  color: "#b9dfff",
+  lineHeight: "1.6",
+};
+
+const fileInput = {
+  marginTop: "12px",
+  width: "100%",
+};
+
 const button = {
   display: "block",
   width: "100%",
   marginTop: "18px",
-  background: "linear-gradient(90deg,#0077ff,#5bb6ff)",
-  color: "#000",
+  background: "linear-gradient(90deg,#00b7ff,#5bb6ff)",
+  color: "#00111f",
   padding: "16px",
   borderRadius: "999px",
   border: "none",
@@ -281,7 +383,7 @@ const bamBubble = {
   border: "1px solid rgba(0,119,255,.6)",
   borderRadius: "18px",
   padding: "14px",
-  background: "rgba(0,119,255,.08)",
+  background: "rgba(0,119,255,.1)",
 };
 
 const techBubble = {
@@ -309,9 +411,20 @@ const textArea = {
   fontSize: "16px",
 };
 
-const backLink = {
-  display: "block",
-  marginTop: "26px",
+const inlineLink = {
   color: "#8fc7ff",
   fontWeight: "900",
+};
+
+const footer = {
+  display: "flex",
+  gap: "18px",
+  flexWrap: "wrap" as const,
+  marginTop: "26px",
+};
+
+const backLink = {
+  color: "#8fc7ff",
+  fontWeight: "900",
+  textDecoration: "none",
 };
