@@ -30,7 +30,7 @@ export default function Home() {
             <a href="#safety" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Safety™
             </a>
-            <a href="#hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Hub™
             </a>
             <a href="#roadmap" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
@@ -84,7 +84,9 @@ export default function Home() {
 
         <section id="platform" className="mt-8 grid gap-5 md:grid-cols-3">
           <div id="hub" className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">BAM Hub™</h3>
+            <a href="/hub" className="text-xl font-black text-cyan-300 hover:text-white">
+              BAM Hub™
+            </a>
             <p className="mt-3 text-sm leading-6 text-slate-300">
               Facility knowledge, equipment data, and maintenance intelligence.
             </p>
