@@ -18,7 +18,7 @@ export default function Home() {
             <NavButton text="Safety™" href="/scanner" />
             <NavButton text="Hub™" href="/platform" />
             <NavButton text="Roadmap™" href="/roadmap" />
-            <NavButton text="Support™" href="/contact" />
+            <NavButton text="Support™" href="/support" />
           </nav>
         </header>
 
@@ -134,7 +134,7 @@ export default function Home() {
             <a href="/privacy">Privacy Policy™</a>
             <a href="/terms">Terms of Use™</a>
             <a href="/contact">Contact™</a>
-            <a href="/contact">Support™</a>
+            <a href="/support">Support™</a>
           </div>
 
           <p className="text-gray-400 text-sm mt-8">
