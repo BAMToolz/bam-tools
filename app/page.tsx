@@ -20,7 +20,7 @@ export default function Home() {
             href="/scanner"
             className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-600"
           >
-            Open Private AI Scanner
+            Launch BAM Scan™
           </a>
 
           <a
@@ -55,8 +55,8 @@ export default function Home() {
             <div className="rounded-2xl bg-slate-950 p-5">
               <h3 className="text-xl font-bold">BAM Scan™</h3>
               <p className="mt-2 text-sm text-slate-400">
-                AI equipment scanning for tags, logs, panels, parts, and machine
-                information.
+                AI equipment intelligence for tags, logs, panels, parts, and
+                machine information.
               </p>
             </div>
 
@@ -87,15 +87,15 @@ export default function Home() {
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             <div className="rounded-2xl bg-slate-950 p-6">
-              <h3 className="text-xl font-bold">AI Equipment Scanner</h3>
+              <h3 className="text-xl font-bold">BAM Scan™</h3>
               <p className="mt-3 text-slate-400">
-                Scan machine tags, labels, electrical panels, and equipment logs
-                to help identify machine data and support troubleshooting.
+                AI-powered equipment intelligence for machine tags, labels,
+                electrical panels, equipment logs, and maintenance data.
               </p>
             </div>
 
             <div className="rounded-2xl bg-slate-950 p-6">
-              <h3 className="text-xl font-bold">Maintenance Knowledge Hub</h3>
+              <h3 className="text-xl font-bold">BAM Hub™</h3>
               <p className="mt-3 text-slate-400">
                 Store repair notes, manuals, part numbers, technician knowledge,
                 downtime history, and machine profiles.
@@ -103,7 +103,7 @@ export default function Home() {
             </div>
 
             <div className="rounded-2xl bg-slate-950 p-6">
-              <h3 className="text-xl font-bold">Controls & Integration Tools</h3>
+              <h3 className="text-xl font-bold">BAM Systems™</h3>
               <p className="mt-3 text-slate-400">
                 Built for future PLC, HMI, I/O mapping, control panels, robotics,
                 and industrial automation support.
@@ -121,8 +121,7 @@ export default function Home() {
 
           <p className="mt-4 text-slate-300">
             For support, facility demos, manufacturer integrations, partnerships,
-            equipment workflows, or private AI scanner questions, contact
-            BAMToolz™.
+            equipment workflows, or BAM Scan™ questions, contact BAMToolz™.
           </p>
 
           <p className="mt-6 text-lg">
@@ -147,7 +146,7 @@ export default function Home() {
               href="/scanner"
               className="rounded-xl border border-blue-400 px-6 py-3 text-center font-bold text-blue-300 hover:bg-blue-950"
             >
-              Open AI Scanner
+              BAM Scan™
             </a>
           </div>
         </div>
