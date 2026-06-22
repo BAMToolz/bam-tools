@@ -80,6 +80,7 @@ export default function ScannerPage() {
       return;
     }
 
+
     const recognition = new SpeechRecognition();
     recognition.lang = "en-US";
     recognition.interimResults = false;
