@@ -27,6 +27,9 @@ export default function Home() {
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Hub™
             </a>
+            <a href="/login" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Access™
+            </a>
             <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Machines™
             </a>
@@ -47,7 +50,7 @@ export default function Home() {
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM™ by Ball AI Metrics™ connects equipment scanning, technician
-            assistance, facility knowledge, machine history, automation, and
+            assistance, secure facility access, machine history, automation, and
             industrial metrics into one AI-driven ecosystem.
           </p>
 
@@ -57,6 +60,13 @@ export default function Home() {
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
               Launch BAM Scan™
+            </a>
+
+            <a
+              href="/login"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              BAM Access™
             </a>
 
             <a
@@ -83,14 +93,20 @@ export default function Home() {
           />
 
           <Card
-            title="BAM Assist™"
-            text="Technician support connected to scanned equipment data for troubleshooting, safety checks, parts, and next-step guidance."
+            title="BAM AI™"
+            text="Technician intelligence connected to scanned equipment data for troubleshooting, safety checks, parts, documentation, and next-step guidance."
           />
 
           <Card
             title="BAM Hub™"
             href="/hub"
             text="The secure facility intelligence core for machine profiles, manuals, photos, repairs, technician notes, and machine history."
+          />
+
+          <Card
+            title="BAM Access™"
+            href="/login"
+            text="Secure facility access layer designed for technician accounts, RFID badge login, company permissions, user roles, and protected BAM Hub™ machine data."
           />
 
           <Card
@@ -122,7 +138,7 @@ export default function Home() {
 
           <Card
             title="BAMLabs™"
-            text="AI research, prototypes, scanner concepts, hardware development, and future industrial technology."
+            text="AI research, prototypes, scanner concepts, hardware development, RFID access concepts, and future industrial technology."
           />
         </section>
 
@@ -133,9 +149,9 @@ export default function Home() {
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM™ is being developed as a scalable industrial AI ecosystem where
-            BAM Scan™ captures, BAM Assist™ supports, BAM Hub™ remembers,
-            BAM Metrics™ measures, BAM Machines™ builds, and BAM Automation™
-            connects the facility.
+            BAM Scan™ captures, BAM AI™ supports, BAM Access™ protects,
+            BAM Hub™ remembers, BAM Metrics™ measures, BAM Machines™ builds,
+            and BAM Automation™ connects the facility.
           </p>
         </section>
 
@@ -146,8 +162,8 @@ export default function Home() {
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             For support, facility demos, machine builds, automation concepts,
-            partnerships, equipment workflows, BAM Scan™ questions, or product
-            support, contact BAM™.
+            partnerships, equipment workflows, BAM Scan™ questions, access
+            workflows, or product support, contact BAM™.
           </p>
 
           <p className="mt-5 text-lg">
@@ -169,6 +185,13 @@ export default function Home() {
             </a>
 
             <a
+              href="/login"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              BAM Access™
+            </a>
+
+            <a
               href="/support"
               className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
             >
@@ -187,12 +210,15 @@ export default function Home() {
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM™ | BAMToolz™ | Ball AI Metrics™</p>
 
-          <div className="mt-4 flex justify-center gap-6">
+          <div className="mt-4 flex flex-wrap justify-center gap-6">
             <a href="/privacy" className="hover:text-white">
               Privacy
             </a>
             <a href="/terms" className="hover:text-white">
               Terms
+            </a>
+            <a href="/login" className="hover:text-white">
+              Access
             </a>
             <a href="mailto:BAMToolzsupport@gmail.com" className="hover:text-white">
               Contact
