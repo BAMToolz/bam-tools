@@ -14,15 +14,18 @@ export default function MachinesPage() {
 
   async function scanPhoto() {
     if (!photo) {
-      setMessage("Add a photo first 📸");
+      setMessage("Please upload or capture an equipment photo before scanning.");
       return;
     }
 
-    setMessage("Scanning photo with BAM Scan™...");
+    setMessage("Analyzing equipment photo with BAM Scan™...");
 
     const formData = new FormData();
     formData.append("image", photo);
-    formData.append("notes", "Extract machine name, manufacturer, model, serial number, and visible equipment details.");
+    formData.append(
+      "notes",
+      "Extract visible equipment information including machine name, manufacturer, model, serial number, asset tag, and relevant technician details."
+    );
 
     try {
       const response = await fetch("/api/scan", {
@@ -47,17 +50,17 @@ export default function MachinesPage() {
       if (!notes) {
         setNotes(text);
       } else {
-        setNotes(notes + "\n\nBAM Scan™ Notes:\n" + text);
+        setNotes(notes + "\n\nBAM Scan™ Analysis:\n" + text);
       }
 
-      setMessage("Scan complete ✅ Review blanks, then save.");
+      setMessage("Scan complete. Review the extracted information before saving.");
     } catch (error) {
-      setMessage("Scan failed ❌ Check /api/scan route.");
+      setMessage("Scan could not be completed. Please verify the scanner connection and try again.");
     }
   }
 
   async function saveMachine() {
-    setMessage("Saving to BAM Hub™...");
+    setMessage("Saving machine profile to BAM Hub™...");
 
     const response = await fetch("/api/machines", {
       method: "POST",
@@ -77,7 +80,7 @@ export default function MachinesPage() {
     const data = await response.json();
 
     if (data.success) {
-      setMessage("Machine saved to BAM Hub™ ✅");
+      setMessage("Machine profile saved to BAM Hub™.");
 
       setName("");
       setLocation("");
@@ -87,20 +90,34 @@ export default function MachinesPage() {
       setNotes("");
       setPhoto(null);
     } else {
-      setMessage("Save failed ❌");
+      setMessage("Machine profile could not be saved. Please review the form and try again.");
     }
   }
 
   return (
     <main className="min-h-screen bg-cyan-600 px-5 py-8 text-white">
       <div className="mx-auto max-w-3xl rounded-3xl bg-slate-950 p-8 shadow-2xl">
-        <h1 className="text-4xl font-black text-cyan-300">BAM Hub™</h1>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-black text-cyan-300">BAM Hub™</h1>
 
-        <h2 className="mt-2 text-2xl font-bold">Photo Scan Machine Memory</h2>
+            <h2 className="mt-2 text-2xl font-bold">
+              Equipment Profile Capture
+            </h2>
+          </div>
 
-        <p className="mt-3 text-slate-300">
-          Scan a machine tag or equipment photo. BAM Scan™ fills what it can.
-          You only edit blanks or wrong info before saving.
+          <a
+            href="/"
+            className="rounded-xl bg-cyan-400 px-5 py-3 text-sm font-black text-slate-950"
+          >
+            Home™
+          </a>
+        </div>
+
+        <p className="mt-5 text-slate-300">
+          Capture an equipment photo or machine tag. BAM Scan™ will extract
+          available details for review. Complete any missing fields before saving
+          the machine profile to BAM Hub™.
         </p>
 
         <div className="mt-8 space-y-4">
@@ -116,19 +133,19 @@ export default function MachinesPage() {
             onClick={scanPhoto}
             className="w-full rounded-xl bg-blue-400 p-4 font-black text-slate-950"
           >
-            Scan Photo with BAM Scan™
+            Analyze Equipment Photo
           </button>
 
           <input
             className="w-full rounded-xl p-3 text-black"
-            placeholder="Machine Name (Extruder #1)"
+            placeholder="Machine Name / Asset Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
           <input
             className="w-full rounded-xl p-3 text-black"
-            placeholder="Location (Line 1)"
+            placeholder="Location / Line / Area"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
@@ -142,21 +159,21 @@ export default function MachinesPage() {
 
           <input
             className="w-full rounded-xl p-3 text-black"
-            placeholder="Model"
+            placeholder="Model Number"
             value={model}
             onChange={(e) => setModel(e.target.value)}
           />
 
           <input
             className="w-full rounded-xl p-3 text-black"
-            placeholder="Serial Number"
+            placeholder="Serial Number / Asset Tag"
             value={serial}
             onChange={(e) => setSerial(e.target.value)}
           />
 
           <textarea
             className="min-h-40 w-full rounded-xl p-3 text-black"
-            placeholder="Technician notes / BAM Scan™ results"
+            placeholder="Technician notes, observed condition, repair history, or BAM Scan™ analysis"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />
@@ -165,7 +182,7 @@ export default function MachinesPage() {
             onClick={saveMachine}
             className="w-full rounded-xl bg-cyan-400 p-4 font-black text-slate-950"
           >
-            Save Machine to BAM Hub™
+            Save Equipment Profile
           </button>
 
           <p className="font-bold text-cyan-300">{message}</p>
