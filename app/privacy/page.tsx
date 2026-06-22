@@ -1,57 +1,94 @@
 export default function PrivacyPage() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#000000",
-        color: "#e8f4ff",
-        padding: "28px",
-        fontFamily: "Arial Rounded MT Bold, Arial, Helvetica, sans-serif",
-      }}
-    >
-      <h1 style={{ color: "#0077ff" }}>BAMToolz™ Privacy Policy</h1>
+    <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
+      <div className="mx-auto max-w-5xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-6 shadow-2xl">
+        <a
+          href="/"
+          className="inline-block rounded-lg bg-slate-950 px-4 py-2 text-sm font-bold text-cyan-200"
+        >
+          ← BAMToolz™ Home
+        </a>
 
-      <p>Effective 2026</p>
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <p className="text-sm font-black tracking-wide text-cyan-300">
+            BALL AI METRICS™
+          </p>
 
-      <h2>Customer Ownership</h2>
-      <p>
-        Customer equipment data belongs to the customer. BAMToolz™ does not
-        claim ownership of customer machines, asset information, repair records,
-        manuals, photos, or facility data.
-      </p>
+          <h1 className="mt-4 text-4xl font-black">
+            Privacy Policy
+          </h1>
 
-      <h2>BAM Scan™ Images</h2>
-      <p>
-        Images uploaded through BAM Scan™ may include equipment tags, serial
-        plates, fault screens, components, or machine information. These images
-        are used to provide equipment intelligence and safety awareness.
-      </p>
+          <p className="mt-6 text-slate-300">
+            This Privacy Policy explains how BAM™, BAMToolz™, BAM Scan™,
+            BAM AI™, BAM Hub™, and related Ball AI Metrics™ services are intended
+            to handle information.
+          </p>
 
-      <h2>BAM Hub™</h2>
-      <p>
-        BAM Hub™ is designed to preserve equipment profiles, asset locations,
-        manuals, schematics, parts information, maintenance history, and
-        technician knowledge.
-      </p>
+          <Section
+            title="Information You Provide"
+            text="BAMToolz™ may process information you enter, upload, scan, or submit, including equipment photos, machine labels, technician notes, support questions, contact information, and facility workflow details."
+          />
 
-      <h2>BAM Safety™</h2>
-      <p>
-        Safety information is intended to support awareness. Users must always
-        follow employer policies, OSHA requirements, Lockout / Tagout
-        procedures, and manufacturer instructions.
-      </p>
+          <Section
+            title="Equipment & Facility Data"
+            text="Machine data, serial numbers, repair history, manuals, parts information, scan records, and technician notes are intended to remain protected inside BAM Hub™ and controlled by authorized facility users."
+          />
 
-      <h2>Preserving Presence™</h2>
-      <p>
-        BAMToolz™ exists to preserve the knowledge, experience, and presence of
-        skilled technicians for the next generation.
-      </p>
+          <Section
+            title="AI Processing"
+            text="BAM AI™ may analyze submitted text, images, equipment information, and technician questions to provide maintenance support, documentation assistance, and workflow guidance."
+          />
 
-      <p>© 2026 BAMToolz™. All Rights Reserved.</p>
+          <Section
+            title="No Public Machine Memory"
+            text="Public-facing pages should not expose stored machine history or facility records. Secure machine memory belongs behind BAM Hub™ access controls."
+          />
 
-      <a href="/" style={{ color: "#0077ff", fontWeight: "900" }}>
-        ← Back Home
-      </a>
+          <Section
+            title="Data Security Direction"
+            text="Future versions are intended to support login, company accounts, user roles, facility permissions, RFID or badge access, and protected data separation between organizations."
+          />
+
+          <Section
+            title="Support Contact"
+            text="When you contact support, the information you provide may be used to respond to your request, improve the product, troubleshoot issues, or evaluate partnership opportunities."
+          />
+
+          <Section
+            title="Development Notice"
+            text="BAMToolz™ is under active development. Privacy features, security controls, integrations, and data handling practices may evolve as the platform grows."
+          />
+
+          <Section
+            title="Contact"
+            text="For privacy, support, or data questions contact BAMToolzsupport@gmail.com"
+          />
+
+          <footer className="mt-10 border-t border-cyan-400/30 pt-5 text-sm text-cyan-100">
+            © 2026 BAM™ | BAMToolz™ | Ball AI Metrics™
+          </footer>
+        </section>
+      </div>
     </main>
+  );
+}
+
+function Section({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="mt-8">
+      <h2 className="text-2xl font-black text-cyan-300">
+        {title}
+      </h2>
+
+      <p className="mt-3 leading-7 text-slate-300">
+        {text}
+      </p>
+    </div>
   );
 }
