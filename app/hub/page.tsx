@@ -24,6 +24,12 @@ export default function HubPage() {
             <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               BAM Scan™
             </a>
+            <a href="/hub/dashboard" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Dashboard™
+            </a>
+            <a href="/hub/machine" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Machine Profile™
+            </a>
             <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               BAM Machines™
             </a>
@@ -48,6 +54,29 @@ export default function HubPage() {
             records, manuals, parts, safety notes, controls data, and technician
             knowledge behind protected access.
           </p>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="/hub/dashboard"
+              className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Open Dashboard™
+            </a>
+
+            <a
+              href="/hub/machine"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              Open Machine Profile™
+            </a>
+
+            <a
+              href="/scanner"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              Open BAM Scan™
+            </a>
+          </div>
         </section>
 
         <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
@@ -67,31 +96,55 @@ export default function HubPage() {
           <Card
             title="Machine Memory™"
             text="Equipment profiles, photos, serial numbers, scan records, manuals, repairs, notes, and service history."
+            href="/hub/machine"
+          />
+
+          <Card
+            title="Dashboard™"
+            text="Facility overview for machines, scans, repairs, parts, technician knowledge, and reliability metrics."
+            href="/hub/dashboard"
           />
 
           <Card
             title="Technician Knowledge™"
             text="Preserve troubleshooting experience, repair steps, safety notes, and field knowledge before it disappears."
+            href="/hub/machine"
           />
 
           <Card
             title="Facility Permissions™"
             text="Keep each company, site, and department separated so equipment data stays controlled by the right organization."
+            href="/login"
           />
 
           <Card
             title="BAM Scan™ Intake"
             text="BAM Scan™ captures equipment data first. Reviewed scan results can flow into secure BAM Hub™ memory."
+            href="/scanner"
           />
 
           <Card
             title="Parts & Manuals™"
             text="Connect machines with spare parts, suppliers, manuals, drawings, documentation, and replacement history."
+            href="/hub/machine"
           />
 
           <Card
             title="Controls & Robotics™"
             text="Support PLC notes, wiring documentation, HMI details, robotics data, and automation history."
+            href="/hub/machine"
+          />
+
+          <Card
+            title="BAM Access™"
+            text="Future RFID and role-based access for technicians, engineers, admins, facilities, and protected machine data."
+            href="/login"
+          />
+
+          <Card
+            title="Reliability Metrics™"
+            text="Turn machine history into downtime patterns, recurring failure tracking, repair time, and improvement opportunities."
+            href="/hub/dashboard"
           />
         </section>
 
@@ -108,8 +161,22 @@ export default function HubPage() {
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row">
             <a
-              href="/scanner"
+              href="/hub/machine"
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Open Machine Profiles™
+            </a>
+
+            <a
+              href="/hub/dashboard"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              Open Dashboard™
+            </a>
+
+            <a
+              href="/scanner"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
             >
               Open BAM Scan™
             </a>
@@ -125,17 +192,46 @@ export default function HubPage() {
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM Hub™ | BAMToolz™ | Ball AI Metrics™</p>
+
+          <div className="mt-4 flex flex-wrap justify-center gap-6">
+            <a href="/" className="hover:text-white">
+              Home
+            </a>
+            <a href="/scanner" className="hover:text-white">
+              BAM Scan™
+            </a>
+            <a href="/hub/dashboard" className="hover:text-white">
+              Dashboard™
+            </a>
+            <a href="/hub/machine" className="hover:text-white">
+              Machine Profile™
+            </a>
+            <a href="/login" className="hover:text-white">
+              Access
+            </a>
+          </div>
         </footer>
       </div>
     </main>
   );
 }
 
-function Card({ title, text }: { title: string; text: string }) {
+function Card({
+  title,
+  text,
+  href,
+}: {
+  title: string;
+  text: string;
+  href: string;
+}) {
   return (
-    <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
+    <a
+      href={href}
+      className="block rounded-xl bg-slate-950/95 p-6 shadow-xl hover:bg-slate-900"
+    >
       <h3 className="text-xl font-black text-cyan-300">{title}</h3>
       <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
-    </div>
+    </a>
   );
 }
