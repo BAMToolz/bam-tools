@@ -14,13 +14,6 @@ export default function ScannerPage() {
   const [machineConnected, setMachineConnected] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [saveStatus, setSaveStatus] = useState("");
-
-  const [machineName, setMachineName] = useState("");
-  const [manufacturer, setManufacturer] = useState("");
-  const [model, setModel] = useState("");
-  const [serial, setSerial] = useState("");
-  const [location, setLocation] = useState("");
 
   async function runScan() {
     if (!file) {
@@ -31,7 +24,6 @@ export default function ScannerPage() {
     setScanStatus("Analyzing equipment with BAM Scan™...");
     setMachineConnected(false);
     setMessages([]);
-    setSaveStatus("");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -54,56 +46,15 @@ export default function ScannerPage() {
       setMachineConnected(true);
       setScanStatus("Equipment scan complete. BAM Assist™ is ready.");
 
-      if (data.name) setMachineName(data.name);
-      if (data.manufacturer) setManufacturer(data.manufacturer);
-      if (data.model) setModel(data.model);
-      if (data.serial) setSerial(data.serial);
-
       setMessages([
         {
           role: "bam",
-          text: "Equipment scan complete. Ask a maintenance question or save this scan to BAM Hub™.",
+          text: "Equipment scan complete. Ask a maintenance question about this scan.",
         },
       ]);
     } catch (error: any) {
       setScanStatus(error?.message || "BAM Scan™ connection failed.");
       setMachineConnected(false);
-    }
-  }
-
-  async function saveToHub() {
-    if (!scanData) {
-      setSaveStatus("Run BAM Scan™ before saving to BAM Hub™.");
-      return;
-    }
-
-    setSaveStatus("Saving scan to BAM Hub™...");
-
-    try {
-      const response = await fetch("/api/machines", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: machineName || "Scanned Equipment",
-          location: location || "Unassigned",
-          manufacturer: manufacturer || "Not identified",
-          model: model || "Not identified",
-          serial: serial || "Not identified",
-          notes: scanData,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSaveStatus("Scan saved to BAM Hub™ machine memory.");
-      } else {
-        setSaveStatus("BAM Hub™ save failed. Please review the scan and try again.");
-      }
-    } catch (error: any) {
-      setSaveStatus(error?.message || "BAM Hub™ connection failed.");
     }
   }
 
@@ -166,13 +117,16 @@ export default function ScannerPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Equipment capture, AI assistance, and BAM Hub™ memory.
+              Equipment capture, AI maintenance support, and machine intelligence.
             </p>
           </div>
 
           <nav className="flex flex-wrap gap-3">
             <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Home™
+            </a>
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Hub™
             </a>
             <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Machines™
@@ -185,22 +139,23 @@ export default function ScannerPage() {
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            BAM SCAN™ EQUIPMENT INTAKE
+            BAM SCAN™ EQUIPMENT INTELLIGENCE
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Scan equipment once. Assist, document, and save machine memory.
+            Scan equipment. Ask what matters.
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Scan™ captures equipment information, connects the scan to BAM
-            Assist™, and allows reviewed scan data to be saved into BAM Hub™ as
-            machine history.
+            BAM Scan™ analyzes equipment photos, captures visible machine
+            information, and connects the result to BAM Assist™ for technician
+            support, troubleshooting, and documentation workflows.
           </p>
         </section>
 
         <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-6 shadow-2xl">
           <h2 className="text-2xl font-black text-yellow-200">Safety First™</h2>
+
           <p className="mt-3 text-sm leading-6 text-yellow-50">
             Informational support only. Follow OEM manuals, company procedures,
             OSHA requirements, site safety rules, PPE requirements, and proper
@@ -243,62 +198,15 @@ export default function ScannerPage() {
           </div>
         </section>
 
-        {machineConnected && (
+        {scanData && (
           <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
             <h2 className="text-3xl font-black text-cyan-300">
-              Save to BAM Hub™
+              BAM Scan™ Result
             </h2>
 
-            <p className="mt-4 text-slate-300">
-              Review or complete the equipment details before saving this scan as
-              machine memory.
-            </p>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <input
-                className="rounded-xl p-3 text-black"
-                placeholder="Machine Name / Asset Name"
-                value={machineName}
-                onChange={(e) => setMachineName(e.target.value)}
-              />
-
-              <input
-                className="rounded-xl p-3 text-black"
-                placeholder="Location / Line / Area"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
-
-              <input
-                className="rounded-xl p-3 text-black"
-                placeholder="Manufacturer"
-                value={manufacturer}
-                onChange={(e) => setManufacturer(e.target.value)}
-              />
-
-              <input
-                className="rounded-xl p-3 text-black"
-                placeholder="Model Number"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-              />
-
-              <input
-                className="rounded-xl p-3 text-black md:col-span-2"
-                placeholder="Serial Number / Asset Tag"
-                value={serial}
-                onChange={(e) => setSerial(e.target.value)}
-              />
+            <div className="mt-5 whitespace-pre-wrap rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
+              {scanData}
             </div>
-
-            <button
-              onClick={saveToHub}
-              className="mt-6 w-full rounded-xl bg-cyan-400 px-6 py-4 font-black text-slate-950 hover:bg-cyan-300"
-            >
-              Save Scan to BAM Hub™
-            </button>
-
-            <p className="mt-4 font-bold text-cyan-300">{saveStatus}</p>
           </section>
         )}
 
@@ -358,20 +266,19 @@ export default function ScannerPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM Hub™ Memory
+            BAM Hub™ Connection
           </h2>
 
           <p className="mt-4 text-slate-300">
-            {scanData
-              ? "Scan data is available for review and can be saved to BAM Hub™."
-              : "No equipment scan has been captured yet."}
+            BAM Hub™ will store approved machine profiles, repair history,
+            manuals, parts, and technician knowledge behind secure facility access.
           </p>
 
           <a
-            href="/machines"
+            href="/hub"
             className="mt-6 inline-block rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
           >
-            Open Machine Profiles™
+            Open BAM Hub™
           </a>
         </section>
 
