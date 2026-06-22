@@ -1,160 +1,127 @@
+"use client";
+
+import { useState } from "react";
+
 export default function MachinesPage() {
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [manufacturer, setManufacturer] = useState("");
+  const [model, setModel] = useState("");
+  const [serial, setSerial] = useState("");
+  const [notes, setNotes] = useState("");
+  const [message, setMessage] = useState("");
+
+  async function saveMachine() {
+    setMessage("Saving to BAM Hub™...");
+
+    const response = await fetch("/api/machines", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        location,
+        manufacturer,
+        model,
+        serial,
+        notes,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setMessage("Machine saved to BAM Hub™ ✅");
+
+      setName("");
+      setLocation("");
+      setManufacturer("");
+      setModel("");
+      setSerial("");
+      setNotes("");
+    } else {
+      setMessage("Save failed ❌");
+    }
+  }
+
   return (
-    <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
-      <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
-        <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
-              BAM
-            </div>
+    <main className="min-h-screen bg-cyan-600 px-5 py-8 text-white">
 
-            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-              BAM Machines™
-            </h1>
+      <div className="mx-auto max-w-3xl rounded-3xl bg-slate-950 p-8 shadow-2xl">
 
-            <p className="mt-2 text-sm font-medium text-cyan-50">
-              Ball Advanced Management™
-            </p>
-          </div>
+        <h1 className="text-4xl font-black text-cyan-300">
+          BAM Hub™
+        </h1>
 
-          <nav className="flex flex-wrap gap-3">
-            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Home™
-            </a>
-            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Scan™
-            </a>
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Support™
-            </a>
-          </nav>
-        </header>
+        <h2 className="mt-2 text-2xl font-bold">
+          Add Machine Memory
+        </h2>
 
-        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
-          <p className="text-sm font-black tracking-wide text-cyan-300">
-            MACHINE MANUFACTURING & INDUSTRIAL EQUIPMENT BUILDS™
+        <p className="mt-3 text-slate-300">
+          Create equipment profiles, repair history,
+          notes, parts, and machine knowledge.
+        </p>
+
+        <div className="mt-8 space-y-4">
+
+          <input
+            className="w-full rounded-xl p-3 text-black"
+            placeholder="Machine Name (Extruder #1)"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
+            className="w-full rounded-xl p-3 text-black"
+            placeholder="Location (Line 1)"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+
+          <input
+            className="w-full rounded-xl p-3 text-black"
+            placeholder="Manufacturer"
+            value={manufacturer}
+            onChange={(e) => setManufacturer(e.target.value)}
+          />
+
+          <input
+            className="w-full rounded-xl p-3 text-black"
+            placeholder="Model"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+          />
+
+          <input
+            className="w-full rounded-xl p-3 text-black"
+            placeholder="Serial Number"
+            value={serial}
+            onChange={(e) => setSerial(e.target.value)}
+          />
+
+          <textarea
+            className="w-full rounded-xl p-3 text-black"
+            placeholder="Technician notes / repairs"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+
+          <button
+            onClick={saveMachine}
+            className="w-full rounded-xl bg-cyan-400 p-4 font-black text-slate-950"
+          >
+            Save Machine
+          </button>
+
+          <p className="font-bold text-cyan-300">
+            {message}
           </p>
 
-          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            From take-up to payoff, custom machines, and complete robotic automation.
-          </h2>
+        </div>
 
-          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Machines™ is the machine manufacturing side of Ball Advanced
-            Management™ — focused on building industrial equipment, production
-            support systems, controls-ready machinery, and custom automation
-            solutions for manufacturing facilities.
-          </p>
-        </section>
-
-        <section className="mt-8 grid gap-5 md:grid-cols-3">
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Take-Up Systems™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Custom take-up equipment for wire, cable, tubing, extrusion,
-              winding, spooling, and controlled material handling.
-            </p>
-          </div>
-
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Payoff Systems™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Payoff stands, feed systems, dereelers, tension control concepts,
-              and production line support equipment.
-            </p>
-          </div>
-
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Custom Machines™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Purpose-built industrial machines, fixtures, tooling, guards,
-              frames, stations, and production support systems.
-            </p>
-          </div>
-
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Controls-Ready Equipment™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Machines designed with sensors, motors, drives, panels, wiring,
-              and future PLC/HMI integration in mind.
-            </p>
-          </div>
-
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Production Line Support™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Equipment concepts for safer, faster, cleaner, and more reliable
-              manufacturing workflows.
-            </p>
-          </div>
-
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Robotic Automation™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Complete robotic automation concepts for machine tending,
-              handling, inspection, packaging, palletizing, and facility upgrades.
-            </p>
-          </div>
-        </section>
-
-        <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-yellow-200">
-            Safety First™
-          </h2>
-
-          <p className="mt-4 text-yellow-50">
-            BAM Machines™ concepts must be reviewed, engineered, guarded,
-            tested, and approved before production use. All equipment must follow
-            applicable safety standards, company procedures, OEM requirements,
-            electrical codes, and site safety rules.
-          </p>
-        </section>
-
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            Machine Build Focus
-          </h2>
-
-          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Machines™ is designed to grow from practical manufacturing
-            equipment concepts into full industrial machine builds — starting
-            with technician-built systems and expanding toward engineered,
-            controls-ready, automation-ready production equipment.
-          </p>
-
-          <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-            <a
-              href="mailto:BAMToolzsupport@gmail.com?subject=BAM%20Machines%20Inquiry"
-              className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
-            >
-              Contact BAM Machines™
-            </a>
-
-            <a
-              href="/"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              Back to BAMToolz™
-            </a>
-          </div>
-        </section>
-
-        <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM Machines™ | BAMToolz™ | Ball Advanced Management™</p>
-        </footer>
       </div>
+
     </main>
   );
 }
