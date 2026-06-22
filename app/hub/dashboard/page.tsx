@@ -155,4 +155,4 @@ function Card({
       <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
     </div>
   );
-}
+} 
