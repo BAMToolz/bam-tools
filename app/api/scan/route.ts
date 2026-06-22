@@ -6,13 +6,22 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+function extractField(text: string, label: string) {
+  const regex = new RegExp(`${label}:\\s*(.*)`, "i");
+  const match = text.match(regex);
+  return match?.[1]?.trim() || "";
+}
+
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
     const file = formData.get("image") as File | null;
 
     if (!file) {
-      return Response.json({ error: "No image uploaded." }, { status: 400 });
+      return Response.json(
+        { success: false, error: "No image uploaded." },
+        { status: 400 }
+      );
     }
 
     const bytes = await file.arrayBuffer();
@@ -29,29 +38,28 @@ export async function POST(req: Request) {
               type: "input_text",
               text: `You are BAM Scan™, an industrial maintenance AI.
 
-Analyze this equipment image and keep the answer simple.
+Analyze this equipment image for maintenance documentation.
 
-Return:
+Return this exact format:
 
 BAM Scan™
 
-Possible Issue:
-Check Next:
-Recommended Action:
-
-BAM Hub™ Memory:
-Scan data captured for future machine history.
-
-Hidden Data Captured:
+Machine Name:
 Manufacturer:
 Model:
 Serial/Tag:
 Visible Parts:
+Possible Issue:
+Check Next:
+Recommended Action:
 Safety Notes:
 Possible Parts:
 Downtime Risk:
 Priority:
-Confidence:`,
+Confidence:
+
+BAM Hub™ Memory:
+Scan data captured for future machine history.`,
             },
             {
               type: "input_image",
@@ -63,14 +71,25 @@ Confidence:`,
       ],
     });
 
+    const analysis = response.output_text || "";
+
     return Response.json({
-      result: response.output_text,
+      success: true,
+      analysis,
+      result: analysis,
+      name: extractField(analysis, "Machine Name"),
+      manufacturer: extractField(analysis, "Manufacturer"),
+      model: extractField(analysis, "Model"),
+      serial: extractField(analysis, "Serial/Tag"),
     });
   } catch (error) {
     console.error("BAM Scan error:", error);
 
     return Response.json(
-      { error: "BAM Scan failed. Check OpenAI key, credits, or Vercel logs." },
+      {
+        success: false,
+        error: "BAM Scan failed. Check OpenAI key, credits, or Vercel logs.",
+      },
       { status: 500 }
     );
   }
