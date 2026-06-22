@@ -14,16 +14,24 @@ export default function ScannerPage() {
   const [machineConnected, setMachineConnected] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [saveStatus, setSaveStatus] = useState("");
+
+  const [machineName, setMachineName] = useState("");
+  const [manufacturer, setManufacturer] = useState("");
+  const [model, setModel] = useState("");
+  const [serial, setSerial] = useState("");
+  const [location, setLocation] = useState("");
 
   async function runScan() {
     if (!file) {
-      setScanStatus("Select an equipment photo first.");
+      setScanStatus("Please select an equipment photo before scanning.");
       return;
     }
 
-    setScanStatus("Analyzing equipment...");
+    setScanStatus("Analyzing equipment with BAM Scan™...");
     setMachineConnected(false);
     setMessages([]);
+    setSaveStatus("");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -37,23 +45,65 @@ export default function ScannerPage() {
       const data = await response.json();
 
       const report =
+        data.analysis ||
         data.result ||
         data.message ||
-        "BAM Scan™ connected, but no scan data returned.";
+        "BAM Scan™ connected, but no scan data was returned.";
 
       setScanData(report);
       setMachineConnected(true);
-      setScanStatus("Machine connected. BAM Assist™ is ready.");
+      setScanStatus("Equipment scan complete. BAM Assist™ is ready.");
+
+      if (data.name) setMachineName(data.name);
+      if (data.manufacturer) setManufacturer(data.manufacturer);
+      if (data.model) setModel(data.model);
+      if (data.serial) setSerial(data.serial);
 
       setMessages([
         {
           role: "bam",
-          text: "Machine connected. Ask what you need help with.",
+          text: "Equipment scan complete. Ask a maintenance question or save this scan to BAM Hub™.",
         },
       ]);
     } catch (error: any) {
       setScanStatus(error?.message || "BAM Scan™ connection failed.");
       setMachineConnected(false);
+    }
+  }
+
+  async function saveToHub() {
+    if (!scanData) {
+      setSaveStatus("Run BAM Scan™ before saving to BAM Hub™.");
+      return;
+    }
+
+    setSaveStatus("Saving scan to BAM Hub™...");
+
+    try {
+      const response = await fetch("/api/machines", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: machineName || "Scanned Equipment",
+          location: location || "Unassigned",
+          manufacturer: manufacturer || "Not identified",
+          model: model || "Not identified",
+          serial: serial || "Not identified",
+          notes: scanData,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSaveStatus("Scan saved to BAM Hub™ machine memory.");
+      } else {
+        setSaveStatus("BAM Hub™ save failed. Please review the scan and try again.");
+      }
+    } catch (error: any) {
+      setSaveStatus(error?.message || "BAM Hub™ connection failed.");
     }
   }
 
@@ -116,7 +166,7 @@ export default function ScannerPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Ball AI Metrics™
+              Equipment capture, AI assistance, and BAM Hub™ memory.
             </p>
           </div>
 
@@ -124,78 +174,45 @@ export default function ScannerPage() {
             <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Home™
             </a>
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Hub™
+            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Machines™
             </a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Support™
-            </a>
-            <a href="mailto:BAMToolzsupport@gmail.com" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Contact™
             </a>
           </nav>
         </header>
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            AI EQUIPMENT SCANNING & MACHINE MEMORY™
+            BAM SCAN™ EQUIPMENT INTAKE
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Scan the machine. Ask what matters.
+            Scan equipment once. Assist, document, and save machine memory.
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Scan™ captures equipment information and connects it to BAM
-            Assist™. The scan data stays behind the scenes as prototype BAM Hub™
-            memory so technicians can ask direct questions without reading a
-            large report first.
+            BAM Scan™ captures equipment information, connects the scan to BAM
+            Assist™, and allows reviewed scan data to be saved into BAM Hub™ as
+            machine history.
           </p>
         </section>
 
-        <section className="mt-8 grid gap-5 md:grid-cols-3">
-          <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
-              BAM SCAN™
-            </p>
-            <h3 className="mt-2 text-2xl font-black">CAPTURE</h3>
-          </div>
-
-          <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
-              BAM HUB™
-            </p>
-            <h3 className="mt-2 text-2xl font-black">MEMORY</h3>
-          </div>
-
-          <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
-              BAM ASSIST™
-            </p>
-            <h3 className="mt-2 text-2xl font-black">Q&A</h3>
-          </div>
-        </section>
-
         <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-6 shadow-2xl">
-          <h2 className="text-2xl font-black text-yellow-200">
-            Safety First™
-          </h2>
-
+          <h2 className="text-2xl font-black text-yellow-200">Safety First™</h2>
           <p className="mt-3 text-sm leading-6 text-yellow-50">
             Informational support only. Follow OEM manuals, company procedures,
             OSHA requirements, site safety rules, PPE requirements, and proper
-            lockout/tagout before inspection or repair. Never bypass guards,
-            interlocks, safety devices, or approved procedures.
+            lockout/tagout before inspection or repair.
           </p>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            Equipment Image
-          </h2>
+          <h2 className="text-3xl font-black text-cyan-300">Equipment Image</h2>
 
           <p className="mt-4 text-slate-300">
-            Upload a machine tag, equipment label, panel, log, or component photo.
+            Select a machine tag, equipment label, panel, log, or component photo.
           </p>
 
           <input
@@ -205,26 +222,85 @@ export default function ScannerPage() {
             className="mt-6 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-cyan-100"
           />
 
+          {file && (
+            <p className="mt-3 text-sm font-bold text-cyan-300">
+              Selected file: {file.name}
+            </p>
+          )}
+
           <button
             onClick={runScan}
             className="mt-6 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400"
           >
-            RUN BAM SCAN™
+            Run BAM Scan™
           </button>
 
-          <div
-            className={
-              machineConnected
-                ? "mt-6 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-5 text-sm leading-6 text-slate-200"
-                : "mt-6 rounded-xl border border-cyan-400/30 bg-slate-900 p-5 text-sm leading-6 text-slate-300"
-            }
-          >
+          <div className="mt-6 rounded-xl border border-cyan-400/30 bg-slate-900 p-5 text-sm leading-6 text-slate-300">
             <p className="font-black text-cyan-300">
-              {machineConnected ? "Machine Connected" : "Status"}
+              {machineConnected ? "Equipment Connected" : "Status"}
             </p>
             <p className="mt-2">{scanStatus}</p>
           </div>
         </section>
+
+        {machineConnected && (
+          <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+            <h2 className="text-3xl font-black text-cyan-300">
+              Save to BAM Hub™
+            </h2>
+
+            <p className="mt-4 text-slate-300">
+              Review or complete the equipment details before saving this scan as
+              machine memory.
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <input
+                className="rounded-xl p-3 text-black"
+                placeholder="Machine Name / Asset Name"
+                value={machineName}
+                onChange={(e) => setMachineName(e.target.value)}
+              />
+
+              <input
+                className="rounded-xl p-3 text-black"
+                placeholder="Location / Line / Area"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+
+              <input
+                className="rounded-xl p-3 text-black"
+                placeholder="Manufacturer"
+                value={manufacturer}
+                onChange={(e) => setManufacturer(e.target.value)}
+              />
+
+              <input
+                className="rounded-xl p-3 text-black"
+                placeholder="Model Number"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+              />
+
+              <input
+                className="rounded-xl p-3 text-black md:col-span-2"
+                placeholder="Serial Number / Asset Tag"
+                value={serial}
+                onChange={(e) => setSerial(e.target.value)}
+              />
+            </div>
+
+            <button
+              onClick={saveToHub}
+              className="mt-6 w-full rounded-xl bg-cyan-400 px-6 py-4 font-black text-slate-950 hover:bg-cyan-300"
+            >
+              Save Scan to BAM Hub™
+            </button>
+
+            <p className="mt-4 font-bold text-cyan-300">{saveStatus}</p>
+          </section>
+        )}
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
@@ -233,8 +309,8 @@ export default function ScannerPage() {
 
           <p className="mt-4 text-slate-300">
             {machineConnected
-              ? "Ask direct questions about the scanned machine."
-              : "Run BAM Scan™ first to connect BAM Assist™ to machine data."}
+              ? "Ask direct questions about the scanned equipment."
+              : "Run BAM Scan™ first to connect BAM Assist™ to equipment data."}
           </p>
 
           {messages.length > 0 && (
@@ -264,7 +340,7 @@ export default function ScannerPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={
               machineConnected
-                ? "Ask about voltage, motor, model, serial, parts, safety, or next check..."
+                ? "Ask about model, serial, parts, safety, possible issue, or next check..."
                 : "Scan equipment first..."
             }
             disabled={!machineConnected}
@@ -276,7 +352,7 @@ export default function ScannerPage() {
             disabled={!machineConnected || !input.trim()}
             className="mt-4 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
           >
-            ASK BAM ASSIST™
+            Ask BAM Assist™
           </button>
         </section>
 
@@ -287,37 +363,20 @@ export default function ScannerPage() {
 
           <p className="mt-4 text-slate-300">
             {scanData
-              ? "Scan data captured behind the scenes. Future version saves this to BAM Hub™ machine history."
-              : "No scan stored yet."}
+              ? "Scan data is available for review and can be saved to BAM Hub™."
+              : "No equipment scan has been captured yet."}
           </p>
 
           <a
-            href="/hub"
+            href="/machines"
             className="mt-6 inline-block rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
           >
-            Open BAM Hub™
+            Open Machine Profiles™
           </a>
         </section>
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM™ Support
-          </h2>
-
-          <p className="mt-4 text-slate-300">
-            Founder: Justin Ball | Company: Ball AI Metrics™
-          </p>
-
-          <p className="mt-4 text-slate-300">
-            Email:{" "}
-            <a href="mailto:BAMToolzsupport@gmail.com" className="font-black text-cyan-300 underline">
-              BAMToolzsupport@gmail.com
-            </a>
-          </p>
-        </section>
-
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM Scan™ | BAM™ | Ball AI Metrics™</p>
+          <p>© 2026 BAM Scan™ | BAMToolz™ | Ball Advanced Management™</p>
         </footer>
       </div>
     </main>
