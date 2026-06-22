@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Message = {
   role: "tech" | "bam";
@@ -8,6 +8,8 @@ type Message = {
 };
 
 export default function ScannerPage() {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const [file, setFile] = useState<File | null>(null);
   const [scanData, setScanData] = useState("");
   const [scanStatus, setScanStatus] = useState("Waiting for equipment scan.");
@@ -15,8 +17,10 @@ export default function ScannerPage() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
 
-  async function runScan() {
-    if (!file) {
+  async function runScan(selectedFile?: File | null) {
+    const imageFile = selectedFile || file;
+
+    if (!imageFile) {
       setScanStatus("Please select an equipment photo before scanning.");
       return;
     }
@@ -26,7 +30,7 @@ export default function ScannerPage() {
     setMessages([]);
 
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image", imageFile);
 
     try {
       const response = await fetch("/api/scan", {
@@ -56,6 +60,41 @@ export default function ScannerPage() {
       setScanStatus(error?.message || "BAM Scan™ connection failed.");
       setMachineConnected(false);
     }
+  }
+
+  function handleFileChange(fileList: FileList | null) {
+    const selectedFile = fileList?.[0] || null;
+    setFile(selectedFile);
+
+    if (selectedFile) {
+      runScan(selectedFile);
+    }
+  }
+
+  function startVoiceInput() {
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      setInput("Voice input is not supported on this browser. Type your question here.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event: any) => {
+      const spokenText = event.results?.[0]?.[0]?.transcript || "";
+      setInput(spokenText);
+    };
+
+    recognition.onerror = () => {
+      setInput("Voice input could not be completed. Type your question here.");
+    };
+
+    recognition.start();
   }
 
   async function sendMessage() {
@@ -167,28 +206,43 @@ export default function ScannerPage() {
           <h2 className="text-3xl font-black text-cyan-300">Equipment Image</h2>
 
           <p className="mt-4 text-slate-300">
-            Select a machine tag, equipment label, panel, log, or component photo.
+            Tap the plus button below to select a machine tag, equipment label,
+            panel, log, or component photo.
           </p>
 
           <input
+            ref={fileInputRef}
             type="file"
             accept="image/*"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-            className="mt-6 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-cyan-100"
+            onChange={(e) => handleFileChange(e.target.files)}
+            className="hidden"
           />
 
-          {file && (
-            <p className="mt-3 text-sm font-bold text-cyan-300">
-              Selected file: {file.name}
-            </p>
-          )}
+          <div className="mt-6 flex items-center gap-3 rounded-2xl border border-cyan-400 bg-slate-900 p-3">
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-3xl font-black text-slate-950 hover:bg-cyan-400"
+              aria-label="Add equipment photo"
+            >
+              +
+            </button>
 
-          <button
-            onClick={runScan}
-            className="mt-6 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400"
-          >
-            Run BAM Scan™
-          </button>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-black text-cyan-300">
+                {file ? "Selected equipment photo" : "Add equipment photo"}
+              </p>
+              <p className="truncate text-xs text-slate-300">
+                {file ? file.name : "Choose a photo to run BAM Scan™"}
+              </p>
+            </div>
+
+            <button
+              onClick={() => runScan()}
+              className="rounded-xl bg-cyan-500 px-4 py-3 text-sm font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Scan
+            </button>
+          </div>
 
           <div className="mt-6 rounded-xl border border-cyan-400/30 bg-slate-900 p-5 text-sm leading-6 text-slate-300">
             <p className="font-black text-cyan-300">
@@ -243,17 +297,36 @@ export default function ScannerPage() {
             </div>
           )}
 
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={
-              machineConnected
-                ? "Ask about model, serial, parts, safety, possible issue, or next check..."
-                : "Scan equipment first..."
-            }
-            disabled={!machineConnected}
-            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white outline-none disabled:opacity-50"
-          />
+          <div className="mt-6 flex items-end gap-3 rounded-2xl border border-cyan-400 bg-slate-900 p-3">
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-2xl font-black text-slate-950 hover:bg-cyan-400"
+              aria-label="Add equipment photo"
+            >
+              +
+            </button>
+
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={
+                machineConnected
+                  ? "Ask about model, serial, parts, safety, possible issue, or next check..."
+                  : "Scan equipment first..."
+              }
+              disabled={!machineConnected}
+              className="min-h-12 flex-1 resize-none rounded-xl border border-cyan-400 bg-slate-950 p-3 text-white outline-none disabled:opacity-50"
+            />
+
+            <button
+              onClick={startVoiceInput}
+              disabled={!machineConnected}
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-xl font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
+              aria-label="Voice input"
+            >
+              🎙️
+            </button>
+          </div>
 
           <button
             onClick={sendMessage}
