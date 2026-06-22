@@ -5,7 +5,8 @@ let machines: any[] = [];
 export async function GET() {
   return NextResponse.json({
     success: true,
-    machines,
+    message: "BAM Hub™ machine data is private. Public listing disabled.",
+    count: machines.length,
   });
 }
 
@@ -15,11 +16,11 @@ export async function POST(request: Request) {
 
     const newMachine = {
       id: Date.now().toString(),
-      name: body.name || "Unnamed Machine",
-      location: body.location || "Unknown Location",
-      manufacturer: body.manufacturer || "Unknown Manufacturer",
-      model: body.model || "Unknown Model",
-      serial: body.serial || "Unknown Serial",
+      name: body.name || "Scanned Equipment",
+      location: body.location || "Unassigned",
+      manufacturer: body.manufacturer || "Not identified",
+      model: body.model || "Not identified",
+      serial: body.serial || "Not identified",
       notes: body.notes || "",
       createdAt: new Date().toISOString(),
     };
@@ -28,13 +29,14 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      machine: newMachine,
+      message: "Machine profile saved to BAM Hub™.",
+      machineId: newMachine.id,
     });
   } catch (error) {
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to create machine",
+        error: "Machine profile could not be saved.",
       },
       { status: 500 }
     );
