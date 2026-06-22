@@ -44,13 +44,13 @@ export default function ScannerPage() {
 
       setScanData(report);
       setMachineConnected(true);
-      setScanStatus("Equipment scan complete. BAM Assist™ is ready.");
+      setScanStatus("Equipment scan complete. BAM AI™ is ready.");
 
       setMessages([
         {
           role: "bam",
           text:
-            "Equipment scan complete. Ask a maintenance question about this scan.",
+            "Equipment scan complete. Enter technician notes, symptoms, fault codes, or questions.",
         },
       ]);
     } catch (error: any) {
@@ -67,7 +67,7 @@ export default function ScannerPage() {
     setMessages((prev) => [
       ...prev,
       { role: "tech", text: techText },
-      { role: "bam", text: "Thinking..." },
+      { role: "bam", text: "Analyzing..." },
     ]);
 
     setInput("");
@@ -93,7 +93,7 @@ export default function ScannerPage() {
           text:
             data.result ||
             data.error ||
-            "BAM Assist™ returned no answer.",
+            "BAM AI™ returned no result.",
         },
       ]);
     } catch (error: any) {
@@ -101,7 +101,7 @@ export default function ScannerPage() {
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: error?.message || "BAM Assist™ connection failed.",
+          text: error?.message || "BAM AI™ connection failed.",
         },
       ]);
     }
@@ -110,7 +110,6 @@ export default function ScannerPage() {
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
-
         <header>
           <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black text-cyan-600">
             BAM
@@ -125,23 +124,18 @@ export default function ScannerPage() {
           </p>
         </header>
 
-
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8">
-
           <h2 className="text-4xl font-black text-cyan-300">
             Scan equipment. Ask what matters.
           </h2>
 
           <p className="mt-4 text-slate-300">
             BAM Scan™ captures machine information and connects it with
-            BAM Assist™ for troubleshooting and documentation.
+            BAM AI™ for troubleshooting and documentation.
           </p>
-
         </section>
 
-
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8">
-
           <h2 className="text-3xl font-black text-cyan-300">
             Equipment Image
           </h2>
@@ -177,13 +171,10 @@ export default function ScannerPage() {
 
             <p>{scanStatus}</p>
           </div>
-
         </section>
-
 
         {scanData && (
           <section className="mt-8 rounded-2xl bg-slate-950/95 p-8">
-
             <h2 className="text-3xl font-black text-cyan-300">
               BAM Scan™ Result
             </h2>
@@ -191,15 +182,12 @@ export default function ScannerPage() {
             <div className="mt-5 whitespace-pre-wrap rounded-xl bg-slate-900 p-5">
               {scanData}
             </div>
-
           </section>
         )}
 
-
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8">
-
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM Assist™ Machine Q&A
+            BAM AI™
           </h2>
 
           {messages.map((msg, index) => (
@@ -207,7 +195,7 @@ export default function ScannerPage() {
               <b className="text-cyan-300">
                 {msg.role === "tech"
                   ? "Technician"
-                  : "BAM Assist™"}
+                  : "BAM AI™"}
               </b>
 
               <p className="mt-2 whitespace-pre-wrap">
@@ -222,7 +210,7 @@ export default function ScannerPage() {
             disabled={!machineConnected}
             placeholder={
               machineConnected
-                ? "Ask about parts, faults, repair steps..."
+                ? "Enter technician notes, symptoms, fault codes, or questions..."
                 : "Scan equipment first..."
             }
             className="mt-6 min-h-28 w-full rounded-xl bg-slate-900 p-4"
@@ -233,16 +221,13 @@ export default function ScannerPage() {
             disabled={!machineConnected}
             className="mt-4 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950"
           >
-            Ask BAM Assist™
+            Run BAM AI™
           </button>
-
         </section>
-
 
         <footer className="mt-8 text-center text-sm text-cyan-50">
           © 2026 BAM Scan™ | BAMToolz™ | Ball AI Metrics™
         </footer>
-
       </div>
     </main>
   );
