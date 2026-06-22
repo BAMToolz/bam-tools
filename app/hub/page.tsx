@@ -1,14 +1,14 @@
 export default function HubPage() {
   return (
-    <main className="min-h-screen bg-[#04162b] px-5 py-6 text-white">
-      <div className="mx-auto max-w-7xl rounded-3xl border border-cyan-300/40 bg-gradient-to-br from-[#08aeea] via-[#0874a8] to-[#061a33] p-8 shadow-2xl">
-        <header className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+    <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
+      <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
+        <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
               BAM
             </div>
 
-            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-6xl">
+            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
               BAM Hub™
             </h1>
 
@@ -33,16 +33,16 @@ export default function HubPage() {
           </nav>
         </header>
 
-        <section className="mt-10 rounded-3xl border border-cyan-400/40 bg-[#0a1629]/95 p-8 shadow-2xl">
-          <p className="font-black tracking-wide text-cyan-300">
+        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
+          <p className="text-sm font-black tracking-wide text-cyan-300">
             SECURE FACILITY CORE™
           </p>
 
-          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight md:text-6xl">
+          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
             Private machine memory for modern facilities.
           </h2>
 
-          <p className="mt-6 max-w-5xl text-base leading-7 text-gray-300">
+          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM Hub™ is the secure intelligence layer for facilities. It is
             designed to organize equipment profiles, repair history, scan
             records, manuals, parts, safety notes, controls data, and technician
@@ -50,12 +50,12 @@ export default function HubPage() {
           </p>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
+        <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-yellow-200">
             Protected Facility Data™
           </h2>
 
-          <p className="mt-4 max-w-5xl text-yellow-50">
+          <p className="mt-4 text-yellow-50">
             Machine history, serial numbers, repair records, scan data, and
             technician notes belong inside secure facility accounts. Future
             versions will support login, company accounts, user roles, and
@@ -95,12 +95,12 @@ export default function HubPage() {
           />
         </section>
 
-        <section className="mt-8 rounded-3xl border border-cyan-400/30 bg-[#061225] p-8 shadow-2xl">
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
             Preserve the Presence™
           </h2>
 
-          <p className="mt-4 max-w-5xl text-gray-300">
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM Hub™ is built around preserving the presence of skilled
             technicians — keeping their experience available for future teams,
             facilities, and generations.
@@ -109,7 +109,7 @@ export default function HubPage() {
           <div className="mt-6 flex flex-col gap-4 sm:flex-row">
             <a
               href="/scanner"
-              className="rounded-xl bg-cyan-400 px-6 py-3 text-center font-black text-[#04162b] hover:bg-cyan-300"
+              className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
               Open BAM Scan™
             </a>
@@ -133,9 +133,9 @@ export default function HubPage() {
 
 function Card({ title, text }: { title: string; text: string }) {
   return (
-    <div className="rounded-2xl border border-cyan-400/30 bg-[#061225] p-6 shadow-xl">
-      <h2 className="text-2xl font-black text-cyan-300">{title}</h2>
-      <p className="mt-3 text-sm leading-6 text-gray-300">{text}</p>
+    <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
+      <h3 className="text-xl font-black text-cyan-300">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
     </div>
   );
 }
