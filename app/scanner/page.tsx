@@ -69,32 +69,38 @@ export default function ScannerPage() {
 
     setSaveStatus("Saving scan to BAM Hub™...");
 
+    const newMachine = {
+      id: Date.now().toString(),
+      name: "Scanned Equipment",
+      location: "Unassigned",
+      manufacturer: "Not identified",
+      model: "Not identified",
+      serial: "Not identified",
+      notes: scanData,
+      createdAt: new Date().toISOString(),
+    };
+
+    const existingMachines = JSON.parse(
+      localStorage.getItem("bamHubMachines") || "[]"
+    );
+
+    const updatedMachines = [...existingMachines, newMachine];
+
+    localStorage.setItem("bamHubMachines", JSON.stringify(updatedMachines));
+
     try {
-      const response = await fetch("/api/machines", {
+      await fetch("/api/machines", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name: "Scanned Equipment",
-          location: "Unassigned",
-          manufacturer: "Not identified",
-          model: "Not identified",
-          serial: "Not identified",
-          notes: scanData,
-        }),
+        body: JSON.stringify(newMachine),
       });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSaveStatus("Scan saved to BAM Hub™ machine memory.");
-      } else {
-        setSaveStatus(data.error || "BAM Hub™ save failed.");
-      }
-    } catch (error: any) {
-      setSaveStatus(error?.message || "BAM Hub™ connection failed.");
+    } catch (error) {
+      console.log("BAM Hub™ cloud prototype save skipped.");
     }
+
+    setSaveStatus("Scan saved to BAM Hub™ machine memory on this device.");
   }
 
   async function sendMessage() {
@@ -360,6 +366,13 @@ export default function ScannerPage() {
             </a>
 
             <a
+              href="/hub/machine"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              Open Machine Profile™
+            </a>
+
+            <a
               href="/"
               className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
             >
@@ -377,6 +390,9 @@ export default function ScannerPage() {
             </a>
             <a href="/hub" className="hover:text-white">
               BAM Hub™
+            </a>
+            <a href="/hub/machine" className="hover:text-white">
+              Machine Profile™
             </a>
             <a href="/machines" className="hover:text-white">
               BAM Machines™
@@ -409,4 +425,4 @@ function Card({
       <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
     </a>
   );
-}  
+}
