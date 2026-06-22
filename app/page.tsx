@@ -27,6 +27,9 @@ export default function Home() {
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Hub™
             </a>
+            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Work Orders™
+            </a>
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Metrics™
             </a>
@@ -53,8 +56,9 @@ export default function Home() {
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM™ by Ball AI Metrics™ connects equipment scanning, technician
-            assistance, secure facility access, machine history, automation, and
-            industrial metrics into one AI-driven ecosystem.
+            assistance, secure facility access, machine history, maintenance
+            work orders, automation, and industrial metrics into one AI-driven
+            ecosystem.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -63,6 +67,13 @@ export default function Home() {
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
               Launch BAM Scan™
+            </a>
+
+            <a
+              href="/workorders"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              BAM Work Orders™
             </a>
 
             <a
@@ -114,6 +125,12 @@ export default function Home() {
           />
 
           <Card
+            title="BAM Work Orders™"
+            href="/workorders"
+            text="Maintenance workflow for machine issues, technician assignments, priority levels, repair notes, status tracking, and history capture."
+          />
+
+          <Card
             title="BAM Metrics™"
             href="/metrics"
             text="Industrial metrics for downtime, repair history, recurring failures, reliability, parts usage, safety trends, saved scans, and improvement tracking."
@@ -161,13 +178,15 @@ export default function Home() {
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM™ is being developed as a scalable industrial AI ecosystem where
             BAM Scan™ captures, BAM AI™ supports, BAM Access™ protects,
-            BAM Hub™ remembers, BAM Metrics™ measures, BAM Machines™ builds,
-            and BAM Automation™ connects the facility.
+            BAM Hub™ remembers, BAM Work Orders™ organize maintenance,
+            BAM Metrics™ measures, BAM Machines™ builds, and BAM Automation™
+            connects the facility.
           </p>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             Current build path: BAM Scan™ captures equipment data, BAM Hub™
-            stores machine memory, and BAM Metrics™ converts saved scans into
+            stores machine memory, BAM Work Orders™ turn issues into trackable
+            maintenance action, and BAM Metrics™ converts saved activity into
             measurable facility intelligence.
           </p>
         </section>
@@ -180,7 +199,7 @@ export default function Home() {
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             For support, facility demos, machine builds, automation concepts,
             partnerships, equipment workflows, BAM Scan™ questions, access
-            workflows, or product support, contact BAM™.
+            workflows, work orders, or product support, contact BAM™.
           </p>
 
           <p className="mt-5 text-lg">
@@ -199,6 +218,13 @@ export default function Home() {
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
               Email Support
+            </a>
+
+            <a
+              href="/workorders"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              BAM Work Orders™
             </a>
 
             <a
@@ -240,6 +266,9 @@ export default function Home() {
             </a>
             <a href="/terms" className="hover:text-white">
               Terms
+            </a>
+            <a href="/workorders" className="hover:text-white">
+              Work Orders
             </a>
             <a href="/metrics" className="hover:text-white">
               Metrics
