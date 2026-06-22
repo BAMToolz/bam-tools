@@ -13,7 +13,7 @@ export default function HubPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Private facility intelligence and machine memory.
+              Ball AI Metrics™
             </p>
           </div>
 
@@ -39,34 +39,34 @@ export default function HubPage() {
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight md:text-6xl">
-            Machine memory should not be public.
+            Private machine memory for modern facilities.
           </h2>
 
           <p className="mt-6 max-w-5xl text-base leading-7 text-gray-300">
-            BAM Hub™ is the private intelligence layer for facilities. This is
-            where equipment profiles, repair history, scan records, manuals,
-            parts, safety notes, controls data, and technician knowledge will be
-            stored behind secure access.
+            BAM Hub™ is the secure intelligence layer for facilities. It is
+            designed to organize equipment profiles, repair history, scan
+            records, manuals, parts, safety notes, controls data, and technician
+            knowledge behind protected access.
           </p>
         </section>
 
         <section className="mt-8 rounded-3xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-yellow-200">
-            Private Access Required™
+            Protected Facility Data™
           </h2>
 
           <p className="mt-4 max-w-5xl text-yellow-50">
-            Facility data, machine history, serial numbers, repair records, and
-            technician notes are protected information. Public viewing is disabled
-            in this prototype direction. Future versions will require login,
-            company accounts, user roles, and facility-level permissions.
+            Machine history, serial numbers, repair records, scan data, and
+            technician notes belong inside secure facility accounts. Future
+            versions will support login, company accounts, user roles, and
+            facility-level permissions.
           </p>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
           <Card
             title="Machine Memory™"
-            text="Private equipment profiles, photos, serial numbers, scan records, manuals, repairs, notes, and service history."
+            text="Equipment profiles, photos, serial numbers, scan records, manuals, repairs, notes, and service history."
           />
 
           <Card
@@ -76,22 +76,22 @@ export default function HubPage() {
 
           <Card
             title="Facility Permissions™"
-            text="Future accounts will keep each company, site, and department separated so data does not cross facilities."
+            text="Keep each company, site, and department separated so equipment data stays controlled by the right organization."
           />
 
           <Card
             title="BAM Scan™ Intake"
-            text="BAM Scan™ captures equipment data first. Reviewed scan results can later be saved into secure BAM Hub™ memory."
+            text="BAM Scan™ captures equipment data first. Reviewed scan results can flow into secure BAM Hub™ memory."
           />
 
           <Card
             title="Parts & Manuals™"
-            text="Future profiles can connect machines with parts, suppliers, manuals, drawings, and documentation."
+            text="Connect machines with spare parts, suppliers, manuals, drawings, documentation, and replacement history."
           />
 
           <Card
             title="Controls & Robotics™"
-            text="Support future PLC notes, wiring documentation, HMI details, robotics data, and automation history."
+            text="Support PLC notes, wiring documentation, HMI details, robotics data, and automation history."
           />
         </section>
 
@@ -124,7 +124,7 @@ export default function HubPage() {
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM Hub™ | BAMToolz™ | Ball Advanced Management™</p>
+          <p>© 2026 BAM Hub™ | BAMToolz™ | Ball AI Metrics™</p>
         </footer>
       </div>
     </main>
