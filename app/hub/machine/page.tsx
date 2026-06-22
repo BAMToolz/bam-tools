@@ -1,4 +1,41 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+type Machine = {
+  id: string;
+  name: string;
+  location: string;
+  manufacturer: string;
+  model: string;
+  serial: string;
+  notes: string;
+  createdAt: string;
+};
+
 export default function MachineProfilePage() {
+  const [machine, setMachine] = useState<Machine | null>(null);
+
+  useEffect(() => {
+    const savedMachines = JSON.parse(
+      localStorage.getItem("bamHubMachines") || "[]"
+    );
+
+    if (savedMachines.length > 0) {
+      setMachine(savedMachines[savedMachines.length - 1]);
+    }
+  }, []);
+
+  const machineName = machine?.name || "Scanned Equipment";
+  const location = machine?.location || "Unassigned";
+  const manufacturer = machine?.manufacturer || "Not identified";
+  const model = machine?.model || "Not identified";
+  const serial = machine?.serial || "Not identified";
+  const createdAt = machine?.createdAt
+    ? new Date(machine.createdAt).toLocaleString()
+    : "No saved scan yet";
+  const notes = machine?.notes || "No BAM Scan™ memory saved yet on this device.";
+
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
@@ -39,30 +76,39 @@ export default function MachineProfilePage() {
           </p>
 
           <h2 className="mt-4 text-4xl font-black text-cyan-300">
-            Scanned Equipment
+            {machineName}
           </h2>
 
           <p className="mt-4 max-w-5xl text-slate-300">
-            This profile represents the future BAM Hub™ machine memory screen.
-            It will store equipment identity, scan records, repair history,
-            parts, manuals, technician notes, engineering notes, and reliability
-            data for each machine.
+            This profile displays the latest BAM Scan™ saved to BAM Hub™ memory
+            on this device. Future versions will connect this view to secure
+            facility accounts and a protected database.
           </p>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-2">
-          <Info title="Machine Name" value="Scanned Equipment" />
-          <Info title="Location" value="Unassigned" />
-          <Info title="Manufacturer" value="Not identified" />
-          <Info title="Model" value="Not identified" />
-          <Info title="Serial / Asset Tag" value="Not identified" />
-          <Info title="Status" value="Profile shell created" />
+          <Info title="Machine Name" value={machineName} />
+          <Info title="Location" value={location} />
+          <Info title="Manufacturer" value={manufacturer} />
+          <Info title="Model" value={model} />
+          <Info title="Serial / Asset Tag" value={serial} />
+          <Info title="Saved Date" value={createdAt} />
+        </section>
+
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            Saved BAM Scan™ Memory
+          </h2>
+
+          <div className="mt-5 whitespace-pre-wrap rounded-xl bg-slate-900 p-5 text-sm leading-6 text-slate-300">
+            {notes}
+          </div>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
           <Card
             title="Scan Records™"
-            text="BAM Scan™ results will attach to this machine profile so equipment knowledge is not lost after the scan."
+            text="BAM Scan™ results attach to this machine profile so equipment knowledge is not lost after the scan."
           />
 
           <Card
@@ -107,11 +153,12 @@ export default function MachineProfilePage() {
 
           <div className="mt-4 rounded-xl bg-slate-900 p-5">
             <p className="font-black text-cyan-300">
-              02 — Next Step
+              02 — Latest Scan Memory
             </p>
             <p className="mt-2 text-slate-300">
-              Connect saved BAM Scan™ results to this profile and display real
-              equipment data from the BAM Hub™ API.
+              {machine
+                ? "Latest saved BAM Scan™ memory is now connected to this profile on this device."
+                : "No saved scan found yet. Open BAM Scan™, scan equipment, and save it to BAM Hub™."}
             </p>
           </div>
         </section>
@@ -122,9 +169,8 @@ export default function MachineProfilePage() {
           </h2>
 
           <p className="mt-4 max-w-5xl text-slate-300">
-            After this page is live, the next task is linking the scanner save
-            button to a real machine profile so every saved scan can become
-            organized facility memory.
+            The next task is creating a machine list so multiple saved scans can
+            be opened individually instead of only showing the latest saved scan.
           </p>
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row">
