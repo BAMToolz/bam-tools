@@ -27,6 +27,9 @@ export default function Home() {
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Hub™
             </a>
+            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Metrics™
+            </a>
             <a href="/login" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Access™
             </a>
@@ -60,6 +63,13 @@ export default function Home() {
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
               Launch BAM Scan™
+            </a>
+
+            <a
+              href="/metrics"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              View BAM Metrics™
             </a>
 
             <a
@@ -104,14 +114,15 @@ export default function Home() {
           />
 
           <Card
-            title="BAM Access™"
-            href="/login"
-            text="Secure facility access layer designed for technician accounts, RFID badge login, company permissions, user roles, and protected BAM Hub™ machine data."
+            title="BAM Metrics™"
+            href="/metrics"
+            text="Industrial metrics for downtime, repair history, recurring failures, reliability, parts usage, safety trends, saved scans, and improvement tracking."
           />
 
           <Card
-            title="BAM Metrics™"
-            text="Industrial metrics for downtime, repair history, recurring failures, reliability, parts usage, safety trends, and improvement tracking."
+            title="BAM Access™"
+            href="/login"
+            text="Secure facility access layer designed for technician accounts, RFID badge login, company permissions, user roles, and protected BAM Hub™ machine data."
           />
 
           <Card
@@ -153,6 +164,12 @@ export default function Home() {
             BAM Hub™ remembers, BAM Metrics™ measures, BAM Machines™ builds,
             and BAM Automation™ connects the facility.
           </p>
+
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            Current build path: BAM Scan™ captures equipment data, BAM Hub™
+            stores machine memory, and BAM Metrics™ converts saved scans into
+            measurable facility intelligence.
+          </p>
         </section>
 
         <section id="support" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
@@ -182,6 +199,13 @@ export default function Home() {
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
               Email Support
+            </a>
+
+            <a
+              href="/metrics"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              BAM Metrics™
             </a>
 
             <a
@@ -216,6 +240,9 @@ export default function Home() {
             </a>
             <a href="/terms" className="hover:text-white">
               Terms
+            </a>
+            <a href="/metrics" className="hover:text-white">
+              Metrics
             </a>
             <a href="/login" className="hover:text-white">
               Access
