@@ -14,6 +14,7 @@ export default function ScannerPage() {
   const [machineConnected, setMachineConnected] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [saveStatus, setSaveStatus] = useState("");
 
   async function runScan() {
     if (!file) {
@@ -24,6 +25,7 @@ export default function ScannerPage() {
     setScanStatus("Analyzing equipment with BAM Scan™...");
     setMachineConnected(false);
     setMessages([]);
+    setSaveStatus("");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -56,6 +58,42 @@ export default function ScannerPage() {
     } catch (error: any) {
       setScanStatus(error?.message || "BAM Scan™ connection failed.");
       setMachineConnected(false);
+    }
+  }
+
+  async function saveToHub() {
+    if (!scanData) {
+      setSaveStatus("Run BAM Scan™ before saving to BAM Hub™.");
+      return;
+    }
+
+    setSaveStatus("Saving scan to BAM Hub™...");
+
+    try {
+      const response = await fetch("/api/machines", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "Scanned Equipment",
+          location: "Unassigned",
+          manufacturer: "Not identified",
+          model: "Not identified",
+          serial: "Not identified",
+          notes: scanData,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSaveStatus("Scan saved to BAM Hub™ machine memory.");
+      } else {
+        setSaveStatus(data.error || "BAM Hub™ save failed.");
+      }
+    } catch (error: any) {
+      setSaveStatus(error?.message || "BAM Hub™ connection failed.");
     }
   }
 
@@ -219,6 +257,19 @@ export default function ScannerPage() {
             <div className="mt-5 whitespace-pre-wrap rounded-xl bg-slate-900 p-5">
               {scanData}
             </div>
+
+            <button
+              onClick={saveToHub}
+              className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Save Scan to BAM Hub™
+            </button>
+
+            {saveStatus && (
+              <p className="mt-4 font-bold text-cyan-300">
+                {saveStatus}
+              </p>
+            )}
           </section>
         )}
 
