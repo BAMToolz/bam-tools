@@ -14,7 +14,7 @@ export default function MachinesPage() {
 
   async function scanPhoto() {
     if (!photo) {
-      setMessage("Please upload or capture an equipment photo before scanning.");
+      setMessage("Please select or capture an equipment photo before scanning.");
       return;
     }
 
@@ -55,7 +55,9 @@ export default function MachinesPage() {
 
       setMessage("Scan complete. Review the extracted information before saving.");
     } catch (error) {
-      setMessage("Scan could not be completed. Please verify the scanner connection and try again.");
+      setMessage(
+        "Scan could not be completed. Please verify the scanner connection and try again."
+      );
     }
   }
 
@@ -90,7 +92,9 @@ export default function MachinesPage() {
       setNotes("");
       setPhoto(null);
     } else {
-      setMessage("Machine profile could not be saved. Please review the form and try again.");
+      setMessage(
+        "Machine profile could not be saved. Please review the form and try again."
+      );
     }
   }
 
@@ -115,19 +119,35 @@ export default function MachinesPage() {
         </div>
 
         <p className="mt-5 text-slate-300">
-          Capture an equipment photo or machine tag. BAM Scan™ will extract
-          available details for review. Complete any missing fields before saving
-          the machine profile to BAM Hub™.
+          Select an equipment photo, machine tag, or captured image from your
+          device. BAM Scan™ will extract available details for review. Complete
+          any missing fields before saving the machine profile to BAM Hub™.
         </p>
 
         <div className="mt-8 space-y-4">
-          <input
-            type="file"
-            accept="image/*"
-            capture="environment"
-            className="w-full rounded-xl bg-white p-3 text-black"
-            onChange={(e) => setPhoto(e.target.files?.[0] || null)}
-          />
+          <div className="rounded-2xl border border-cyan-400/40 bg-cyan-400/10 p-4">
+            <label className="mb-2 block text-sm font-bold text-cyan-200">
+              Equipment photo or machine tag
+            </label>
+
+            <input
+              type="file"
+              accept="image/*"
+              className="w-full rounded-xl bg-white p-3 text-black"
+              onChange={(e) => setPhoto(e.target.files?.[0] || null)}
+            />
+
+            <p className="mt-2 text-xs text-slate-300">
+              Choose an existing photo from your device or take a new photo when
+              prompted by your browser.
+            </p>
+
+            {photo && (
+              <p className="mt-2 text-sm font-bold text-cyan-300">
+                Selected file: {photo.name}
+              </p>
+            )}
+          </div>
 
           <button
             onClick={scanPhoto}
