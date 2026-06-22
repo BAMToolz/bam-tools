@@ -1,72 +1,51 @@
-import OpenAI from "openai";
+import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
+let machines: any[] = [];
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+export async function GET() {
+  return NextResponse.json({
+    success: true,
+    service: "BAM Hub™",
+    message:
+      "Machine memory is protected. Facility equipment data requires secure access.",
+  });
+}
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json();
-    const question = body.question || "";
-    const scanData = body.scanData || "";
+    const body = await request.json();
 
-    if (!question) {
-      return Response.json({ error: "No question provided." }, { status: 400 });
-    }
+    const machineProfile = {
+      id: crypto.randomUUID(),
 
-    const response = await openai.responses.create({
-      model: "gpt-4.1-mini",
-      input: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "input_text",
-              text: `You are BAM Assist™, a technician Q&A assistant for BAM Scan™.
+      equipment: {
+        name: body.name || "Unnamed Equipment",
+        location: body.location || "",
+        manufacturer: body.manufacturer || "",
+        model: body.model || "",
+        serial: body.serial || "",
+      },
 
-Use the BAM Scan™ data to answer the technician question.
+      memory: {
+        notes: body.notes || "",
+        createdAt: new Date().toISOString(),
+      },
+    };
 
-Rules:
-- Keep answers short.
-- Do not repeat the full scan report.
-- Answer like a maintenance technician.
-- If the scan has the answer, give it directly.
-- If the scan does not have the answer, say what is missing.
-- Ask for one useful next item if needed: photo, model, serial, voltage, amp reading, fault code, or nameplate.
-- Mention lockout/tagout when safety matters.
-- Do not make up voltage, part numbers, serial numbers, manufacturer, or model.
+    machines.push(machineProfile);
 
-BAM Scan™ Data:
-${scanData || "No scan data provided."}
-
-Technician Question:
-${question}
-
-Return:
-
-BAM Assist™
-
-Answer:
-[short direct answer]
-
-Next:
-[one next step]`,
-            },
-          ],
-        },
-      ],
-    });
-
-    return Response.json({
-      result: response.output_text,
+    return NextResponse.json({
+      success: true,
+      service: "BAM Hub™",
+      message: "Machine memory captured successfully.",
+      machineId: machineProfile.id,
     });
   } catch (error) {
-    console.error("BAM Assist error:", error);
-
-    return Response.json(
-      { error: "BAM Assist failed. Check OpenAI key, credits, or Vercel logs." },
+    return NextResponse.json(
+      {
+        success: false,
+        error: "BAM Hub™ could not process machine memory.",
+      },
       { status: 500 }
     );
   }
