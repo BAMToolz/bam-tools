@@ -13,7 +13,7 @@ export default function MachinesPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Ball Advanced Management™
+              Ball AI Metrics™
             </p>
           </div>
 
@@ -23,6 +23,9 @@ export default function MachinesPage() {
             </a>
             <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               BAM Scan™
+            </a>
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              BAM Hub™
             </a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Support™
@@ -40,73 +43,43 @@ export default function MachinesPage() {
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Machines™ is the machine manufacturing side of Ball Advanced
-            Management™ — focused on industrial equipment, production support
-            systems, controls-ready machinery, and custom automation solutions
-            for manufacturing facilities.
+            BAM Machines™ is the machine manufacturing and equipment-build side
+            of the BAM™ ecosystem — focused on industrial equipment, production
+            support systems, controls-ready machinery, and custom automation
+            solutions for manufacturing facilities.
           </p>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Take-Up Systems™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Custom take-up equipment for wire, cable, tubing, extrusion,
-              winding, spooling, and controlled material handling.
-            </p>
-          </div>
+          <Card
+            title="Take-Up Systems™"
+            text="Custom take-up equipment for wire, cable, tubing, extrusion, winding, spooling, and controlled material handling."
+          />
 
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Payoff Systems™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Payoff stands, feed systems, dereelers, tension control concepts,
-              and production line support equipment.
-            </p>
-          </div>
+          <Card
+            title="Payoff Systems™"
+            text="Payoff stands, feed systems, dereelers, tension control concepts, and production line support equipment."
+          />
 
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Custom Machines™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Purpose-built industrial machines, fixtures, tooling, guards,
-              frames, workstations, and production support systems.
-            </p>
-          </div>
+          <Card
+            title="Custom Machines™"
+            text="Purpose-built industrial machines, fixtures, tooling, guards, frames, workstations, and production support systems."
+          />
 
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Controls-Ready Equipment™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Machines designed with sensors, motors, drives, panels, wiring,
-              and future PLC/HMI integration in mind.
-            </p>
-          </div>
+          <Card
+            title="Controls-Ready Equipment™"
+            text="Machines designed with sensors, motors, drives, panels, wiring, and future PLC/HMI integration in mind."
+          />
 
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Production Line Support™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Equipment concepts for safer, faster, cleaner, and more reliable
-              manufacturing workflows.
-            </p>
-          </div>
+          <Card
+            title="Production Line Support™"
+            text="Equipment concepts for safer, faster, cleaner, and more reliable manufacturing workflows."
+          />
 
-          <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300">
-              Robotic Automation™
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Automation concepts for machine tending, handling, inspection,
-              packaging, palletizing, and facility upgrades.
-            </p>
-          </div>
+          <Card
+            title="Robotic Automation™"
+            text="Automation concepts for machine tending, handling, inspection, packaging, palletizing, and facility upgrades."
+          />
         </section>
 
         <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
@@ -152,9 +125,18 @@ export default function MachinesPage() {
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM Machines™ | BAMToolz™ | Ball Advanced Management™</p>
+          <p>© 2026 BAM Machines™ | BAMToolz™ | Ball AI Metrics™</p>
         </footer>
       </div>
     </main>
+  );
+}
+
+function Card({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
+      <h3 className="text-xl font-black text-cyan-300">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
+    </div>
   );
 }
