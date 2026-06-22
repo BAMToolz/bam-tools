@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 type Message = {
   role: "tech" | "bam";
@@ -8,8 +8,6 @@ type Message = {
 };
 
 export default function ScannerPage() {
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
   const [file, setFile] = useState<File | null>(null);
   const [scanData, setScanData] = useState("");
   const [scanStatus, setScanStatus] = useState("Waiting for equipment scan.");
@@ -17,20 +15,18 @@ export default function ScannerPage() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
 
-  async function runScan(selectedFile?: File | null) {
-    const imageFile = selectedFile || file;
-
-    if (!imageFile) {
-      setScanStatus("Select an image before scanning.");
+  async function runScan() {
+    if (!file) {
+      setScanStatus("Please select an equipment photo before scanning.");
       return;
     }
 
-    setScanStatus("Analyzing with BAM AI™...");
+    setScanStatus("Analyzing equipment with BAM Scan™...");
     setMachineConnected(false);
     setMessages([]);
 
     const formData = new FormData();
-    formData.append("image", imageFile);
+    formData.append("image", file);
 
     try {
       const response = await fetch("/api/scan", {
@@ -44,58 +40,23 @@ export default function ScannerPage() {
         data.analysis ||
         data.result ||
         data.message ||
-        "BAM AI™ connected, but no scan data was returned.";
+        "BAM Scan™ connected, but no scan data was returned.";
 
       setScanData(report);
       setMachineConnected(true);
-      setScanStatus("Scan complete. BAM Assist™ is ready.");
+      setScanStatus("Equipment scan complete. BAM Assist™ is ready.");
 
       setMessages([
         {
           role: "bam",
-          text: "Scan complete. Ask a maintenance question about this equipment.",
+          text:
+            "Equipment scan complete. Ask a maintenance question about this scan.",
         },
       ]);
     } catch (error: any) {
       setScanStatus(error?.message || "BAM Scan™ connection failed.");
       setMachineConnected(false);
     }
-  }
-
-  function handleFileChange(fileList: FileList | null) {
-    const selectedFile = fileList?.[0] || null;
-    setFile(selectedFile);
-
-    if (selectedFile) {
-      runScan(selectedFile);
-    }
-  }
-
-  function startVoiceInput() {
-    const SpeechRecognition =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      setInput("Voice input is not supported on this browser.");
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    recognition.onresult = (event: any) => {
-      const spokenText = event.results?.[0]?.[0]?.transcript || "";
-      setInput(spokenText);
-    };
-
-    recognition.onerror = () => {
-      setInput("Voice input could not be completed.");
-    };
-
-    recognition.start();
   }
 
   async function sendMessage() {
@@ -119,7 +80,7 @@ export default function ScannerPage() {
         },
         body: JSON.stringify({
           question: techText,
-          scanData: scanData,
+          scanData,
         }),
       });
 
@@ -129,7 +90,10 @@ export default function ScannerPage() {
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: data.result || data.error || "BAM Assist™ returned no answer.",
+          text:
+            data.result ||
+            data.error ||
+            "BAM Assist™ returned no answer.",
         },
       ]);
     } catch (error: any) {
@@ -146,213 +110,139 @@ export default function ScannerPage() {
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
-        <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
-              BAM
-            </div>
 
-            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-              BAM Scan™
-            </h1>
-
-            <p className="mt-2 text-sm font-medium text-cyan-50">
-              Ball AI Metrics™
-            </p>
+        <header>
+          <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black text-cyan-600">
+            BAM
           </div>
 
-          <nav className="flex flex-wrap gap-3">
-            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Home™
-            </a>
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Hub™
-            </a>
-            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Machines™
-            </a>
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Support™
-            </a>
-          </nav>
+          <h1 className="mt-3 text-5xl font-black">
+            BAM Scan™
+          </h1>
+
+          <p className="mt-2 text-cyan-50">
+            Ball AI Metrics™
+          </p>
         </header>
 
-        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
-          <p className="text-sm font-black tracking-wide text-cyan-300">
-            BAM SCAN™ EQUIPMENT INTELLIGENCE
-          </p>
 
-          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
+        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8">
+
+          <h2 className="text-4xl font-black text-cyan-300">
             Scan equipment. Ask what matters.
           </h2>
 
-          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Scan™ analyzes equipment photos, captures visible machine
-            information, and connects the result to BAM Assist™ for technician
-            support, troubleshooting, and documentation workflows.
+          <p className="mt-4 text-slate-300">
+            BAM Scan™ captures machine information and connects it with
+            BAM Assist™ for troubleshooting and documentation.
           </p>
+
         </section>
 
-        <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-6 shadow-2xl">
-          <h2 className="text-2xl font-black text-yellow-200">Safety First™</h2>
 
-          <p className="mt-3 text-sm leading-6 text-yellow-50">
-            Informational support only. Follow OEM manuals, company procedures,
-            OSHA requirements, site safety rules, PPE requirements, and proper
-            lockout/tagout before inspection or repair.
-          </p>
-        </section>
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8">
 
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleFileChange(e.target.files)}
-          className="hidden"
-        />
+          <h2 className="text-3xl font-black text-cyan-300">
+            Equipment Image
+          </h2>
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <div className="flex items-center gap-3 rounded-full border border-cyan-400 bg-slate-900 p-3">
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-4xl font-light text-slate-950 hover:bg-cyan-400"
-              aria-label="Add image"
-            >
-              +
-            </button>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) =>
+              setFile(e.target.files?.[0] || null)
+            }
+            className="mt-6 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4"
+          />
 
-            <div className="min-w-0 flex-1">
-              <p className="text-lg font-black text-cyan-300">
-                BAM AI™
-              </p>
-              <p className="truncate text-sm text-slate-300">
-                {file ? file.name : "Select image"}
-              </p>
-            </div>
-
-            <button
-              onClick={() => runScan()}
-              className="rounded-full bg-cyan-500 px-6 py-4 text-sm font-black text-slate-950 hover:bg-cyan-400"
-            >
-              Scan
-            </button>
-          </div>
-
-          <div className="mt-6 rounded-xl border border-cyan-400/30 bg-slate-900 p-5 text-sm leading-6 text-slate-300">
-            <p className="font-black text-cyan-300">
-              {machineConnected ? "Equipment Connected" : "Status"}
+          {file && (
+            <p className="mt-3 text-cyan-300">
+              Selected file: {file.name}
             </p>
-            <p className="mt-2">{scanStatus}</p>
+          )}
+
+          <button
+            onClick={runScan}
+            className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950"
+          >
+            Run BAM Scan™
+          </button>
+
+          <div className="mt-5 rounded-xl bg-slate-900 p-5">
+            <p className="font-black text-cyan-300">
+              {machineConnected
+                ? "Equipment Connected"
+                : "Status"}
+            </p>
+
+            <p>{scanStatus}</p>
           </div>
+
         </section>
+
 
         {scanData && (
-          <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <section className="mt-8 rounded-2xl bg-slate-950/95 p-8">
+
             <h2 className="text-3xl font-black text-cyan-300">
               BAM Scan™ Result
             </h2>
 
-            <div className="mt-5 whitespace-pre-wrap rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
+            <div className="mt-5 whitespace-pre-wrap rounded-xl bg-slate-900 p-5">
               {scanData}
             </div>
+
           </section>
         )}
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8">
+
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM Assist™
+            BAM Assist™ Machine Q&A
           </h2>
 
-          <p className="mt-4 text-slate-300">
-            {machineConnected
-              ? "Ask direct questions about the scanned equipment."
-              : "Run BAM Scan™ first to connect BAM Assist™ to equipment data."}
-          </p>
+          {messages.map((msg, index) => (
+            <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
+              <b className="text-cyan-300">
+                {msg.role === "tech"
+                  ? "Technician"
+                  : "BAM Assist™"}
+              </b>
 
-          {messages.length > 0 && (
-            <div className="mt-6 space-y-4">
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={
-                    msg.role === "tech"
-                      ? "rounded-xl border border-cyan-200/50 bg-white/5 p-5"
-                      : "rounded-xl border border-cyan-400/50 bg-cyan-500/10 p-5"
-                  }
-                >
-                  <strong className="text-cyan-300">
-                    {msg.role === "tech" ? "Technician" : "BAM Assist™"}
-                  </strong>
-                  <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
-                    {msg.text}
-                  </p>
-                </div>
-              ))}
+              <p className="mt-2 whitespace-pre-wrap">
+                {msg.text}
+              </p>
             </div>
-          )}
+          ))}
 
-          <div className="mt-6 flex items-center gap-3 rounded-full border border-cyan-400 bg-slate-900 p-3">
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-3xl font-light text-slate-950 hover:bg-cyan-400"
-              aria-label="Add image"
-            >
-              +
-            </button>
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={!machineConnected}
+            placeholder={
+              machineConnected
+                ? "Ask about parts, faults, repair steps..."
+                : "Scan equipment first..."
+            }
+            className="mt-6 min-h-28 w-full rounded-xl bg-slate-900 p-4"
+          />
 
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={
-                machineConnected
-                  ? "Ask BAM Assist™"
-                  : "Scan equipment first"
-              }
-              disabled={!machineConnected}
-              className="h-12 flex-1 rounded-full bg-transparent px-2 text-white outline-none placeholder:text-slate-400 disabled:opacity-50"
-            />
-
-            <button
-              onClick={startVoiceInput}
-              disabled={!machineConnected}
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-slate-950 text-2xl text-cyan-300 hover:bg-cyan-950 disabled:opacity-50"
-              aria-label="Voice input"
-            >
-              🎙️
-            </button>
-
-            <button
-              onClick={sendMessage}
-              disabled={!machineConnected || !input.trim()}
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-xl font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
-              aria-label="Send"
-            >
-              ▶
-            </button>
-          </div>
-        </section>
-
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM Hub™ Connection
-          </h2>
-
-          <p className="mt-4 text-slate-300">
-            BAM Hub™ will store approved machine profiles, repair history,
-            manuals, parts, and technician knowledge behind secure facility access.
-          </p>
-
-          <a
-            href="/hub"
-            className="mt-6 inline-block rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+          <button
+            onClick={sendMessage}
+            disabled={!machineConnected}
+            className="mt-4 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950"
           >
-            Open BAM Hub™
-          </a>
+            Ask BAM Assist™
+          </button>
+
         </section>
 
-        <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM Scan™ | BAMToolz™ | Ball AI Metrics™</p>
+
+        <footer className="mt-8 text-center text-sm text-cyan-50">
+          © 2026 BAM Scan™ | BAMToolz™ | Ball AI Metrics™
         </footer>
+
       </div>
     </main>
   );
