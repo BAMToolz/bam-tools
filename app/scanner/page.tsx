@@ -9,23 +9,25 @@ type Message = {
 
 export default function ScannerPage() {
   const [file, setFile] = useState<File | null>(null);
-  const [result, setResult] = useState("");
+  const [scanData, setScanData] = useState("");
+  const [scanStatus, setScanStatus] = useState("");
+  const [machineConnected, setMachineConnected] = useState(false);
   const [input, setInput] = useState("");
-  const [hubRecord, setHubRecord] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bam",
-      text: "BAM Assist™ ready. Upload an equipment image, run BAM Scan™, then ask simple questions like voltage, motor type, model, safety risk, or next check.",
+      text: "BAM Assist™ ready. Scan equipment first, then I will connect to the machine memory and answer questions from the photo information.",
     },
   ]);
 
   async function runScan() {
     if (!file) {
-      setResult("Select an equipment photo first.");
+      setScanStatus("Select an equipment photo first.");
       return;
     }
 
-    setResult("BAM Scan™ analyzing equipment intelligence...");
+    setScanStatus("BAM Scan™ analyzing equipment and preparing machine memory...");
+    setMachineConnected(false);
 
     const formData = new FormData();
     formData.append("image", file);
@@ -38,42 +40,35 @@ export default function ScannerPage() {
 
       const data = await response.json();
 
-      setResult(
+      const report =
         data.result ||
-          data.message ||
-          "BAM Scan™ connected, but no result text returned."
+        data.message ||
+        "BAM Scan™ connected, but no scan data returned.";
+
+      setScanData(report);
+      setMachineConnected(true);
+
+      setScanStatus(
+        "Machine scan complete. Report saved to BAM Hub™ prototype memory."
       );
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "bam",
+          text: "Machine identified. BAM Assist™ is now connected to this scan. What do you need help with?",
+        },
+      ]);
     } catch (error: any) {
-      setResult(error?.message || "BAM Scan™ connection failed.");
+      setScanStatus(error?.message || "BAM Scan™ connection failed.");
+      setMachineConnected(false);
     }
-  }
-
-  function saveToHub() {
-    if (!result) {
-      setHubRecord("Run BAM Scan™ first before saving to BAM Hub™.");
-      return;
-    }
-
-    const record = `BAM Hub™ Prototype Record
-
-Source: BAM Scan™
-Status: Saved locally for prototype display
-Future Storage: BAM Hub™ machine memory database
-
-Saved Scan:
-${result}
-
-Next:
-Attach this scan to a machine profile in BAM Hub™ with facility, equipment ID, manufacturer, model, serial, voltage, controls system, repair notes, and technician knowledge.`;
-
-    setHubRecord(record);
   }
 
   async function sendMessage() {
     if (!input.trim()) return;
 
     const techText = input.trim();
-    const currentScan = result || "";
 
     setMessages((prev) => [
       ...prev,
@@ -91,7 +86,7 @@ Attach this scan to a machine profile in BAM Hub™ with facility, equipment ID,
         },
         body: JSON.stringify({
           question: techText,
-          scanData: currentScan,
+          scanData: scanData,
         }),
       });
 
@@ -129,7 +124,7 @@ Attach this scan to a machine profile in BAM Hub™ with facility, equipment ID,
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Ball Advanced Management™
+              Ball AI Metrics™
             </p>
           </div>
 
@@ -151,35 +146,41 @@ Attach this scan to a machine profile in BAM Hub™ with facility, equipment ID,
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            AI EQUIPMENT INTELLIGENCE™
+            AI EQUIPMENT SCANNING & MACHINE MEMORY™
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Scan machines, capture knowledge, support technicians.
+            Scan the machine. Connect the memory. Ask BAM Assist™.
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Scan™ is part of the BAMToolz™ industrial intelligence platform
-            by Ball Advanced Management™. It is designed for equipment images,
-            machine tags, maintenance history, safety, parts, controls,
-            troubleshooting, and technician knowledge.
+            BAM Scan™ captures equipment information and connects it to BAM
+            Hub™ machine memory. The visible report is no longer the main
+            experience — the scan becomes data for BAM Assist™ to answer
+            technician questions from the photo information.
           </p>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM SCAN™</p>
-            <h3 className="mt-2 text-2xl font-black">IMAGE</h3>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
+              BAM SCAN™
+            </p>
+            <h3 className="mt-2 text-2xl font-black">CAPTURE</h3>
           </div>
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM ASSIST™</p>
-            <h3 className="mt-2 text-2xl font-black">AI Q&A</h3>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
+              BAM HUB™
+            </p>
+            <h3 className="mt-2 text-2xl font-black">MEMORY</h3>
           </div>
 
           <div className="rounded-xl bg-slate-950/95 p-6 text-center shadow-xl">
-            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">BAM HUB™</p>
-            <h3 className="mt-2 text-2xl font-black">SAVE</h3>
+            <p className="text-xs font-black tracking-[0.25em] text-cyan-300">
+              BAM ASSIST™
+            </p>
+            <h3 className="mt-2 text-2xl font-black">Q&A</h3>
           </div>
         </section>
 
@@ -208,10 +209,13 @@ Attach this scan to a machine profile in BAM Hub™ with facility, equipment ID,
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">Equipment Image</h2>
+          <h2 className="text-3xl font-black text-cyan-300">
+            Equipment Image
+          </h2>
 
           <p className="mt-4 text-slate-300">
-            Upload a machine tag, equipment label, electrical panel, equipment log, or component photo.
+            Upload a machine tag, equipment label, electrical panel, equipment
+            log, or component photo.
           </p>
 
           <input
@@ -227,61 +231,34 @@ Attach this scan to a machine profile in BAM Hub™ with facility, equipment ID,
           >
             RUN BAM SCAN™
           </button>
-        </section>
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">BAM Scan™ Report</h2>
+          {scanStatus && (
+            <div className="mt-6 rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
+              {scanStatus}
+            </div>
+          )}
 
-          <div className="mt-6 whitespace-pre-wrap rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
-            {result ||
-              `Awaiting equipment image.
-
-◈ Asset Intelligence
-Manufacturer:
-Equipment Type:
-Model:
-Serial:
-Ratings:
-
-◈ Safety Intelligence
-Hazards:
-Energy Sources:
-Lockout / Tagout:
-
-◈ Parts Intelligence
-Components:
-Replacement Parts:
-
-◈ Troubleshooting
-Observed Issues:
-Tests:
-Recommended Action:
-
-◈ BAM Hub™ Machine Memory
-Repair Notes:
-Knowledge Captured:
-Future Prevention:`}
-          </div>
-
-          <button
-            onClick={saveToHub}
-            className="mt-6 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400"
-          >
-            SAVE SCAN TO BAM HUB™
-          </button>
-
-          {hubRecord && (
-            <div className="mt-6 whitespace-pre-wrap rounded-xl border border-cyan-400/40 bg-slate-900 p-5 text-sm leading-6 text-slate-200">
-              {hubRecord}
+          {machineConnected && (
+            <div className="mt-6 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-5 text-sm leading-6 text-slate-200">
+              <p className="font-black text-cyan-300">
+                BAM Assist™ connected to this machine scan.
+              </p>
+              <p className="mt-2">
+                The report is stored behind the scenes as prototype BAM Hub™
+                memory. Ask direct questions below.
+              </p>
             </div>
           )}
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">BAM Assist™ AI Q&A</h2>
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM Assist™ Machine Q&A
+          </h2>
 
           <p className="mt-4 text-slate-300">
-            Ask direct equipment questions. BAM Assist™ will use the current BAM Scan™ report and answer short.
+            Ask questions after scanning. BAM Assist™ uses the stored scan data
+            from the photo instead of showing a large report first.
           </p>
 
           <div className="mt-6 space-y-4">
@@ -320,10 +297,37 @@ Future Prevention:`}
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">BAMToolz™ Support</h2>
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM Hub™ Prototype Memory
+          </h2>
 
           <p className="mt-4 text-slate-300">
-            Founder: Justin Ball | Company: Ball Advanced Management™
+            Current prototype memory status:{" "}
+            <span className="font-black text-cyan-300">
+              {scanData ? "Scan data captured behind the scenes." : "No scan stored yet."}
+            </span>
+          </p>
+
+          <p className="mt-4 text-slate-300">
+            Future version: this scan will save to the backend under BAM Hub™ →
+            Machine History → Reports.
+          </p>
+
+          <a
+            href="/hub"
+            className="mt-6 inline-block rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+          >
+            Open BAM Hub™
+          </a>
+        </section>
+
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM™ Support
+          </h2>
+
+          <p className="mt-4 text-slate-300">
+            Founder: Justin Ball | Company: Ball AI Metrics™
           </p>
 
           <p className="mt-4 text-slate-300">
@@ -335,7 +339,7 @@ Future Prevention:`}
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM Scan™ | BAMToolz™ | Ball Advanced Management™</p>
+          <p>© 2026 BAM Scan™ | BAM™ | Ball AI Metrics™</p>
         </footer>
       </div>
     </main>
