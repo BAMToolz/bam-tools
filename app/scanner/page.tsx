@@ -117,7 +117,7 @@ export default function ScannerPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Equipment capture, AI maintenance support, and machine intelligence.
+              Ball AI Metrics™
             </p>
           </div>
 
@@ -283,7 +283,7 @@ export default function ScannerPage() {
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM Scan™ | BAMToolz™ | Ball Advanced Management™</p>
+          <p>© 2026 BAM Scan™ | BAMToolz™ | Ball AI Metrics™</p>
         </footer>
       </div>
     </main>
