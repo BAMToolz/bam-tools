@@ -21,11 +21,11 @@ export default function ScannerPage() {
     const imageFile = selectedFile || file;
 
     if (!imageFile) {
-      setScanStatus("Please select an equipment photo before scanning.");
+      setScanStatus("Select an image before scanning.");
       return;
     }
 
-    setScanStatus("Analyzing equipment with BAM Scan™...");
+    setScanStatus("Analyzing with BAM AI™...");
     setMachineConnected(false);
     setMessages([]);
 
@@ -44,16 +44,16 @@ export default function ScannerPage() {
         data.analysis ||
         data.result ||
         data.message ||
-        "BAM Scan™ connected, but no scan data was returned.";
+        "BAM AI™ connected, but no scan data was returned.";
 
       setScanData(report);
       setMachineConnected(true);
-      setScanStatus("Equipment scan complete. BAM Assist™ is ready.");
+      setScanStatus("Scan complete. BAM Assist™ is ready.");
 
       setMessages([
         {
           role: "bam",
-          text: "Equipment scan complete. Ask a maintenance question about this scan.",
+          text: "Scan complete. Ask a maintenance question about this equipment.",
         },
       ]);
     } catch (error: any) {
@@ -73,13 +73,13 @@ export default function ScannerPage() {
 
   function startVoiceInput() {
     const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      (window as any).SpeechRecognition ||
+      (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      setInput("Voice input is not supported on this browser. Type your question here.");
+      setInput("Voice input is not supported on this browser.");
       return;
     }
-
 
     const recognition = new SpeechRecognition();
     recognition.lang = "en-US";
@@ -92,7 +92,7 @@ export default function ScannerPage() {
     };
 
     recognition.onerror = () => {
-      setInput("Voice input could not be completed. Type your question here.");
+      setInput("Voice input could not be completed.");
     };
 
     recognition.start();
@@ -203,43 +203,36 @@ export default function ScannerPage() {
           </p>
         </section>
 
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={(e) => handleFileChange(e.target.files)}
+          className="hidden"
+        />
+
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">Equipment Image</h2>
-
-          <p className="mt-4 text-slate-300">
-            Tap the plus button below to select a machine tag, equipment label,
-            panel, log, or component photo.
-          </p>
-
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleFileChange(e.target.files)}
-            className="hidden"
-          />
-
-          <div className="mt-6 flex items-center gap-3 rounded-2xl border border-cyan-400 bg-slate-900 p-3">
+          <div className="flex items-center gap-3 rounded-full border border-cyan-400 bg-slate-900 p-3">
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-3xl font-black text-slate-950 hover:bg-cyan-400"
-              aria-label="Add equipment photo"
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-4xl font-light text-slate-950 hover:bg-cyan-400"
+              aria-label="Add image"
             >
               +
             </button>
 
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-black text-cyan-300">
-                {file ? "Selected equipment photo" : "Add equipment photo"}
+              <p className="text-lg font-black text-cyan-300">
+                BAM AI™
               </p>
-              <p className="truncate text-xs text-slate-300">
-                {file ? file.name : "Choose a photo to run BAM Scan™"}
+              <p className="truncate text-sm text-slate-300">
+                {file ? file.name : "Select image"}
               </p>
             </div>
 
             <button
               onClick={() => runScan()}
-              className="rounded-xl bg-cyan-500 px-4 py-3 text-sm font-black text-slate-950 hover:bg-cyan-400"
+              className="rounded-full bg-cyan-500 px-6 py-4 text-sm font-black text-slate-950 hover:bg-cyan-400"
             >
               Scan
             </button>
@@ -267,7 +260,7 @@ export default function ScannerPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM Assist™ Machine Q&A
+            BAM Assist™
           </h2>
 
           <p className="mt-4 text-slate-300">
@@ -298,44 +291,45 @@ export default function ScannerPage() {
             </div>
           )}
 
-          <div className="mt-6 flex items-end gap-3 rounded-2xl border border-cyan-400 bg-slate-900 p-3">
+          <div className="mt-6 flex items-center gap-3 rounded-full border border-cyan-400 bg-slate-900 p-3">
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-2xl font-black text-slate-950 hover:bg-cyan-400"
-              aria-label="Add equipment photo"
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-3xl font-light text-slate-950 hover:bg-cyan-400"
+              aria-label="Add image"
             >
               +
             </button>
 
-            <textarea
+            <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={
                 machineConnected
-                  ? "Ask about model, serial, parts, safety, possible issue, or next check..."
-                  : "Scan equipment first..."
+                  ? "Ask BAM Assist™"
+                  : "Scan equipment first"
               }
               disabled={!machineConnected}
-              className="min-h-12 flex-1 resize-none rounded-xl border border-cyan-400 bg-slate-950 p-3 text-white outline-none disabled:opacity-50"
+              className="h-12 flex-1 rounded-full bg-transparent px-2 text-white outline-none placeholder:text-slate-400 disabled:opacity-50"
             />
 
             <button
               onClick={startVoiceInput}
               disabled={!machineConnected}
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-xl font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-slate-950 text-2xl text-cyan-300 hover:bg-cyan-950 disabled:opacity-50"
               aria-label="Voice input"
             >
               🎙️
             </button>
-          </div>
 
-          <button
-            onClick={sendMessage}
-            disabled={!machineConnected || !input.trim()}
-            className="mt-4 w-full rounded-xl bg-cyan-500 px-6 py-4 font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
-          >
-            Ask BAM Assist™
-          </button>
+            <button
+              onClick={sendMessage}
+              disabled={!machineConnected || !input.trim()}
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-xl font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
+              aria-label="Send"
+            >
+              ▶
+            </button>
+          </div>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
