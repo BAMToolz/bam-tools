@@ -1,0 +1,301 @@
+"use client";
+
+import { useState } from "react";
+
+type Message = {
+  role: "user" | "bam";
+  text: string;
+};
+
+export default function HomeScannerPage() {
+  const [file, setFile] = useState<File | null>(null);
+  const [scanProgress, setScanProgress] = useState(0);
+  const [statusText, setStatusText] = useState("Ready for a home repair scan.");
+  const [issueConnected, setIssueConnected] = useState(false);
+  const [scanData, setScanData] = useState("");
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  function startProgress() {
+    setScanProgress(10);
+    setStatusText("Preparing BAM Home™ scan...");
+
+    const steps = [
+      { progress: 25, text: "Looking for labels, parts, damage, or warning signs..." },
+      { progress: 45, text: "Building a repair issue profile..." },
+      { progress: 65, text: "Connecting scan to BAM AI™..." },
+      { progress: 85, text: "Preparing repair guidance..." },
+    ];
+
+    steps.forEach((step, index) => {
+      setTimeout(() => {
+        setScanProgress(step.progress);
+        setStatusText(step.text);
+      }, 650 * (index + 1));
+    });
+  }
+
+  async function runHomeScan() {
+    if (!file) {
+      setStatusText("Upload a picture of the appliance, tool, vehicle issue, warning label, leak, part, or repair problem.");
+      setScanProgress(0);
+      return;
+    }
+
+    setIssueConnected(false);
+    setScanData("");
+    setMessages([]);
+    startProgress();
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await fetch("/api/scan", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      const report =
+        data.analysis ||
+        data.result ||
+        data.message ||
+        "BAM AI™ could not identify enough details from this image.";
+
+      setScanData(report);
+      setIssueConnected(true);
+      setScanProgress(100);
+      setStatusText("Home issue connected. BAM AI™ is ready.");
+
+      setMessages([
+        {
+          role: "bam",
+          text: "Home issue connected. Ask BAM AI™ what this might be, what to check safely, what information to collect, or what kind of repair help may be needed.",
+        },
+      ]);
+    } catch (error: any) {
+      setIssueConnected(false);
+      setScanProgress(0);
+      setStatusText(error?.message || "BAM Home™ scan failed. Try another image.");
+    }
+  }
+
+  async function askBamHome() {
+    const userQuestion = input.trim();
+
+    if (!userQuestion) return;
+
+    setMessages((prev) => [
+      ...prev,
+      { role: "user", text: userQuestion },
+      { role: "bam", text: "BAM AI™ is reviewing the home repair issue..." },
+    ]);
+
+    setInput("");
+
+    try {
+      const response = await fetch("/api/assist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          question: userQuestion,
+          scanData,
+        }),
+      });
+
+      const data = await response.json();
+
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        {
+          role: "bam",
+          text: data.result || data.error || "BAM AI™ returned no home repair guidance.",
+        },
+      ]);
+    } catch (error: any) {
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        {
+          role: "bam",
+          text: error?.message || "BAM AI™ connection failed.",
+        },
+      ]);
+    }
+  }
+
+  return (
+    <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
+      <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
+        <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
+              BAM Home™
+            </div>
+
+            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+              Home Repair Scan™
+            </h1>
+
+            <p className="mt-2 text-sm font-medium text-cyan-50">
+              Consumer repair assistance powered by BAM Scan™
+            </p>
+          </div>
+
+          <nav className="flex flex-wrap gap-3">
+            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home™</a>
+            <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Home™</a>
+            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Industrial Scan™</a>
+            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Access™</a>
+            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
+          </nav>
+        </header>
+
+        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
+          <p className="text-sm font-black tracking-wide text-cyan-300">
+            EVERYDAY REPAIR SCAN™
+          </p>
+
+          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
+            Take a picture. Ask what it is. Find the next repair step.
+          </h2>
+
+          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
+            Use BAM Home™ for appliances, vehicles, tools, home systems, leaks,
+            warning labels, broken parts, and repair problems. BAM AI™ helps
+            explain the issue and what information to collect before repair.
+          </p>
+        </section>
+
+        <section className="mt-6 grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
+            <h2 className="text-3xl font-black text-cyan-300">
+              Capture Home Issue™
+            </h2>
+
+            <p className="mt-4 text-sm leading-6 text-slate-300">
+              Good targets: appliance label, model sticker, warning light,
+              leaking pipe, damaged part, tool issue, vehicle part, pool pump,
+              AC unit, generator, or repair problem.
+            </p>
+
+            <label className="mt-6 block rounded-xl border border-dashed border-cyan-400 bg-slate-900 p-5 text-center hover:bg-slate-800">
+              <span className="block text-sm font-black text-cyan-300">
+                Select or Capture Home Repair Image
+              </span>
+
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                className="mt-4 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-sm text-slate-200"
+              />
+            </label>
+
+            {file && (
+              <div className="mt-4 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
+                <p className="text-sm font-black text-cyan-300">
+                  Selected Image
+                </p>
+                <p className="mt-2 break-all text-sm text-slate-200">
+                  {file.name}
+                </p>
+              </div>
+            )}
+
+            <button
+              onClick={runHomeScan}
+              className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Run BAM Home™ Scan
+            </button>
+          </div>
+
+          <div className="rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
+            <h2 className="text-3xl font-black text-cyan-300">
+              Scan Progress™
+            </h2>
+
+            <div className="mt-6 rounded-xl bg-slate-900 p-5">
+              <div className="mb-2 flex justify-between gap-4 text-sm font-bold text-cyan-300">
+                <span>{statusText}</span>
+                <span>{scanProgress}%</span>
+              </div>
+
+              <div className="h-4 overflow-hidden rounded-full bg-slate-800">
+                <div
+                  className="h-full rounded-full bg-cyan-400 transition-all duration-500"
+                  style={{ width: `${scanProgress}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="mt-5 rounded-xl border border-yellow-300/60 bg-yellow-400/10 p-4">
+              <p className="font-black text-yellow-200">Safety Note™</p>
+              <p className="mt-2 text-sm leading-6 text-yellow-50">
+                Do not open electrical panels, gas systems, pressurized lines,
+                or dangerous equipment unless qualified. Turn off power/water/gas
+                only when safe and follow professional guidance.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM AI™ Home Assist
+          </h2>
+
+          <p className="mt-4 text-sm leading-6 text-slate-300">
+            {issueConnected
+              ? "Home issue connected. Ask about the likely issue, what to check safely, what information to collect, or what repair help may be needed."
+              : "Run a BAM Home™ scan first to connect BAM AI™ to the issue."}
+          </p>
+
+          {messages.map((msg, index) => (
+            <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
+              <p className="text-sm font-black uppercase tracking-wide text-cyan-300">
+                {msg.role === "user" ? "User" : "BAM AI™"}
+              </p>
+
+              <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
+                {msg.text}
+              </p>
+            </div>
+          ))}
+
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={!issueConnected}
+            placeholder={
+              issueConnected
+                ? "Ask BAM AI™ what this is, what to check, or what kind of repair may be needed..."
+                : "Run a home scan first..."
+            }
+            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-white placeholder:text-slate-400 outline-none disabled:text-slate-500"
+          />
+
+          <button
+            onClick={askBamHome}
+            disabled={!issueConnected || !input.trim()}
+            className={`mt-4 w-full rounded-xl p-4 font-black ${
+              issueConnected && input.trim()
+                ? "bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+                : "border border-cyan-500/40 bg-slate-950 text-cyan-900"
+            }`}
+          >
+            Ask BAM AI™
+          </button>
+        </section>
+
+        <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
+          <p>© 2026 BAM Home™ | BAM Scan™ | Ball AI Metrics™</p>
+        </footer>
+      </div>
+    </main>
+  );
+}
