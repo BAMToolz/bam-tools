@@ -197,13 +197,6 @@ export default function ScannerPage() {
             and components, then connects the scan to BAM AI™ for technician
             support, troubleshooting, documentation, and machine memory.
           </p>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-4">
-            <Step number="01" title="Capture" text="Upload equipment image." />
-            <Step number="02" title="Identify" text="Read visible machine data." />
-            <Step number="03" title="Assist" text="Ask BAM AI™ what matters." />
-            <Step number="04" title="Remember" text="Save to BAM Hub™." />
-          </div>
         </section>
 
         <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-6 shadow-2xl">
@@ -378,24 +371,6 @@ export default function ScannerPage() {
         </footer>
       </div>
     </main>
-  );
-}
-
-function Step({
-  number,
-  title,
-  text,
-}: {
-  number: string;
-  title: string;
-  text: string;
-}) {
-  return (
-    <div className="rounded-xl border border-cyan-400/40 bg-slate-900 p-5">
-      <p className="text-sm font-black text-cyan-300">{number}</p>
-      <h3 className="mt-2 text-xl font-black">{title}</h3>
-      <p className="mt-2 text-sm text-slate-300">{text}</p>
-    </div>
   );
 }
 
