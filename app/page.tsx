@@ -30,6 +30,9 @@ export default function Home() {
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               Metrics™
             </a>
+            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
+              Access™
+            </a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               Support™
             </a>
@@ -141,7 +144,7 @@ export default function Home() {
             <a href="/scanner" className="hover:text-white">BAM Scan</a>
             <a href="/workorders" className="hover:text-white">Work Orders</a>
             <a href="/metrics" className="hover:text-white">Metrics</a>
-            <a href="/login" className="hover:text-white">Access</a>
+            <a href="/access" className="hover:text-white">Access™</a>
             <a href="mailto:BAMToolzsupport@gmail.com" className="hover:text-white">Contact</a>
           </div>
         </footer>
