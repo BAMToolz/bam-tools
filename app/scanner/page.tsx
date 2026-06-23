@@ -58,7 +58,9 @@ export default function ScannerPage() {
 
   async function runScan() {
     if (!file) {
-      setScanFunText("Start with a machine nameplate, tag, label, or visible equipment image.");
+      setScanFunText(
+        "Start with a machine nameplate, tag, label, or visible equipment image."
+      );
       setScanProgress(0);
       return;
     }
@@ -66,6 +68,7 @@ export default function ScannerPage() {
     setMachineConnected(false);
     setMessages([]);
     setSaveStatus("");
+    setScanData("");
     setMachineIdentity({
       name: "",
       manufacturer: "",
@@ -103,7 +106,14 @@ export default function ScannerPage() {
 
       setMachineConnected(true);
       setScanProgress(100);
-      setScanFunText("Machine identity loaded. BAM AI™ is ready.");
+      setScanFunText("Machine connected. BAM AI™ is ready.");
+
+      setMessages([
+        {
+          role: "bam",
+          text: "Machine connected. BAM AI™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history.",
+        },
+      ]);
     } catch (error: any) {
       setMachineConnected(false);
       setScanProgress(0);
@@ -292,16 +302,14 @@ export default function ScannerPage() {
             </div>
 
             {machineConnected && (
-              <div className="mt-5 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
-                <p className="font-black text-cyan-300">
-                  Machine Identity™
-                </p>
+              <div className="mt-5 rounded-xl border border-cyan-300 bg-cyan-400/15 p-4">
+                <p className="font-black text-cyan-200">Machine Identity™</p>
 
-                <div className="mt-4 grid gap-2 text-sm text-slate-300">
-                  <p><span className="font-black text-cyan-300">Machine:</span> {machineIdentity.name}</p>
-                  <p><span className="font-black text-cyan-300">Manufacturer:</span> {machineIdentity.manufacturer}</p>
-                  <p><span className="font-black text-cyan-300">Model:</span> {machineIdentity.model}</p>
-                  <p><span className="font-black text-cyan-300">Serial:</span> {machineIdentity.serial}</p>
+                <div className="mt-4 grid gap-2 text-sm text-slate-100">
+                  <p><span className="font-black text-cyan-200">Machine:</span> {machineIdentity.name}</p>
+                  <p><span className="font-black text-cyan-200">Manufacturer:</span> {machineIdentity.manufacturer}</p>
+                  <p><span className="font-black text-cyan-200">Model:</span> {machineIdentity.model}</p>
+                  <p><span className="font-black text-cyan-200">Serial:</span> {machineIdentity.serial}</p>
                 </div>
               </div>
             )}
@@ -318,36 +326,70 @@ export default function ScannerPage() {
           </p>
         </section>
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM AI™ Technician Assist
-          </h2>
+        <section
+          className={`mt-8 rounded-2xl p-6 shadow-2xl sm:p-8 ${
+            machineConnected
+              ? "border border-cyan-200 bg-white text-slate-950"
+              : "bg-slate-950/95 text-white"
+          }`}
+        >
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2
+                className={`text-3xl font-black ${
+                  machineConnected ? "text-cyan-700" : "text-cyan-300"
+                }`}
+              >
+                BAM AI™ Technician Assist
+              </h2>
 
-          <p className="mt-4 text-sm leading-6 text-slate-300">
-            {machineConnected
-              ? "Machine identity is loaded. Ask BAM AI™ what to verify, inspect, research, or save next."
-              : "Begin machine identification first to connect BAM AI™ to the equipment."}
-          </p>
+              <p
+                className={`mt-4 text-sm leading-6 ${
+                  machineConnected ? "text-slate-700" : "text-slate-300"
+                }`}
+              >
+                {machineConnected
+                  ? "Machine connected. BAM AI™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history."
+                  : "Begin machine identification first to connect BAM AI™ to the equipment."}
+              </p>
+            </div>
+
+            <div
+              className={`rounded-full px-4 py-2 text-xs font-black ${
+                machineConnected
+                  ? "bg-cyan-100 text-cyan-800"
+                  : "bg-slate-900 text-slate-400"
+              }`}
+            >
+              {machineConnected ? "ASSIST ACTIVE" : "STANDING BY"}
+            </div>
+          </div>
 
           {machineConnected && (
             <div className="mt-5 grid gap-3 md:grid-cols-3">
               <button
-                onClick={() => sendMessage("What visible machine identity details should I verify first?")}
-                className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
+                onClick={() =>
+                  sendMessage("What visible machine identity details should I verify first?")
+                }
+                className="rounded-xl border border-cyan-500 bg-cyan-50 p-3 text-sm font-black text-cyan-800 hover:bg-cyan-100"
               >
                 Verify Identity™
               </button>
 
               <button
-                onClick={() => sendMessage("What information should be added next to build this machine profile?")}
-                className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
+                onClick={() =>
+                  sendMessage("What information should be added next to build this machine profile?")
+                }
+                className="rounded-xl border border-cyan-500 bg-cyan-50 p-3 text-sm font-black text-cyan-800 hover:bg-cyan-100"
               >
                 Build Profile™
               </button>
 
               <button
-                onClick={() => sendMessage("Create a short machine identity note from this scan.")}
-                className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
+                onClick={() =>
+                  sendMessage("Create a short machine identity note from this scan.")
+                }
+                className="rounded-xl border border-cyan-500 bg-cyan-50 p-3 text-sm font-black text-cyan-800 hover:bg-cyan-100"
               >
                 Identity Note™
               </button>
@@ -355,12 +397,29 @@ export default function ScannerPage() {
           )}
 
           {messages.map((msg, index) => (
-            <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
-              <p className="text-sm font-black uppercase tracking-wide text-cyan-300">
+            <div
+              key={index}
+              className={`mt-4 rounded-xl p-5 ${
+                machineConnected
+                  ? msg.role === "tech"
+                    ? "bg-slate-100"
+                    : "border border-cyan-200 bg-cyan-50"
+                  : "bg-slate-900"
+              }`}
+            >
+              <p
+                className={`text-sm font-black uppercase tracking-wide ${
+                  machineConnected ? "text-cyan-700" : "text-cyan-300"
+                }`}
+              >
                 {msg.role === "tech" ? "Technician" : "BAM AI™"}
               </p>
 
-              <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
+              <p
+                className={`mt-3 whitespace-pre-wrap text-sm leading-6 ${
+                  machineConnected ? "text-slate-800" : "text-slate-200"
+                }`}
+              >
                 {msg.text}
               </p>
             </div>
@@ -375,7 +434,11 @@ export default function ScannerPage() {
                 ? "Ask BAM AI™ about identification, verification, parts research, manuals, or next profile data..."
                 : "Begin identification first..."
             }
-            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white"
+            className={`mt-6 min-h-28 w-full rounded-xl border p-4 ${
+              machineConnected
+                ? "border-cyan-500 bg-white text-slate-950 placeholder:text-slate-500"
+                : "border-cyan-400 bg-slate-900 text-white placeholder:text-slate-500"
+            }`}
           />
 
           <button
@@ -397,7 +460,7 @@ export default function ScannerPage() {
 
               <a
                 href="/workorders"
-                className="rounded-xl border border-cyan-400 p-4 text-center font-black text-cyan-200 hover:bg-cyan-950"
+                className="rounded-xl border border-cyan-500 p-4 text-center font-black text-cyan-800 hover:bg-cyan-50"
               >
                 Create Work Order™
               </a>
@@ -405,7 +468,7 @@ export default function ScannerPage() {
           )}
 
           {saveStatus && (
-            <p className="mt-4 font-bold text-cyan-300">{saveStatus}</p>
+            <p className="mt-4 font-bold text-cyan-700">{saveStatus}</p>
           )}
         </section>
 
