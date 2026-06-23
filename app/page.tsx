@@ -2,7 +2,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
-        
         <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
@@ -14,7 +13,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Ball AI Metrics™ | The future is now.
+              Ball AI Metrics™ | Connected Intelligence Platform™
             </p>
           </div>
 
@@ -49,21 +48,20 @@ export default function Home() {
           </nav>
         </header>
 
-
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            BALL AI METRICS™
+            CONNECTED INTELLIGENCE PLATFORM™
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            The future is now. AI powered knowledge for people, machines, and industry.
+            Transforming real-world information into intelligent action.
           </h2>
 
           <p className="mt-6 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM™ connects artificial intelligence with real world problems.
-            BAM Scan™ helps identify products, parts, issues, and questions.
-            BAMToolz™ expands into industrial maintenance, machine intelligence,
-            equipment memory, and facility performance.
+            BAM™ connects people, technology, and industry through intelligent
+            scanning, AI assistance, knowledge capture, and data-driven insights.
+            From everyday questions to advanced manufacturing, Ball AI Metrics™
+            turns information into action.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -88,7 +86,9 @@ export default function Home() {
               View BAM Metrics™
             </a>
           </div>
-        </section>        <section id="platform" className="mt-8 grid gap-5 md:grid-cols-4">
+        </section>
+
+        <section id="platform" className="mt-8 grid gap-5 md:grid-cols-4">
           <Card
             title="BAM Scan™"
             href="/scan"
@@ -113,7 +113,6 @@ export default function Home() {
             text="Facility intelligence built from scans, work orders, reliability data, and machine history."
           />
         </section>
-
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
@@ -147,7 +146,6 @@ export default function Home() {
           </div>
         </section>
 
-
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
             Built under Ball AI Metrics™
@@ -160,7 +158,6 @@ export default function Home() {
             preserve knowledge, and make better decisions.
           </p>
         </section>
-
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
@@ -183,26 +180,23 @@ export default function Home() {
           </p>
         </section>
 
-
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM™ | BAMToolz™ | Ball AI Metrics™</p>
 
           <div className="mt-4 flex flex-wrap justify-center gap-6">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-            <a href="/scan">BAM Scan™</a>
-            <a href="/toolz/scan">BAMToolz™</a>
-            <a href="/hub">BAM Hub™</a>
-            <a href="/metrics">Metrics™</a>
-            <a href="/access">Access™</a>
+            <a href="/privacy" className="hover:text-white">Privacy</a>
+            <a href="/terms" className="hover:text-white">Terms</a>
+            <a href="/scan" className="hover:text-white">BAM Scan™</a>
+            <a href="/toolz/scan" className="hover:text-white">BAMToolz™</a>
+            <a href="/hub" className="hover:text-white">BAM Hub™</a>
+            <a href="/metrics" className="hover:text-white">Metrics™</a>
+            <a href="/access" className="hover:text-white">Access™</a>
           </div>
         </footer>
-
       </div>
     </main>
   );
 }
-
 
 function Card({
   title,
@@ -228,7 +222,6 @@ function Card({
     </a>
   );
 }
-
 
 function Step({
   number,
