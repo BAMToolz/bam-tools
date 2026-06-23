@@ -80,6 +80,7 @@ export default function ScannerPage() {
 
     const formData = new FormData();
     formData.append("image", file);
+    formData.append("mode", "industrial");
 
     try {
       const response = await fetch("/api/scan", {
@@ -215,10 +216,10 @@ export default function ScannerPage() {
         <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black text-cyan-600">
-              BAM
+              BAMToolz™
             </div>
 
-            <h1 className="mt-3 text-5xl font-black">BAM Scan™</h1>
+            <h1 className="mt-3 text-5xl font-black">BAMToolz™ Scan</h1>
 
             <p className="mt-2 text-cyan-50">
               Industrial Equipment Scan™
@@ -227,8 +228,7 @@ export default function ScannerPage() {
 
           <nav className="flex flex-wrap gap-3">
             <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home™</a>
-            <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Home™</a>
-            <a href="/scanner/home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home Scan™</a>
+            <a href="/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Scan™</a>
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Hub™</a>
             <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
@@ -247,9 +247,10 @@ export default function ScannerPage() {
           </h2>
 
           <p className="mt-4 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            This industrial BAM Scan™ mode is built for facilities, technicians,
-            maintenance teams, and equipment records. Capture a nameplate, equipment tag,
-            fault screen, control panel, component, or visible machine image.
+            This BAMToolz™ scan mode is built for facilities, technicians,
+            maintenance teams, and equipment records. Capture a nameplate,
+            equipment tag, fault screen, control panel, component, or visible
+            machine image.
           </p>
         </section>
 
