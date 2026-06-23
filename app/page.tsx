@@ -18,8 +18,11 @@ export default function Home() {
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <a href="/scanner" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg hover:bg-cyan-400">
-              BAM Scan™
+            <a href="/scanner/home" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg hover:bg-cyan-400">
+              Home Scan™
+            </a>
+            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
+              Industrial Scan™
             </a>
             <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               BAM Home™
@@ -44,25 +47,33 @@ export default function Home() {
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            INDUSTRIAL AI MAINTENANCE INTELLIGENCE
+            AI SCANNING FOR HOMES AND INDUSTRY
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Scan equipment. Assist technicians. Build machine memory.
+            Scan problems. Assist people. Build useful repair intelligence.
           </h2>
 
           <p className="mt-6 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAMToolz™ helps maintenance teams identify machines, connect AI
-            technician support, save equipment knowledge, and turn repairs into
-            usable facility intelligence.
+            BAMToolz™ supports both everyday repair assistance and industrial
+            equipment intelligence. BAM Home™ helps users scan repair issues,
+            while Industrial BAM Scan™ helps technicians identify machines,
+            save equipment knowledge, and build facility intelligence.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
-              href="/scanner"
+              href="/scanner/home"
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
-              Launch BAM Scan™
+              Start Home Repair Scan™
+            </a>
+
+            <a
+              href="/scanner"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              Launch Industrial Scan™
             </a>
 
             <a
@@ -76,15 +87,15 @@ export default function Home() {
 
         <section id="platform" className="mt-8 grid gap-5 md:grid-cols-4">
           <Card
-            title="BAM Scan™"
-            href="/scanner"
-            text="Capture a machine image, nameplate, tag, fault screen, or component and connect it to BAM AI™ technician support."
+            title="Home Repair Scan™"
+            href="/scanner/home"
+            text="Everyday users can scan appliances, vehicles, tools, home systems, and repair issues for AI-guided next steps."
           />
 
           <Card
-            title="BAM Home™"
-            href="/bam-home"
-            text="Everyday users can scan appliances, vehicles, tools, home systems, and equipment for repair guidance."
+            title="Industrial BAM Scan™"
+            href="/scanner"
+            text="Technicians can capture machine images, nameplates, tags, fault screens, and components for equipment intelligence."
           />
 
           <Card
@@ -106,24 +117,23 @@ export default function Home() {
           </h2>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <Step number="01" title="Capture" text="Upload or take a machine image." />
-            <Step number="02" title="Identify" text="Extract machine identity details." />
-            <Step number="03" title="Assist" text="Ask BAM AI™ technician questions." />
-            <Step number="04" title="Save" text="Preserve knowledge in BAM Hub™." />
+            <Step number="01" title="Capture" text="Upload or take a picture of a repair issue or machine." />
+            <Step number="02" title="Identify" text="Use BAM AI™ to understand the object, issue, or equipment." />
+            <Step number="03" title="Assist" text="Ask BAM AI™ for next steps, repair guidance, or technician support." />
+            <Step number="04" title="Save" text="Future accounts preserve repair history, machine memory, and service knowledge." />
           </div>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Built for the future of maintenance.
+            Built for the future of repair and maintenance.
           </h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            The first goal is simple: make BAM Scan™ useful for technicians.
-            From there, BAM Hub™ becomes machine memory, work orders organize
-            repairs, and BAM Metrics™ turns maintenance activity into better
-            decisions. BAM Home™ expands the same scan-and-assist idea to
-            everyday repair support.
+            BAM Home™ expands scan-and-assist repair support to everyday users.
+            Industrial BAM Scan™ keeps the professional path focused on
+            technicians, machine identity, BAM Hub™, work orders, and facility
+            intelligence.
           </p>
         </section>
 
@@ -151,7 +161,8 @@ export default function Home() {
           <div className="mt-4 flex flex-wrap justify-center gap-6">
             <a href="/privacy" className="hover:text-white">Privacy</a>
             <a href="/terms" className="hover:text-white">Terms</a>
-            <a href="/scanner" className="hover:text-white">BAM Scan</a>
+            <a href="/scanner/home" className="hover:text-white">Home Scan™</a>
+            <a href="/scanner" className="hover:text-white">Industrial Scan™</a>
             <a href="/bam-home" className="hover:text-white">BAM Home™</a>
             <a href="/workorders" className="hover:text-white">Work Orders</a>
             <a href="/metrics" className="hover:text-white">Metrics</a>
