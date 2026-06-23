@@ -5,15 +5,15 @@ export default function Home() {
         <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
-              BAM™
+              Ball AI Metrics™
             </div>
 
             <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-              BAM™
+              Ball AI Metrics™
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Ball AI Metrics™
+              The future is now.
             </p>
           </div>
 
@@ -44,18 +44,17 @@ export default function Home() {
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            AI SCANNING FOR PEOPLE AND INDUSTRY
+            THE FUTURE IS NOW
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Scan anything. Assist people. Power industrial intelligence.
+            AI scanning, repair intelligence, and industrial memory under one system.
           </h2>
 
           <p className="mt-6 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM™ connects everyday visual identification with professional
-            industrial intelligence. BAM Scan™ helps users identify products,
-            parts, problems, and next steps. BAMToolz™ supports technicians,
-            machines, maintenance workflows, and facility intelligence.
+            Ball AI Metrics™ is building the BAM™ ecosystem: BAM Scan™ for visual
+            identification and assistance, BAMToolz™ for industrial maintenance,
+            BAM Hub™ for machine memory, and BAM Metrics™ for facility intelligence.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -74,10 +73,10 @@ export default function Home() {
             </a>
 
             <a
-              href="/hub"
+              href="/metrics"
               className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
             >
-              View BAM Hub™
+              View BAM Metrics™
             </a>
           </div>
         </section>
@@ -90,57 +89,58 @@ export default function Home() {
           />
 
           <Card
-            title="BAMToolz™ Scan"
+            title="BAMToolz™"
             href="/toolz/scan"
-            text="Technicians can capture machine images, nameplates, tags, fault screens, and components for equipment intelligence."
+            text="Industrial scanning for technicians, equipment identity, machine documentation, and facility maintenance workflows."
           />
 
           <Card
             title="BAM Hub™"
             href="/hub"
-            text="Store machine profiles, repair history, technician notes, manuals, parts data, and equipment memory."
+            text="The machine memory layer for equipment profiles, repair history, technician notes, manuals, parts data, and facility knowledge."
           />
 
           <Card
             title="BAM Metrics™"
             href="/metrics"
-            text="Track downtime, recurring failures, saved scans, work orders, reliability patterns, and improvement opportunities."
+            text="The intelligence layer for work orders, downtime patterns, reliability insights, knowledge capture, and maintenance performance."
           />
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            The BAM™ Ecosystem
+            Built under Ball AI Metrics™
           </h2>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <Step number="01" title="Capture" text="Upload or take a picture of a product, issue, part, or machine." />
-            <Step number="02" title="Identify" text="Use BAM Assist™ to understand what the image shows." />
-            <Step number="03" title="Assist" text="Research possible answers, parts, repairs, manuals, or next steps." />
-            <Step number="04" title="Scale" text="BAMToolz™ turns industrial scans into machine memory, work orders, and metrics." />
+            <Step number="01" title="Scan" text="Capture a product, issue, part, label, or industrial machine." />
+            <Step number="02" title="Assist" text="Use BAM Assist™ to identify what is visible and research next steps." />
+            <Step number="03" title="Remember" text="BAM Hub™ preserves machine knowledge, repair history, and technician experience." />
+            <Step number="04" title="Measure" text="BAM Metrics™ turns maintenance activity into facility intelligence." />
           </div>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Built for the future of repair and maintenance.
+            From everyday problems to industrial intelligence.
           </h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Scan™ is the universal scan and assist layer. BAMToolz™ is the
-            industrial platform layer for machine identity, BAM Hub™, work orders,
-            metrics, and facility intelligence.
+            BAM Scan™ is the universal visual input layer. BAMToolz™ is the
+            industrial platform. BAM Hub™ stores machine memory. BAM Metrics™
+            turns knowledge into measurable intelligence. Together, they form the
+            foundation of Ball AI Metrics™.
           </p>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM™ Support
+            Ball AI Metrics™ Support
           </h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             For BAM Scan™, BAMToolz™, machine identification, facility demos,
-            support, partnerships, or platform questions, contact BAM™.
+            support, partnerships, or platform questions, contact Ball AI Metrics™.
           </p>
 
           <p className="mt-5 text-lg">
@@ -152,7 +152,7 @@ export default function Home() {
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAM™ | BAMToolz™ | Ball AI Metrics™</p>
+          <p>© 2026 Ball AI Metrics™ | BAM™ | BAMToolz™</p>
 
           <div className="mt-4 flex flex-wrap justify-center gap-6">
             <a href="/privacy" className="hover:text-white">Privacy</a>
