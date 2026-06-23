@@ -16,6 +16,7 @@ export async function POST(req: Request) {
   try {
     const formData = await req.formData();
     const file = formData.get("image") as File | null;
+    const mode = (formData.get("mode") as string | null) || "consumer";
 
     if (!file) {
       return Response.json(
@@ -28,15 +29,28 @@ export async function POST(req: Request) {
     const base64 = Buffer.from(bytes).toString("base64");
     const imageUrl = `data:${file.type};base64,${base64}`;
 
-    const response = await openai.responses.create({
-      model: "gpt-4.1-mini",
-      input: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "input_text",
-              text: `You are BAM Scan™, an industrial maintenance AI.
+    const consumerPrompt = `You are BAM Scan™ with BAM Assist™.
+
+Analyze the image for product, part, label, object, issue, or repair research.
+
+Keep the answer short and useful.
+Do not pretend certainty if details are unclear.
+If something is not visible, write Not visible.
+Focus on identifying what is shown and what the user can ask next.
+
+Return this exact format:
+
+BAM Scan™
+
+Item:
+Brand:
+Model:
+Visible Details:
+Possible Category:
+Next:
+BAM Assist™`;
+
+    const industrialPrompt = `You are BAMToolz™ Scan, an industrial maintenance AI.
 
 Analyze the equipment image for quick technician documentation.
 
@@ -49,7 +63,7 @@ If a field is not visible, write Not visible.
 
 Return this exact format:
 
-BAM Scan™
+BAMToolz™ Scan
 
 Machine:
 Manufacturer:
@@ -57,7 +71,17 @@ Model:
 Serial:
 Next:
 Save:
-BAM Hub™`,
+BAM Hub™`;
+
+    const response = await openai.responses.create({
+      model: "gpt-4.1-mini",
+      input: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "input_text",
+              text: mode === "industrial" ? industrialPrompt : consumerPrompt,
             },
             {
               type: "input_image",
@@ -73,10 +97,16 @@ BAM Hub™`,
 
     return Response.json({
       success: true,
+      mode,
       analysis,
       result: analysis,
-      name: extractField(analysis, "Machine"),
-      manufacturer: extractField(analysis, "Manufacturer"),
+      name:
+        extractField(analysis, "Machine") ||
+        extractField(analysis, "Item") ||
+        "Scanned Item",
+      manufacturer:
+        extractField(analysis, "Manufacturer") ||
+        extractField(analysis, "Brand"),
       model: extractField(analysis, "Model"),
       serial: extractField(analysis, "Serial"),
     });
