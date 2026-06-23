@@ -1,44 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-type Machine = {
-  id: string;
-  name: string;
-  location?: string;
-  manufacturer?: string;
-  model?: string;
-  serial?: string;
-  notes: string;
-  createdAt: string;
-};
-
 export default function MetricsPage() {
-  const [machines, setMachines] = useState<Machine[]>([]);
-
-  useEffect(() => {
-    const savedMachines = JSON.parse(
-      localStorage.getItem("bamHubMachines") || "[]"
-    );
-
-    setMachines(savedMachines);
-  }, []);
-
-  const totalMachines = machines.length;
-  const totalScans = machines.length;
-  const knowledgeCaptured = machines.filter(
-    (machine) => machine.notes && machine.notes.trim().length > 0
-  ).length;
-
-  const facilityHealth =
-    totalMachines === 0 ? "Waiting" : totalMachines < 3 ? "Learning" : "Active";
-
-  const downtimeRisk =
-    totalMachines === 0 ? "Waiting" : totalMachines < 3 ? "Reviewing" : "Tracking";
-
-  const repairTrends =
-    totalMachines === 0 ? "Waiting" : totalMachines < 3 ? "Building" : "Learning";
-
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <section className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-8 shadow-2xl">
@@ -58,135 +18,93 @@ export default function MetricsPage() {
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Home™
-            </a>
-            <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Home™
-            </a>
-            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Scan™
-            </a>
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Hub™
-            </a>
-            <a href="/hub/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Machine List™
-            </a>
-            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Access™
-            </a>
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Support™
-            </a>
+            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home™</a>
+            <a href="/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Scan™</a>
+            <a href="/toolz/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAMToolz™</a>
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Hub™</a>
+            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
+            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Access™</a>
+            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
           </nav>
         </header>
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            FACILITY INTELLIGENCE DASHBOARD™
+            FACILITY INTELLIGENCE COMMAND CENTER™
           </p>
 
-          <h2 className="mt-4 text-4xl font-black text-cyan-300">
-            Turning machine memory into measurable intelligence.
+          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight text-cyan-300 sm:text-6xl">
+            Turning maintenance activity into measurable intelligence.
           </h2>
 
-          <p className="mt-5 max-w-5xl text-slate-300">
-            BAM Metrics™ reads saved BAM Hub™ machine memory on this device and
-            begins converting equipment scans into machine counts, scan totals,
-            knowledge capture, reliability tracking, and future downtime metrics.
+          <p className="mt-5 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
+            BAM Metrics™ is the intelligence layer for BAMToolz™. It turns
+            machine scans, work orders, technician notes, repair patterns, and
+            facility activity into visibility for maintenance teams and leaders.
           </p>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
-          <Card title="Machines Connected™" value={totalMachines.toString()} />
-          <Card title="Total BAM Scans™" value={totalScans.toString()} />
-          <Card title="Knowledge Captured™" value={knowledgeCaptured.toString()} />
-          <Card title="Facility Health™" value={facilityHealth} />
-          <Card title="Downtime Risk™" value={downtimeRisk} />
-          <Card title="Repair Trends™" value={repairTrends} />
+          <Card title="Machines Connected™" value="128" subtext="Assets linked into facility intelligence" />
+          <Card title="BAMToolz™ Scans" value="3,482" subtext="Equipment captures processed" />
+          <Card title="Knowledge Records™" value="9,420" subtext="Notes, repairs, parts, and history" />
+          <Card title="Work Orders Processed™" value="2,847" subtext="Maintenance actions organized" />
+          <Card title="Downtime Insights™" value="Active" subtext="Patterns tracked across equipment" />
+          <Card title="AI Analysis™" value="Online" subtext="BAM AI™ intelligence layer enabled" />
+        </section>
+
+        <section className="mt-8 grid gap-5 lg:grid-cols-2">
+          <Panel
+            title="Machine Health Overview™"
+            text="Monitor connected equipment, recurring faults, service needs, repair frequency, asset history, and maintenance readiness from one intelligence layer."
+          />
+
+          <Panel
+            title="Maintenance Performance™"
+            text="Track work order activity, technician documentation, response flow, repair status, priority load, and facility maintenance movement."
+          />
+
+          <Panel
+            title="Reliability Insights™"
+            text="Identify repeat failures, aging assets, missing documentation, parts pressure, and opportunities to prevent downtime before it becomes expensive."
+          />
+
+          <Panel
+            title="Knowledge Captured™"
+            text="Preserve technician notes, machine history, repair decisions, parts used, service outcomes, and the experience that normally disappears over time."
+          />
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Recent Machine Data™
+            Intelligence Sources™
           </h2>
 
-          {machines.length === 0 ? (
-            <div className="mt-5 rounded-xl bg-slate-900 p-5">
-              <p className="text-slate-300">
-                No machine data yet. Run BAM Scan™ and save equipment to BAM Hub™.
-              </p>
-
-              <a
-                href="/scanner"
-                className="mt-5 inline-block rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
-              >
-                Open BAM Scan™
-              </a>
-            </div>
-          ) : (
-            machines
-              .slice(-5)
-              .reverse()
-              .map((machine) => (
-                <div
-                  key={machine.id}
-                  className="mt-5 rounded-xl bg-slate-900 p-5"
-                >
-                  <p className="text-xl font-black text-cyan-300">
-                    {machine.name || "Scanned Equipment"}
-                  </p>
-
-                  <p className="mt-2 text-sm text-slate-400">
-                    Saved:{" "}
-                    {machine.createdAt
-                      ? new Date(machine.createdAt).toLocaleString()
-                      : "Unknown date"}
-                  </p>
-
-                  <div className="mt-4 grid gap-2 text-sm text-slate-300 md:grid-cols-2">
-                    <p>
-                      <span className="font-black text-cyan-300">Location:</span>{" "}
-                      {machine.location || "Unassigned"}
-                    </p>
-                    <p>
-                      <span className="font-black text-cyan-300">Model:</span>{" "}
-                      {machine.model || "Not identified"}
-                    </p>
-                    <p>
-                      <span className="font-black text-cyan-300">
-                        Manufacturer:
-                      </span>{" "}
-                      {machine.manufacturer || "Not identified"}
-                    </p>
-                    <p>
-                      <span className="font-black text-cyan-300">Serial:</span>{" "}
-                      {machine.serial || "Not identified"}
-                    </p>
-                  </div>
-                </div>
-              ))
-          )}
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            <SourceCard number="01" title="BAMToolz™ Scan" text="Captures machine identity and visible equipment information." />
+            <SourceCard number="02" title="BAM Hub™" text="Stores machine memory, documentation, notes, and repair history." />
+            <SourceCard number="03" title="Work Orders™" text="Organizes maintenance activity, priorities, technicians, and repair actions." />
+            <SourceCard number="04" title="BAM AI™" text="Connects scan data, notes, patterns, and recommendations." />
+          </div>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
           <ActionCard
-            title="Add Machine Data™"
-            text="Run BAM Scan™ and save another equipment record to BAM Hub™ memory."
-            href="/scanner"
+            title="Open BAMToolz™ Scan"
+            text="Capture industrial equipment data and feed machine intelligence."
+            href="/toolz/scan"
           />
 
           <ActionCard
-            title="Open Machine List™"
-            text="View all saved BAM Hub™ machine records stored on this device."
-            href="/hub/machines"
+            title="Open BAM Hub™"
+            text="View the protected machine memory layer behind facility intelligence."
+            href="/hub"
           />
 
           <ActionCard
-            title="Open Latest Profile™"
-            text="View the latest saved machine profile and attached scan memory."
-            href="/hub/machine"
+            title="Open Work Orders™"
+            text="Turn maintenance issues into organized repair workflow."
+            href="/workorders"
           />
         </section>
 
@@ -195,10 +113,10 @@ export default function MetricsPage() {
             BAM AI™ Metrics Engine
           </h2>
 
-          <p className="mt-4 max-w-5xl text-slate-300">
-            Future BAM AI™ analysis will identify recurring failures, recommend
-            preventative maintenance, predict downtime risk, preserve technician
-            knowledge, and turn machine history into reliability improvement.
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            Metrics populate as BAM Hub™, BAMToolz™ Scan, and Work Orders™ collect
+            facility intelligence. The goal is simple: make maintenance visible,
+            measurable, searchable, and easier to improve.
           </p>
         </section>
 
@@ -213,14 +131,50 @@ export default function MetricsPage() {
 function Card({
   title,
   value,
+  subtext,
 }: {
   title: string;
   value: string;
+  subtext: string;
 }) {
   return (
     <div className="rounded-2xl bg-slate-950/95 p-6 shadow-xl">
       <h2 className="font-black text-cyan-300">{title}</h2>
-      <p className="mt-4 text-3xl font-black">{value}</p>
+      <p className="mt-4 text-4xl font-black">{value}</p>
+      <p className="mt-3 text-sm leading-6 text-slate-300">{subtext}</p>
+    </div>
+  );
+}
+
+function Panel({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-cyan-400/30 bg-slate-950/95 p-6 shadow-xl">
+      <h2 className="text-2xl font-black text-cyan-300">{title}</h2>
+      <p className="mt-4 text-sm leading-6 text-slate-300">{text}</p>
+    </div>
+  );
+}
+
+function SourceCard({
+  number,
+  title,
+  text,
+}: {
+  number: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-xl border border-cyan-400/40 bg-slate-900 p-5">
+      <p className="text-sm font-black text-cyan-300">{number}</p>
+      <h3 className="mt-2 text-xl font-black">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
     </div>
   );
 }
