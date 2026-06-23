@@ -31,25 +31,13 @@ export default function MetricsPage() {
   ).length;
 
   const facilityHealth =
-    totalMachines === 0
-      ? "Waiting"
-      : totalMachines < 3
-        ? "Learning"
-        : "Active";
+    totalMachines === 0 ? "Waiting" : totalMachines < 3 ? "Learning" : "Active";
 
   const downtimeRisk =
-    totalMachines === 0
-      ? "Waiting"
-      : totalMachines < 3
-        ? "Reviewing"
-        : "Tracking";
+    totalMachines === 0 ? "Waiting" : totalMachines < 3 ? "Reviewing" : "Tracking";
 
   const repairTrends =
-    totalMachines === 0
-      ? "Waiting"
-      : totalMachines < 3
-        ? "Building"
-        : "Learning";
+    totalMachines === 0 ? "Waiting" : totalMachines < 3 ? "Building" : "Learning";
 
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
@@ -72,6 +60,9 @@ export default function MetricsPage() {
           <nav className="flex flex-wrap gap-3">
             <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Home™
+            </a>
+            <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              BAM Home™
             </a>
             <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               BAM Scan™
