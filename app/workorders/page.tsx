@@ -94,8 +94,14 @@ export default function WorkOrdersPage() {
               <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
                 BAM Hub™
               </a>
-              <a href="/login" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">
+              <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+                Metrics™
+              </a>
+              <a href="/access" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">
                 BAM Access™
+              </a>
+              <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+                Support™
               </a>
             </nav>
           </header>
@@ -117,7 +123,7 @@ export default function WorkOrdersPage() {
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
-                href="/login"
+                href="/access"
                 className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
               >
                 Open BAM Access™
@@ -207,6 +213,12 @@ export default function WorkOrdersPage() {
             </a>
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Metrics™
+            </a>
+            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Access™
+            </a>
+            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Support™
             </a>
           </nav>
         </header>
