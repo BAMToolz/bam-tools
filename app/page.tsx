@@ -21,6 +21,9 @@ export default function Home() {
             <a href="/scanner" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg hover:bg-cyan-400">
               BAM Scan™
             </a>
+            <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
+              BAM Home™
+            </a>
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               Hub™
             </a>
@@ -63,19 +66,25 @@ export default function Home() {
             </a>
 
             <a
-              href="#platform"
+              href="/bam-home"
               className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
             >
-              View Platform
+              Explore BAM Home™
             </a>
           </div>
         </section>
 
-        <section id="platform" className="mt-8 grid gap-5 md:grid-cols-3">
+        <section id="platform" className="mt-8 grid gap-5 md:grid-cols-4">
           <Card
             title="BAM Scan™"
             href="/scanner"
             text="Capture a machine image, nameplate, tag, fault screen, or component and connect it to BAM AI™ technician support."
+          />
+
+          <Card
+            title="BAM Home™"
+            href="/bam-home"
+            text="Everyday users can scan appliances, vehicles, tools, home systems, and equipment for repair guidance."
           />
 
           <Card
@@ -113,7 +122,8 @@ export default function Home() {
             The first goal is simple: make BAM Scan™ useful for technicians.
             From there, BAM Hub™ becomes machine memory, work orders organize
             repairs, and BAM Metrics™ turns maintenance activity into better
-            decisions.
+            decisions. BAM Home™ expands the same scan-and-assist idea to
+            everyday repair support.
           </p>
         </section>
 
@@ -142,6 +152,7 @@ export default function Home() {
             <a href="/privacy" className="hover:text-white">Privacy</a>
             <a href="/terms" className="hover:text-white">Terms</a>
             <a href="/scanner" className="hover:text-white">BAM Scan</a>
+            <a href="/bam-home" className="hover:text-white">BAM Home™</a>
             <a href="/workorders" className="hover:text-white">Work Orders</a>
             <a href="/metrics" className="hover:text-white">Metrics</a>
             <a href="/access" className="hover:text-white">Access™</a>
