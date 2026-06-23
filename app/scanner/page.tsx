@@ -244,34 +244,85 @@ export default function ScannerPage() {
           </h2>
 
           <p className="mt-4 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            Begin with machine identification. Start with a nameplate, tag,
-            label, or visible equipment image to identify the asset and connect
-            BAM AI™ for technician support.
+            Begin with machine identification. Capture a nameplate, equipment tag,
+            fault screen, component, or visible machine image. BAM Scan™ turns the
+            image into machine identity data and connects it to BAM AI™ support.
           </p>
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
-            <h2 className="text-3xl font-black text-cyan-300">
-              Machine Identity Image
-            </h2>
+          <div className="rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-sm font-black tracking-wide text-cyan-300">
+                  BAM SCAN™ CAPTURE
+                </p>
+
+                <h2 className="mt-2 text-3xl font-black text-cyan-300">
+                  Capture Equipment
+                </h2>
+              </div>
+
+              <div
+                className={`rounded-full px-4 py-2 text-xs font-black ${
+                  file
+                    ? "border border-cyan-300 bg-cyan-500/20 text-cyan-200"
+                    : "border border-slate-700 bg-slate-900 text-slate-400"
+                }`}
+              >
+                {file ? "IMAGE READY" : "AWAITING IMAGE"}
+              </div>
+            </div>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Start with a machine nameplate, tag, label, or clear equipment image.
-              This begins the first machine identity profile.
+              Upload or capture a machine image from your phone. Best results come
+              from clear nameplates, serial tags, fault screens, control panels,
+              components, or full equipment views.
             </p>
 
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setFile(e.target.files?.[0] || null)}
-              className="mt-6 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4"
-            />
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-cyan-400/30 bg-slate-900 p-4">
+                <p className="font-black text-cyan-300">Good Targets</p>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  Nameplate, model tag, serial plate, HMI alarm, panel label.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-cyan-400/30 bg-slate-900 p-4">
+                <p className="font-black text-cyan-300">Next Step</p>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  Run BAMToolz™ to build the first machine identity profile.
+                </p>
+              </div>
+            </div>
+
+            <label className="mt-6 block rounded-xl border border-dashed border-cyan-400 bg-slate-900 p-5 text-center hover:bg-slate-800">
+              <span className="block text-sm font-black text-cyan-300">
+                Select or Capture Machine Image
+              </span>
+
+              <span className="mt-2 block text-xs text-slate-400">
+                Phone camera uploads work here.
+              </span>
+
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                className="mt-4 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-sm text-slate-200"
+              />
+            </label>
 
             {file && (
-              <p className="mt-3 text-sm font-bold text-cyan-300">
-                Selected: {file.name}
-              </p>
+              <div className="mt-4 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
+                <p className="text-sm font-black text-cyan-300">
+                  Selected Image
+                </p>
+                <p className="mt-2 break-all text-sm text-slate-200">
+                  {file.name}
+                </p>
+              </div>
             )}
 
             <button
