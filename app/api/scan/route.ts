@@ -38,28 +38,26 @@ export async function POST(req: Request) {
               type: "input_text",
               text: `You are BAM Scan™, an industrial maintenance AI.
 
-Analyze this equipment image for maintenance documentation.
+Analyze the equipment image for quick technician documentation.
+
+Keep the answer very short.
+Do not write paragraphs.
+Do not guess machine condition.
+Do not include status, priority, downtime risk, confidence, safety notes, or possible issue.
+Only include fields that are visible or reasonably readable from the image.
+If a field is not visible, write Not visible.
 
 Return this exact format:
 
 BAM Scan™
 
-Machine Name:
+Machine:
 Manufacturer:
 Model:
-Serial/Tag:
-Visible Parts:
-Possible Issue:
-Check Next:
-Recommended Action:
-Safety Notes:
-Possible Parts:
-Downtime Risk:
-Priority:
-Confidence:
-
-BAM Hub™ Memory:
-Scan data captured for future machine history.`,
+Serial:
+Next:
+Save:
+BAM Hub™`,
             },
             {
               type: "input_image",
@@ -77,10 +75,10 @@ Scan data captured for future machine history.`,
       success: true,
       analysis,
       result: analysis,
-      name: extractField(analysis, "Machine Name"),
+      name: extractField(analysis, "Machine"),
       manufacturer: extractField(analysis, "Manufacturer"),
       model: extractField(analysis, "Model"),
-      serial: extractField(analysis, "Serial/Tag"),
+      serial: extractField(analysis, "Serial"),
     });
   } catch (error) {
     console.error("BAM Scan error:", error);
