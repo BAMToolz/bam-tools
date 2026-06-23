@@ -128,10 +128,10 @@ export default function ScannerPage() {
     setSaveStatus("Scan saved to BAM Hub™ machine memory on this device.");
   }
 
-  async function sendMessage() {
-    if (!input.trim()) return;
+  async function sendMessage(customQuestion?: string) {
+    const techText = customQuestion || input.trim();
 
-    const techText = input.trim();
+    if (!techText.trim()) return;
 
     setMessages((prev) => [
       ...prev,
@@ -185,7 +185,7 @@ export default function ScannerPage() {
             <h1 className="mt-3 text-5xl font-black">BAM Scan™</h1>
 
             <p className="mt-2 text-cyan-50">
-              Capture → Identify → Troubleshoot → Remember
+              Capture → AI Assist → Machine Memory
             </p>
           </div>
 
@@ -208,39 +208,29 @@ export default function ScannerPage() {
           </nav>
         </header>
 
-        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <p className="text-sm font-black tracking-wide text-cyan-300">
             BAM SCAN™ EQUIPMENT INTELLIGENCE
           </p>
 
-          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Scan equipment and turn machine data into action.
+          <h2 className="mt-3 max-w-5xl text-3xl font-black leading-tight tracking-tight sm:text-5xl">
+            Scan the machine. Let BAM AI™ take over.
           </h2>
 
-          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Scan™ captures equipment photos, tags, labels, panels, logs,
-            and components, then connects the scan to BAM AI™ for technician
-            support, troubleshooting, documentation, and machine memory.
+          <p className="mt-4 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
+            Capture equipment photos, tags, labels, panels, logs, or components.
+            BAM Scan™ loads the machine data into BAM AI™ so a technician can
+            ask what to inspect, repair, document, or save.
           </p>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-6 shadow-2xl">
-          <h2 className="text-2xl font-black text-yellow-200">Safety First™</h2>
-
-          <p className="mt-3 text-sm leading-6 text-yellow-50">
-            Informational support only. Follow OEM manuals, company procedures,
-            OSHA requirements, site safety rules, PPE requirements, and proper
-            lockout/tagout before inspection, troubleshooting, or repair.
-          </p>
-        </section>
-
-        <section className="mt-8 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+        <section className="mt-6 grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
             <h2 className="text-3xl font-black text-cyan-300">
               Equipment Image
             </h2>
 
-            <p className="mt-4 text-slate-300">
+            <p className="mt-4 text-sm leading-6 text-slate-300">
               Upload a machine tag, equipment label, electrical panel,
               component, nameplate, fault screen, or maintenance log.
             </p>
@@ -253,8 +243,8 @@ export default function ScannerPage() {
             />
 
             {file && (
-              <p className="mt-3 text-cyan-300">
-                Selected file: {file.name}
+              <p className="mt-3 text-sm font-bold text-cyan-300">
+                Selected: {file.name}
               </p>
             )}
 
@@ -266,9 +256,9 @@ export default function ScannerPage() {
             </button>
           </div>
 
-          <div className="rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <div className="rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
             <h2 className="text-3xl font-black text-cyan-300">
-              BAM Scan™ Progress
+              Scan Progress
             </h2>
 
             <div className="mt-6 rounded-xl bg-slate-900 p-5">
@@ -284,19 +274,62 @@ export default function ScannerPage() {
                 />
               </div>
             </div>
+
+            {machineConnected && (
+              <div className="mt-5 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
+                <p className="font-black text-cyan-300">
+                  Machine data loaded into BAM AI™
+                </p>
+              </div>
+            )}
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+        <section className="mt-6 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-5 shadow-2xl">
+          <h2 className="text-xl font-black text-yellow-200">Safety First™</h2>
+
+          <p className="mt-2 text-sm leading-6 text-yellow-50">
+            Informational support only. Follow OEM manuals, company procedures,
+            OSHA requirements, site safety rules, PPE, and lockout/tagout before
+            inspection, troubleshooting, or repair.
+          </p>
+        </section>
+
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <h2 className="text-3xl font-black text-cyan-300">
             BAM AI™ Technician Assist
           </h2>
 
-          <p className="mt-4 text-slate-300">
+          <p className="mt-4 text-sm leading-6 text-slate-300">
             {machineConnected
               ? "Machine data is loaded. Ask BAM AI™ what to check, repair, document, or save next."
               : "Run BAM Scan™ first to connect BAM AI™ to equipment data."}
           </p>
+
+          {machineConnected && (
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
+              <button
+                onClick={() => sendMessage("What should I inspect first on this machine?")}
+                className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
+              >
+                Inspect First™
+              </button>
+
+              <button
+                onClick={() => sendMessage("What parts or components may be involved based on this scan?")}
+                className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
+              >
+                Parts Check™
+              </button>
+
+              <button
+                onClick={() => sendMessage("Create a short maintenance note from this scan.")}
+                className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
+              >
+                Maintenance Note™
+              </button>
+            </div>
+          )}
 
           {messages.map((msg, index) => (
             <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
@@ -316,14 +349,14 @@ export default function ScannerPage() {
             disabled={!machineConnected}
             placeholder={
               machineConnected
-                ? "Example: What should I inspect first on this machine?"
+                ? "Ask BAM AI™ about inspection, repair, parts, notes, or next steps..."
                 : "Scan equipment first..."
             }
             className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white"
           />
 
           <button
-            onClick={sendMessage}
+            onClick={() => sendMessage()}
             disabled={!machineConnected || !input.trim()}
             className="mt-4 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
           >
@@ -353,25 +386,6 @@ export default function ScannerPage() {
           )}
         </section>
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            Powered by BAM Hub™ Machine Memory
-          </h2>
-
-          <p className="mt-4 max-w-5xl text-slate-300">
-            Every scan can become part of a machine profile. BAM Hub™ is designed
-            to remember equipment history, technician notes, manuals, repair
-            records, parts, and recurring issues so the facility gets smarter
-            over time.
-          </p>
-
-          <div className="mt-6 grid gap-5 md:grid-cols-3">
-            <Card title="BAM Hub™" href="/hub" text="Machine memory, scan history, manuals, notes, and facility equipment records." />
-            <Card title="BAM Work Orders™" href="/workorders" text="Turn scan results into assigned maintenance action and trackable repair history." />
-            <Card title="BAM Metrics™" href="/metrics" text="Convert saved repairs, failures, and downtime into measurable facility intelligence." />
-          </div>
-        </section>
-
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM Scan™ | BAMToolz™ | Ball AI Metrics™</p>
 
@@ -385,25 +399,5 @@ export default function ScannerPage() {
         </footer>
       </div>
     </main>
-  );
-}
-
-function Card({
-  title,
-  text,
-  href,
-}: {
-  title: string;
-  text: string;
-  href: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="block rounded-xl bg-slate-900 p-6 shadow-xl hover:bg-slate-800"
-    >
-      <h3 className="text-xl font-black text-cyan-300">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
-    </a>
   );
 }
