@@ -31,7 +31,7 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
-      <div className="mx-auto max-w-5xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-6 shadow-2xl sm:p-8">
+      <div className="mx-auto max-w-6xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-6 shadow-2xl sm:p-8">
         <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black text-cyan-600">
@@ -43,7 +43,7 @@ export default function LoginPage() {
             </h1>
 
             <p className="mt-2 text-cyan-50">
-              Ball AI Metrics™
+              Secure login gateway for BAM Hub™
             </p>
           </div>
 
@@ -51,78 +51,107 @@ export default function LoginPage() {
             <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
               Home™
             </a>
+            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
+              BAM Scan™
+            </a>
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
               BAM Hub™
             </a>
-            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
-              Metrics™
-            </a>
-            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
-              BAM Scan™
+            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
+              Support™
             </a>
           </nav>
         </header>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            SECURE FACILITY ACCESS™
+            PROTECTED FACILITY ACCESS™
           </p>
 
-          <h2 className="mt-4 text-3xl font-black text-cyan-300">
-            Technician, Engineer, and Facility Login
+          <h2 className="mt-4 max-w-4xl text-4xl font-black leading-tight text-cyan-300">
+            Enter the secure layer before machine memory.
           </h2>
 
-          <p className="mt-4 max-w-4xl text-slate-300">
-            BAM Access™ is the future login layer for facility accounts,
-            RFID/badge authentication, technician permissions, engineer access,
-            admin roles, and protected BAM Hub™ machine data.
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            BAM Access™ is the login gateway for facility accounts, technician
+            permissions, engineer access, admin roles, RFID/badge concepts, and
+            protected BAM Hub™ machine data.
           </p>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email / Facility User"
-              className="w-full rounded-xl bg-slate-900 p-4 text-white outline-none"
-            />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            <div className="rounded-2xl border border-cyan-400/40 bg-slate-900 p-6">
+              <h3 className="text-2xl font-black text-cyan-300">
+                Access Login™
+              </h3>
 
-            <input
-              value={badgeId}
-              onChange={(e) => setBadgeId(e.target.value)}
-              placeholder="Badge ID / RFID"
-              className="w-full rounded-xl bg-slate-900 p-4 text-white outline-none"
-            />
+              <div className="mt-6 grid gap-4">
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email / Facility User"
+                  className="w-full rounded-xl border border-cyan-400/40 bg-slate-950 p-4 text-white outline-none"
+                />
+
+                <input
+                  value={badgeId}
+                  onChange={(e) => setBadgeId(e.target.value)}
+                  placeholder="Badge ID / RFID"
+                  className="w-full rounded-xl border border-cyan-400/40 bg-slate-950 p-4 text-white outline-none"
+                />
+
+                <label className="block">
+                  <span className="font-black text-cyan-300">
+                    Access Role
+                  </span>
+
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="mt-2 w-full rounded-xl border border-cyan-400/40 bg-slate-950 p-4 text-white outline-none"
+                  >
+                    <option>Technician</option>
+                    <option>Engineer</option>
+                    <option>Facility Admin</option>
+                    <option>Viewer</option>
+                  </select>
+                </label>
+
+                <button
+                  onClick={handleLogin}
+                  className="rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
+                >
+                  Unlock BAM Hub™ Workspace
+                </button>
+
+                {message && (
+                  <p className="font-bold text-cyan-300">
+                    {message}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-yellow-300/50 bg-yellow-400/10 p-6">
+              <h3 className="text-2xl font-black text-yellow-200">
+                Protected Data Notice™
+              </h3>
+
+              <p className="mt-4 text-sm leading-6 text-yellow-50">
+                Machine profiles, scan records, serial numbers, manuals,
+                repair history, technician notes, and facility documentation
+                belong behind controlled access. BAM Hub™ should only open
+                after the user passes through BAM Access™.
+              </p>
+
+              <div className="mt-6 grid gap-3">
+                <AccessPoint text="Company account separation" />
+                <AccessPoint text="Technician and engineer roles" />
+                <AccessPoint text="Facility admin permissions" />
+                <AccessPoint text="Future RFID badge workflow" />
+                <AccessPoint text="Protected machine memory" />
+              </div>
+            </div>
           </div>
-
-          <label className="mt-5 block">
-            <span className="font-black text-cyan-300">
-              Access Role
-            </span>
-
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="mt-2 w-full rounded-xl bg-slate-900 p-4 text-white outline-none"
-            >
-              <option>Technician</option>
-              <option>Engineer</option>
-              <option>Facility Admin</option>
-              <option>Viewer</option>
-            </select>
-          </label>
-
-          <button
-            onClick={handleLogin}
-            className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
-          >
-            Unlock BAM Hub™ Workspace
-          </button>
-
-          {message && (
-            <p className="mt-5 font-bold text-cyan-300">
-              {message}
-            </p>
-          )}
         </section>
 
         {accessGranted && (
@@ -202,6 +231,14 @@ export default function LoginPage() {
         </footer>
       </div>
     </main>
+  );
+}
+
+function AccessPoint({ text }: { text: string }) {
+  return (
+    <div className="rounded-xl bg-slate-950/80 p-3 text-sm font-bold text-yellow-50">
+      ✓ {text}
+    </div>
   );
 }
 
