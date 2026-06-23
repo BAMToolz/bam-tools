@@ -1,29 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-type Machine = {
-  id: string;
-  name: string;
-  location?: string;
-  manufacturer?: string;
-  model?: string;
-  serial?: string;
-  notes?: string;
-  createdAt?: string;
-};
-
 export default function HubPage() {
-  const [machines, setMachines] = useState<Machine[]>([]);
-
-  useEffect(() => {
-    const savedMachines = JSON.parse(
-      localStorage.getItem("bamHubMachines") || "[]"
-    );
-
-    setMachines(savedMachines);
-  }, []);
-
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
@@ -38,7 +13,7 @@ export default function HubPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Machine Memory™
+              Secure Facility Intelligence™
             </p>
           </div>
 
@@ -47,23 +22,25 @@ export default function HubPage() {
             <a href="/scanner" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">BAM Scan™</a>
             <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
+            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Access™</a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
           </nav>
         </header>
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            SAVED MACHINE MEMORY
+            PUBLIC OVERVIEW
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            BAM Hub™ remembers what BAM Scan™ captures.
+            The secure memory layer for machines, facilities, and technicians.
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            Saved machine identities from BAM Scan™ appear here as local machine
-            memory. This is the foundation for equipment history, repair notes,
-            work orders, manuals, parts, and future facility intelligence.
+            BAM Hub™ connects equipment records, repair history, technician notes,
+            manuals, parts, work orders, and facility metrics into one protected
+            intelligence layer. Public pages show the vision. Real customer data
+            belongs behind BAM Access™.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -71,14 +48,14 @@ export default function HubPage() {
               href="/scanner"
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
-              Run BAM Scan™
+              Launch BAM Scan™
             </a>
 
             <a
-              href="/workorders"
+              href="/access"
               className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
             >
-              Create Work Order™
+              Enter BAM Access™
             </a>
           </div>
         </section>
@@ -87,69 +64,65 @@ export default function HubPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-3xl font-black text-cyan-300">
-                Saved Machines™
+                Demo Machine Intelligence™
               </h2>
 
               <p className="mt-3 text-sm leading-6 text-slate-300">
-                Machine profiles saved from BAM Scan™ on this device.
+                Example cards only. No real facility data is displayed publicly.
               </p>
             </div>
 
             <div className="rounded-full border border-cyan-300 bg-cyan-500/20 px-4 py-2 text-xs font-black text-cyan-200">
-              {machines.length} SAVED
+              SAMPLE DATA
             </div>
           </div>
 
-          {machines.length === 0 ? (
-            <div className="mt-6 rounded-xl border border-cyan-400/30 bg-slate-900 p-6">
-              <h3 className="text-xl font-black text-cyan-300">
-                No machines saved yet.
-              </h3>
+          <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <DemoMachineCard
+              name="Demo Extruder Line 01"
+              type="Wire Manufacturing"
+              status="Preventive maintenance due"
+              insight="Recurring heat-zone alarm detected across recent service notes."
+            />
 
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                Run BAM Scan™, identify a machine, then press “Save Machine
-                Identity to BAM Hub™.”
-              </p>
+            <DemoMachineCard
+              name="Demo Compressor Station"
+              type="Facility Utilities"
+              status="Running"
+              insight="Oil service, belt inspection, and air leak check scheduled."
+            />
 
-              <a
-                href="/scanner"
-                className="mt-5 inline-flex rounded-xl bg-cyan-500 px-5 py-3 font-black text-slate-950 hover:bg-cyan-400"
-              >
-                Open BAM Scan™
-              </a>
-            </div>
-          ) : (
-            <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {machines.map((machine) => (
-                <MachineCard key={machine.id} machine={machine} />
-              ))}
-            </div>
-          )}
+            <DemoMachineCard
+              name="Demo Control Panel A"
+              type="Automation / Controls"
+              status="Documentation needed"
+              insight="PLC I/O mapping, panel photos, and wiring notes can be stored here."
+            />
+          </div>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Protected Workflow™
+            BAM Hub™ Workflow
           </h2>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <WorkflowCard number="01" title="Scan" text="Capture equipment data." />
-            <WorkflowCard number="02" title="Assist" text="Ask BAM AI™." />
-            <WorkflowCard number="03" title="Save" text="Store machine memory." />
-            <WorkflowCard number="04" title="Improve" text="Build history over time." />
+            <WorkflowCard number="01" title="Scan" text="Capture equipment data using BAM Scan™." />
+            <WorkflowCard number="02" title="Identify" text="Build a machine profile from photos, tags, notes, and documents." />
+            <WorkflowCard number="03" title="Protect" text="Keep real facility data behind BAM Access™." />
+            <WorkflowCard number="04" title="Improve" text="Turn repair history into machine intelligence over time." />
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-6 shadow-2xl sm:p-8">
-          <h2 className="text-2xl font-black text-yellow-200">
-            Access Required™
+        <section className="mt-8 rounded-2xl border border-cyan-300/40 bg-cyan-500/10 p-6 shadow-2xl sm:p-8">
+          <h2 className="text-2xl font-black text-cyan-200">
+            Built for Protected Facility Data™
           </h2>
 
-          <p className="mt-4 text-sm leading-6 text-yellow-50 sm:text-base">
-            This prototype uses local device storage. Future BAM Hub™ machine
-            history, serial numbers, repair records, manuals, drawings, and
-            facility documentation should live behind BAM Access™ with protected
-            company accounts and user roles.
+          <p className="mt-4 text-sm leading-6 text-cyan-50 sm:text-base">
+            Real machine names, serial numbers, manuals, drawings, repair records,
+            technician notes, AI conversations, parts lists, and work orders should
+            only appear inside authenticated BAM Hub™ accounts.
           </p>
         </section>
 
@@ -160,7 +133,8 @@ export default function HubPage() {
             <a href="/" className="hover:text-white">Home</a>
             <a href="/scanner" className="hover:text-white">BAM Scan™</a>
             <a href="/workorders" className="hover:text-white">Work Orders™</a>
-            <a href="/metrics" className="hover:text-white">Metrics™</a>
+            <a href="/metrics" className="hover:text-white">Metrics</a>
+            <a href="/access" className="hover:text-white">Access</a>
             <a href="/support" className="hover:text-white">Support</a>
           </div>
         </footer>
@@ -169,38 +143,38 @@ export default function HubPage() {
   );
 }
 
-function MachineCard({ machine }: { machine: Machine }) {
+function DemoMachineCard({
+  name,
+  type,
+  status,
+  insight,
+}: {
+  name: string;
+  type: string;
+  status: string;
+  insight: string;
+}) {
   return (
     <div className="rounded-xl border border-cyan-400/30 bg-slate-900 p-5 shadow-xl">
       <p className="text-xs font-black tracking-wide text-cyan-400">
-        MACHINE PROFILE
+        DEMO PROFILE
       </p>
 
       <h3 className="mt-2 text-2xl font-black text-cyan-300">
-        {machine.name || "Scanned Equipment"}
+        {name}
       </h3>
 
       <div className="mt-4 grid gap-2 text-sm text-slate-300">
-        <p><span className="font-black text-cyan-300">Manufacturer:</span> {machine.manufacturer || "Pending identification"}</p>
-        <p><span className="font-black text-cyan-300">Model:</span> {machine.model || "Pending identification"}</p>
-        <p><span className="font-black text-cyan-300">Serial:</span> {machine.serial || "Pending identification"}</p>
-        <p><span className="font-black text-cyan-300">Location:</span> {machine.location || "Unassigned"}</p>
+        <p><span className="font-black text-cyan-300">Type:</span> {type}</p>
+        <p><span className="font-black text-cyan-300">Status:</span> {status}</p>
       </div>
 
-      {machine.notes && (
-        <div className="mt-4 rounded-lg bg-slate-950 p-4">
-          <p className="text-xs font-black text-cyan-300">Scan Notes</p>
-          <p className="mt-2 line-clamp-5 whitespace-pre-wrap text-sm leading-6 text-slate-300">
-            {machine.notes}
-          </p>
-        </div>
-      )}
-
-      {machine.createdAt && (
-        <p className="mt-4 text-xs text-slate-400">
-          Saved: {new Date(machine.createdAt).toLocaleString()}
+      <div className="mt-4 rounded-lg bg-slate-950 p-4">
+        <p className="text-xs font-black text-cyan-300">BAM AI™ Example Insight</p>
+        <p className="mt-2 text-sm leading-6 text-slate-300">
+          {insight}
         </p>
-      )}
+      </div>
     </div>
   );
 }
