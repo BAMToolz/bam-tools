@@ -12,9 +12,32 @@ export default function ScannerPage() {
   const [scanData, setScanData] = useState("");
   const [scanStatus, setScanStatus] = useState("Waiting for equipment scan.");
   const [machineConnected, setMachineConnected] = useState(false);
+  const [scanProgress, setScanProgress] = useState(0);
+  const [scanFunText, setScanFunText] = useState("Scanner standing by.");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [saveStatus, setSaveStatus] = useState("");
+
+  function startProgressAnimation() {
+    setScanProgress(7);
+    setScanFunText("Initializing BAM Scan™ engine...");
+
+    const steps = [
+      { progress: 18, text: "Powering BAM Scan™ intelligence systems..." },
+      { progress: 33, text: "Reading equipment fingerprints..." },
+      { progress: 49, text: "Converting machine details into usable data..." },
+      { progress: 66, text: "Building machine memory profile..." },
+      { progress: 82, text: "Connecting technician intelligence layer..." },
+      { progress: 94, text: "Preparing BAM AI™ recommendations..." },
+    ];
+
+    steps.forEach((step, index) => {
+      setTimeout(() => {
+        setScanProgress(step.progress);
+        setScanFunText(step.text);
+      }, 700 * (index + 1));
+    });
+  }
 
   async function runScan() {
     if (!file) {
@@ -26,6 +49,7 @@ export default function ScannerPage() {
     setMachineConnected(false);
     setMessages([]);
     setSaveStatus("");
+    startProgressAnimation();
 
     const formData = new FormData();
     formData.append("image", file);
@@ -47,6 +71,8 @@ export default function ScannerPage() {
       setScanData(report);
       setMachineConnected(true);
       setScanStatus("Equipment scan complete. BAM AI™ is ready.");
+      setScanProgress(100);
+      setScanFunText("Scan complete. Machine intelligence connected.");
 
       setMessages([
         {
@@ -57,6 +83,8 @@ export default function ScannerPage() {
     } catch (error: any) {
       setScanStatus(error?.message || "BAM Scan™ connection failed.");
       setMachineConnected(false);
+      setScanProgress(0);
+      setScanFunText("Scan stopped. BAM Scan™ needs another try.");
     }
   }
 
@@ -252,6 +280,20 @@ export default function ScannerPage() {
               </p>
 
               <p className="mt-2 text-slate-200">{scanStatus}</p>
+
+              <div className="mt-5">
+                <div className="mb-2 flex justify-between gap-4 text-sm font-bold text-cyan-300">
+                  <span>{scanFunText}</span>
+                  <span>{scanProgress}%</span>
+                </div>
+
+                <div className="h-4 overflow-hidden rounded-full bg-slate-800">
+                  <div
+                    className="h-full rounded-full bg-cyan-400 transition-all duration-500"
+                    style={{ width: `${scanProgress}%` }}
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="mt-5 grid gap-3">
