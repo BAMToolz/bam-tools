@@ -302,13 +302,12 @@ export default function ScannerPage() {
               </span>
 
               <span className="mt-2 block text-xs text-slate-400">
-                Phone camera uploads work here.
+                Use camera, photo library, or file upload.
               </span>
 
               <input
                 type="file"
                 accept="image/*"
-                capture="environment"
                 onChange={(e) => setFile(e.target.files?.[0] || null)}
                 className="mt-4 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-sm text-slate-200"
               />
