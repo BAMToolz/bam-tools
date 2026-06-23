@@ -8,12 +8,12 @@ export default function Home() {
               BAMToolz™
             </div>
 
-            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-6xl">
+            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
               BAMToolz™
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Industrial AI tools by Ball Advanced Management™
+              Ball AI Metrics™
             </p>
           </div>
 
@@ -55,8 +55,7 @@ export default function Home() {
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAMToolz™ is the technician-focused industrial AI platform built by
-            Ball Advanced Management™. It connects machine identification,
+            BAMToolz™ by Ball AI Metrics™ connects machine identification,
             BAM AI™ technician assistance, secure BAM Access™, protected
             BAM Hub™ machine memory, work orders, metrics, automation, and
             industrial support tools into one connected workflow.
@@ -68,13 +67,6 @@ export default function Home() {
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
               Launch BAM Scan™
-            </a>
-
-            <a
-              href="/login"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              Open BAM Access™
             </a>
           </div>
         </section>
@@ -141,11 +133,6 @@ export default function Home() {
             title="BAMLabs™"
             text="AI research, scanner prototypes, rugged hardware concepts, RFID access ideas, and future industrial technology development."
           />
-
-          <Card
-            title="Ball Advanced Management™"
-            text="The parent company vision behind BAMToolz™, BAM Machines™, BAM Automation™, and the larger BAM™ industrial ecosystem."
-          />
         </section>
 
         <section id="roadmap" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
@@ -190,7 +177,7 @@ export default function Home() {
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 BAMToolz™ | Ball Advanced Management™</p>
+          <p>© 2026 BAMToolz™ | Ball AI Metrics™</p>
 
           <div className="mt-4 flex flex-wrap justify-center gap-6">
             <a href="/privacy" className="hover:text-white">Privacy</a>
