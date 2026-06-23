@@ -68,112 +68,25 @@ export default function Home() {
             >
               Launch BAM Scan™
             </a>
-
-            <a
-              href="/workorders"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAM Work Orders™
-            </a>
-
-            <a
-              href="/metrics"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              View BAM Metrics™
-            </a>
-
-            <a
-              href="/login"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAM Access™
-            </a>
-
-            <a
-              href="/hub"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              View BAM Hub™
-            </a>
-
-            <a
-              href="/support"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAM Support™
-            </a>
           </div>
         </section>
 
         <section id="platform" className="mt-8 grid gap-5 md:grid-cols-3">
-          <Card
-            title="BAM Scan™"
-            href="/scanner"
-            text="AI equipment scanning for machine tags, components, panels, logs, labels, and field documentation."
-          />
-
-          <Card
-            title="BAM AI™"
-            text="Technician intelligence connected to scanned equipment data for troubleshooting, safety checks, parts, documentation, and next-step guidance."
-          />
-
-          <Card
-            title="BAM Hub™"
-            href="/hub"
-            text="The secure facility intelligence core for machine profiles, manuals, photos, repairs, technician notes, and machine history."
-          />
-
-          <Card
-            title="BAM Work Orders™"
-            href="/workorders"
-            text="Maintenance workflow for machine issues, technician assignments, priority levels, repair notes, status tracking, and history capture."
-          />
-
-          <Card
-            title="BAM Metrics™"
-            href="/metrics"
-            text="Industrial metrics for downtime, repair history, recurring failures, reliability, parts usage, safety trends, saved scans, and improvement tracking."
-          />
-
-          <Card
-            title="BAM Access™"
-            href="/login"
-            text="Secure facility access layer designed for technician accounts, RFID badge login, company permissions, user roles, and protected BAM Hub™ machine data."
-          />
-
-          <Card
-            title="BAMToolz™"
-            text="The technician software toolkit inside the BAM™ ecosystem for repair workflows, documentation, manuals, parts lookup, and knowledge capture."
-          />
-
-          <Card
-            title="BAM Safety™"
-            text="Safety intelligence built around LOTO mindset, PPE awareness, hazard recognition, procedure support, and safer technician decisions."
-          />
-
-          <Card
-            title="BAM Machines™"
-            href="/machines"
-            text="Industrial machine builds including take-ups, payoffs, custom equipment, controls-ready systems, and automation-ready production support."
-          />
-
-          <Card
-            title="BAM Automation™"
-            href="/automation"
-            text="Automation concepts for PLCs, HMIs, robotics, sensors, controls, process upgrades, and facility-wide industrial integration."
-          />
-
-          <Card
-            title="BAMLabs™"
-            text="AI research, prototypes, scanner concepts, hardware development, RFID access concepts, and future industrial technology."
-          />
+          <Card title="BAM Scan™" href="/scanner" text="AI equipment scanning for machine tags, components, panels, logs, labels, and field documentation." />
+          <Card title="BAM AI™" text="Technician intelligence connected to scanned equipment data for troubleshooting, safety checks, parts, documentation, and next-step guidance." />
+          <Card title="BAM Hub™" href="/hub" text="The secure facility intelligence core for machine profiles, manuals, photos, repairs, technician notes, and machine history." />
+          <Card title="BAM Work Orders™" href="/workorders" text="Maintenance workflow for machine issues, technician assignments, priority levels, repair notes, status tracking, and history capture." />
+          <Card title="BAM Metrics™" href="/metrics" text="Industrial metrics for downtime, repair history, recurring failures, reliability, parts usage, safety trends, saved scans, and improvement tracking." />
+          <Card title="BAM Access™" href="/login" text="Secure facility access layer designed for technician accounts, RFID badge login, company permissions, user roles, and protected BAM Hub™ machine data." />
+          <Card title="BAMToolz™" text="The technician software toolkit inside the BAM™ ecosystem for repair workflows, documentation, manuals, parts lookup, and knowledge capture." />
+          <Card title="BAM Safety™" text="Safety intelligence built around LOTO mindset, PPE awareness, hazard recognition, procedure support, and safer technician decisions." />
+          <Card title="BAM Machines™" href="/machines" text="Industrial machine builds including take-ups, payoffs, custom equipment, controls-ready systems, and automation-ready production support." />
+          <Card title="BAM Automation™" href="/automation" text="Automation concepts for PLCs, HMIs, robotics, sensors, controls, process upgrades, and facility-wide industrial integration." />
+          <Card title="BAMLabs™" text="AI research, prototypes, scanner concepts, hardware development, RFID access concepts, and future industrial technology." />
         </section>
 
         <section id="roadmap" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM™ Roadmap
-          </h2>
+          <h2 className="text-3xl font-black text-cyan-300">BAM™ Roadmap</h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM™ is being developed as a scalable industrial AI ecosystem where
@@ -192,9 +105,7 @@ export default function Home() {
         </section>
 
         <section id="support" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM™ Support
-          </h2>
+          <h2 className="text-3xl font-black text-cyan-300">BAM™ Support</h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             For support, facility demos, machine builds, automation concepts,
@@ -204,81 +115,22 @@ export default function Home() {
 
           <p className="mt-5 text-lg">
             Email:{" "}
-            <a
-              href="mailto:BAMToolzsupport@gmail.com"
-              className="font-black text-cyan-300 underline"
-            >
+            <a href="mailto:BAMToolzsupport@gmail.com" className="font-black text-cyan-300 underline">
               BAMToolzsupport@gmail.com
             </a>
           </p>
-
-          <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-            <a
-              href="mailto:BAMToolzsupport@gmail.com?subject=BAM%20Support%20Request"
-              className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
-            >
-              Email Support
-            </a>
-
-            <a
-              href="/workorders"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAM Work Orders™
-            </a>
-
-            <a
-              href="/metrics"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAM Metrics™
-            </a>
-
-            <a
-              href="/login"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAM Access™
-            </a>
-
-            <a
-              href="/support"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              Open Support™
-            </a>
-
-            <a
-              href="/scanner"
-              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
-            >
-              BAM Scan™
-            </a>
-          </div>
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM™ | BAMToolz™ | Ball AI Metrics™</p>
 
           <div className="mt-4 flex flex-wrap justify-center gap-6">
-            <a href="/privacy" className="hover:text-white">
-              Privacy
-            </a>
-            <a href="/terms" className="hover:text-white">
-              Terms
-            </a>
-            <a href="/workorders" className="hover:text-white">
-              Work Orders
-            </a>
-            <a href="/metrics" className="hover:text-white">
-              Metrics
-            </a>
-            <a href="/login" className="hover:text-white">
-              Access
-            </a>
-            <a href="mailto:BAMToolzsupport@gmail.com" className="hover:text-white">
-              Contact
-            </a>
+            <a href="/privacy" className="hover:text-white">Privacy</a>
+            <a href="/terms" className="hover:text-white">Terms</a>
+            <a href="/workorders" className="hover:text-white">Work Orders</a>
+            <a href="/metrics" className="hover:text-white">Metrics</a>
+            <a href="/login" className="hover:text-white">Access</a>
+            <a href="mailto:BAMToolzsupport@gmail.com" className="hover:text-white">Contact</a>
           </div>
         </footer>
       </div>
