@@ -31,10 +31,7 @@ export default function ScannerPage() {
   const [saveStatus, setSaveStatus] = useState("");
 
   function cleanField(value: string, fallback: string) {
-    if (!value || value.toLowerCase() === "not visible") {
-      return fallback;
-    }
-
+    if (!value || value.toLowerCase() === "not visible") return fallback;
     return value;
   }
 
@@ -75,6 +72,7 @@ export default function ScannerPage() {
       model: "",
       serial: "",
     });
+
     startProgressAnimation();
 
     const formData = new FormData();
@@ -105,14 +103,7 @@ export default function ScannerPage() {
 
       setMachineConnected(true);
       setScanProgress(100);
-      setScanFunText("Machine identity started. BAM AI™ is ready.");
-
-      setMessages([
-        {
-          role: "bam",
-          text: "Machine identity started. BAM AI™ is ready. Ask about identification, first checks, parts, manuals, repairs, or what to save into BAM Hub™.",
-        },
-      ]);
+      setScanFunText("Machine identity loaded. BAM AI™ is ready.");
     } catch (error: any) {
       setMachineConnected(false);
       setScanProgress(0);
@@ -171,7 +162,7 @@ export default function ScannerPage() {
     setMessages((prev) => [
       ...prev,
       { role: "tech", text: techText },
-      { role: "bam", text: "BAM AI™ is reviewing the machine identity and technician question..." },
+      { role: "bam", text: "BAM AI™ is reviewing the machine identity..." },
     ]);
 
     setInput("");
@@ -225,21 +216,11 @@ export default function ScannerPage() {
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Home™
-            </a>
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Hub™
-            </a>
-            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Work Orders™
-            </a>
-            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Metrics™
-            </a>
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Support™
-            </a>
+            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home™</a>
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Hub™</a>
+            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
+            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
+            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
           </nav>
         </header>
 
@@ -313,7 +294,7 @@ export default function ScannerPage() {
             {machineConnected && (
               <div className="mt-5 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
                 <p className="font-black text-cyan-300">
-                  Machine identity loaded into BAM AI™
+                  Machine Identity™
                 </p>
 
                 <div className="mt-4 grid gap-2 text-sm text-slate-300">
@@ -375,11 +356,11 @@ export default function ScannerPage() {
 
           {messages.map((msg, index) => (
             <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
-              <b className="text-cyan-300">
+              <p className="text-sm font-black uppercase tracking-wide text-cyan-300">
                 {msg.role === "tech" ? "Technician" : "BAM AI™"}
-              </b>
+              </p>
 
-              <p className="mt-2 whitespace-pre-wrap text-slate-200">
+              <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
                 {msg.text}
               </p>
             </div>
@@ -430,14 +411,6 @@ export default function ScannerPage() {
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM Scan™ | BAMToolz™ | Ball AI Metrics™</p>
-
-          <div className="mt-4 flex flex-wrap justify-center gap-6">
-            <a href="/" className="hover:text-white">Home</a>
-            <a href="/hub" className="hover:text-white">BAM Hub™</a>
-            <a href="/workorders" className="hover:text-white">Work Orders™</a>
-            <a href="/metrics" className="hover:text-white">Metrics™</a>
-            <a href="/support" className="hover:text-white">Support</a>
-          </div>
         </footer>
       </div>
     </main>
