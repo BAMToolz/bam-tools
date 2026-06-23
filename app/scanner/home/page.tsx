@@ -18,13 +18,13 @@ export default function HomeScannerPage() {
 
   function startProgressAnimation() {
     setScanProgress(10);
-    setStatusText("Starting BAM Home™ issue scan...");
+    setStatusText("Starting BAM Home™ scan...");
 
     const steps = [
-      { progress: 25, text: "Reading visible labels, parts, damage, or symptoms..." },
-      { progress: 45, text: "Building home repair issue profile..." },
-      { progress: 65, text: "Connecting repair issue to BAM AI™..." },
-      { progress: 85, text: "Preparing repair guidance..." },
+      { progress: 25, text: "Identifying product, part, or issue..." },
+      { progress: 45, text: "Researching available information..." },
+      { progress: 65, text: "Connecting results to BAM Assist™..." },
+      { progress: 85, text: "Preparing possible solutions..." },
     ];
 
     steps.forEach((step, index) => {
@@ -38,7 +38,7 @@ export default function HomeScannerPage() {
   async function runHomeScan() {
     if (!file) {
       setStatusText(
-        "Start with a picture of the issue, appliance, tool, vehicle part, label, leak, warning light, or broken component."
+        "Start with a picture of the product, label, part, warning light, issue, or broken component."
       );
       setScanProgress(0);
       return;
@@ -65,23 +65,23 @@ export default function HomeScannerPage() {
         data.analysis ||
         data.result ||
         data.message ||
-        "No home repair issue data was returned.";
+        "BAM Assist™ could not identify enough details from this image.";
 
       setScanData(report);
       setIssueConnected(true);
       setScanProgress(100);
-      setStatusText("Home repair issue connected. BAM AI™ is ready.");
+      setStatusText("Product or issue connected. BAM Assist™ is ready.");
 
       setMessages([
         {
           role: "bam",
-          text: "Home repair issue connected. Ask BAM AI™ what this might be, what to check safely, what information to collect, or what type of repair help may be needed.",
+          text: "BAM Assist™ is ready. Ask about the product, model, parts, manuals, common problems, troubleshooting steps, or possible repair options.",
         },
       ]);
     } catch (error: any) {
       setIssueConnected(false);
       setScanProgress(0);
-      setStatusText(error?.message || "Home repair scan stopped. Try another image.");
+      setStatusText(error?.message || "BAM Home™ scan stopped. Try another image.");
     }
   }
 
@@ -93,7 +93,7 @@ export default function HomeScannerPage() {
     setMessages((prev) => [
       ...prev,
       { role: "user", text: userText },
-      { role: "bam", text: "BAM AI™ is reviewing the home repair issue..." },
+      { role: "bam", text: "BAM Assist™ is researching the product or issue..." },
     ]);
 
     setInput("");
@@ -116,7 +116,7 @@ export default function HomeScannerPage() {
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: data.result || data.error || "BAM AI™ returned no home repair result.",
+          text: data.result || data.error || "BAM Assist™ returned no result.",
         },
       ]);
     } catch (error: any) {
@@ -124,7 +124,7 @@ export default function HomeScannerPage() {
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: error?.message || "BAM AI™ connection failed.",
+          text: error?.message || "BAM Assist™ connection failed.",
         },
       ]);
     }
@@ -140,11 +140,11 @@ export default function HomeScannerPage() {
             </div>
 
             <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-              Home Repair Scan™
+              Home Scan™
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Take a picture. Ask BAM AI™. Find the next step.
+              Identify products. Research answers. Find the repair path.
             </p>
           </div>
 
@@ -159,35 +159,36 @@ export default function HomeScannerPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            CONSUMER REPAIR IDENTIFICATION
+            PRODUCT IDENTIFICATION + BAM ASSIST™
           </p>
 
           <h2 className="mt-3 max-w-5xl text-3xl font-black leading-tight tracking-tight sm:text-5xl">
-            Scan appliances, tools, vehicles, home systems, and repair issues.
+            Scan a product, part, label, issue, or broken component.
           </h2>
 
           <p className="mt-4 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Home Scan™ is for everyday users. Upload a picture of a broken
-            part, warning light, leak, appliance label, vehicle issue, tool problem,
-            pool pump, AC unit, generator, or home repair situation.
+            BAM Home Scan™ helps identify everyday products, appliances,
+            vehicles, tools, equipment, and components. BAM Assist™ helps
+            research information, understand issues, find possible solutions,
+            and connect users with the right repair path.
           </p>
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
             <h2 className="text-3xl font-black text-cyan-300">
-              Capture Home Issue™
+              Capture Item or Issue™
             </h2>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
               Best results come from clear pictures of labels, model numbers,
-              visible damage, leaks, warning lights, error screens, or the part
-              you are trying to understand.
+              visible damage, warning lights, error screens, parts, or the item
+              you want BAM Assist™ to research.
             </p>
 
             <label className="mt-6 block rounded-xl border border-dashed border-cyan-400 bg-slate-900 p-5 text-center hover:bg-slate-800">
               <span className="block text-sm font-black text-cyan-300">
-                Select or Capture Home Repair Image
+                Select or Capture Image
               </span>
 
               <span className="mt-2 block text-xs text-slate-400">
@@ -217,7 +218,7 @@ export default function HomeScannerPage() {
               onClick={runHomeScan}
               className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
             >
-              Run Home Repair Scan™
+              Run Home Scan™
             </button>
           </div>
 
@@ -243,9 +244,9 @@ export default function HomeScannerPage() {
             <div className="mt-5 rounded-xl border border-yellow-300/60 bg-yellow-400/10 p-5">
               <h3 className="font-black text-yellow-200">Safety First™</h3>
               <p className="mt-2 text-sm leading-6 text-yellow-50">
-                Do not work on live electrical systems, gas lines, pressurized
-                systems, vehicles, or dangerous equipment unless qualified.
-                BAM AI™ is informational support only.
+                BAM Assist™ can help research and explain possible next steps.
+                For dangerous repairs, electrical systems, gas, vehicles, or
+                pressurized systems, use qualified help.
               </p>
             </div>
           </div>
@@ -253,19 +254,19 @@ export default function HomeScannerPage() {
 
         <section className="mt-8 rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM AI™ Home Assist
+            BAM Assist™
           </h2>
 
           <p className="mt-4 text-sm leading-6 text-slate-300">
             {issueConnected
-              ? "Home repair issue connected. Ask what it might be, what to check safely, what details to collect, or what type of service help may be needed."
-              : "Run a Home Repair Scan™ first to connect BAM AI™ to the issue."}
+              ? "BAM Assist™ is ready. Ask about product identity, model information, manuals, common failures, troubleshooting, parts, or possible repair options."
+              : "Run a Home Scan™ first to connect BAM Assist™ to the item or issue."}
           </p>
 
           {messages.map((msg, index) => (
             <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
               <p className="text-sm font-black uppercase tracking-wide text-cyan-300">
-                {msg.role === "user" ? "User" : "BAM AI™"}
+                {msg.role === "user" ? "User" : "BAM Assist™"}
               </p>
 
               <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
@@ -280,7 +281,7 @@ export default function HomeScannerPage() {
             disabled={!issueConnected}
             placeholder={
               issueConnected
-                ? "Ask BAM AI™ what this is, what to check safely, or what repair help may be needed..."
+                ? "Ask about the product, issue, parts, manual, common problems, or repair options..."
                 : "Run a home scan first..."
             }
             className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-white placeholder:text-slate-400 outline-none disabled:bg-slate-950 disabled:text-slate-500"
@@ -295,19 +296,18 @@ export default function HomeScannerPage() {
                 : "border border-cyan-500/40 bg-slate-950 text-cyan-900"
             }`}
           >
-            Ask BAM AI™
+            Ask BAM Assist™
           </button>
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Future Repair Path™
+            BAM Provider Network™
           </h2>
 
           <p className="mt-4 text-sm leading-6 text-slate-300">
-            Future BAM Access™ accounts can save repair history, create service
-            requests, connect users to BAM Provider Network™, and preserve home
-            repair knowledge over time.
+            When additional help is needed, BAM Provider Network™ creates the
+            future connection between users and qualified repair professionals.
           </p>
         </section>
 
