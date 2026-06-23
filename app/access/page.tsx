@@ -66,18 +66,38 @@ export default function AccessPage() {
 
         <section className="mt-8 rounded-2xl border border-cyan-300/40 bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Future Protected Login™
+            Sign in to BAM Access™
           </h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300">
-            Future authentication will connect BAM Scan™ user accounts, BAM
-            Provider Network™ profiles, BAMToolz™ business dashboards, admin
-            controls, repair requests, machine records, and protected facility data.
+            Access BAM Scan™ accounts, BAM Provider Network™, BAMToolz™ business
+            dashboards, repair requests, machine records, and protected facility data.
           </p>
 
-          <button className="mt-8 rounded-xl bg-cyan-500 px-8 py-3 font-black text-slate-950 opacity-70">
-            Login Coming Soon™
-          </button>
+          <div className="mt-8 grid gap-4">
+            <input
+              type="email"
+              placeholder="Email address"
+              className="w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-400/40"
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-400/40"
+            />
+
+            <button className="rounded-xl bg-cyan-500 px-8 py-4 font-black text-slate-950 hover:bg-cyan-400">
+              Sign In™
+            </button>
+
+            <a
+              href="/support"
+              className="text-center text-sm font-bold text-cyan-300 underline"
+            >
+              Need access? Contact BAM Support™
+            </a>
+          </div>
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
