@@ -23,8 +23,12 @@ export default function BamHomePage() {
               Home™
             </a>
 
-            <a href="/scanner" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950">
-              BAM Scan™
+            <a href="/scanner/home" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950">
+              Home Scan™
+            </a>
+
+            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
+              Industrial Scan™
             </a>
 
             <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
@@ -50,10 +54,10 @@ export default function BamHomePage() {
           </p>
 
           <a
-            href="/scanner"
+            href="/scanner/home"
             className="mt-8 inline-block rounded-xl bg-cyan-500 px-6 py-3 font-black text-slate-950 hover:bg-cyan-400"
           >
-            Try BAM Scan™
+            Start Home Repair Scan™
           </a>
         </section>
 
