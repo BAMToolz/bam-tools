@@ -7,15 +7,36 @@ type Message = {
   text: string;
 };
 
+type MachineIdentity = {
+  name: string;
+  manufacturer: string;
+  model: string;
+  serial: string;
+};
+
 export default function ScannerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [scanData, setScanData] = useState("");
+  const [machineIdentity, setMachineIdentity] = useState<MachineIdentity>({
+    name: "",
+    manufacturer: "",
+    model: "",
+    serial: "",
+  });
   const [machineConnected, setMachineConnected] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
   const [scanFunText, setScanFunText] = useState("Scanner standing by.");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [saveStatus, setSaveStatus] = useState("");
+
+  function cleanField(value: string, fallback: string) {
+    if (!value || value.toLowerCase() === "not visible") {
+      return fallback;
+    }
+
+    return value;
+  }
 
   function startProgressAnimation() {
     setScanProgress(7);
@@ -27,7 +48,7 @@ export default function ScannerPage() {
       { progress: 49, text: "Searching for nameplate and tag details..." },
       { progress: 66, text: "Creating first machine identity profile..." },
       { progress: 82, text: "Connecting identity data to BAM AI™..." },
-      { progress: 94, text: "Preparing technician assist workspace..." },
+      { progress: 94, text: "Waiting for BAM AI™ response..." },
     ];
 
     steps.forEach((step, index) => {
@@ -48,6 +69,12 @@ export default function ScannerPage() {
     setMachineConnected(false);
     setMessages([]);
     setSaveStatus("");
+    setMachineIdentity({
+      name: "",
+      manufacturer: "",
+      model: "",
+      serial: "",
+    });
     startProgressAnimation();
 
     const formData = new FormData();
@@ -68,6 +95,14 @@ export default function ScannerPage() {
         "BAM Scan™ connected, but no machine identity data was returned.";
 
       setScanData(report);
+
+      setMachineIdentity({
+        name: cleanField(data.name, "Scanned Equipment"),
+        manufacturer: cleanField(data.manufacturer, "Pending identification"),
+        model: cleanField(data.model, "Pending identification"),
+        serial: cleanField(data.serial, "Pending identification"),
+      });
+
       setMachineConnected(true);
       setScanProgress(100);
       setScanFunText("Machine identity started. BAM AI™ is ready.");
@@ -95,11 +130,11 @@ export default function ScannerPage() {
 
     const newMachine = {
       id: Date.now().toString(),
-      name: "Scanned Equipment",
+      name: machineIdentity.name || "Scanned Equipment",
       location: "Unassigned",
-      manufacturer: "Pending identification",
-      model: "Pending identification",
-      serial: "Pending identification",
+      manufacturer: machineIdentity.manufacturer || "Pending identification",
+      model: machineIdentity.model || "Pending identification",
+      serial: machineIdentity.serial || "Pending identification",
       notes: scanData,
       createdAt: new Date().toISOString(),
     };
@@ -125,7 +160,7 @@ export default function ScannerPage() {
       console.log("BAM Hub™ cloud prototype save skipped.");
     }
 
-    setSaveStatus("Machine identity saved to BAM Hub™ memory on this device.");
+    setSaveStatus(`${newMachine.name} saved to BAM Hub™ memory on this device.`);
   }
 
   async function sendMessage(customQuestion?: string) {
@@ -280,6 +315,13 @@ export default function ScannerPage() {
                 <p className="font-black text-cyan-300">
                   Machine identity loaded into BAM AI™
                 </p>
+
+                <div className="mt-4 grid gap-2 text-sm text-slate-300">
+                  <p><span className="font-black text-cyan-300">Machine:</span> {machineIdentity.name}</p>
+                  <p><span className="font-black text-cyan-300">Manufacturer:</span> {machineIdentity.manufacturer}</p>
+                  <p><span className="font-black text-cyan-300">Model:</span> {machineIdentity.model}</p>
+                  <p><span className="font-black text-cyan-300">Serial:</span> {machineIdentity.serial}</p>
+                </div>
               </div>
             )}
           </div>
