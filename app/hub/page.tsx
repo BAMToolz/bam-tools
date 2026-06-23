@@ -133,8 +133,8 @@ export default function HubPage() {
             <a href="/" className="hover:text-white">Home</a>
             <a href="/scanner" className="hover:text-white">BAM Scan™</a>
             <a href="/workorders" className="hover:text-white">Work Orders™</a>
-            <a href="/metrics" className="hover:text-white">Metrics</a>
-            <a href="/access" className="hover:text-white">Access</a>
+            <a href="/metrics" className="hover:text-white">Metrics™</a>
+            <a href="/access" className="hover:text-white">Access™</a>
             <a href="/support" className="hover:text-white">Support</a>
           </div>
         </footer>
