@@ -154,6 +154,49 @@ export default function Home() {
             behind BAM Access™, and connect work orders and metrics into the
             larger BAMToolz™ platform.
           </p>
+        </section>        <section id="evolution" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM™ Evolution Roadmap
+          </h2>
+
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            BAM™ is building a connected industrial intelligence ecosystem —
+            starting with machine memory today and preparing for the future of
+            predictive AI, digital twins, advanced optimization, and next-generation
+            computing.
+          </p>
+
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            <Card
+              title="Phase 1 — Machine Memory"
+              text="BAM Scan™ captures equipment identity while BAM Hub™ preserves manuals, parts, repairs, history, and technician knowledge."
+            />
+
+            <Card
+              title="Phase 2 — Predictive Intelligence"
+              text="BAM AI™ and BAM Metrics™ analyze maintenance history, recognize failure patterns, and support smarter decisions."
+            />
+
+            <Card
+              title="Phase 3 — BAMToolz™ Hardware"
+              text="Rugged technician devices designed around scanning, diagnostics, machine data access, and field support."
+            />
+
+            <Card
+              title="Phase 4 — Connected Facilities"
+              text="Link machines, teams, work orders, and reliability data into a shared facility intelligence network."
+            />
+
+            <Card
+              title="Phase 5 — Digital Twins"
+              text="Create virtual machine models to simulate performance, maintenance planning, reliability, and future outcomes."
+            />
+
+            <Card
+              title="Phase 6 — Future Optimization"
+              text="Prepare industrial data systems for next-generation AI, quantum computing possibilities, and advanced manufacturing intelligence."
+            />
+          </div>
         </section>
 
         <section id="support" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
