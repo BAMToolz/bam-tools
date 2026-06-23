@@ -18,28 +18,19 @@ export default function Home() {
           </div>
 
           <nav className="flex flex-wrap gap-3">
-            <a href="#platform" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Platform™
-            </a>
-            <a href="/scanner" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">
+            <a href="/scanner" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg hover:bg-cyan-400">
               BAM Scan™
             </a>
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               Hub™
             </a>
-            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               Work Orders™
             </a>
-            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               Metrics™
             </a>
-            <a href="/login" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Access™
-            </a>
-            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Machines™
-            </a>
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
               Support™
             </a>
           </nav>
@@ -47,18 +38,17 @@ export default function Home() {
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            BAMTOOLZ™ INDUSTRIAL AI TOOLKIT
+            INDUSTRIAL AI MAINTENANCE INTELLIGENCE
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Identify machines. Assist technicians. Preserve machine memory.
+            Scan equipment. Assist technicians. Build machine memory.
           </h2>
 
-          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAMToolz™ by Ball AI Metrics™ connects machine identification,
-            BAM AI™ technician assistance, secure BAM Access™, protected
-            BAM Hub™ machine memory, work orders, metrics, automation, and
-            industrial support tools into one connected workflow.
+          <p className="mt-6 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            BAMToolz™ helps maintenance teams identify machines, connect AI
+            technician support, save equipment knowledge, and turn repairs into
+            usable facility intelligence.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -68,147 +58,70 @@ export default function Home() {
             >
               Launch BAM Scan™
             </a>
+
+            <a
+              href="#platform"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              View Platform
+            </a>
           </div>
         </section>
 
         <section id="platform" className="mt-8 grid gap-5 md:grid-cols-3">
           <Card
-            title="BAMToolz™"
-            text="The technician software toolkit for machine identification, repair workflows, documentation, parts research, and knowledge capture."
-          />
-
-          <Card
             title="BAM Scan™"
             href="/scanner"
-            text="The machine identification entry point. Start with a nameplate, tag, label, or equipment image, then connect BAM AI™."
-          />
-
-          <Card
-            title="BAM AI™"
-            text="Technician assistance connected to scanned machine identity for verification, first checks, profile building, notes, and next-step guidance."
-          />
-
-          <Card
-            title="BAM Access™"
-            href="/login"
-            text="Secure access layer for technicians, engineers, admins, RFID badge concepts, user roles, and protected facility tools."
+            text="Capture a machine image, nameplate, tag, fault screen, or component and connect it to BAM AI™ technician support."
           />
 
           <Card
             title="BAM Hub™"
             href="/hub"
-            text="Protected facility intelligence core for machine profiles, scan records, manuals, repair history, technician notes, and machine memory."
-          />
-
-          <Card
-            title="BAM Work Orders™"
-            href="/workorders"
-            text="Protected maintenance workflow for machine issues, technician assignments, priority levels, repair notes, and history capture."
+            text="Store machine profiles, repair history, technician notes, manuals, parts data, and equipment memory."
           />
 
           <Card
             title="BAM Metrics™"
             href="/metrics"
-            text="Industrial metrics for downtime, recurring failures, reliability, parts usage, saved scans, work orders, and improvement tracking."
-          />
-
-          <Card
-            title="BAM Machines™"
-            href="/machines"
-            text="Industrial machine builds including take-ups, payoffs, custom equipment, controls-ready systems, and automation-ready production support."
-          />
-
-          <Card
-            title="BAM Automation™"
-            href="/automation"
-            text="Automation concepts for PLCs, HMIs, robotics, sensors, controls, process upgrades, and facility-wide industrial integration."
-          />
-
-          <Card
-            title="BAM Safety™"
-            text="Safety intelligence built around LOTO mindset, PPE awareness, hazard recognition, procedure support, and safer technician decisions."
-          />
-
-          <Card
-            title="BAMLabs™"
-            text="AI research, scanner prototypes, rugged hardware concepts, RFID access ideas, and future industrial technology development."
+            text="Track downtime, recurring failures, saved scans, work orders, reliability patterns, and improvement opportunities."
           />
         </section>
 
-        <section id="roadmap" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            BAMToolz™ Workflow
+            The BAMToolz™ Workflow
           </h2>
 
-          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAMToolz™ starts with machine identification. BAM Scan™ identifies
-            the asset, BAM AI™ assists the technician, BAM Access™ protects the
-            workflow, BAM Hub™ stores machine memory, BAM Work Orders™ organize
-            maintenance action, and BAM Metrics™ turns activity into measurable
-            facility intelligence.
-          </p>
-
-          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            Current build path: polish BAM Scan™ as the primary technician tool,
-            save clean machine identity into BAM Hub™, protect facility records
-            behind BAM Access™, and connect work orders and metrics into the
-            larger BAMToolz™ platform.
-          </p>
-        </section>        <section id="evolution" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            BAM™ Evolution Roadmap
-          </h2>
-
-          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM™ is building a connected industrial intelligence ecosystem —
-            starting with machine memory today and preparing for the future of
-            predictive AI, digital twins, advanced optimization, and next-generation
-            computing.
-          </p>
-
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            <Card
-              title="Phase 1 — Machine Memory"
-              text="BAM Scan™ captures equipment identity while BAM Hub™ preserves manuals, parts, repairs, history, and technician knowledge."
-            />
-
-            <Card
-              title="Phase 2 — Predictive Intelligence"
-              text="BAM AI™ and BAM Metrics™ analyze maintenance history, recognize failure patterns, and support smarter decisions."
-            />
-
-            <Card
-              title="Phase 3 — BAMToolz™ Hardware"
-              text="Rugged technician devices designed around scanning, diagnostics, machine data access, and field support."
-            />
-
-            <Card
-              title="Phase 4 — Connected Facilities"
-              text="Link machines, teams, work orders, and reliability data into a shared facility intelligence network."
-            />
-
-            <Card
-              title="Phase 5 — Digital Twins"
-              text="Create virtual machine models to simulate performance, maintenance planning, reliability, and future outcomes."
-            />
-
-            <Card
-              title="Phase 6 — Future Optimization"
-              text="Prepare industrial data systems for next-generation AI, quantum computing possibilities, and advanced manufacturing intelligence."
-            />
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            <Step number="01" title="Capture" text="Upload or take a machine image." />
+            <Step number="02" title="Identify" text="Extract machine identity details." />
+            <Step number="03" title="Assist" text="Ask BAM AI™ technician questions." />
+            <Step number="04" title="Save" text="Preserve knowledge in BAM Hub™." />
           </div>
         </section>
 
-        <section id="support" className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+          <h2 className="text-3xl font-black text-cyan-300">
+            Built for the future of maintenance.
+          </h2>
+
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            The first goal is simple: make BAM Scan™ useful for technicians.
+            From there, BAM Hub™ becomes machine memory, work orders organize
+            repairs, and BAM Metrics™ turns maintenance activity into better
+            decisions.
+          </p>
+        </section>
+
+        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
             BAMToolz™ Support
           </h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            For BAMToolz™ support, facility demos, BAM Scan™ questions, machine
-            identification workflows, secure access, work orders, metrics,
-            machine builds, automation concepts, or partnerships, contact
-            BAMToolz™.
+            For BAM Scan™, machine identification, facility demos, support,
+            partnerships, or platform questions, contact BAMToolz™.
           </p>
 
           <p className="mt-5 text-lg">
@@ -255,9 +168,27 @@ function Card({
   );
 
   return (
-    <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
+    <div className="rounded-xl border border-cyan-400/30 bg-slate-950/95 p-6 shadow-xl">
       {heading}
       <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
+    </div>
+  );
+}
+
+function Step({
+  number,
+  title,
+  text,
+}: {
+  number: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-xl border border-cyan-400/30 bg-slate-900 p-5">
+      <p className="text-sm font-black text-cyan-400">{number}</p>
+      <h3 className="mt-2 text-xl font-black text-cyan-300">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
     </div>
   );
 }
