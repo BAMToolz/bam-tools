@@ -19,6 +19,7 @@ export default function HubPage() {
 
           <nav className="flex flex-wrap gap-3">
             <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home™</a>
+            <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Home™</a>
             <a href="/scanner" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">BAM Scan™</a>
             <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
@@ -131,6 +132,7 @@ export default function HubPage() {
 
           <div className="mt-4 flex flex-wrap justify-center gap-6">
             <a href="/" className="hover:text-white">Home</a>
+            <a href="/bam-home" className="hover:text-white">BAM Home™</a>
             <a href="/scanner" className="hover:text-white">BAM Scan™</a>
             <a href="/workorders" className="hover:text-white">Work Orders™</a>
             <a href="/metrics" className="hover:text-white">Metrics™</a>
