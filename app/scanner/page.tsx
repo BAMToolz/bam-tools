@@ -19,15 +19,15 @@ export default function ScannerPage() {
 
   function startProgressAnimation() {
     setScanProgress(7);
-    setScanFunText("Initializing BAM Scan™ engine...");
+    setScanFunText("Initializing BAM Scan™ identification engine...");
 
     const steps = [
-      { progress: 18, text: "Powering BAM Scan™ intelligence systems..." },
-      { progress: 33, text: "Reading equipment fingerprints..." },
-      { progress: 49, text: "Converting machine details into usable data..." },
-      { progress: 66, text: "Building machine memory profile..." },
-      { progress: 82, text: "Connecting technician intelligence layer..." },
-      { progress: 94, text: "Preparing BAM AI™ recommendations..." },
+      { progress: 18, text: "Preparing machine identity scan..." },
+      { progress: 33, text: "Reading visible equipment markers..." },
+      { progress: 49, text: "Searching for nameplate and tag details..." },
+      { progress: 66, text: "Creating first machine identity profile..." },
+      { progress: 82, text: "Connecting identity data to BAM AI™..." },
+      { progress: 94, text: "Preparing technician assist workspace..." },
     ];
 
     steps.forEach((step, index) => {
@@ -40,7 +40,7 @@ export default function ScannerPage() {
 
   async function runScan() {
     if (!file) {
-      setScanFunText("Please select an equipment photo before scanning.");
+      setScanFunText("Start with a machine nameplate, tag, label, or visible equipment image.");
       setScanProgress(0);
       return;
     }
@@ -65,33 +65,33 @@ export default function ScannerPage() {
         data.analysis ||
         data.result ||
         data.message ||
-        "BAM Scan™ connected, but no scan data was returned.";
+        "BAM Scan™ connected, but no machine identity data was returned.";
 
       setScanData(report);
       setMachineConnected(true);
       setScanProgress(100);
-      setScanFunText("Scan complete. Machine intelligence connected.");
+      setScanFunText("Machine identity started. BAM AI™ is ready.");
 
       setMessages([
         {
           role: "bam",
-          text: "Machine connected. BAM AI™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history.",
+          text: "Machine identity started. BAM AI™ is ready. Ask about identification, first checks, parts, manuals, repairs, or what to save into BAM Hub™.",
         },
       ]);
     } catch (error: any) {
       setMachineConnected(false);
       setScanProgress(0);
-      setScanFunText(error?.message || "Scan stopped. BAM Scan™ needs another try.");
+      setScanFunText(error?.message || "Identification stopped. BAM Scan™ needs another try.");
     }
   }
 
   async function saveToHub() {
     if (!scanData) {
-      setSaveStatus("Run BAM Scan™ before saving to BAM Hub™.");
+      setSaveStatus("Run BAM Scan™ before saving machine identity to BAM Hub™.");
       return;
     }
 
-    setSaveStatus("Saving scan to BAM Hub™...");
+    setSaveStatus("Saving machine identity to BAM Hub™...");
 
     const newMachine = {
       id: Date.now().toString(),
@@ -125,7 +125,7 @@ export default function ScannerPage() {
       console.log("BAM Hub™ cloud prototype save skipped.");
     }
 
-    setSaveStatus("Scan saved to BAM Hub™ machine memory on this device.");
+    setSaveStatus("Machine identity saved to BAM Hub™ memory on this device.");
   }
 
   async function sendMessage(customQuestion?: string) {
@@ -136,7 +136,7 @@ export default function ScannerPage() {
     setMessages((prev) => [
       ...prev,
       { role: "tech", text: techText },
-      { role: "bam", text: "BAM AI™ is analyzing the scan and technician notes..." },
+      { role: "bam", text: "BAM AI™ is reviewing the machine identity and technician question..." },
     ]);
 
     setInput("");
@@ -185,7 +185,7 @@ export default function ScannerPage() {
             <h1 className="mt-3 text-5xl font-black">BAM Scan™</h1>
 
             <p className="mt-2 text-cyan-50">
-              Capture → AI Assist → Machine Memory
+              Identify → Assist → Save Machine Memory
             </p>
           </div>
 
@@ -210,29 +210,29 @@ export default function ScannerPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            BAM SCAN™ EQUIPMENT INTELLIGENCE
+            BAM SCAN™ MACHINE IDENTIFICATION
           </p>
 
           <h2 className="mt-3 max-w-5xl text-3xl font-black leading-tight tracking-tight sm:text-5xl">
-            Scan the machine. Let BAM AI™ take over.
+            Identify equipment. Unlock machine intelligence.
           </h2>
 
           <p className="mt-4 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            Capture equipment photos, tags, labels, panels, logs, or components.
-            BAM Scan™ loads the machine data into BAM AI™ so a technician can
-            ask what to inspect, repair, document, or save.
+            BAM Scan™ begins with machine identification. Start with a nameplate,
+            tag, label, or visible equipment image to identify the asset and
+            connect BAM AI™ for technician support.
           </p>
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
             <h2 className="text-3xl font-black text-cyan-300">
-              Equipment Image
+              Machine Identity Image
             </h2>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Upload a machine tag, equipment label, electrical panel,
-              component, nameplate, fault screen, or maintenance log.
+              Start with a machine nameplate, tag, label, or clear equipment image.
+              BAM Scan™ creates the first machine identity profile.
             </p>
 
             <input
@@ -252,13 +252,13 @@ export default function ScannerPage() {
               onClick={runScan}
               className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
             >
-              Run BAM Scan™
+              Begin Identification™
             </button>
           </div>
 
           <div className="rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
             <h2 className="text-3xl font-black text-cyan-300">
-              Scan Progress
+              Identification Progress
             </h2>
 
             <div className="mt-6 rounded-xl bg-slate-900 p-5">
@@ -278,7 +278,7 @@ export default function ScannerPage() {
             {machineConnected && (
               <div className="mt-5 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
                 <p className="font-black text-cyan-300">
-                  Machine data loaded into BAM AI™
+                  Machine identity loaded into BAM AI™
                 </p>
               </div>
             )}
@@ -302,31 +302,31 @@ export default function ScannerPage() {
 
           <p className="mt-4 text-sm leading-6 text-slate-300">
             {machineConnected
-              ? "Machine data is loaded. Ask BAM AI™ what to check, repair, document, or save next."
-              : "Run BAM Scan™ first to connect BAM AI™ to equipment data."}
+              ? "Machine identity is loaded. Ask BAM AI™ what to verify, inspect, research, or save next."
+              : "Begin machine identification first to connect BAM AI™ to the equipment."}
           </p>
 
           {machineConnected && (
             <div className="mt-5 grid gap-3 md:grid-cols-3">
               <button
-                onClick={() => sendMessage("What should I inspect first on this machine?")}
+                onClick={() => sendMessage("What visible machine identity details should I verify first?")}
                 className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
               >
-                Inspect First™
+                Verify Identity™
               </button>
 
               <button
-                onClick={() => sendMessage("What parts or components may be involved based on this scan?")}
+                onClick={() => sendMessage("What information should be added next to build this machine profile?")}
                 className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
               >
-                Parts Check™
+                Build Profile™
               </button>
 
               <button
-                onClick={() => sendMessage("Create a short maintenance note from this scan.")}
+                onClick={() => sendMessage("Create a short machine identity note from this scan.")}
                 className="rounded-xl border border-cyan-400 p-3 text-sm font-black text-cyan-200 hover:bg-cyan-950"
               >
-                Maintenance Note™
+                Identity Note™
               </button>
             </div>
           )}
@@ -349,8 +349,8 @@ export default function ScannerPage() {
             disabled={!machineConnected}
             placeholder={
               machineConnected
-                ? "Ask BAM AI™ about inspection, repair, parts, notes, or next steps..."
-                : "Scan equipment first..."
+                ? "Ask BAM AI™ about identification, verification, parts research, manuals, or next profile data..."
+                : "Begin identification first..."
             }
             className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white"
           />
@@ -369,7 +369,7 @@ export default function ScannerPage() {
                 onClick={saveToHub}
                 className="rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
               >
-                Save to BAM Hub™
+                Save Machine Identity to BAM Hub™
               </button>
 
               <a
