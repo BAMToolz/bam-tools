@@ -127,7 +127,9 @@ export default function BamScanPage() {
         },
       ]);
     }
-  }  return (
+  }
+
+  return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
         <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
@@ -292,13 +294,31 @@ export default function BamScanPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Provider Path™
+            BAM Provider Network™
           </h2>
 
-          <p className="mt-4 text-sm leading-6 text-slate-300">
-            When help is needed, BAM Provider Network™ can become the future
-            bridge between users and qualified repair professionals.
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            When a repair needs additional help, BAM Scan™ can connect users with
+            future verified providers, technicians, and service professionals.
+            BAM Access™ will manage accounts, requests, provider profiles, and
+            protected repair workflows.
           </p>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="/access"
+              className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Join BAM Provider Network™
+            </a>
+
+            <a
+              href="/support"
+              className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+            >
+              Contact BAM Support™
+            </a>
+          </div>
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
