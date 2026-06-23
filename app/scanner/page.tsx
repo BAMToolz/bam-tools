@@ -37,7 +37,7 @@ export default function ScannerPage() {
 
   function startProgressAnimation() {
     setScanProgress(7);
-    setScanFunText("Initializing BAM Scan™ identification engine...");
+    setScanFunText("Initializing identification engine...");
 
     const steps = [
       { progress: 18, text: "Preparing machine identity scan..." },
@@ -90,7 +90,7 @@ export default function ScannerPage() {
         data.analysis ||
         data.result ||
         data.message ||
-        "BAM Scan™ connected, but no machine identity data was returned.";
+        "No machine identity data was returned.";
 
       setScanData(report);
 
@@ -107,13 +107,13 @@ export default function ScannerPage() {
     } catch (error: any) {
       setMachineConnected(false);
       setScanProgress(0);
-      setScanFunText(error?.message || "Identification stopped. BAM Scan™ needs another try.");
+      setScanFunText(error?.message || "Identification stopped. Try another image.");
     }
   }
 
   async function saveToHub() {
     if (!scanData) {
-      setSaveStatus("Run BAM Scan™ before saving machine identity to BAM Hub™.");
+      setSaveStatus("Run identification before saving machine identity to BAM Hub™.");
       return;
     }
 
@@ -226,7 +226,7 @@ export default function ScannerPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            BAM SCAN™ MACHINE IDENTIFICATION
+            MACHINE IDENTIFICATION
           </p>
 
           <h2 className="mt-3 max-w-5xl text-3xl font-black leading-tight tracking-tight sm:text-5xl">
@@ -234,9 +234,9 @@ export default function ScannerPage() {
           </h2>
 
           <p className="mt-4 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Scan™ begins with machine identification. Start with a nameplate,
-            tag, label, or visible equipment image to identify the asset and
-            connect BAM AI™ for technician support.
+            Begin with machine identification. Start with a nameplate, tag,
+            label, or visible equipment image to identify the asset and connect
+            BAM AI™ for technician support.
           </p>
         </section>
 
@@ -248,7 +248,7 @@ export default function ScannerPage() {
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
               Start with a machine nameplate, tag, label, or clear equipment image.
-              BAM Scan™ creates the first machine identity profile.
+              This begins the first machine identity profile.
             </p>
 
             <input
@@ -268,7 +268,7 @@ export default function ScannerPage() {
               onClick={runScan}
               className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
             >
-              Begin Identification™
+              Run BAMToolz™
             </button>
           </div>
 
