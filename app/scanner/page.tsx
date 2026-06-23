@@ -372,13 +372,17 @@ export default function ScannerPage() {
                 ? "Ask BAM AI™ about identification, verification, parts research, manuals, or next profile data..."
                 : "Begin identification first..."
             }
-            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white placeholder:text-slate-500 disabled:opacity-50"
+            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-400/40 disabled:bg-slate-950 disabled:text-slate-500 disabled:placeholder:text-slate-600"
           />
 
           <button
             onClick={() => sendMessage()}
             disabled={!machineConnected || !input.trim()}
-            className="mt-4 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
+            className={`mt-4 w-full rounded-xl p-4 font-black ${
+              machineConnected && input.trim()
+                ? "bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+                : "border border-cyan-500/40 bg-slate-950 text-cyan-900"
+            }`}
           >
             Ask BAM AI™
           </button>
