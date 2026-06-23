@@ -10,7 +10,6 @@ type Message = {
 export default function ScannerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [scanData, setScanData] = useState("");
-  const [scanStatus, setScanStatus] = useState("Waiting for equipment scan.");
   const [machineConnected, setMachineConnected] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
   const [scanFunText, setScanFunText] = useState("Scanner standing by.");
@@ -41,11 +40,11 @@ export default function ScannerPage() {
 
   async function runScan() {
     if (!file) {
-      setScanStatus("Please select an equipment photo before scanning.");
+      setScanFunText("Please select an equipment photo before scanning.");
+      setScanProgress(0);
       return;
     }
 
-    setScanStatus("Analyzing equipment with BAM Scan™...");
     setMachineConnected(false);
     setMessages([]);
     setSaveStatus("");
@@ -70,21 +69,19 @@ export default function ScannerPage() {
 
       setScanData(report);
       setMachineConnected(true);
-      setScanStatus("Equipment scan complete. BAM AI™ is ready.");
       setScanProgress(100);
       setScanFunText("Scan complete. Machine intelligence connected.");
 
       setMessages([
         {
           role: "bam",
-          text: "Equipment scan complete. Enter symptoms, readings, fault codes, technician notes, or repair questions.",
+          text: "Machine connected. BAM AI™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history.",
         },
       ]);
     } catch (error: any) {
-      setScanStatus(error?.message || "BAM Scan™ connection failed.");
       setMachineConnected(false);
       setScanProgress(0);
-      setScanFunText("Scan stopped. BAM Scan™ needs another try.");
+      setScanFunText(error?.message || "Scan stopped. BAM Scan™ needs another try.");
     }
   }
 
@@ -271,71 +268,24 @@ export default function ScannerPage() {
 
           <div className="rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
             <h2 className="text-3xl font-black text-cyan-300">
-              Live Scan Status
+              BAM Scan™ Progress
             </h2>
 
             <div className="mt-6 rounded-xl bg-slate-900 p-5">
-              <p className="font-black text-cyan-300">
-                {machineConnected ? "Equipment Connected" : "Scanner Status"}
-              </p>
-
-              <p className="mt-2 text-slate-200">{scanStatus}</p>
-
-              <div className="mt-5">
-                <div className="mb-2 flex justify-between gap-4 text-sm font-bold text-cyan-300">
-                  <span>{scanFunText}</span>
-                  <span>{scanProgress}%</span>
-                </div>
-
-                <div className="h-4 overflow-hidden rounded-full bg-slate-800">
-                  <div
-                    className="h-full rounded-full bg-cyan-400 transition-all duration-500"
-                    style={{ width: `${scanProgress}%` }}
-                  />
-                </div>
+              <div className="mb-2 flex justify-between gap-4 text-sm font-bold text-cyan-300">
+                <span>{scanFunText}</span>
+                <span>{scanProgress}%</span>
               </div>
-            </div>
 
-            <div className="mt-5 grid gap-3">
-              <StatusItem label="Machine ID" value={machineConnected ? "Captured / Pending Review" : "Waiting"} />
-              <StatusItem label="Manufacturer" value={machineConnected ? "Scan Data Available" : "Waiting"} />
-              <StatusItem label="Model / Serial" value={machineConnected ? "Review Scan Result" : "Waiting"} />
-              <StatusItem label="BAM AI™" value={machineConnected ? "Ready" : "Locked Until Scan"} />
+              <div className="h-4 overflow-hidden rounded-full bg-slate-800">
+                <div
+                  className="h-full rounded-full bg-cyan-400 transition-all duration-500"
+                  style={{ width: `${scanProgress}%` }}
+                />
+              </div>
             </div>
           </div>
         </section>
-
-        {scanData && (
-          <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-            <h2 className="text-3xl font-black text-cyan-300">
-              BAM AI™ Scan Analysis
-            </h2>
-
-            <div className="mt-5 whitespace-pre-wrap rounded-xl bg-slate-900 p-5 text-sm leading-6 text-slate-200">
-              {scanData}
-            </div>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <button
-                onClick={saveToHub}
-                className="rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
-              >
-                Save to BAM Hub™
-              </button>
-
-              <a
-                href="/workorders"
-                className="rounded-xl border border-cyan-400 p-4 text-center font-black text-cyan-200 hover:bg-cyan-950"
-              >
-                Create Work Order™
-              </a>
-            </div>
-
-            {saveStatus && (
-              <p className="mt-4 font-bold text-cyan-300">{saveStatus}</p>
-            )}
-          </section>
-        )}
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
@@ -344,7 +294,7 @@ export default function ScannerPage() {
 
           <p className="mt-4 text-slate-300">
             {machineConnected
-              ? "Ask about symptoms, readings, fault codes, parts, next checks, safety steps, or repair direction."
+              ? "Machine data is loaded. Ask BAM AI™ what to check, repair, document, or save next."
               : "Run BAM Scan™ first to connect BAM AI™ to equipment data."}
           </p>
 
@@ -366,7 +316,7 @@ export default function ScannerPage() {
             disabled={!machineConnected}
             placeholder={
               machineConnected
-                ? "Example: Motor trips after startup. VFD shows overcurrent. What should I check first?"
+                ? "Example: What should I inspect first on this machine?"
                 : "Scan equipment first..."
             }
             className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white"
@@ -377,8 +327,30 @@ export default function ScannerPage() {
             disabled={!machineConnected || !input.trim()}
             className="mt-4 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
           >
-            Run BAM AI™
+            Ask BAM AI™
           </button>
+
+          {machineConnected && (
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <button
+                onClick={saveToHub}
+                className="rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
+              >
+                Save to BAM Hub™
+              </button>
+
+              <a
+                href="/workorders"
+                className="rounded-xl border border-cyan-400 p-4 text-center font-black text-cyan-200 hover:bg-cyan-950"
+              >
+                Create Work Order™
+              </a>
+            </div>
+          )}
+
+          {saveStatus && (
+            <p className="mt-4 font-bold text-cyan-300">{saveStatus}</p>
+          )}
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
@@ -413,21 +385,6 @@ export default function ScannerPage() {
         </footer>
       </div>
     </main>
-  );
-}
-
-function StatusItem({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex justify-between gap-4 rounded-xl border border-cyan-400/30 bg-slate-900 p-4">
-      <span className="font-bold text-slate-300">{label}</span>
-      <span className="text-right font-black text-cyan-300">{value}</span>
-    </div>
   );
 }
 
