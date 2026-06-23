@@ -20,8 +20,18 @@ export default function WorkOrdersPage() {
   const [problem, setProblem] = useState("");
   const [notes, setNotes] = useState("");
   const [workOrders, setWorkOrders] = useState<WorkOrder[]>([]);
+  const [hasAccess, setHasAccess] = useState(false);
 
   useEffect(() => {
+    const accessProfile = localStorage.getItem("bamAccessProfile");
+
+    if (!accessProfile) {
+      setHasAccess(false);
+      return;
+    }
+
+    setHasAccess(true);
+
     const saved = JSON.parse(localStorage.getItem("bamWorkOrders") || "[]");
     setWorkOrders(saved);
   }, []);
@@ -53,6 +63,118 @@ export default function WorkOrdersPage() {
   function clearWorkOrders() {
     localStorage.removeItem("bamWorkOrders");
     setWorkOrders([]);
+  }
+
+  if (!hasAccess) {
+    return (
+      <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
+        <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
+          <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
+                BAM
+              </div>
+
+              <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+                BAM Work Orders™
+              </h1>
+
+              <p className="mt-2 text-sm font-medium text-cyan-50">
+                Protected maintenance workflow | Ball AI Metrics™
+              </p>
+            </div>
+
+            <nav className="flex flex-wrap gap-3">
+              <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+                Home™
+              </a>
+              <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+                BAM Scan™
+              </a>
+              <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+                BAM Hub™
+              </a>
+              <a href="/login" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">
+                BAM Access™
+              </a>
+            </nav>
+          </header>
+
+          <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
+            <p className="text-sm font-black tracking-wide text-cyan-300">
+              ACCESS REQUIRED™
+            </p>
+
+            <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
+              Work Orders™ are protected facility maintenance records.
+            </h2>
+
+            <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
+              BAM Work Orders™ connects machine issues, technician assignments,
+              priorities, repair notes, work history, and reliability metrics.
+              This data belongs behind BAM Access™ with facility permissions.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="/login"
+                className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
+              >
+                Open BAM Access™
+              </a>
+
+              <a
+                href="/scanner"
+                className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+              >
+                Start With BAM Scan™
+              </a>
+
+              <a
+                href="/hub"
+                className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
+              >
+                View BAM Hub™
+              </a>
+            </div>
+          </section>
+
+          <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
+            <h2 className="text-3xl font-black text-yellow-200">
+              Protected Workflow™
+            </h2>
+
+            <p className="mt-4 text-sm leading-6 text-yellow-50 sm:text-base">
+              Work orders may contain machine names, fault conditions, technician
+              notes, parts usage, repair timing, downtime, safety details, and
+              facility maintenance history. BAM Access™ protects this workflow
+              before work order data is created or viewed.
+            </p>
+          </section>
+
+          <section className="mt-8 grid gap-5 md:grid-cols-3">
+            <InfoCard
+              title="Machine Issue™"
+              text="Work orders begin from a machine issue, scan, technician note, or facility request."
+            />
+
+            <InfoCard
+              title="Assigned Work™"
+              text="Technicians, engineers, and admins can be assigned work based on role and facility access."
+            />
+
+            <InfoCard
+              title="Repair History™"
+              text="Completed work becomes machine memory inside BAM Hub™ and future BAM Metrics™."
+            />
+          </section>
+
+          <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
+            © 2026 BAM Work Orders™ | BAM Hub™ | Ball AI Metrics™
+          </footer>
+        </div>
+      </main>
+    );
   }
 
   return (
@@ -91,7 +213,7 @@ export default function WorkOrdersPage() {
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            MAINTENANCE WORKFLOW SYSTEM™
+            PROTECTED MAINTENANCE WORKFLOW™
           </p>
 
           <h2 className="mt-4 text-4xl font-black text-cyan-300">
@@ -100,8 +222,8 @@ export default function WorkOrdersPage() {
 
           <p className="mt-4 max-w-5xl text-slate-300">
             BAM Work Orders™ connects equipment problems, technician notes,
-            priorities, repair history, and future metrics into one maintenance
-            workflow.
+            priorities, repair history, and future metrics into one protected
+            maintenance workflow.
           </p>
         </section>
 
@@ -260,6 +382,21 @@ function Metric({ title, value }: { title: string; value: string }) {
     <div className="rounded-xl bg-slate-900 p-5 shadow-xl">
       <p className="font-black text-cyan-300">{title}</p>
       <p className="mt-3 text-4xl font-black">{value}</p>
+    </div>
+  );
+}
+
+function InfoCard({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
+      <h3 className="text-xl font-black text-cyan-300">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
     </div>
   );
 }
