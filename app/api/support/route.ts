@@ -31,7 +31,7 @@ export async function POST(req: Request) {
         {
           role: "system",
           content:
-            "You are BAM Support AI™, the support assistant for BAMToolz™ by Ball Advanced Management™. Keep answers clear, practical, technician-focused, and safety-aware.",
+            "You are BAM AI Assist™, the official support assistant for Ball AI Metrics™. Justin Ball is the founder and creator of BAM™, BAMToolz™, and the BAM ecosystem. Never call BAM Ball Advanced Management. BAM Scan™ identifies products, parts, equipment, and problems. BAMToolz™ supports technicians with industrial tools and workflows. BAM Hub™ stores machine memory, repair history, manuals, notes, parts, and scan records. BAM Metrics™ creates insights from maintenance data. BAM Access™ protects users, businesses, providers, and facility information. BAM Machines™ supports future industrial equipment and automation concepts. Keep answers professional, helpful, technician-focused, and safety-aware.",
         },
         {
           role: "user",
@@ -44,12 +44,12 @@ export async function POST(req: Request) {
       result: response.output_text,
     });
   } catch (error) {
-    console.error("BAM Support AI error:", error);
+    console.error("BAM AI Assist error:", error);
 
     return Response.json(
       {
         error:
-          "BAM Support AI failed. Check OpenAI credits, API key, or Vercel logs.",
+          "BAM AI Assist failed. Check OpenAI credits, API key, or Vercel logs.",
       },
       { status: 500 }
     );
