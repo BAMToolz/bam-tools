@@ -65,6 +65,19 @@ export default function WorkOrdersPage() {
     setWorkOrders([]);
   }
 
+  const nav = (
+    <nav className="flex flex-wrap gap-3">
+      <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home™</a>
+      <a href="/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Scan™</a>
+      <a href="/toolz/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAMToolz™</a>
+      <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Hub™</a>
+      <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
+      <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Machines™</a>
+      <a href="/access" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">BAM Access™</a>
+      <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
+    </nav>
+  );
+
   if (!hasAccess) {
     return (
       <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
@@ -84,29 +97,7 @@ export default function WorkOrdersPage() {
               </p>
             </div>
 
-            <nav className="flex flex-wrap gap-3">
-              <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-                Home™
-              </a>
-              <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-                BAM Home™
-              </a>
-              <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-                BAM Scan™
-              </a>
-              <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-                BAM Hub™
-              </a>
-              <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-                Metrics™
-              </a>
-              <a href="/access" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">
-                BAM Access™
-              </a>
-              <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-                Support™
-              </a>
-            </nav>
+            {nav}
           </header>
 
           <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
@@ -120,8 +111,9 @@ export default function WorkOrdersPage() {
 
             <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
               BAM Work Orders™ connects machine issues, technician assignments,
-              priorities, repair notes, work history, and reliability metrics.
-              This data belongs behind BAM Access™ with facility permissions.
+              priorities, repair notes, parts used, downtime activity, work
+              history, and reliability metrics. This data belongs behind BAM
+              Access™ and connects back into BAM Hub™ machine memory.
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -133,10 +125,10 @@ export default function WorkOrdersPage() {
               </a>
 
               <a
-                href="/scanner"
+                href="/toolz/scan"
                 className="rounded-xl border border-cyan-400 px-6 py-3 text-center font-black text-cyan-200 hover:bg-cyan-950"
               >
-                Start With BAM Scan™
+                Start With BAMToolz™
               </a>
 
               <a
@@ -164,17 +156,17 @@ export default function WorkOrdersPage() {
           <section className="mt-8 grid gap-5 md:grid-cols-3">
             <InfoCard
               title="Machine Issue™"
-              text="Work orders begin from a machine issue, scan, technician note, or facility request."
+              text="Work orders begin from a machine issue, BAM Scan™, technician note, BAM AI Assist™ result, or facility request."
             />
 
             <InfoCard
               title="Assigned Work™"
-              text="Technicians, engineers, and admins can be assigned work based on role and facility access."
+              text="Technicians, engineers, and admins can be assigned work based on role, priority, and facility access."
             />
 
             <InfoCard
               title="Repair History™"
-              text="Completed work becomes machine memory inside BAM Hub™ and future BAM Metrics™."
+              text="Completed work becomes BAM Hub™ machine memory and future BAM Metrics™ intelligence."
             />
           </section>
 
@@ -200,33 +192,11 @@ export default function WorkOrdersPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Maintenance workflow | Ball AI Metrics™
+              Protected maintenance workflow | Ball AI Metrics™
             </p>
           </div>
 
-          <nav className="flex flex-wrap gap-3">
-            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Home™
-            </a>
-            <a href="/bam-home" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Home™
-            </a>
-            <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Scan™
-            </a>
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              BAM Hub™
-            </a>
-            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Metrics™
-            </a>
-            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Access™
-            </a>
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
-              Support™
-            </a>
-          </nav>
+          {nav}
         </header>
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
@@ -240,8 +210,9 @@ export default function WorkOrdersPage() {
 
           <p className="mt-4 max-w-5xl text-slate-300">
             BAM Work Orders™ connects equipment problems, technician notes,
-            priorities, repair history, and future metrics into one protected
-            maintenance workflow.
+            priorities, assignments, repair history, and downtime activity into
+            one protected maintenance workflow that feeds BAM Hub™ machine
+            memory and future BAM Metrics™ intelligence.
           </p>
         </section>
 
@@ -336,10 +307,7 @@ export default function WorkOrdersPage() {
           ) : (
             <div className="mt-6 grid gap-5">
               {workOrders.map((order) => (
-                <div
-                  key={order.id}
-                  className="rounded-xl bg-slate-900 p-5 shadow-xl"
-                >
+                <div key={order.id} className="rounded-xl bg-slate-900 p-5 shadow-xl">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <h3 className="text-2xl font-black text-cyan-300">
@@ -404,13 +372,7 @@ function Metric({ title, value }: { title: string; value: string }) {
   );
 }
 
-function InfoCard({
-  title,
-  text,
-}: {
-  title: string;
-  text: string;
-}) {
+function InfoCard({ title, text }: { title: string; text: string }) {
   return (
     <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
       <h3 className="text-xl font-black text-cyan-300">{title}</h3>
