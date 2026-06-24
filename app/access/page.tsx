@@ -13,7 +13,7 @@ export default function AccessPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Protected Intelligence Gateway™
+              Secure Platform Access™
             </p>
           </div>
 
@@ -31,31 +31,28 @@ export default function AccessPage() {
 
         <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            SECURE ACCOUNT & PERMISSION LAYER™
+            SECURE INTELLIGENCE GATEWAY™
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Protect access to BAM Hub™ machine memory.
+            Manage your connected BAM™ workspace.
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Access™ is the protected gateway for users, providers,
-            businesses, technicians, admins, and facility accounts across the
-            BAM™ ecosystem. It is designed to manage sign-in, roles,
-            permissions, provider workflows, and access to BAM Hub™ machine
-            memory, BAMToolz™, Work Orders™, and BAM Metrics™.
+            BAM Access™ provides secure access to connected tools, machine
+            intelligence, facility records, work orders, analytics, and
+            AI-powered support across the BAM™ ecosystem.
           </p>
         </section>
 
         <section className="mt-8 rounded-2xl border border-cyan-300/40 bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            Sign in
+            Account Access™
           </h2>
 
           <p className="mt-3 text-sm leading-6 text-slate-300">
-            Prototype access screen for future authenticated accounts,
-            protected facility data, provider workflows, and role-based
-            permissions.
+            Sign in to manage your BAM™ workspace, connected tools, facility
+            records, machine intelligence, and protected workflows.
           </p>
 
           <div className="mt-8 grid gap-4">
@@ -76,28 +73,58 @@ export default function AccessPage() {
             </button>
 
             <a href="/support" className="text-center text-sm font-bold text-cyan-300 underline">
-              Need access? Contact BAM Support™
+              Request Access or Account Support™
             </a>
           </div>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          <AccessCard title="User Account™" text="BAM Scan™ users, repair questions, provider requests, and guided assistance." />
-          <AccessCard title="Provider Account™" text="Verified technicians, repair professionals, service companies, and protected service workflows." />
-          <AccessCard title="Business Account™" text="BAMToolz™, BAM Hub™ machine memory, Work Orders™, facility data, and BAM Metrics™." />
-          <AccessCard title="Admin Account™" text="Users, providers, businesses, permissions, facility records, and protected data controls." />
+          <AccessCard
+            title="Individual Access™"
+            text="Personal workspace, saved scans, assistance, and connected services."
+          />
+
+          <AccessCard
+            title="Technician Access™"
+            text="Maintenance tools, equipment workflows, documentation, and repair intelligence."
+          />
+
+          <AccessCard
+            title="Business Access™"
+            text="Facility management, BAM Hub™, work orders, analytics, and team collaboration."
+          />
+
+          <AccessCard
+            title="Administrator Access™"
+            text="Manage organizations, permissions, security, users, and connected systems."
+          />
         </section>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            What BAM Access™ Protects
+            Protected BAM™ Workspace
           </h2>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <AccessCard title="Machine Memory™" text="Equipment profiles, scans, manuals, notes, parts, serials, and repair history." />
-            <AccessCard title="Facility Workflows™" text="Work orders, technician activity, maintenance status, and operational records." />
-            <AccessCard title="Provider Network™" text="Future verified repair providers, service requests, account roles, and customer workflows." />
-            <AccessCard title="Business Intelligence™" text="BAM Metrics™, downtime insights, repair trends, and protected facility reporting." />
+            <AccessCard
+              title="Machine Memory™"
+              text="Equipment profiles, scans, manuals, notes, parts, serials, and repair history."
+            />
+
+            <AccessCard
+              title="Facility Workflows™"
+              text="Work orders, technician activity, maintenance status, and operational records."
+            />
+
+            <AccessCard
+              title="Provider Network™"
+              text="Service requests, account roles, provider access, and customer workflows."
+            />
+
+            <AccessCard
+              title="Business Intelligence™"
+              text="BAM Metrics™, downtime insights, repair trends, and protected facility reporting."
+            />
           </div>
         </section>
 
