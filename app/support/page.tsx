@@ -37,31 +37,15 @@ export default function SupportPage() {
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-5xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
-
         <nav className="flex flex-wrap gap-3">
-          <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
-            Home™
-          </a>
-
-          <a href="/scanner" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
-            BAM Scan™
-          </a>
-
-          <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
-            BAM Hub™
-          </a>
-
-          <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
-            Work Orders™
-          </a>
-
-          <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">
-            Metrics™
-          </a>
-
-          <a href="/access" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950">
-            Access™
-          </a>
+          <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">Home™</a>
+          <a href="/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">BAM Scan™</a>
+          <a href="/toolz/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">BAMToolz™</a>
+          <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">BAM Hub™</a>
+          <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">Work Orders™</a>
+          <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">Metrics™</a>
+          <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200">Machines™</a>
+          <a href="/access" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950">Access™</a>
         </nav>
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
@@ -70,18 +54,17 @@ export default function SupportPage() {
           </p>
 
           <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-            BAMToolz™ AI Support
+            BAMToolz™ Support
           </h1>
 
           <p className="mt-4 max-w-3xl text-slate-300">
-            Support for BAM Scan™, BAM AI™, BAM Hub™, BAM Access™,
-            automation, equipment workflows, and facility intelligence.
+            Support for BAM Scan™, BAMToolz™, BAM AI Assist™, BAM Hub™ machine
+            memory, BAM Access™, Work Orders™, BAM Metrics™, BAM Machines™, and
+            facility intelligence workflows.
           </p>
 
           <div className="mt-6 rounded-xl border border-cyan-400/40 bg-slate-900 p-5">
-            <p className="font-bold text-cyan-300">
-              Support Contact
-            </p>
+            <p className="font-bold text-cyan-300">Support Contact</p>
 
             <p className="mt-2 text-slate-300">
               Email:{" "}
@@ -100,7 +83,7 @@ export default function SupportPage() {
 
           <textarea
             className="mt-8 min-h-40 w-full rounded-xl border border-cyan-400 bg-white p-4 text-black outline-none"
-            placeholder="Ask BAMToolz™ AI Support..."
+            placeholder="Ask BAMToolz™ Support..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
@@ -110,7 +93,7 @@ export default function SupportPage() {
             disabled={loading || !message.trim()}
             className="mt-4 rounded-xl bg-cyan-500 px-6 py-3 font-black text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
           >
-            {loading ? "Analyzing..." : "Ask BAMToolz™ AI Support"}
+            {loading ? "Analyzing..." : "Ask BAMToolz™ Support"}
           </button>
 
           {answer && (
