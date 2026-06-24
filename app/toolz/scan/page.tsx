@@ -25,7 +25,7 @@ export default function ScannerPage() {
   });
   const [machineConnected, setMachineConnected] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
-  const [scanFunText, setScanFunText] = useState("Industrial scanner standing by.");
+  const [scanFunText, setScanFunText] = useState("BAMToolz™ standing by.");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [saveStatus, setSaveStatus] = useState("");
@@ -37,15 +37,15 @@ export default function ScannerPage() {
 
   function startProgressAnimation() {
     setScanProgress(7);
-    setScanFunText("Initializing industrial identification engine...");
+    setScanFunText("Initializing BAMToolz™ industrial scan...");
 
     const steps = [
       { progress: 18, text: "Preparing machine identity scan..." },
-      { progress: 33, text: "Reading visible equipment markers..." },
-      { progress: 49, text: "Searching for nameplate and tag details..." },
-      { progress: 66, text: "Creating industrial machine identity profile..." },
-      { progress: 82, text: "Connecting identity data to BAM AI™..." },
-      { progress: 94, text: "Waiting for BAM AI™ response..." },
+      { progress: 33, text: "Reading equipment markers and visible labels..." },
+      { progress: 49, text: "Searching for nameplate, model, and tag details..." },
+      { progress: 66, text: "Building BAM Hub™ machine memory profile..." },
+      { progress: 82, text: "Connecting results to BAM AI Assist™..." },
+      { progress: 94, text: "Preparing technician assist response..." },
     ];
 
     steps.forEach((step, index) => {
@@ -107,12 +107,12 @@ export default function ScannerPage() {
 
       setMachineConnected(true);
       setScanProgress(100);
-      setScanFunText("Industrial machine connected. BAM AI™ is ready.");
+      setScanFunText("Machine connected. BAM AI Assist™ is ready.");
 
       setMessages([
         {
           role: "bam",
-          text: "Industrial machine connected. BAM AI™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history.",
+          text: "Machine connected. BAM AI Assist™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history.",
         },
       ]);
     } catch (error: any) {
@@ -128,7 +128,7 @@ export default function ScannerPage() {
       return;
     }
 
-    setSaveStatus("Saving machine identity to BAM Hub™...");
+    setSaveStatus("Saving machine identity to BAM Hub™ machine memory...");
 
     const newMachine = {
       id: Date.now().toString(),
@@ -162,7 +162,7 @@ export default function ScannerPage() {
       console.log("BAM Hub™ cloud prototype save skipped.");
     }
 
-    setSaveStatus(`${newMachine.name} saved to BAM Hub™ memory on this device.`);
+    setSaveStatus(`${newMachine.name} saved to BAM Hub™ machine memory on this device.`);
   }
 
   async function sendMessage(customQuestion?: string) {
@@ -173,7 +173,7 @@ export default function ScannerPage() {
     setMessages((prev) => [
       ...prev,
       { role: "tech", text: techText },
-      { role: "bam", text: "BAM AI™ is reviewing the industrial machine identity..." },
+      { role: "bam", text: "BAM AI Assist™ is reviewing the machine identity..." },
     ]);
 
     setInput("");
@@ -196,7 +196,7 @@ export default function ScannerPage() {
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: data.result || data.error || "BAM AI™ returned no result.",
+          text: data.result || data.error || "BAM AI Assist™ returned no result.",
         },
       ]);
     } catch (error: any) {
@@ -204,7 +204,7 @@ export default function ScannerPage() {
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: error?.message || "BAM AI™ connection failed.",
+          text: error?.message || "BAM AI Assist™ connection failed.",
         },
       ]);
     }
@@ -219,10 +219,10 @@ export default function ScannerPage() {
               BAMToolz™
             </div>
 
-            <h1 className="mt-3 text-5xl font-black">BAMToolz™ Scan</h1>
+            <h1 className="mt-3 text-5xl font-black">BAMToolz™</h1>
 
             <p className="mt-2 text-cyan-50">
-              Industrial Equipment Scan™
+              Industrial technician tools powered by BAM Scan™, BAM Hub™, and BAM AI Assist™.
             </p>
           </div>
 
@@ -232,6 +232,7 @@ export default function ScannerPage() {
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Hub™</a>
             <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
+            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Machines™</a>
             <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Access™</a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
           </nav>
@@ -239,18 +240,19 @@ export default function ScannerPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            INDUSTRIAL MACHINE IDENTIFICATION
+            INDUSTRIAL TECHNICIAN TOOLKIT™
           </p>
 
           <h2 className="mt-3 max-w-5xl text-3xl font-black leading-tight tracking-tight sm:text-5xl">
-            Identify equipment. Unlock facility intelligence.
+            Scan equipment. Build machine memory. Assist the technician.
           </h2>
 
           <p className="mt-4 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            This BAMToolz™ scan mode is built for facilities, technicians,
-            maintenance teams, and equipment records. Capture a nameplate,
-            equipment tag, fault screen, control panel, component, or visible
-            machine image.
+            BAMToolz™ is the technician-focused side of the BAM™ ecosystem,
+            built for facilities, maintenance teams, and equipment records.
+            Capture a nameplate, equipment tag, fault screen, control panel,
+            component, or visible machine image to begin building useful machine
+            intelligence.
           </p>
         </section>
 
@@ -259,7 +261,7 @@ export default function ScannerPage() {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm font-black tracking-wide text-cyan-300">
-                  INDUSTRIAL SCAN™ CAPTURE
+                  BAM SCAN™ INDUSTRIAL MODE
                 </p>
 
                 <h2 className="mt-2 text-3xl font-black text-cyan-300">
@@ -295,7 +297,7 @@ export default function ScannerPage() {
               <div className="rounded-xl border border-cyan-400/30 bg-slate-900 p-4">
                 <p className="font-black text-cyan-300">Next Step</p>
                 <p className="mt-2 text-sm leading-6 text-slate-300">
-                  Run Industrial Scan™ to build the first machine identity profile.
+                  Run BAM Scan™ to build the first machine identity profile.
                 </p>
               </div>
             </div>
@@ -319,12 +321,8 @@ export default function ScannerPage() {
 
             {file && (
               <div className="mt-4 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
-                <p className="text-sm font-black text-cyan-300">
-                  Selected Image
-                </p>
-                <p className="mt-2 break-all text-sm text-slate-200">
-                  {file.name}
-                </p>
+                <p className="text-sm font-black text-cyan-300">Selected Image</p>
+                <p className="mt-2 break-all text-sm text-slate-200">{file.name}</p>
               </div>
             )}
 
@@ -332,7 +330,7 @@ export default function ScannerPage() {
               onClick={runScan}
               className="mt-6 w-full rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
             >
-              Run Industrial Scan™
+              Run BAM Scan™
             </button>
           </div>
 
@@ -384,13 +382,13 @@ export default function ScannerPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-3xl font-black text-cyan-300">
-                BAM AI™ Industrial Technician Assist
+                BAM AI Assist™
               </h2>
 
               <p className="mt-4 text-sm leading-6 text-slate-300">
                 {machineConnected
-                  ? "Industrial machine connected. BAM AI™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history."
-                  : "Begin industrial machine identification first to connect BAM AI™ to the equipment."}
+                  ? "Machine connected. BAM AI Assist™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history."
+                  : "Begin industrial machine identification first to connect BAM AI Assist™ to the equipment."}
               </p>
             </div>
 
@@ -408,7 +406,7 @@ export default function ScannerPage() {
           {messages.map((msg, index) => (
             <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
               <p className="text-sm font-black uppercase tracking-wide text-cyan-300">
-                {msg.role === "tech" ? "Technician" : "BAM AI™"}
+                {msg.role === "tech" ? "Technician" : "BAM AI Assist™"}
               </p>
 
               <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
@@ -423,7 +421,7 @@ export default function ScannerPage() {
             disabled={!machineConnected}
             placeholder={
               machineConnected
-                ? "Ask BAM AI™ about identification, verification, parts research, manuals, or next profile data..."
+                ? "Ask BAM AI Assist™ about identification, verification, parts research, manuals, repairs, or maintenance history..."
                 : "Begin industrial identification first..."
             }
             className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-400/40 disabled:bg-slate-950 disabled:text-slate-500 disabled:placeholder:text-slate-600"
@@ -438,7 +436,7 @@ export default function ScannerPage() {
                 : "border border-cyan-500/40 bg-slate-950 text-cyan-900"
             }`}
           >
-            Ask BAM AI™
+            Ask BAM AI Assist™
           </button>
 
           {machineConnected && (
@@ -465,7 +463,7 @@ export default function ScannerPage() {
         </section>
 
         <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
-          <p>© 2026 Industrial BAM Scan™ | BAMToolz™ | Ball AI Metrics™</p>
+          <p>© 2026 BAMToolz™ | Industrial BAM Scan™ | Ball AI Metrics™</p>
         </footer>
       </div>
     </main>
