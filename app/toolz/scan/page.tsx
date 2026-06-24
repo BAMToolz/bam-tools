@@ -28,7 +28,6 @@ export default function ScannerPage() {
   const [scanFunText, setScanFunText] = useState("BAMToolz™ standing by.");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [saveStatus, setSaveStatus] = useState("");
 
   function cleanField(value: string, fallback: string) {
     if (!value || value.toLowerCase() === "not visible") return fallback;
@@ -67,7 +66,6 @@ export default function ScannerPage() {
 
     setMachineConnected(false);
     setMessages([]);
-    setSaveStatus("");
     setScanData("");
     setMachineIdentity({
       name: "",
@@ -120,49 +118,6 @@ export default function ScannerPage() {
       setScanProgress(0);
       setScanFunText(error?.message || "Industrial identification stopped. Try another image.");
     }
-  }
-
-  async function saveToHub() {
-    if (!scanData) {
-      setSaveStatus("Run industrial identification before saving machine identity to BAM Hub™.");
-      return;
-    }
-
-    setSaveStatus("Saving machine identity to BAM Hub™ machine memory...");
-
-    const newMachine = {
-      id: Date.now().toString(),
-      name: machineIdentity.name || "Scanned Equipment",
-      location: "Unassigned",
-      manufacturer: machineIdentity.manufacturer || "Pending identification",
-      model: machineIdentity.model || "Pending identification",
-      serial: machineIdentity.serial || "Pending identification",
-      notes: scanData,
-      createdAt: new Date().toISOString(),
-    };
-
-    const existingMachines = JSON.parse(
-      localStorage.getItem("bamHubMachines") || "[]"
-    );
-
-    localStorage.setItem(
-      "bamHubMachines",
-      JSON.stringify([...existingMachines, newMachine])
-    );
-
-    try {
-      await fetch("/api/machines", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newMachine),
-      });
-    } catch {
-      console.log("BAM Hub™ cloud prototype save skipped.");
-    }
-
-    setSaveStatus(`${newMachine.name} saved to BAM Hub™ machine memory on this device.`);
   }
 
   async function sendMessage(customQuestion?: string) {
@@ -269,13 +224,11 @@ export default function ScannerPage() {
                 </h2>
               </div>
 
-              <div
-                className={`rounded-full px-4 py-2 text-xs font-black ${
-                  file
-                    ? "border border-cyan-300 bg-cyan-500/20 text-cyan-200"
-                    : "border border-slate-700 bg-slate-900 text-slate-400"
-                }`}
-              >
+              <div className={`rounded-full px-4 py-2 text-xs font-black ${
+                file
+                  ? "border border-cyan-300 bg-cyan-500/20 text-cyan-200"
+                  : "border border-slate-700 bg-slate-900 text-slate-400"
+              }`}>
                 {file ? "IMAGE READY" : "AWAITING IMAGE"}
               </div>
             </div>
@@ -285,46 +238,6 @@ export default function ScannerPage() {
               Best results come from clear nameplates, serial tags, fault screens,
               control panels, components, or full equipment views.
             </p>
-
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-cyan-400/30 bg-slate-900 p-4">
-                <p className="font-black text-cyan-300">Good Targets</p>
-                <p className="mt-2 text-sm leading-6 text-slate-300">
-                  Nameplate, model tag, serial plate, HMI alarm, panel label.
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-cyan-400/30 bg-slate-900 p-4">
-                <p className="font-black text-cyan-300">Next Step</p>
-                <p className="mt-2 text-sm leading-6 text-slate-300">
-                  Run BAM Scan™ to build the first machine identity profile.
-                </p>
-              </div>
-            </div>
-
-            <label className="mt-6 block rounded-xl border border-dashed border-cyan-400 bg-slate-900 p-5 text-center hover:bg-slate-800">
-              <span className="block text-sm font-black text-cyan-300">
-                Select or Capture Industrial Machine Image
-              </span>
-
-              <span className="mt-2 block text-xs text-slate-400">
-                Use camera, photo library, or file upload.
-              </span>
-
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setFile(e.target.files?.[0] || null)}
-                className="mt-4 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-sm text-slate-200"
-              />
-            </label>
-
-            {file && (
-              <div className="mt-4 rounded-xl border border-cyan-400/40 bg-cyan-500/10 p-4">
-                <p className="text-sm font-black text-cyan-300">Selected Image</p>
-                <p className="mt-2 break-all text-sm text-slate-200">{file.name}</p>
-              </div>
-            )}
 
             <button
               onClick={runScan}
@@ -379,29 +292,15 @@ export default function ScannerPage() {
         </section>
 
         <section className="mt-8 rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-3xl font-black text-cyan-300">
-                BAM AI Assist™
-              </h2>
+          <h2 className="text-3xl font-black text-cyan-300">
+            BAM AI Assist™
+          </h2>
 
-              <p className="mt-4 text-sm leading-6 text-slate-300">
-                {machineConnected
-                  ? "Machine connected. BAM AI Assist™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history."
-                  : "Begin industrial machine identification first to connect BAM AI Assist™ to the equipment."}
-              </p>
-            </div>
-
-            <div
-              className={`rounded-full px-4 py-2 text-xs font-black ${
-                machineConnected
-                  ? "border border-cyan-300 bg-cyan-500/20 text-cyan-200"
-                  : "border border-slate-700 bg-slate-900 text-slate-400"
-              }`}
-            >
-              {machineConnected ? "ASSIST ACTIVE" : "STANDING BY"}
-            </div>
-          </div>
+          <p className="mt-4 text-sm leading-6 text-slate-300">
+            {machineConnected
+              ? "Machine connected. BAM AI Assist™ is ready. Ask about troubleshooting, parts, manuals, repairs, or maintenance history."
+              : "Begin industrial machine identification first to connect BAM AI Assist™ to the equipment."}
+          </p>
 
           {messages.map((msg, index) => (
             <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
@@ -424,7 +323,7 @@ export default function ScannerPage() {
                 ? "Ask BAM AI Assist™ about identification, verification, parts research, manuals, repairs, or maintenance history..."
                 : "Begin industrial identification first..."
             }
-            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-400/40 disabled:bg-slate-950 disabled:text-slate-500 disabled:placeholder:text-slate-600"
+            className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-white placeholder:text-slate-400 outline-none disabled:bg-slate-950 disabled:text-slate-500"
           />
 
           <button
@@ -441,12 +340,12 @@ export default function ScannerPage() {
 
           {machineConnected && (
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <button
-                onClick={saveToHub}
-                className="rounded-xl bg-cyan-500 p-4 font-black text-slate-950 hover:bg-cyan-400"
+              <a
+                href="/access"
+                className="rounded-xl bg-cyan-500 p-4 text-center font-black text-slate-950 hover:bg-cyan-400"
               >
-                Save Machine Identity to BAM Hub™
-              </button>
+                Sign in to Save to BAM Hub™
+              </a>
 
               <a
                 href="/workorders"
@@ -455,10 +354,6 @@ export default function ScannerPage() {
                 Create Work Order™
               </a>
             </div>
-          )}
-
-          {saveStatus && (
-            <p className="mt-4 font-bold text-cyan-300">{saveStatus}</p>
           )}
         </section>
 
