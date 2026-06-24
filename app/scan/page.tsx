@@ -22,9 +22,9 @@ export default function BamScanPage() {
 
     const steps = [
       { progress: 25, text: "Reading image details..." },
-      { progress: 45, text: "Identifying product, part, or issue..." },
-      { progress: 65, text: "Connecting results to BAM Assist™..." },
-      { progress: 85, text: "Preparing information..." },
+      { progress: 45, text: "Identifying product, part, machine, or issue..." },
+      { progress: 65, text: "Connecting results to BAM Hub™ machine memory..." },
+      { progress: 85, text: "Preparing BAM AI Assist™..." },
     ];
 
     steps.forEach((step, index) => {
@@ -38,7 +38,7 @@ export default function BamScanPage() {
   async function runScan() {
     if (!file) {
       setStatusText(
-        "Start with a picture of a product, part, label, problem, or item."
+        "Start with a picture of a product, part, label, machine, problem, or item."
       );
       return;
     }
@@ -69,13 +69,13 @@ export default function BamScanPage() {
       setScanData(report);
       setScanConnected(true);
       setScanProgress(100);
-      setStatusText("Scan complete. BAM Assist™ ready.");
+      setStatusText("Scan complete. BAM AI Assist™ ready.");
 
       setMessages([
         {
           role: "bam",
           text:
-            "BAM Assist™ is ready. Ask about this item, repair options, information, parts, or next steps.",
+            "BAM AI Assist™ is ready. Ask about this item, machine, repair options, information, parts, manuals, or next steps.",
         },
       ]);
     } catch {
@@ -92,7 +92,7 @@ export default function BamScanPage() {
     setMessages((prev) => [
       ...prev,
       { role: "user", text: userText },
-      { role: "bam", text: "BAM Assist™ is searching..." },
+      { role: "bam", text: "BAM AI Assist™ is searching..." },
     ]);
 
     setInput("");
@@ -123,7 +123,7 @@ export default function BamScanPage() {
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: "BAM Assist™ connection failed.",
+          text: "BAM AI Assist™ connection failed.",
         },
       ]);
     }
@@ -138,12 +138,10 @@ export default function BamScanPage() {
               BAM
             </div>
 
-            <h1 className="mt-3 text-5xl font-black">
-              BAM Scan™
-            </h1>
+            <h1 className="mt-3 text-5xl font-black">BAM Scan™</h1>
 
             <p className="mt-2 text-cyan-50">
-              Identify products, parts, problems, and next steps.
+              Identify products, parts, machines, problems, and next steps.
             </p>
           </div>
 
@@ -153,6 +151,15 @@ export default function BamScanPage() {
             </a>
             <a href="/toolz/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               BAMToolz™
+            </a>
+            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Hub™
+            </a>
+            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Metrics™
+            </a>
+            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
+              Machines™
             </a>
             <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">
               Access™
@@ -169,14 +176,15 @@ export default function BamScanPage() {
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight sm:text-6xl">
-            Take a picture. Identify what it is. Ask BAM Assist™.
+            Take a picture. Identify what it is. Ask BAM AI Assist™.
           </h2>
 
           <p className="mt-6 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM Scan™ helps users identify products, parts, appliances, tools,
-            vehicles, components, labels, problems, and repair questions. BAM
-            Assist™ helps research information, possible causes, parts, manuals,
-            options, and next steps.
+            vehicles, components, labels, machines, problems, and repair
+            questions. BAM AI Assist™ helps research information, possible
+            causes, parts, manuals, options, and next steps while future BAM Hub™
+            memory preserves useful knowledge over time.
           </p>
         </section>
 
@@ -187,8 +195,8 @@ export default function BamScanPage() {
             </h2>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Upload a clear image of the item, label, part, issue, warning,
-              damage, model number, or repair problem.
+              Upload a clear image of the item, label, part, machine, issue,
+              warning, damage, model number, or repair problem.
             </p>
 
             <label className="mt-6 block rounded-xl border border-dashed border-cyan-400 bg-slate-900 p-5 text-center hover:bg-slate-800">
@@ -246,19 +254,19 @@ export default function BamScanPage() {
 
         <section className="mt-8 rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM Assist™
+            BAM AI Assist™
           </h2>
 
           <p className="mt-4 text-sm leading-6 text-slate-300">
             {scanConnected
-              ? "BAM Assist™ is ready. Ask about what was scanned, possible causes, parts, manuals, options, or next steps."
-              : "Run BAM Scan™ first to connect BAM Assist™ to the image."}
+              ? "BAM AI Assist™ is ready. Ask about what was scanned, possible causes, parts, manuals, options, or next steps."
+              : "Run BAM Scan™ first to connect BAM AI Assist™ to the image."}
           </p>
 
           {messages.map((msg, index) => (
             <div key={index} className="mt-4 rounded-xl bg-slate-900 p-5">
               <p className="text-sm font-black uppercase tracking-wide text-cyan-300">
-                {msg.role === "user" ? "User" : "BAM Assist™"}
+                {msg.role === "user" ? "User" : "BAM AI Assist™"}
               </p>
 
               <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
@@ -273,7 +281,7 @@ export default function BamScanPage() {
             disabled={!scanConnected}
             placeholder={
               scanConnected
-                ? "Ask about the item, product, part, issue, manual, replacement, or repair options..."
+                ? "Ask about the item, product, part, machine, issue, manual, replacement, or repair options..."
                 : "Run BAM Scan™ first..."
             }
             className="mt-6 min-h-28 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-white placeholder:text-slate-400 outline-none disabled:text-slate-500"
@@ -288,7 +296,7 @@ export default function BamScanPage() {
                 : "border border-cyan-500/40 bg-slate-950 text-cyan-900"
             }`}
           >
-            Ask BAM Assist™
+            Ask BAM AI Assist™
           </button>
         </section>
 
