@@ -39,14 +39,15 @@ export default function MachinesPage() {
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            From take-up to payoff, custom machines, and robotic automation.
+            Machines, automation, and future safety-connected technician hardware.
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM Machines™ is the machine manufacturing and equipment-build side
             of the BAM™ ecosystem — focused on industrial equipment, production
-            support systems, controls-ready machinery, and custom automation
-            solutions for manufacturing facilities.
+            support systems, controls-ready machinery, custom automation, rugged
+            scanner devices, and future wearable safety technology for
+            manufacturing facilities.
           </p>
         </section>
 
@@ -72,6 +73,16 @@ export default function MachinesPage() {
           />
 
           <Card
+            title="BAM Scan™ Devices"
+            text="Future rugged scanner hardware designed to connect machine identification, technician workflows, and BAM Hub™ machine memory."
+          />
+
+          <Card
+            title="BAM Safety Glass™"
+            text="Future industrial safety-glasses concept connecting technicians to BAM Scan™, BAM Hub™, and BAM AI Assist™ through hands-free maintenance intelligence."
+          />
+
+          <Card
             title="Production Line Support™"
             text="Equipment concepts for safer, faster, cleaner, and more reliable manufacturing workflows."
           />
@@ -80,6 +91,36 @@ export default function MachinesPage() {
             title="Robotic Automation™"
             text="Automation concepts for machine tending, handling, inspection, packaging, palletizing, and facility upgrades."
           />
+
+          <Card
+            title="BAM Labs™"
+            text="Research and prototype development for rugged devices, wearable safety technology, edge hardware, and future industrial intelligence systems."
+          />
+        </section>
+
+        <section className="mt-8 rounded-2xl border border-cyan-300/40 bg-slate-950/95 p-8 shadow-2xl">
+          <p className="text-sm font-black tracking-wide text-cyan-300">
+            FUTURE CONNECTED HARDWARE™
+          </p>
+
+          <h2 className="mt-3 text-3xl font-black text-white">
+            BAM Safety Glass™ connects the technician to the ecosystem.
+          </h2>
+
+          <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
+            BAM Safety Glass™ is a future industrial wearable concept designed
+            around the technician’s real work environment — gloves on, tools in
+            hand, machines running, panels open, and safety procedures active.
+            The goal is not consumer smart glasses. The goal is safety-connected
+            maintenance intelligence.
+          </p>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            <MiniCard title="Look" text="Technician views the machine, tag, panel, part, or fault area." />
+            <MiniCard title="Scan" text="BAM Scan™ identifies the asset and connects it to machine data." />
+            <MiniCard title="Assist" text="BAM AI Assist™ supports troubleshooting, parts, manuals, and procedures." />
+            <MiniCard title="Remember" text="Repair notes and machine knowledge sync back into BAM Hub™." />
+          </div>
         </section>
 
         <section className="mt-8 rounded-2xl border border-yellow-300/60 bg-yellow-400/10 p-8 shadow-2xl">
@@ -89,9 +130,10 @@ export default function MachinesPage() {
 
           <p className="mt-4 text-yellow-50">
             BAM Machines™ concepts must be reviewed, engineered, guarded,
-            tested, and approved before production use. All equipment must follow
-            applicable safety standards, company procedures, OEM requirements,
-            electrical codes, and site safety rules.
+            tested, and approved before production use. All equipment and
+            wearable technology concepts must follow applicable safety standards,
+            company procedures, OEM requirements, electrical codes, PPE
+            requirements, and site safety rules.
           </p>
         </section>
 
@@ -104,7 +146,8 @@ export default function MachinesPage() {
             BAM Machines™ is designed to grow from practical manufacturing
             equipment concepts into full industrial machine builds — starting
             with technician-built systems and expanding toward engineered,
-            controls-ready, automation-ready production equipment.
+            controls-ready, automation-ready production equipment connected to
+            the BAM™ intelligence ecosystem.
           </p>
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row">
@@ -137,6 +180,15 @@ function Card({ title, text }: { title: string; text: string }) {
     <div className="rounded-xl bg-slate-950/95 p-6 shadow-xl">
       <h3 className="text-xl font-black text-cyan-300">{title}</h3>
       <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
+    </div>
+  );
+}
+
+function MiniCard({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-xl border border-cyan-300/20 bg-white/10 p-4">
+      <h3 className="text-lg font-black text-cyan-200">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-cyan-50">{text}</p>
     </div>
   );
 }
