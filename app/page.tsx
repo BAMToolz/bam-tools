@@ -1,4 +1,20 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function Home() {
+  const [showNotice, setShowNotice] = useState(false);
+
+  useEffect(() => {
+    const accepted = localStorage.getItem("bamPrivacyNoticeAccepted");
+    if (!accepted) setShowNotice(true);
+  }, []);
+
+  function acceptNotice() {
+    localStorage.setItem("bamPrivacyNoticeAccepted", "true");
+    setShowNotice(false);
+  }
+
   return (
     <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
@@ -122,6 +138,38 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      {showNotice && (
+        <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-5xl rounded-2xl border border-cyan-300/40 bg-slate-950 p-5 text-white shadow-2xl">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 className="text-lg font-black text-cyan-300">
+                BAM Privacy & AI Notice™
+              </h2>
+
+              <p className="mt-2 text-sm leading-6 text-slate-300">
+                BAMToolz™ may use cookies or local storage to support platform
+                features and remember preferences. BAM AI Assist™ provides
+                informational support only and does not replace OEM manuals,
+                trained professionals, company safety procedures, PPE, or
+                lockout/tagout requirements.
+              </p>
+
+              <p className="mt-2 text-xs leading-5 text-slate-400">
+                Do not upload confidential facility data unless you are
+                authorized to share it.
+              </p>
+            </div>
+
+            <button
+              onClick={acceptNotice}
+              className="rounded-xl bg-cyan-500 px-6 py-3 font-black text-slate-950 hover:bg-cyan-400"
+            >
+              Accept
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
