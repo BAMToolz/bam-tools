@@ -116,11 +116,11 @@ export default function ScannerPage() {
     } catch (error: any) {
       setMachineConnected(false);
       setScanProgress(0);
-      setScanFunText(error?.message || "Industrial identification stopped. Try another image.");
+      setScanFunText(
+        error?.message || "Industrial identification stopped. Try another image."
+      );
     }
-  }
-
-  async function sendMessage(customQuestion?: string) {
+  }  async function sendMessage(customQuestion?: string) {
     const techText = customQuestion || input.trim();
 
     if (!techText.trim()) return;
@@ -213,31 +213,26 @@ export default function ScannerPage() {
 
         <section className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-6 shadow-2xl sm:p-8">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm font-black tracking-wide text-cyan-300">
-                  BAM SCAN™ INDUSTRIAL MODE
-                </p>
+            <p className="text-sm font-black tracking-wide text-cyan-300">
+              BAM SCAN™ INDUSTRIAL MODE
+            </p>
 
-                <h2 className="mt-2 text-3xl font-black text-cyan-300">
-                  Capture Equipment
-                </h2>
-              </div>
-
-              <div className={`rounded-full px-4 py-2 text-xs font-black ${
-                file
-                  ? "border border-cyan-300 bg-cyan-500/20 text-cyan-200"
-                  : "border border-slate-700 bg-slate-900 text-slate-400"
-              }`}>
-                {file ? "IMAGE READY" : "AWAITING IMAGE"}
-              </div>
-            </div>
+            <h2 className="mt-2 text-3xl font-black text-cyan-300">
+              Capture Equipment
+            </h2>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
               Upload or capture an industrial machine image from your phone.
               Best results come from clear nameplates, serial tags, fault screens,
               control panels, components, or full equipment views.
             </p>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+              className="mt-6 w-full rounded-xl border border-cyan-400 bg-slate-950 p-4 text-sm text-slate-200"
+            />
 
             <button
               onClick={runScan}
