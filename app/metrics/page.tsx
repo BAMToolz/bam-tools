@@ -8,9 +8,7 @@ export default function MetricsPage() {
               BAM
             </div>
 
-            <h1 className="mt-4 text-5xl font-black">
-              BAM Metrics™
-            </h1>
+            <h1 className="mt-4 text-5xl font-black">BAM Metrics™</h1>
 
             <p className="mt-2 text-cyan-50">
               Facility intelligence dashboard | Ball AI Metrics™
@@ -23,6 +21,7 @@ export default function MetricsPage() {
             <a href="/toolz/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAMToolz™</a>
             <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Hub™</a>
             <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
+            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Machines™</a>
             <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Access™</a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
           </nav>
@@ -34,34 +33,35 @@ export default function MetricsPage() {
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight text-cyan-300 sm:text-6xl">
-            Turning maintenance activity into measurable intelligence.
+            Turning machine memory into measurable intelligence.
           </h2>
 
           <p className="mt-5 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Metrics™ is the intelligence layer for BAMToolz™. It turns
-            machine scans, work orders, technician notes, repair patterns, and
-            facility activity into visibility for maintenance teams and leaders.
+            BAM Metrics™ is the intelligence layer for the BAM™ ecosystem. It
+            turns scan history, BAM Hub™ machine memory, work orders, technician
+            notes, repair patterns, downtime activity, and facility movement into
+            visibility for maintenance teams and leaders.
           </p>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
-          <Card title="Machines Connected™" value="128" subtext="Assets linked into facility intelligence" />
-          <Card title="BAMToolz™ Scans" value="3,482" subtext="Equipment captures processed" />
-          <Card title="Knowledge Records™" value="9,420" subtext="Notes, repairs, parts, and history" />
-          <Card title="Work Orders Processed™" value="2,847" subtext="Maintenance actions organized" />
-          <Card title="Downtime Insights™" value="Active" subtext="Patterns tracked across equipment" />
-          <Card title="AI Analysis™" value="Online" subtext="BAM AI™ intelligence layer enabled" />
+          <Card title="Machines Connected™" value="128" subtext="Assets linked into BAM Hub™ machine memory" />
+          <Card title="BAMToolz™ Scans" value="3,482" subtext="Equipment captures and scan history processed" />
+          <Card title="Knowledge Records™" value="9,420" subtext="Notes, repairs, parts, manuals, and history" />
+          <Card title="Work Orders Processed™" value="2,847" subtext="Maintenance actions organized and tracked" />
+          <Card title="Downtime Insights™" value="Active" subtext="Patterns tracked across equipment and failures" />
+          <Card title="BAM AI Assist™" value="Online" subtext="Technician guidance and intelligence layer enabled" />
         </section>
 
         <section className="mt-8 grid gap-5 lg:grid-cols-2">
           <Panel
             title="Machine Health Overview™"
-            text="Monitor connected equipment, recurring faults, service needs, repair frequency, asset history, and maintenance readiness from one intelligence layer."
+            text="Monitor connected equipment, recurring faults, service needs, repair frequency, asset history, scan history, and maintenance readiness from one intelligence layer."
           />
 
           <Panel
             title="Maintenance Performance™"
-            text="Track work order activity, technician documentation, response flow, repair status, priority load, and facility maintenance movement."
+            text="Track work order activity, technician documentation, response flow, repair status, priority load, downtime movement, and facility maintenance activity."
           />
 
           <Panel
@@ -81,23 +81,23 @@ export default function MetricsPage() {
           </h2>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <SourceCard number="01" title="BAMToolz™ Scan" text="Captures machine identity and visible equipment information." />
-            <SourceCard number="02" title="BAM Hub™" text="Stores machine memory, documentation, notes, and repair history." />
-            <SourceCard number="03" title="Work Orders™" text="Organizes maintenance activity, priorities, technicians, and repair actions." />
-            <SourceCard number="04" title="BAM AI™" text="Connects scan data, notes, patterns, and recommendations." />
+            <SourceCard number="01" title="BAM Scan™" text="Captures product, part, machine, issue, and visible equipment information." />
+            <SourceCard number="02" title="BAM Hub™" text="Stores machine memory, documentation, notes, scan history, and repair history." />
+            <SourceCard number="03" title="Work Orders™" text="Organizes maintenance activity, priorities, technicians, downtime, and repair actions." />
+            <SourceCard number="04" title="BAM AI Assist™" text="Connects scan data, notes, patterns, troubleshooting, and recommendations." />
           </div>
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
           <ActionCard
-            title="Open BAMToolz™ Scan"
+            title="Open BAMToolz™"
             text="Capture industrial equipment data and feed machine intelligence."
             href="/toolz/scan"
           />
 
           <ActionCard
             title="Open BAM Hub™"
-            text="View the protected machine memory layer behind facility intelligence."
+            text="View the protected BAM Hub™ machine memory layer behind facility intelligence."
             href="/hub"
           />
 
@@ -110,13 +110,13 @@ export default function MetricsPage() {
 
         <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
           <h2 className="text-3xl font-black text-cyan-300">
-            BAM AI™ Metrics Engine
+            BAM Metrics™ Intelligence Engine
           </h2>
 
           <p className="mt-4 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            Metrics populate as BAM Hub™, BAMToolz™ Scan, and Work Orders™ collect
-            facility intelligence. The goal is simple: make maintenance visible,
-            measurable, searchable, and easier to improve.
+            Metrics populate as BAM Hub™, BAM Scan™, BAMToolz™, and Work Orders™
+            collect facility intelligence. The goal is simple: make maintenance
+            visible, measurable, searchable, and easier to improve.
           </p>
         </section>
 
