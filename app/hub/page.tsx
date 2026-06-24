@@ -13,7 +13,7 @@ export default function HubPage() {
             </h1>
 
             <p className="mt-2 text-sm font-medium text-cyan-50">
-              Machine Memory™ | Facility Intelligence Layer™
+              BAM Hub™ Machine Memory | Facility Intelligence Layer™
             </p>
           </div>
 
@@ -23,6 +23,7 @@ export default function HubPage() {
             <a href="/toolz/scan" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg">BAMToolz™</a>
             <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
             <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
+            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Machines™</a>
             <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Access™</a>
             <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
           </nav>
@@ -34,14 +35,15 @@ export default function HubPage() {
           </p>
 
           <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            The intelligence layer that remembers every machine.
+            The memory layer that helps every machine tell its story.
           </h2>
 
           <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
             BAM Hub™ connects machine identity, repair history, technician notes,
-            manuals, parts, work orders, and facility intelligence into one
-            protected operating layer. BAMToolz™ captures the data. BAM Hub™
-            organizes the memory. BAM Metrics™ turns it into insight.
+            manuals, parts, work orders, scan history, and facility intelligence
+            into one protected operating layer. BAM Scan™ captures. BAMToolz™
+            supports the technician. BAM Hub™ preserves the memory. BAM Metrics™
+            turns it into insight.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -49,7 +51,7 @@ export default function HubPage() {
               href="/toolz/scan"
               className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400"
             >
-              Open BAMToolz™ Scan
+              Open BAMToolz™
             </a>
 
             <a
@@ -72,19 +74,19 @@ export default function HubPage() {
           <IntelligenceCard
             title="Machine Identity™"
             value="Connected"
-            text="Nameplates, serial data, model information, tags, and machine profiles become searchable equipment memory."
+            text="Nameplates, serial data, model information, tags, and machine profiles become searchable BAM Hub™ machine memory."
           />
 
           <IntelligenceCard
             title="Repair History™"
             value="Tracked"
-            text="Work orders, technician notes, service activity, and repair outcomes build long-term facility knowledge."
+            text="Work orders, technician notes, service activity, parts used, and repair outcomes build long-term facility knowledge."
           />
 
           <IntelligenceCard
             title="Facility Knowledge™"
             value="Protected"
-            text="Manuals, drawings, parts, procedures, documents, and AI conversations stay inside the access-controlled layer."
+            text="Manuals, drawings, parts, procedures, documents, and BAM AI Assist™ conversations stay inside the access-controlled layer."
           />
         </section>
 
@@ -96,8 +98,8 @@ export default function HubPage() {
               </h2>
 
               <p className="mt-3 text-sm leading-6 text-slate-300">
-                BAM Hub™ is designed to become the central memory system for
-                industrial equipment, maintenance teams, and facility operations.
+                BAM Hub™ is designed to become the central machine memory system
+                for industrial equipment, maintenance teams, and facility operations.
               </p>
             </div>
 
@@ -110,7 +112,7 @@ export default function HubPage() {
             <SystemCard
               title="Asset Profiles™"
               type="Equipment Records"
-              status="Machine identity, location, model, serial, documentation, and service context."
+              status="Machine identity, location, model, serial, documentation, scan history, and service context."
               insight="Every asset becomes easier to find, understand, service, and improve."
             />
 
@@ -136,7 +138,7 @@ export default function HubPage() {
           </h2>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <WorkflowCard number="01" title="Capture" text="BAMToolz™ scans machines, nameplates, faults, components, and documents." />
+            <WorkflowCard number="01" title="Capture" text="BAM Scan™ and BAMToolz™ capture machines, nameplates, faults, components, and documents." />
             <WorkflowCard number="02" title="Organize" text="BAM Hub™ builds structured machine memory and searchable facility records." />
             <WorkflowCard number="03" title="Protect" text="BAM Access™ controls users, accounts, providers, businesses, and facility data." />
             <WorkflowCard number="04" title="Improve" text="BAM Metrics™ converts machine history into reliability and performance intelligence." />
@@ -150,9 +152,9 @@ export default function HubPage() {
 
           <p className="mt-4 text-sm leading-6 text-cyan-50 sm:text-base">
             Real machine names, serial numbers, manuals, drawings, repair records,
-            technician notes, AI conversations, parts lists, work orders, and
-            customer records belong inside authenticated BAM Hub™ accounts through
-            BAM Access™.
+            technician notes, BAM AI Assist™ conversations, parts lists, work
+            orders, scan history, and customer records belong inside authenticated
+            BAM Hub™ accounts through BAM Access™.
           </p>
         </section>
 
@@ -165,6 +167,7 @@ export default function HubPage() {
             <a href="/toolz/scan" className="hover:text-white">BAMToolz™</a>
             <a href="/workorders" className="hover:text-white">Work Orders™</a>
             <a href="/metrics" className="hover:text-white">Metrics™</a>
+            <a href="/machines" className="hover:text-white">Machines™</a>
             <a href="/access" className="hover:text-white">Access™</a>
             <a href="/support" className="hover:text-white">Support</a>
           </div>
@@ -209,9 +212,7 @@ function SystemCard({
         HUB RECORD
       </p>
 
-      <h3 className="mt-2 text-2xl font-black text-cyan-300">
-        {title}
-      </h3>
+      <h3 className="mt-2 text-2xl font-black text-cyan-300">{title}</h3>
 
       <div className="mt-4 grid gap-2 text-sm text-slate-300">
         <p><span className="font-black text-cyan-300">Layer:</span> {type}</p>
@@ -219,10 +220,8 @@ function SystemCard({
       </div>
 
       <div className="mt-4 rounded-lg bg-slate-950 p-4">
-        <p className="text-xs font-black text-cyan-300">BAM AI™ Intelligence</p>
-        <p className="mt-2 text-sm leading-6 text-slate-300">
-          {insight}
-        </p>
+        <p className="text-xs font-black text-cyan-300">BAM AI Assist™ Intelligence</p>
+        <p className="mt-2 text-sm leading-6 text-slate-300">{insight}</p>
       </div>
     </div>
   );
