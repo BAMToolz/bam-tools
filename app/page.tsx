@@ -6,9 +6,7 @@ export default function Home() {
   const [showNotice, setShowNotice] = useState(false);
 
   useEffect(() => {
-    const accepted = localStorage.getItem(
-      "bamPrivacyNoticeAccepted"
-    );
+    const accepted = localStorage.getItem("bamPrivacyNoticeAccepted");
 
     if (!accepted) {
       setShowNotice(true);
@@ -16,16 +14,13 @@ export default function Home() {
   }, []);
 
   function acceptNotice() {
-    localStorage.setItem(
-      "bamPrivacyNoticeAccepted",
-      "true"
-    );
-
+    localStorage.setItem("bamPrivacyNoticeAccepted", "true");
     setShowNotice(false);
-  }  return (
+  }
+
+  return (
     <main className="min-h-screen bg-[#020617] px-4 py-5 text-white">
       <div className="mx-auto max-w-7xl">
-
         <header className="mb-6 flex flex-col gap-5 rounded-3xl border border-cyan-400/30 bg-slate-950/80 p-5 shadow-2xl sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="inline-flex rounded-lg bg-cyan-300 px-4 py-2 text-sm font-black text-slate-950">
@@ -33,11 +28,11 @@ export default function Home() {
             </div>
 
             <h1 className="mt-3 text-5xl font-black tracking-tight">
-              BAM™
+              BAMToolz™
             </h1>
 
             <p className="mt-2 text-sm text-slate-300">
-              Ball AI Metrics™ | Connected Intelligence Platform™
+              Professional AI Tools for Maintenance & Manufacturing
             </p>
           </div>
 
@@ -61,32 +56,31 @@ export default function Home() {
           </nav>
         </header>
 
-
         <section className="relative overflow-hidden rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-slate-950 via-slate-950 to-cyan-950 p-8 shadow-2xl sm:p-12">
           <div className="absolute right-10 top-10 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" />
 
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-sm font-black tracking-wide text-cyan-300">
-                CONNECTED INTELLIGENCE PLATFORM™
+                PROFESSIONAL AI TOOLS
               </p>
 
               <h2 className="mt-5 max-w-3xl text-4xl font-black leading-tight sm:text-6xl">
-                Transforming
+                Maintenance
                 <br />
-                real-world
+                intelligence for
                 <br />
-                information into
+                the people who keep
                 <br />
                 <span className="text-cyan-300">
-                  intelligent action.
+                  industry running.
                 </span>
               </h2>
 
               <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-300">
-                BAM™ connects people, technology, and AI through intelligent
-                scanning, assistance, knowledge capture, and connected
-                information systems.
+                BAMToolz™ connects AI scanning, technician assistance,
+                equipment history, work orders, and facility knowledge into one
+                professional maintenance platform.
               </p>
 
               <a
@@ -97,68 +91,63 @@ export default function Home() {
               </a>
             </div>
 
-
             <div className="relative mx-auto flex h-80 w-full items-center justify-center">
               <div className="absolute h-72 w-72 rounded-full border border-cyan-300/40 bg-cyan-400/10 shadow-[0_0_80px_rgba(34,211,238,0.4)]" />
 
               <div className="relative flex h-52 w-52 items-center justify-center rounded-full border-2 border-cyan-300 bg-slate-950 shadow-2xl">
                 <div className="text-center">
-                  <div className="text-6xl">
-                    🤖
-                  </div>
+                  <CircuitIcon />
 
                   <p className="mt-4 text-sm font-black text-cyan-300">
                     BAM AI™
                   </p>
 
                   <p className="mt-1 text-xs text-slate-400">
-                    Connected Intelligence
+                    Professional Intelligence
                   </p>
                 </div>
               </div>
             </div>
-
           </div>
         </section>
 
-
         <section className="mt-8 grid gap-5 md:grid-cols-3">
-
           <Card
             title="BAM Scan™"
             href="/scan"
-            text="Take a picture. Identify items, problems, parts, information, and ask BAM AI Assist™."
+            text="Scan equipment, labels, parts, problems, and maintenance information with AI-assisted support."
           />
 
           <Card
             title="BAMToolz™"
             href="/toolz/scan"
-            text="Technician tools, equipment intelligence, maintenance support, and workflows."
+            text="Professional technician tools for maintenance support, troubleshooting, workflows, and repair documentation."
           />
 
           <Card
             title="BAM Hub™"
             href="/hub"
-            text="Preserve knowledge, history, documents, repairs, and connected information."
+            text="Preserve equipment history, technician knowledge, documents, repairs, and connected facility information."
           />
+        </section>
 
-        </section>        <section className="mt-6 grid gap-5 md:grid-cols-3">
+        <section className="mt-6 grid gap-5 md:grid-cols-3">
           <Card
             title="Work Orders™"
             href="/workorders"
-            text="Organize tasks, repair needs, follow-ups, and service activity."
+            text="Organize repair needs, service activity, maintenance tasks, follow-ups, and technician notes."
           />
 
           <Card
             title="Access™"
             href="/access"
-            text="Control user access, platform entry, roles, and future team permissions."
+            text="Control platform access, user roles, team permissions, and secure facility entry."
           />
 
           <Card
             title="Support™"
             href="/support"
-            text="Get help, request support, and connect with the BAM™ platform."
+            text="Get help, request support, and connect with the BAMToolz™ platform."
           />
         </section>
 
@@ -209,6 +198,33 @@ export default function Home() {
         </div>
       )}
     </main>
+  );
+}
+
+function CircuitIcon() {
+  return (
+    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-300/60 bg-cyan-400/10 shadow-[0_0_30px_rgba(34,211,238,0.35)]">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-10 w-10 text-cyan-300"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 4v4" />
+        <path d="M12 16v4" />
+        <path d="M4 12h4" />
+        <path d="M16 12h4" />
+        <rect x="8" y="8" width="8" height="8" rx="2" />
+        <circle cx="12" cy="12" r="1.5" />
+        <path d="M6 6l2.5 2.5" />
+        <path d="M18 6l-2.5 2.5" />
+        <path d="M6 18l2.5-2.5" />
+        <path d="M18 18l-2.5-2.5" />
+      </svg>
+    </div>
   );
 }
 
