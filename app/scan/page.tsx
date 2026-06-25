@@ -7,6 +7,13 @@ type Message = {
   text: string;
 };
 
+type MachineIdentity = {
+  name: string;
+  manufacturer: string;
+  model: string;
+  serial: string;
+};
+
 export default function BamScanPage() {
   const [file, setFile] = useState<File | null>(null);
   const [scanData, setScanData] = useState("");
@@ -15,6 +22,12 @@ export default function BamScanPage() {
   const [scanConnected, setScanConnected] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [machineIdentity, setMachineIdentity] = useState<MachineIdentity>({
+    name: "",
+    manufacturer: "",
+    model: "",
+    serial: "",
+  });
 
   const quickActions = [
     {
@@ -46,6 +59,11 @@ export default function BamScanPage() {
         "Source information for this scan. Help identify manuals, parts, model data, replacements, or useful references.",
     },
   ];
+
+  function cleanField(value: string, fallback: string) {
+    if (!value || value.toLowerCase() === "not visible") return fallback;
+    return value;
+  }
 
   function startProgressAnimation() {
     setScanProgress(10);
@@ -80,11 +98,18 @@ export default function BamScanPage() {
     setScanConnected(false);
     setMessages([]);
     setScanData("");
+    setMachineIdentity({
+      name: "",
+      manufacturer: "",
+      model: "",
+      serial: "",
+    });
 
     startProgressAnimation();
 
     const formData = new FormData();
     formData.append("image", file);
+    formData.append("mode", "industrial");
 
     try {
       const response = await fetch("/api/scan", {
@@ -101,6 +126,14 @@ export default function BamScanPage() {
         "No scan information returned.";
 
       setScanData(report);
+
+      setMachineIdentity({
+        name: cleanField(data.name, "Scanned Equipment"),
+        manufacturer: cleanField(data.manufacturer, "Pending identification"),
+        model: cleanField(data.model, "Pending identification"),
+        serial: cleanField(data.serial, "Pending identification"),
+      });
+
       setScanConnected(true);
       setScanProgress(100);
       setStatusText("Scan complete. BAM AI Assist™ ready.");
@@ -217,7 +250,9 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
               </a>
             ))}
           </nav>
-        </header>        <section className="relative overflow-hidden rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-slate-950 via-slate-950 to-cyan-950 p-6 shadow-2xl sm:p-10">
+        </header>
+
+        <section className="relative overflow-hidden rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-slate-950 via-slate-950 to-cyan-950 p-6 shadow-2xl sm:p-10">
           <div className="absolute right-10 top-10 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
           <div className="absolute bottom-0 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full border border-cyan-300/30" />
 
@@ -232,18 +267,15 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
                 <br />
                 Analyze.
                 <br />
-                <span className="text-cyan-300">
-                  Take Action.
-                </span>
+                <span className="text-cyan-300">Take Action.</span>
               </h2>
 
               <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
                 BAM Scan™ transforms images into organized maintenance
                 intelligence. Capture equipment, components, labels,
                 nameplates, tools, parts, documents, damage, or system
-                information. BAM AI Assist™ organizes the results,
-                explains what it detects, and helps technicians make
-                informed decisions.
+                information. BAM AI Assist™ organizes the results, explains what
+                it detects, and helps technicians make informed decisions.
               </p>
             </div>
 
@@ -271,7 +303,6 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
 
               <div className="absolute right-4 top-6 rounded-2xl border border-cyan-300/40 bg-slate-950/90 p-4 shadow-2xl">
                 <div className="flex items-center gap-3">
-
                   <SmallCircuitIcon />
 
                   <div>
@@ -291,22 +322,18 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
 
         <section className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
-
             <h2 className="text-2xl font-black text-cyan-300 sm:text-3xl">
               Capture Image™
             </h2>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Upload a clear image of equipment, machine components,
-              labels, nameplates, tools, electrical systems,
-              documentation, damage, or maintenance concerns.
+              Upload a clear image of equipment, machine components, labels,
+              nameplates, tools, electrical systems, documentation, damage, or
+              maintenance concerns.
             </p>
 
             <label className="mt-6 block rounded-2xl border border-dashed border-cyan-300/70 bg-slate-900/80 p-6 text-center hover:bg-slate-800">
-
-              <span className="block text-4xl">
-                ⛶
-              </span>
+              <span className="block text-4xl">⛶</span>
 
               <span className="mt-3 block text-sm font-black text-cyan-200">
                 Select Image
@@ -326,10 +353,7 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
 
             {file && (
               <div className="mt-4 rounded-2xl border border-cyan-400/40 bg-cyan-500/10 p-4">
-
-                <p className="text-sm font-black text-cyan-300">
-                  Scan Ready
-                </p>
+                <p className="text-sm font-black text-cyan-300">Scan Ready</p>
 
                 <p className="mt-2 break-all text-sm text-slate-200">
                   {file.name}
@@ -338,7 +362,6 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
                 <p className="mt-2 text-sm text-emerald-300">
                   ✓ Image successfully loaded
                 </p>
-
               </div>
             )}
 
@@ -348,7 +371,9 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
             >
               Run BAM Scan™
             </button>
-          </div>          <div className="rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
+          </div>
+
+          <div className="rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
             <h2 className="text-2xl font-black text-cyan-300 sm:text-3xl">
               Scan Progress™
             </h2>
@@ -396,6 +421,28 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
           </div>
         </section>
 
+        {scanConnected && (
+          <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
+            <p className="text-sm font-black tracking-wide text-cyan-300">
+              MACHINE IDENTITY™
+            </p>
+
+            <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl">
+              Scanned Equipment Profile
+            </h2>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <InfoCard label="Machine" value={machineIdentity.name} />
+              <InfoCard
+                label="Manufacturer"
+                value={machineIdentity.manufacturer}
+              />
+              <InfoCard label="Model" value={machineIdentity.model} />
+              <InfoCard label="Serial" value={machineIdentity.serial} />
+            </div>
+          </section>
+        )}
+
         <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
@@ -427,9 +474,7 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
                 <SmallCircuitIcon />
 
                 <div>
-                  <p className="font-black text-cyan-300">
-                    BAM AI Assist™
-                  </p>
+                  <p className="font-black text-cyan-300">BAM AI Assist™</p>
 
                   <p className="text-xs text-slate-400">
                     Professional scan guidance
@@ -444,8 +489,8 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
 
                 <p className="mt-3 text-sm leading-6 text-slate-300">
                   BAM AI Assist™ helps organize the scan, explain visible
-                  information, support troubleshooting, create useful
-                  maintenance notes, and guide practical next steps.
+                  information, support troubleshooting, create useful maintenance
+                  notes, and guide practical next steps.
                 </p>
               </div>
             </div>
@@ -526,6 +571,17 @@ Ask BAM AI Assist™ a question or choose a workflow below.`,
         </footer>
       </div>
     </main>
+  );
+}
+
+function InfoCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-cyan-400/20 bg-slate-900 p-4">
+      <p className="text-xs font-black uppercase tracking-wide text-cyan-300">
+        {label}
+      </p>
+      <p className="mt-2 text-sm font-bold text-white">{value}</p>
+    </div>
   );
 }
 
