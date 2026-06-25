@@ -110,8 +110,7 @@ export default function ScannerPage() {
       setMessages([
         {
           role: "bam",
-          text:
-            "Machine connected. BAM AI Assist™ is ready. Ask about troubleshooting, parts, manuals, repairs, documentation, or maintenance history.",
+          text: "Machine connected. BAM AI Assist™ is ready. Ask about troubleshooting, parts, manuals, repairs, documentation, or maintenance history.",
         },
       ]);
     } catch (error: any) {
@@ -125,7 +124,6 @@ export default function ScannerPage() {
 
   async function sendMessage(customQuestion?: string) {
     const techText = customQuestion || input.trim();
-
     if (!techText.trim()) return;
 
     setMessages((prev) => [
@@ -169,140 +167,135 @@ export default function ScannerPage() {
         },
       ]);
     }
-  }  return (
+  }
+
+  return (
     <main className="min-h-screen bg-[#020617] px-4 py-5 text-white">
-      <div className="mx-auto max-w-7xl">
-        <header className="mb-6 flex flex-col gap-5 rounded-3xl border border-cyan-400/30 bg-slate-950/80 p-5 shadow-2xl sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="inline-flex rounded-lg bg-cyan-300 px-4 py-2 text-sm font-black text-slate-950">
-              BAMToolz™
-            </div>
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-6 rounded-3xl border border-cyan-400/30 bg-slate-950/80 p-5 shadow-2xl">
+          <a href="/" className="text-xs font-black text-cyan-300">
+            ← BAMToolz™ Home
+          </a>
 
-            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-              BAMToolz™
-            </h1>
+          <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
+            BAM Scan™
+          </h1>
 
-            <p className="mt-2 text-sm text-slate-300">
-              Professional AI Tools for Maintenance & Manufacturing
-            </p>
-          </div>
-
-          <nav className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-end">
-            {[
-              ["Home™", "/"],
-              ["BAM Scan™", "/scan"],
-              ["BAM Hub™", "/hub"],
-              ["Work Orders™", "/workorders"],
-              ["Metrics™", "/metrics"],
-              ["Machines™", "/machines"],
-              ["Access™", "/access"],
-              ["Support™", "/support"],
-            ].map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                className="rounded-xl border border-cyan-400/40 bg-slate-900 px-4 py-3 text-center text-xs font-black text-cyan-200 shadow-lg hover:bg-slate-800"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
+          <p className="mt-2 text-sm text-slate-300">
+            Industrial equipment scanning, machine identity, and technician assist.
+          </p>
         </header>
 
-        <section className="relative overflow-hidden rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-slate-950 via-slate-950 to-cyan-950 p-6 shadow-2xl sm:p-10">
-          <div className="absolute right-10 top-10 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
-          <div className="absolute bottom-0 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full border border-cyan-300/30" />
-
-          <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
-              <p className="text-sm font-black tracking-wide text-cyan-300">
-                INDUSTRIAL TECHNICIAN TOOLKIT™
-              </p>
-
-              <h2 className="mt-4 max-w-4xl text-4xl font-black leading-tight sm:text-6xl">
-                Scan equipment.
-                <br />
-                Build machine memory.
-                <br />
-                <span className="text-cyan-300">
-                  Assist the technician.
-                </span>
-              </h2>
-
-              <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
-                BAMToolz™ is the technician-focused side of the BAM™ ecosystem,
-                built for maintenance teams, equipment records, troubleshooting,
-                work orders, and facility intelligence. Capture a nameplate,
-                equipment tag, fault screen, control panel, component, or visible
-                machine image to begin building useful machine intelligence.
-              </p>
-            </div>
-
-            <div className="relative mx-auto flex h-80 w-full max-w-md items-center justify-center">
-              <div className="absolute h-72 w-72 rounded-full border border-cyan-300/40 bg-cyan-400/10 shadow-[0_0_80px_rgba(34,211,238,0.4)]" />
-
-              <div className="relative flex h-52 w-52 items-center justify-center rounded-full border-2 border-cyan-300 bg-slate-950 shadow-2xl">
-                <div className="text-center">
-                  <CircuitIcon />
-
-                  <p className="mt-4 text-sm font-black text-cyan-300">
-                    Industrial Mode™
-                  </p>
-
-                  <p className="mt-1 text-xs text-slate-400">
-                    Machine Intelligence
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>        <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["BAM Scan™", "Capture equipment images and start AI-assisted identification.", "/scan"],
-            ["BAM Hub™", "Store machine records, manuals, notes, and repair history.", "/hub"],
-            ["Work Orders™", "Organize maintenance jobs, tasks, and technician activity.", "/workorders"],
-            ["Metrics™", "Track downtime, repairs, trends, and facility performance.", "/metrics"],
-          ].map(([title, text, href]) => (
-            <a
-              key={title}
-              href={href}
-              className="rounded-3xl border border-cyan-400/30 bg-slate-950 p-5 shadow-xl hover:bg-slate-900"
-            >
-              <h3 className="text-lg font-black text-cyan-300">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
-              <p className="mt-5 text-xs font-black text-cyan-200">
-                Open Tool →
-              </p>
-            </a>
-          ))}
-        </section>
-
-        <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
+        <section className="rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-slate-950 via-slate-950 to-cyan-950 p-6 shadow-2xl">
           <p className="text-sm font-black tracking-wide text-cyan-300">
-            BAMTOOLZ™ SYSTEM FLOW
+            INDUSTRIAL SCAN MODE™
           </p>
 
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
-            {[
-              ["1. Capture", "Scan tags, nameplates, panels, faults, components, or machine images."],
-              ["2. Understand", "BAM AI™ helps identify equipment context, repair needs, and useful records."],
-              ["3. Remember", "BAM Hub™ stores knowledge so every repair builds future machine intelligence."],
-            ].map(([title, text]) => (
+          <h2 className="mt-4 text-3xl font-black sm:text-5xl">
+            Scan the machine.
+            <br />
+            Connect BAM AI Assist™.
+          </h2>
+
+          <p className="mt-4 text-sm leading-7 text-slate-300">
+            Upload a machine nameplate, equipment tag, fault screen, control
+            panel, component, or visible equipment image.
+          </p>
+
+          <div className="mt-6 rounded-2xl border border-cyan-400/30 bg-slate-950 p-5">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) => setFile(event.target.files?.[0] || null)}
+              className="block w-full text-sm text-slate-300 file:mr-4 file:rounded-xl file:border-0 file:bg-cyan-300 file:px-4 file:py-3 file:text-sm file:font-black file:text-slate-950"
+            />
+
+            <button
+              onClick={runScan}
+              className="mt-5 w-full rounded-2xl bg-cyan-300 px-5 py-4 text-sm font-black text-slate-950 shadow-xl hover:bg-cyan-200"
+            >
+              Run BAM Scan™
+            </button>
+
+            <div className="mt-5 h-3 overflow-hidden rounded-full bg-slate-800">
               <div
-                key={title}
-                className="rounded-2xl border border-cyan-400/20 bg-slate-900 p-5"
+                className="h-full rounded-full bg-cyan-300 transition-all"
+                style={{ width: `${scanProgress}%` }}
+              />
+            </div>
+
+            <p className="mt-3 text-sm font-bold text-cyan-200">
+              {scanFunText}
+            </p>
+          </div>
+        </section>
+
+        {machineConnected && (
+          <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
+            <p className="text-sm font-black tracking-wide text-cyan-300">
+              MACHINE IDENTITY
+            </p>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <InfoCard label="Machine" value={machineIdentity.name} />
+              <InfoCard label="Manufacturer" value={machineIdentity.manufacturer} />
+              <InfoCard label="Model" value={machineIdentity.model} />
+              <InfoCard label="Serial" value={machineIdentity.serial} />
+            </div>
+          </section>
+        )}
+
+        <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
+          <p className="text-sm font-black tracking-wide text-cyan-300">
+            BAM AI ASSIST™
+          </p>
+
+          <div className="mt-5 space-y-3">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`rounded-2xl border p-4 text-sm leading-6 ${
+                  message.role === "bam"
+                    ? "border-cyan-400/30 bg-cyan-950/30 text-cyan-50"
+                    : "border-slate-700 bg-slate-900 text-slate-200"
+                }`}
               >
-                <h3 className="font-black text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
+                <p className="mb-1 text-xs font-black text-cyan-300">
+                  {message.role === "bam" ? "BAM AI™" : "Technician"}
+                </p>
+                {message.text}
               </div>
             ))}
           </div>
-        </section>
 
-        <footer className="mt-6 rounded-3xl border border-cyan-400/20 bg-slate-950 p-5 text-center text-xs text-slate-400">
-          BAMToolz™ — Professional AI Tools for Maintenance & Manufacturing.
-        </footer>
+          <div className="mt-5 flex gap-3">
+            <input
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="Ask about troubleshooting, parts, manuals, or repairs..."
+              className="min-w-0 flex-1 rounded-2xl border border-cyan-400/30 bg-slate-900 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500"
+            />
+
+            <button
+              onClick={() => sendMessage()}
+              className="rounded-2xl bg-cyan-300 px-5 py-3 text-sm font-black text-slate-950 hover:bg-cyan-200"
+            >
+              Send
+            </button>
+          </div>
+        </section>
       </div>
     </main>
+  );
+}
+
+function InfoCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-cyan-400/20 bg-slate-900 p-4">
+      <p className="text-xs font-black uppercase tracking-wide text-cyan-300">
+        {label}
+      </p>
+      <p className="mt-2 text-sm font-bold text-white">{value}</p>
+    </div>
   );
 }
