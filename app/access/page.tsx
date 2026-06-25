@@ -1,134 +1,209 @@
 export default function AccessPage() {
   return (
-    <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
-      <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
-        <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+    <main className="min-h-screen bg-[#020617] px-4 py-5 text-white">
+      <div className="mx-auto max-w-7xl">
+        <header className="mb-6 flex flex-col gap-5 rounded-3xl border border-cyan-400/30 bg-slate-950/80 p-5 shadow-2xl sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
-              BAM
+            <div className="inline-flex rounded-lg bg-cyan-300 px-4 py-2 text-sm font-black text-slate-950">
+              BAM Access™
             </div>
 
             <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-              BAM Access™
+              Secure Platform Access™
             </h1>
 
-            <p className="mt-2 text-sm font-medium text-cyan-50">
-              Secure Platform Access™
+            <p className="mt-2 text-sm text-slate-300">
+              Account access, roles, permissions, and protected BAM™ workspaces.
             </p>
           </div>
 
-          <nav className="flex flex-wrap gap-3">
-            <a href="/" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Home™</a>
-            <a href="/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Scan™</a>
-            <a href="/toolz/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAMToolz™</a>
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">BAM Hub™</a>
-            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Work Orders™</a>
-            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Metrics™</a>
-            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Machines™</a>
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg">Support™</a>
+          <nav className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-end">
+            {[
+              ["Home™", "/"],
+              ["BAM Scan™", "/scan"],
+              ["BAMToolz™", "/toolz/scan"],
+              ["BAM Hub™", "/hub"],
+              ["Work Orders™", "/workorders"],
+              ["Metrics™", "/metrics"],
+              ["Machines™", "/machines"],
+              ["Support™", "/support"],
+            ].map(([label, href]) => (
+              <a
+                key={label}
+                href={href}
+                className="rounded-xl border border-cyan-400/40 bg-slate-900 px-4 py-3 text-center text-xs font-black text-cyan-200 shadow-lg hover:bg-slate-800"
+              >
+                {label}
+              </a>
+            ))}
           </nav>
         </header>
 
-        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
-          <p className="text-sm font-black tracking-wide text-cyan-300">
-            SECURE INTELLIGENCE GATEWAY™
-          </p>
+        <section className="relative overflow-hidden rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-slate-950 via-slate-950 to-cyan-950 p-6 shadow-2xl sm:p-10">
+          <div className="absolute right-10 top-10 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
+          <div className="absolute bottom-0 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full border border-cyan-300/30" />
 
-          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Manage your connected BAM™ workspace.
-          </h2>
+          <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="text-sm font-black tracking-wide text-cyan-300">
+                SECURE INTELLIGENCE GATEWAY™
+              </p>
 
-          <p className="mt-6 max-w-6xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM Access™ provides secure access to connected tools, machine
-            intelligence, facility records, work orders, analytics, and
-            AI-powered support across the BAM™ ecosystem.
-          </p>
-        </section>
+              <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight sm:text-6xl">
+                Control who can access
+                <br />
+                your BAM™ workspace.
+              </h2>
 
-        <section className="mt-8 rounded-2xl border border-cyan-300/40 bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            Account Access™
-          </h2>
+              <p className="mt-6 max-w-4xl text-sm leading-7 text-slate-300 sm:text-base">
+                BAM Access™ protects connected tools, machine intelligence,
+                facility records, work orders, analytics, team roles, and
+                AI-powered support across the BAM™ ecosystem.
+              </p>
 
-          <p className="mt-3 text-sm leading-6 text-slate-300">
-            Sign in to manage your BAM™ workspace, connected tools, facility
-            records, machine intelligence, and protected workflows.
-          </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                <StatusPill text="Encrypted Workspace" />
+                <StatusPill text="Role-Based Access" />
+                <StatusPill text="Team Permissions" />
+              </div>
+            </div>
 
-          <div className="mt-8 grid gap-4">
-            <input
-              type="email"
-              placeholder="Email address"
-              className="w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white placeholder:text-slate-400 outline-none"
-            />
+            <div className="relative mx-auto w-full max-w-md rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-black text-cyan-300">
+                  Workspace Status
+                </p>
 
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full rounded-xl border border-cyan-400 bg-slate-900 p-4 text-white placeholder:text-slate-400 outline-none"
-            />
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">
+                  ● Online
+                </span>
+              </div>
 
-            <button className="rounded-xl bg-cyan-500 px-8 py-4 font-black text-slate-950 hover:bg-cyan-400">
-              Sign In™
-            </button>
-
-            <a href="/support" className="text-center text-sm font-bold text-cyan-300 underline">
-              Request Access or Account Support™
-            </a>
+              <div className="mt-6 space-y-4">
+                <AccessStatusRow label="Access Layer" value="Active" />
+                <AccessStatusRow label="Machine Records" value="Protected" />
+                <AccessStatusRow label="Team Roles" value="Enabled" />
+                <AccessStatusRow label="AI Support" value="Secured" />
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          <AccessCard
-            title="Individual Access™"
-            text="Personal workspace, saved scans, assistance, and connected services."
-          />
+        <section className="mt-6 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
+            <p className="text-sm font-black tracking-wide text-cyan-300">
+              ACCOUNT ACCESS™
+            </p>
 
-          <AccessCard
-            title="Technician Access™"
-            text="Maintenance tools, equipment workflows, documentation, and repair intelligence."
-          />
+            <h2 className="mt-3 text-3xl font-black text-white">
+              Access your BAM™ workspace
+            </h2>
 
-          <AccessCard
-            title="Business Access™"
-            text="Facility management, BAM Hub™, work orders, analytics, and team collaboration."
-          />
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              Securely sign in to access your BAM™ workspace, connected tools,
+              facility records, machine intelligence, work orders, analytics,
+              and protected support.
+            </p>
 
-          <AccessCard
-            title="Administrator Access™"
-            text="Manage organizations, permissions, security, users, and connected systems."
-          />
+            <div className="mt-8 grid gap-4">
+              <input
+                type="email"
+                placeholder="Email address"
+                className="w-full rounded-2xl border border-cyan-400/40 bg-slate-900 p-4 text-white placeholder:text-slate-500 outline-none"
+              />
+
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full rounded-2xl border border-cyan-400/40 bg-slate-900 p-4 text-white placeholder:text-slate-500 outline-none"
+              />
+
+              <button className="rounded-2xl bg-cyan-300 px-8 py-4 font-black text-slate-950 shadow-xl hover:bg-cyan-200">
+                Access Workspace™
+              </button>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                <a
+                  href="/support"
+                  className="rounded-2xl border border-cyan-400/30 bg-slate-900 px-4 py-3 text-center text-sm font-black text-cyan-200 hover:bg-slate-800"
+                >
+                  Request Access™
+                </a>
+
+                <a
+                  href="/support"
+                  className="rounded-2xl border border-cyan-400/30 bg-slate-900 px-4 py-3 text-center text-sm font-black text-cyan-200 hover:bg-slate-800"
+                >
+                  Account Support™
+                </a>
+              </div>
+            </div>
+          </div>          <div className="rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
+            <p className="text-sm font-black tracking-wide text-cyan-300">
+              ACCESS LEVELS™
+            </p>
+
+            <h2 className="mt-3 text-3xl font-black text-white">
+              Workspace Permissions
+            </h2>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <AccessCard
+                title="Individual Access™"
+                text="Personal workspace, saved scans, AI assistance, and connected services."
+              />
+
+              <AccessCard
+                title="Technician Access™"
+                text="Maintenance tools, troubleshooting, machine records, and repair workflows."
+              />
+
+              <AccessCard
+                title="Business Access™"
+                text="Facilities, BAM Hub™, work orders, analytics, teams, and reporting."
+              />
+
+              <AccessCard
+                title="Administrator Access™"
+                text="Organizations, permissions, users, security policies, and connected systems."
+              />
+            </div>
+          </div>
         </section>
 
-        <section className="mt-8 rounded-2xl bg-slate-950/95 p-8 shadow-2xl">
-          <h2 className="text-3xl font-black text-cyan-300">
-            Protected BAM™ Workspace
+        <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl sm:p-8">
+          <p className="text-sm font-black tracking-wide text-cyan-300">
+            PROTECTED BAM™ WORKSPACE
+          </p>
+
+          <h2 className="mt-3 text-3xl font-black text-white">
+            Everything secured through BAM Access™
           </h2>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-4">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             <AccessCard
               title="Machine Memory™"
-              text="Equipment profiles, scans, manuals, notes, parts, serials, and repair history."
+              text="Equipment profiles, scans, manuals, notes, serial numbers, parts, and repair history."
             />
 
             <AccessCard
               title="Facility Workflows™"
-              text="Work orders, technician activity, maintenance status, and operational records."
+              text="Work orders, technician activity, maintenance schedules, inspections, and operational records."
             />
 
             <AccessCard
               title="Provider Network™"
-              text="Service requests, account roles, provider access, and customer workflows."
+              text="Service providers, customers, organizations, and account relationships."
             />
 
             <AccessCard
               title="Business Intelligence™"
-              text="BAM Metrics™, downtime insights, repair trends, and protected facility reporting."
+              text="BAM Metrics™, downtime trends, KPI dashboards, and protected operational reporting."
             />
           </div>
         </section>
 
-        <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
+        <footer className="mt-8 border-t border-cyan-300/20 pt-6 text-center text-sm text-cyan-50">
           © 2026 BAM Access™ | BAMToolz™ | Ball AI Metrics™
         </footer>
       </div>
@@ -136,11 +211,46 @@ export default function AccessPage() {
   );
 }
 
-function AccessCard({ title, text }: { title: string; text: string }) {
+function StatusPill({ text }: { text: string }) {
   return (
-    <div className="rounded-2xl border border-cyan-300/30 bg-slate-950/95 p-6 shadow-xl">
-      <h3 className="text-2xl font-black text-cyan-300">{title}</h3>
-      <p className="mt-4 text-sm leading-6 text-slate-300">{text}</p>
+    <div className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-center text-xs font-black text-cyan-200">
+      {text}
+    </div>
+  );
+}
+
+function AccessStatusRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-center justify-between rounded-2xl border border-cyan-400/20 bg-slate-900 p-4">
+      <span className="text-sm text-slate-300">{label}</span>
+
+      <span className="font-black text-cyan-300">{value}</span>
+    </div>
+  );
+}
+
+function AccessCard({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-cyan-400/20 bg-slate-900 p-5 shadow-xl transition-all hover:border-cyan-300/40 hover:bg-slate-800">
+      <h3 className="text-xl font-black text-cyan-300">
+        {title}
+      </h3>
+
+      <p className="mt-3 text-sm leading-6 text-slate-300">
+        {text}
+      </p>
     </div>
   );
 }
