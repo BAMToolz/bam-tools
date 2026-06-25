@@ -6,124 +6,163 @@ export default function Home() {
   const [showNotice, setShowNotice] = useState(false);
 
   useEffect(() => {
-    const accepted = localStorage.getItem("bamPrivacyNoticeAccepted");
-    if (!accepted) setShowNotice(true);
+    const accepted = localStorage.getItem(
+      "bamPrivacyNoticeAccepted"
+    );
+
+    if (!accepted) {
+      setShowNotice(true);
+    }
   }, []);
 
   function acceptNotice() {
-    localStorage.setItem("bamPrivacyNoticeAccepted", "true");
-    setShowNotice(false);
-  }
+    localStorage.setItem(
+      "bamPrivacyNoticeAccepted",
+      "true"
+    );
 
-  return (
-    <main className="min-h-screen bg-cyan-600 px-4 py-6 text-white">
-      <div className="mx-auto max-w-7xl rounded-[2rem] border border-cyan-300/40 bg-gradient-to-br from-cyan-500 via-cyan-600 to-blue-900 p-5 shadow-2xl sm:p-8">
-        <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+    setShowNotice(false);
+  }  return (
+    <main className="min-h-screen bg-[#020617] px-4 py-5 text-white">
+      <div className="mx-auto max-w-7xl">
+
+        <header className="mb-6 flex flex-col gap-5 rounded-3xl border border-cyan-400/30 bg-slate-950/80 p-5 shadow-2xl sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <div className="inline-flex rounded-md bg-white px-4 py-1 text-sm font-black tracking-wide text-cyan-600">
+            <div className="inline-flex rounded-lg bg-cyan-300 px-4 py-2 text-sm font-black text-slate-950">
               BAM™
             </div>
 
-            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+            <h1 className="mt-3 text-5xl font-black tracking-tight">
               BAM™
             </h1>
 
-            <p className="mt-2 text-sm font-medium text-cyan-50">
+            <p className="mt-2 text-sm text-slate-300">
               Ball AI Metrics™ | Connected Intelligence Platform™
             </p>
           </div>
 
-          <nav className="flex flex-wrap gap-3">
-            <a href="/scan" className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950 shadow-lg hover:bg-cyan-400">
-              BAM Scan™
-            </a>
-
-            <a href="/toolz/scan" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
-              BAMToolz™
-            </a>
-
-            <a href="/hub" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
-              Hub™
-            </a>
-
-            <a href="/workorders" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
-              Work Orders™
-            </a>
-
-            <a href="/metrics" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
-              Metrics™
-            </a>
-
-            <a href="/access" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
-              Access™
-            </a>
-
-            <a href="/machines" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
-              Machines™
-            </a>
-
-            <a href="/support" className="rounded-lg bg-slate-950 px-4 py-2 text-xs font-bold text-cyan-200 shadow-lg hover:bg-slate-900">
-              Support™
-            </a>
+          <nav className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-end">
+            {[
+              ["BAM Scan™", "/scan"],
+              ["BAMToolz™", "/toolz/scan"],
+              ["Hub™", "/hub"],
+              ["Work Orders™", "/workorders"],
+              ["Access™", "/access"],
+              ["Support™", "/support"],
+            ].map(([label, href]) => (
+              <a
+                key={label}
+                href={href}
+                className="rounded-xl border border-cyan-400/40 bg-slate-900 px-4 py-3 text-center text-xs font-black text-cyan-200 shadow-lg hover:bg-slate-800"
+              >
+                {label}
+              </a>
+            ))}
           </nav>
         </header>
 
-        <section className="mt-10 rounded-2xl bg-slate-950/95 p-8 shadow-2xl sm:p-10">
-          <p className="text-sm font-black tracking-wide text-cyan-300">
-            CONNECTED INTELLIGENCE PLATFORM™
-          </p>
 
-          <h2 className="mt-4 max-w-5xl text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            Transforming real-world information into intelligent action.
-          </h2>
+        <section className="relative overflow-hidden rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-slate-950 via-slate-950 to-cyan-950 p-8 shadow-2xl sm:p-12">
+          <div className="absolute right-10 top-10 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" />
 
-          <p className="mt-6 max-w-5xl text-sm leading-6 text-slate-300 sm:text-base">
-            BAM™ connects people, technology, and industry through intelligent
-            scanning, AI assistance, knowledge capture, and data-driven insights.
-            From everyday questions to advanced manufacturing, Ball AI Metrics™
-            turns information into action.
-          </p>
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="text-sm font-black tracking-wide text-cyan-300">
+                CONNECTED INTELLIGENCE PLATFORM™
+              </p>
 
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <a href="/scan" className="rounded-xl bg-cyan-500 px-6 py-3 text-center font-black text-slate-950 hover:bg-cyan-400">
-              Launch BAM Scan™
-            </a>
+              <h2 className="mt-5 max-w-3xl text-4xl font-black leading-tight sm:text-6xl">
+                Transforming
+                <br />
+                real-world
+                <br />
+                information into
+                <br />
+                <span className="text-cyan-300">
+                  intelligent action.
+                </span>
+              </h2>
+
+              <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-300">
+                BAM™ connects people, technology, and AI through intelligent
+                scanning, assistance, knowledge capture, and connected
+                information systems.
+              </p>
+
+              <a
+                href="/scan"
+                className="mt-8 inline-flex rounded-2xl bg-cyan-400 px-8 py-4 font-black text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.35)] hover:bg-cyan-300"
+              >
+                Launch BAM Scan™
+              </a>
+            </div>
+
+
+            <div className="relative mx-auto flex h-80 w-full items-center justify-center">
+              <div className="absolute h-72 w-72 rounded-full border border-cyan-300/40 bg-cyan-400/10 shadow-[0_0_80px_rgba(34,211,238,0.4)]" />
+
+              <div className="relative flex h-52 w-52 items-center justify-center rounded-full border-2 border-cyan-300 bg-slate-950 shadow-2xl">
+                <div className="text-center">
+                  <div className="text-6xl">
+                    🤖
+                  </div>
+
+                  <p className="mt-4 text-sm font-black text-cyan-300">
+                    BAM AI™
+                  </p>
+
+                  <p className="mt-1 text-xs text-slate-400">
+                    Connected Intelligence
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
-        <section id="platform" className="mt-8 grid gap-5 md:grid-cols-5">
+
+        <section className="mt-8 grid gap-5 md:grid-cols-3">
+
           <Card
             title="BAM Scan™"
             href="/scan"
-            text="Universal AI scanning for products, parts, labels, repair questions, and everyday problem solving."
+            text="Take a picture. Identify items, problems, parts, information, and ask BAM AI Assist™."
           />
 
           <Card
             title="BAMToolz™"
             href="/toolz/scan"
-            text="Industrial tools for technicians, equipment identity, machine records, and maintenance workflows."
+            text="Technician tools, equipment intelligence, maintenance support, and workflows."
           />
 
           <Card
             title="BAM Hub™"
             href="/hub"
-            text="Machine memory that preserves equipment profiles, repairs, knowledge, documents, and history."
+            text="Preserve knowledge, history, documents, repairs, and connected information."
+          />
+
+        </section>        <section className="mt-6 grid gap-5 md:grid-cols-3">
+          <Card
+            title="Work Orders™"
+            href="/workorders"
+            text="Organize tasks, repair needs, follow-ups, and service activity."
           />
 
           <Card
-            title="BAM Metrics™"
-            href="/metrics"
-            text="Facility intelligence built from scans, work orders, reliability data, and machine history."
+            title="Access™"
+            href="/access"
+            text="Control user access, platform entry, roles, and future team permissions."
           />
 
           <Card
-            title="BAM Machines™"
-            href="/machines"
-            text="Industrial builds, automation systems, rugged hardware, and future connected technician technology."
+            title="Support™"
+            href="/support"
+            text="Get help, request support, and connect with the BAM™ platform."
           />
         </section>
 
-        <footer className="mt-8 border-t border-cyan-300/30 pt-6 text-center text-sm text-cyan-50">
+        <footer className="mt-8 border-t border-cyan-300/20 pt-6 text-center text-sm text-cyan-50">
           <p>© 2026 BAM™ | BAMToolz™ | Ball AI Metrics™</p>
 
           <div className="mt-4 flex flex-wrap justify-center gap-6">
@@ -132,15 +171,14 @@ export default function Home() {
             <a href="/scan" className="hover:text-white">BAM Scan™</a>
             <a href="/toolz/scan" className="hover:text-white">BAMToolz™</a>
             <a href="/hub" className="hover:text-white">BAM Hub™</a>
-            <a href="/machines" className="hover:text-white">BAM Machines™</a>
-            <a href="/metrics" className="hover:text-white">Metrics™</a>
             <a href="/access" className="hover:text-white">Access™</a>
+            <a href="/support" className="hover:text-white">Support™</a>
           </div>
         </footer>
       </div>
 
       {showNotice && (
-        <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-5xl rounded-2xl border border-cyan-300/40 bg-slate-950 p-5 text-white shadow-2xl">
+        <div className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-5xl rounded-3xl border border-cyan-300/40 bg-slate-950 p-5 text-white shadow-2xl">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h2 className="text-lg font-black text-cyan-300">
@@ -163,7 +201,7 @@ export default function Home() {
 
             <button
               onClick={acceptNotice}
-              className="rounded-xl bg-cyan-500 px-6 py-3 font-black text-slate-950 hover:bg-cyan-400"
+              className="rounded-2xl bg-cyan-400 px-6 py-3 font-black text-slate-950 hover:bg-cyan-300"
             >
               Accept
             </button>
@@ -174,11 +212,27 @@ export default function Home() {
   );
 }
 
-function Card({ title, text, href }: { title: string; text: string; href: string }) {
+function Card({
+  title,
+  text,
+  href,
+}: {
+  title: string;
+  text: string;
+  href: string;
+}) {
   return (
-    <a href={href} className="rounded-xl border border-cyan-400/30 bg-slate-950/95 p-6 shadow-xl hover:bg-slate-900">
-      <h3 className="text-xl font-black text-cyan-300">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
+    <a
+      href={href}
+      className="rounded-3xl border border-cyan-400/30 bg-slate-950/90 p-6 shadow-2xl hover:bg-slate-900"
+    >
+      <h3 className="text-xl font-black text-cyan-300">
+        {title}
+      </h3>
+
+      <p className="mt-3 text-sm leading-6 text-slate-300">
+        {text}
+      </p>
     </a>
   );
 }
