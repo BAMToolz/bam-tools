@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 
 type ScanResult = {
   name: string;
@@ -19,12 +19,30 @@ type Message = {
 
 export default function BamScanPage() {
   const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [scan, setScan] = useState<ScanResult | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [asking, setAsking] = useState(false);
   const [error, setError] = useState("");
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selected = e.target.files?.[0];
+    if (selected) {
+      setFile(selected);
+      setPreviewUrl(URL.createObjectURL(selected));
+      setError("");
+    }
+  };
+
+  const clearFile = () => {
+    setFile(null);
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(null);
+    }
+  };
 
   async function runScan() {
     if (!file) {
@@ -71,9 +89,7 @@ export default function BamScanPage() {
       ]);
     } catch (err) {
       setError(
-        err instanceof Error
-          ? err.message
-          : "BAM Scan failed."
+        err instanceof Error ? err.message : "BAM Scan failed."
       );
     } finally {
       setLoading(false);
@@ -143,19 +159,17 @@ export default function BamScanPage() {
 
   return (
     <main className="min-h-screen bg-[#020617] px-4 py-6 text-white">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl space-y-6">
 
         {/* HEADER */}
-        <header className="mb-6 flex items-center justify-between">
+        <header className="flex items-center justify-between">
           <div>
             <div className="text-sm font-black text-cyan-300">
               BAM™
             </div>
-
             <h1 className="text-3xl font-black">
               BAM Scan™
             </h1>
-
             <p className="text-sm text-slate-400">
               Scan equipment. Identify it. Get answers.
             </p>
@@ -163,7 +177,7 @@ export default function BamScanPage() {
 
           <a
             href="/"
-            className="rounded-xl border border-cyan-400/30 px-4 py-2 text-sm font-bold text-cyan-300"
+            className="rounded-xl border border-cyan-400/30 px-4 py-2 text-sm font-bold text-cyan-300 hover:bg-cyan-400/10 transition-colors"
           >
             Home
           </a>
@@ -173,10 +187,19 @@ export default function BamScanPage() {
         <section className="rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
           <div className="text-center">
 
-            <div className="mx-auto flex h-40 w-40 items-center justify-center rounded-3xl border-2 border-cyan-300 bg-slate-900">
-              <div className="h-20 w-20 rounded-2xl border-2 border-cyan-300">
-                <div className="mx-auto mt-8 h-4 w-4 rounded-full bg-cyan-300" />
-              </div>
+            {/* Target Graphic / Image Preview */}
+            <div className="mx-auto flex h-40 w-40 items-center justify-center overflow-hidden rounded-3xl border-2 border-cyan-300 bg-slate-900 shadow-lg shadow-cyan-400/10">
+              {previewUrl ? (
+                <img
+                  src={previewUrl}
+                  alt="Scanned Preview"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="h-20 w-20 rounded-2xl border-2 border-cyan-300 flex items-center justify-center">
+                  <div className="h-4 w-4 rounded-full bg-cyan-300 animate-pulse" />
+                </div>
+              )}
             </div>
 
             <h2 className="mt-6 text-2xl font-black text-cyan-300">
@@ -188,40 +211,43 @@ export default function BamScanPage() {
               part, tool, or maintenance issue.
             </p>
 
-            {/* FILE */}
-            <label className="mx-auto mt-6 block max-w-md cursor-pointer rounded-2xl border border-dashed border-cyan-400/50 bg-slate-900 p-5 hover:bg-slate-800">
-              <div className="text-3xl">📷</div>
-
-              <div className="mt-2 font-black text-cyan-300">
-                Take Photo / Select Image
-              </div>
-
-              <div className="mt-1 text-xs text-slate-500">
-                JPG • PNG • HEIC
-              </div>
-
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={(e) =>
-                  setFile(e.target.files?.[0] || null)
-                }
-                className="hidden"
-              />
-            </label>
-
-            {file && (
-              <div className="mx-auto mt-4 max-w-md rounded-xl bg-cyan-400/10 p-3 text-sm text-cyan-300">
-                ✓ {file.name}
-              </div>
-            )}
+            {/* FILE SELECTION */}
+            <div className="mx-auto mt-6 max-w-md">
+              {!previewUrl ? (
+                <label className="block cursor-pointer rounded-2xl border border-dashed border-cyan-400/50 bg-slate-900 p-5 hover:bg-slate-800 transition-colors">
+                  <div className="text-3xl">📷</div>
+                  <div className="mt-2 font-black text-cyan-300">
+                    Take Photo / Select Image
+                  </div>
+                  <div className="mt-1 text-xs text-slate-500">
+                    JPG • PNG • HEIC
+                  </div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                </label>
+              ) : (
+                <div className="flex items-center justify-between rounded-xl bg-cyan-400/10 p-3 text-sm text-cyan-300 border border-cyan-400/20">
+                  <span className="truncate max-w-[240px] font-medium">✓ {file?.name}</span>
+                  <button
+                    onClick={clearFile}
+                    className="ml-2 font-bold text-xs uppercase text-cyan-400 hover:text-cyan-200"
+                  >
+                    Change
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* SCAN BUTTON */}
             <button
               onClick={runScan}
               disabled={!file || loading}
-              className="mx-auto mt-5 block w-full max-w-md rounded-2xl bg-cyan-400 p-4 font-black text-slate-950 disabled:cursor-not-allowed disabled:opacity-40"
+              className="mx-auto mt-5 block w-full max-w-md rounded-2xl bg-cyan-400 p-4 font-black text-slate-950 hover:bg-cyan-300 transition-colors disabled:cursor-not-allowed disabled:opacity-40"
             >
               {loading
                 ? "BAM SCAN™ ANALYZING..."
@@ -244,46 +270,27 @@ export default function BamScanPage() {
 
         {/* RESULT */}
         {scan && (
-          <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
-
+          <section className="rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-black tracking-widest text-cyan-400">
                   EQUIPMENT IDENTIFIED
                 </p>
-
                 <h2 className="mt-2 text-2xl font-black">
                   {scan.name}
                 </h2>
               </div>
 
-              <div className="rounded-full bg-emerald-400/10 px-3 py-2 text-xs font-black text-emerald-300">
+              <div className="rounded-full bg-emerald-400/10 px-3 py-2 text-xs font-black text-emerald-300 border border-emerald-400/20">
                 ✓ SCANNED
               </div>
             </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-
-              <Result
-                label="Manufacturer"
-                value={scan.manufacturer}
-              />
-
-              <Result
-                label="Model"
-                value={scan.model}
-              />
-
-              <Result
-                label="Serial"
-                value={scan.serial}
-              />
-
-              <Result
-                label="Equipment Type"
-                value={scan.equipment_type || "Not visible"}
-              />
-
+              <Result label="Manufacturer" value={scan.manufacturer} />
+              <Result label="Model" value={scan.model} />
+              <Result label="Serial" value={scan.serial} />
+              <Result label="Equipment Type" value={scan.equipment_type || "Not visible"} />
             </div>
 
             {scan.confidence !== undefined && (
@@ -292,7 +299,6 @@ export default function BamScanPage() {
                   <span className="font-bold text-slate-400">
                     Identification Confidence
                   </span>
-
                   <span className="font-black text-cyan-300">
                     {Math.round(scan.confidence * 100)}%
                   </span>
@@ -300,11 +306,9 @@ export default function BamScanPage() {
 
                 <div className="mt-2 h-2 rounded-full bg-slate-800">
                   <div
-                    className="h-2 rounded-full bg-cyan-300"
+                    className="h-2 rounded-full bg-cyan-300 transition-all duration-300"
                     style={{
-                      width: `${Math.round(
-                        scan.confidence * 100
-                      )}%`,
+                      width: `${Math.round(scan.confidence * 100)}%`,
                     }}
                   />
                 </div>
@@ -317,7 +321,7 @@ export default function BamScanPage() {
                   View Scan Details
                 </summary>
 
-                <pre className="mt-4 whitespace-pre-wrap text-sm leading-6 text-slate-300">
+                <pre className="mt-4 whitespace-pre-wrap text-sm leading-6 text-slate-300 font-sans">
                   {scan.analysis}
                 </pre>
               </details>
@@ -325,7 +329,7 @@ export default function BamScanPage() {
 
             {/* SAVE */}
             <button
-              className="mt-5 w-full rounded-2xl border border-cyan-400/40 bg-cyan-400/10 p-4 font-black text-cyan-300 hover:bg-cyan-400/20"
+              className="mt-5 w-full rounded-2xl border border-cyan-400/40 bg-cyan-400/10 p-4 font-black text-cyan-300 hover:bg-cyan-400/20 transition-colors"
               onClick={() =>
                 alert("BAM Hub™ save feature coming next.")
               }
@@ -336,14 +340,12 @@ export default function BamScanPage() {
         )}
 
         {/* AI ASSIST */}
-        <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
-
+        <section className="rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-black tracking-widest text-cyan-400">
                 BAM AI
               </p>
-
               <h2 className="mt-1 text-2xl font-black text-cyan-300">
                 BAM AI Assist™
               </h2>
@@ -352,7 +354,7 @@ export default function BamScanPage() {
             <div
               className={`rounded-full px-3 py-2 text-xs font-black ${
                 scan
-                  ? "bg-emerald-400/10 text-emerald-300"
+                  ? "bg-emerald-400/10 text-emerald-300 border border-emerald-400/20"
                   : "bg-slate-900 text-slate-500"
               }`}
             >
@@ -370,7 +372,6 @@ export default function BamScanPage() {
             <>
               {/* QUICK QUESTIONS */}
               <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-
                 {[
                   "What is this?",
                   "Troubleshoot it",
@@ -381,12 +382,11 @@ export default function BamScanPage() {
                     key={text}
                     onClick={() => askBam(text)}
                     disabled={asking}
-                    className="rounded-xl border border-cyan-400/20 bg-slate-900 p-3 text-left text-xs font-bold text-cyan-300 hover:bg-slate-800 disabled:opacity-50"
+                    className="rounded-xl border border-cyan-400/20 bg-slate-900 p-3 text-left text-xs font-bold text-cyan-300 hover:bg-slate-800 transition-colors disabled:opacity-50"
                   >
                     {text}
                   </button>
                 ))}
-
               </div>
 
               {/* MESSAGES */}
@@ -396,7 +396,7 @@ export default function BamScanPage() {
                     key={index}
                     className={`rounded-2xl p-4 ${
                       message.role === "user"
-                        ? "bg-cyan-400/10 text-cyan-100"
+                        ? "bg-cyan-400/10 text-cyan-100 border border-cyan-400/20"
                         : "bg-slate-900 text-slate-200"
                     }`}
                   >
@@ -415,12 +415,9 @@ export default function BamScanPage() {
 
               {/* QUESTION */}
               <div className="mt-5 flex gap-2">
-
                 <input
                   value={question}
-                  onChange={(e) =>
-                    setQuestion(e.target.value)
-                  }
+                  onChange={(e) => setQuestion(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       askBam();
@@ -428,17 +425,16 @@ export default function BamScanPage() {
                   }}
                   placeholder="Ask BAM about this equipment..."
                   disabled={asking}
-                  className="min-w-0 flex-1 rounded-xl border border-cyan-400/30 bg-slate-900 p-4 text-sm text-white outline-none"
+                  className="min-w-0 flex-1 rounded-xl border border-cyan-400/30 bg-slate-900 p-4 text-sm text-white outline-none focus:border-cyan-300"
                 />
 
                 <button
                   onClick={() => askBam()}
                   disabled={!question.trim() || asking}
-                  className="rounded-xl bg-cyan-400 px-5 font-black text-slate-950 disabled:opacity-30"
+                  className="rounded-xl bg-cyan-400 px-5 font-black text-slate-950 hover:bg-cyan-300 transition-colors disabled:opacity-30"
                 >
                   ASK
                 </button>
-
               </div>
             </>
           )}
@@ -453,19 +449,12 @@ export default function BamScanPage() {
   );
 }
 
-function Result({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
+function Result({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl bg-slate-900 p-4">
       <div className="text-xs font-black uppercase text-cyan-400">
         {label}
       </div>
-
       <div className="mt-2 text-sm font-bold text-white">
         {value || "Not visible"}
       </div>
