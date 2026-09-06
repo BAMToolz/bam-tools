@@ -20,6 +20,7 @@ type Message = {
 export default function BamScanPage() {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [fileType, setFileType] = useState<"image" | "pdf" | null>(null);
   const [scan, setScan] = useState<ScanResult | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [question, setQuestion] = useState("");
@@ -27,17 +28,35 @@ export default function BamScanPage() {
   const [asking, setAsking] = useState(false);
   const [error, setError] = useState("");
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selected = e.target.files?.[0];
-    if (selected) {
-      setFile(selected);
+  const processSelectedFile = (selected: File) => {
+    setFile(selected);
+    setError("");
+
+    if (selected.type.startsWith("image/")) {
+      setFileType("image");
       setPreviewUrl(URL.createObjectURL(selected));
-      setError("");
+    } else if (selected.type === "application/pdf") {
+      setFileType("pdf");
+      setPreviewUrl(null);
+    } else {
+      setFileType("image");
+      setPreviewUrl(null);
     }
+  };
+
+  const handleCameraCapture = (e: ChangeEvent<HTMLInputElement>) => {
+    const selected = e.target.files?.[0];
+    if (selected) processSelectedFile(selected);
+  };
+
+  const handleFileBrowse = (e: ChangeEvent<HTMLInputElement>) => {
+    const selected = e.target.files?.[0];
+    if (selected) processSelectedFile(selected);
   };
 
   const clearFile = () => {
     setFile(null);
+    setFileType(null);
     if (previewUrl) {
       URL.revokeObjectURL(previewUrl);
       setPreviewUrl(null);
@@ -46,7 +65,7 @@ export default function BamScanPage() {
 
   async function runScan() {
     if (!file) {
-      setError("Take or select a photo first.");
+      setError("Please capture a photo or select a file first.");
       return;
     }
 
@@ -84,7 +103,7 @@ export default function BamScanPage() {
       setMessages([
         {
           role: "bam",
-          text: "Scan complete. BAM AI Assist™ has indexed this unit's parameters.",
+          text: "Scan complete. BAM AI Assist™ has indexed this equipment file.",
         },
       ]);
     } catch (err) {
@@ -194,67 +213,97 @@ export default function BamScanPage() {
           </a>
         </header>
 
-        {/* MAIN SCANNER CARD */}
+        {/* DUAL SELECTION WORKSPACE (CAMERA OR FILES) */}
         <section className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
           <div className="flex flex-col items-center text-center">
 
-            {/* SCAN PREVIEW CONTAINER */}
-            <div className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-950/80 shadow-2xl">
-              
-              {!previewUrl ? (
-                <label className="group relative flex min-h-[260px] cursor-pointer flex-col items-center justify-center p-8 transition hover:bg-slate-900/60">
+            <div className="w-full max-w-xl">
+              {!file ? (
+                <div className="grid gap-4 sm:grid-cols-2">
                   
-                  {/* Vector HUD Graphic */}
-                  <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/5 group-hover:border-cyan-400/60 transition-colors">
-                    <div className="absolute -top-1 -left-1 h-3 w-3 border-t-2 border-l-2 border-cyan-400" />
-                    <div className="absolute -top-1 -right-1 h-3 w-3 border-t-2 border-r-2 border-cyan-400" />
-                    <div className="absolute -bottom-1 -left-1 h-3 w-3 border-b-2 border-l-2 border-cyan-400" />
-                    <div className="absolute -bottom-1 -right-1 h-3 w-3 border-b-2 border-r-2 border-cyan-400" />
-                    
-                    <svg className="h-8 w-8 text-cyan-300 transition-transform group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h3.172a2 2 0 001.414-.586l1.828-1.828A2 2 0 0112.828 4h2.343a2 2 0 011.414.586l1.828 1.828A2 2 0 0019.828 7H21a2 2 0 012 2v9a2 2 0 01-2 2H3a2 2 0 01-2-2V9z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
+                  {/* CAMERA CAPTURE OPTION */}
+                  <label className="group relative flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-950/80 p-6 transition hover:border-cyan-400/60 hover:bg-slate-900/60">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/5 group-hover:scale-105 transition-transform">
+                      <span className="text-2xl">📷</span>
+                    </div>
 
-                  <div className="mt-4 text-base font-black text-white group-hover:text-cyan-300 transition-colors">
-                    Capture Equipment Photo
-                  </div>
-                  <p className="mt-1 text-xs text-slate-400">
-                    Supports JPG, PNG, HEIC nameplate or full unit images
-                  </p>
+                    <div className="mt-3 text-sm font-black text-white group-hover:text-cyan-300 transition-colors">
+                      Take Photo
+                    </div>
+                    <p className="mt-1 text-xs text-slate-400">
+                      Open device camera directly
+                    </p>
 
-                  <input
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                </label>
-              ) : (
-                <div className="relative group">
-                  <div className="aspect-[16/9] w-full overflow-hidden bg-slate-900">
-                    <img
-                      src={previewUrl}
-                      alt="Equipment Preview"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    <input
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      onChange={handleCameraCapture}
+                      className="hidden"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-                  </div>
+                  </label>
 
-                  {/* Overlaid Image Banner */}
-                  <div className="absolute bottom-0 inset-x-0 p-4 flex items-center justify-between bg-slate-950/80 backdrop-blur-md border-t border-slate-800">
+                  {/* FILE BROWSER OPTION */}
+                  <label className="group relative flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-950/80 p-6 transition hover:border-cyan-400/60 hover:bg-slate-900/60">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/5 group-hover:scale-105 transition-transform">
+                      <span className="text-2xl">📁</span>
+                    </div>
+
+                    <div className="mt-3 text-sm font-black text-white group-hover:text-cyan-300 transition-colors">
+                      Upload from Files
+                    </div>
+                    <p className="mt-1 text-xs text-slate-400">
+                      Choose PNG, JPG, or PDF document
+                    </p>
+
+                    <input
+                      type="file"
+                      accept="image/*,.pdf"
+                      onChange={handleFileBrowse}
+                      className="hidden"
+                    />
+                  </label>
+
+                </div>
+              ) : (
+                /* SELECTED FILE PREVIEW CARD */
+                <div className="relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-950/90 shadow-2xl">
+                  {fileType === "image" && previewUrl ? (
+                    <div className="relative group aspect-[16/9] w-full overflow-hidden bg-slate-900">
+                      <img
+                        src={previewUrl}
+                        alt="Equipment Preview"
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                    </div>
+                  ) : (
+                    /* PDF / DOCUMENT DISPLAY PREVIEW */
+                    <div className="flex flex-col items-center justify-center py-12 px-4 bg-slate-900/50">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-3xl text-cyan-300">
+                        📄
+                      </div>
+                      <div className="mt-3 text-sm font-bold text-white">
+                        {file.name}
+                      </div>
+                      <div className="mt-1 text-xs text-slate-400">
+                        {(file.size / (1024 * 1024)).toFixed(2)} MB • PDF Document
+                      </div>
+                    </div>
+                  )}
+
+                  {/* BOTTOM ACTION BAR */}
+                  <div className="p-4 flex items-center justify-between bg-slate-950 border-t border-slate-800">
                     <div className="flex items-center gap-2 text-xs font-medium text-cyan-300 truncate max-w-[70%]">
                       <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-                      <span className="truncate">{file?.name}</span>
+                      <span className="truncate">{file.name}</span>
                     </div>
 
                     <button
                       onClick={clearFile}
                       className="rounded-lg bg-slate-800 px-3 py-1.5 text-xs font-bold text-slate-300 hover:bg-slate-700 hover:text-white transition"
                     >
-                      Change Photo
+                      Remove File
                     </button>
                   </div>
                 </div>
@@ -265,7 +314,7 @@ export default function BamScanPage() {
             <button
               onClick={runScan}
               disabled={!file || loading}
-              className="mt-6 flex w-full max-w-lg items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-500 py-4 text-sm font-black text-slate-950 shadow-xl shadow-cyan-500/20 transition-all hover:brightness-110 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40"
+              className="mt-6 flex w-full max-w-xl items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-500 py-4 text-sm font-black text-slate-950 shadow-xl shadow-cyan-500/20 transition-all hover:brightness-110 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40"
             >
               {loading ? (
                 <>
@@ -281,13 +330,13 @@ export default function BamScanPage() {
             </button>
 
             {loading && (
-              <div className="mt-4 h-1.5 w-full max-w-lg overflow-hidden rounded-full bg-slate-800">
+              <div className="mt-4 h-1.5 w-full max-w-xl overflow-hidden rounded-full bg-slate-800">
                 <div className="h-full w-full animate-pulse bg-cyan-400" />
               </div>
             )}
 
             {error && (
-              <div className="mt-4 w-full max-w-lg rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-left text-xs font-medium text-red-300">
+              <div className="mt-4 w-full max-w-xl rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-left text-xs font-medium text-red-300">
                 ⚠️ {error}
               </div>
             )}
@@ -298,7 +347,6 @@ export default function BamScanPage() {
         {scan && (
           <section className="rounded-3xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
             
-            {/* Header Badge */}
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
               <div>
                 <p className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
@@ -315,7 +363,6 @@ export default function BamScanPage() {
               </div>
             </div>
 
-            {/* Visual Card Grid */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <ResultTile label="Manufacturer" value={scan.manufacturer} icon="🏢" />
               <ResultTile label="Model" value={scan.model} icon="⚙️" />
@@ -323,7 +370,6 @@ export default function BamScanPage() {
               <ResultTile label="Type" value={scan.equipment_type || "Not visible"} icon="📦" />
             </div>
 
-            {/* Confidence Dial Gauge */}
             {scan.confidence !== undefined && (
               <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-5 flex items-center justify-between gap-4">
                 <div className="space-y-1">
@@ -374,7 +420,7 @@ export default function BamScanPage() {
           </section>
         )}
 
-        {/* BAM AI ASSIST™ CONVERSATION WORKSPACE */}
+        {/* BAM AI ASSIST™ WORKSPACE */}
         <section className="rounded-3xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
           <div className="flex items-center justify-between border-b border-slate-800 pb-4">
             <div className="flex items-center gap-3">
@@ -408,7 +454,6 @@ export default function BamScanPage() {
             </div>
           ) : (
             <div className="space-y-5">
-              {/* Action Chips */}
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {[
                   "What is this?",
@@ -427,7 +472,6 @@ export default function BamScanPage() {
                 ))}
               </div>
 
-              {/* Chat Thread */}
               <div className="space-y-3 pt-2 max-h-96 overflow-y-auto pr-1">
                 {messages.map((message, index) => (
                   <div
@@ -449,7 +493,6 @@ export default function BamScanPage() {
                 ))}
               </div>
 
-              {/* Query Box */}
               <div className="flex gap-2 pt-2">
                 <input
                   value={question}
