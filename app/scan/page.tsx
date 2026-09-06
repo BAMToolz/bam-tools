@@ -46,7 +46,7 @@ export default function BamScanPage() {
 
   async function runScan() {
     if (!file) {
-      setError("Please capture or upload an image first.");
+      setError("Take or select a photo first.");
       return;
     }
 
@@ -68,7 +68,7 @@ export default function BamScanPage() {
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.error || "Equipment identification failed.");
+        throw new Error(data.error || "BAM Scan failed.");
       }
 
       setScan({
@@ -84,12 +84,12 @@ export default function BamScanPage() {
       setMessages([
         {
           role: "bam",
-          text: "Equipment scan analyzed. What information do you need?",
+          text: "Scan complete. BAM AI Assist™ is ready.",
         },
       ]);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Equipment identification failed."
+        err instanceof Error ? err.message : "BAM Scan failed."
       );
     } finally {
       setLoading(false);
@@ -112,7 +112,7 @@ export default function BamScanPage() {
       },
       {
         role: "bam",
-        text: "Analyzing database records...",
+        text: "BAM AI Assist™ is thinking...",
       },
     ]);
 
@@ -131,14 +131,14 @@ export default function BamScanPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Assistant inquiry failed.");
+        throw new Error(data.error || "BAM AI Assist failed.");
       }
 
       setMessages((prev) => [
         ...prev.slice(0, -1),
         {
           role: "bam",
-          text: data.result || "No records returned for this query.",
+          text: data.result || "No answer returned.",
         },
       ]);
     } catch (err) {
@@ -149,7 +149,7 @@ export default function BamScanPage() {
           text:
             err instanceof Error
               ? err.message
-              : "Unable to process query.",
+              : "BAM AI Assist failed.",
         },
       ]);
     } finally {
@@ -158,49 +158,46 @@ export default function BamScanPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0b0f17] px-4 py-8 text-slate-100 antialiased">
-      <div className="mx-auto max-w-4xl space-y-8">
+    <main className="min-h-screen bg-[#090D16] px-4 py-8 text-slate-100 font-sans antialiased">
+      <div className="mx-auto max-w-4xl space-y-6">
 
         {/* HEADER */}
-        <header className="flex items-center justify-between border-b border-slate-800 pb-6">
+        <header className="flex items-center justify-between border-b border-slate-800/80 pb-6">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              <span className="text-xs font-mono font-semibold tracking-wider text-slate-400 uppercase">
-                BAM Platform v2.4
-              </span>
+            <div className="text-xs font-black tracking-wider text-cyan-400 uppercase">
+              BAM™
             </div>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Equipment Scanner
+            <h1 className="text-3xl font-black tracking-tight text-white mt-0.5">
+              BAM Scan™
             </h1>
+            <p className="text-sm text-slate-400 mt-1">
+              Scan equipment. Identify it. Get answers.
+            </p>
           </div>
 
           <a
             href="/"
-            className="rounded-lg border border-slate-700 bg-slate-900 px-3.5 py-2 text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white"
+            className="rounded-xl border border-slate-700/80 bg-slate-900 px-4 py-2.5 text-xs font-bold text-slate-300 transition hover:border-slate-600 hover:bg-slate-800 hover:text-white"
           >
-            Dashboard →
+            Home
           </a>
         </header>
 
-        {/* IMAGE CAPTURE SECTION */}
-        <section className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 sm:p-8 backdrop-blur-sm">
+        {/* SCANNER SECTION */}
+        <section className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 backdrop-blur-sm">
           <div className="flex flex-col items-center text-center">
 
             {!previewUrl ? (
-              <label className="group relative flex w-full max-w-md cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-slate-700 bg-slate-950/60 p-8 transition hover:border-slate-500 hover:bg-slate-950">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-300 group-hover:scale-105 transition-transform">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M68 68h0M3 9a2 2 0 012-2h3.172a2 2 0 001.414-.586l1.828-1.828A2 2 0 0112.828 4h2.343a2 2 0 011.414.586l1.828 1.828A2 2 0 0019.828 7H21a2 2 0 012 2v9a2 2 0 01-2 2H3a2 2 0 01-2-2V9z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+              <label className="group relative flex w-full max-w-md cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-950/60 p-8 transition hover:border-cyan-500/50 hover:bg-slate-950">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-800 bg-slate-900 text-2xl group-hover:scale-105 transition-transform">
+                  📷
                 </div>
 
-                <div className="mt-4 text-sm font-semibold text-slate-200">
-                  Upload or Capture Image
+                <div className="mt-4 text-sm font-black text-cyan-400">
+                  Take Photo / Select Image
                 </div>
-                <p className="mt-1 text-xs text-slate-400">
-                  Nameplates, serial numbers, parts, or whole machinery
+                <p className="mt-1 text-xs text-slate-500">
+                  JPG • PNG • HEIC
                 </p>
 
                 <input
@@ -212,197 +209,214 @@ export default function BamScanPage() {
                 />
               </label>
             ) : (
-              <div className="w-full max-w-md overflow-hidden rounded-xl border border-slate-800 bg-slate-950">
+              <div className="w-full max-w-md overflow-hidden rounded-2xl border border-slate-800 bg-slate-950">
                 <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
                   <img
                     src={previewUrl}
-                    alt="Captured preview"
+                    alt="Scanned Preview"
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="flex items-center justify-between px-4 py-3 border-t border-slate-800 bg-slate-900/40">
-                  <span className="truncate text-xs font-mono text-slate-400">
-                    {file?.name}
+                <div className="flex items-center justify-between px-4 py-3 border-t border-slate-800 bg-slate-900/60">
+                  <span className="truncate text-xs font-medium text-slate-300">
+                    ✓ {file?.name}
                   </span>
                   <button
                     onClick={clearFile}
-                    className="text-xs font-semibold text-slate-300 hover:text-red-400 transition"
+                    className="text-xs font-bold text-slate-400 hover:text-cyan-400 transition"
                   >
-                    Remove Photo
+                    Change Photo
                   </button>
                 </div>
               </div>
             )}
 
-            {/* SCAN ACTION BUTTON */}
+            <h2 className="mt-6 text-xl font-black text-white">
+              Scan Equipment
+            </h2>
+
+            <p className="mx-auto mt-1 max-w-md text-xs text-slate-400">
+              Take a photo of a machine, nameplate, component, part, tool, or maintenance issue.
+            </p>
+
+            {/* RUN BUTTON */}
             <button
               onClick={runScan}
               disabled={!file || loading}
-              className="mt-6 flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-white py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-30"
+              className="mt-6 flex w-full max-w-md items-center justify-center gap-2 rounded-xl bg-cyan-400 py-3.5 text-sm font-black text-slate-950 shadow-sm transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {loading ? (
-                <>
-                  <svg className="h-4 w-4 animate-spin text-slate-950" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  Processing Image...
-                </>
-              ) : (
-                "Identify Equipment"
-              )}
+              {loading ? "BAM SCAN™ ANALYZING..." : "RUN BAM SCAN™"}
             </button>
 
+            {loading && (
+              <div className="mt-4 h-1.5 w-full max-w-md overflow-hidden rounded-full bg-slate-800">
+                <div className="h-full w-full animate-pulse bg-cyan-400" />
+              </div>
+            )}
+
             {error && (
-              <div className="mt-4 w-full max-w-md rounded-lg border border-red-900/50 bg-red-950/30 p-3 text-left text-xs text-red-400">
+              <div className="mt-4 w-full max-w-md rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-left text-xs font-medium text-red-300">
                 {error}
               </div>
             )}
           </div>
         </section>
 
-        {/* IDENTIFICATION RESULTS */}
+        {/* RESULTS SECTION */}
         {scan && (
-          <section className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 sm:p-8 space-y-6">
+          <section className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 space-y-6">
             <div className="flex items-center justify-between border-b border-slate-800 pb-4">
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                  Identification Record
-                </span>
-                <h2 className="text-xl font-bold text-white mt-0.5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
+                  EQUIPMENT IDENTIFIED
+                </p>
+                <h2 className="mt-1 text-2xl font-black text-white">
                   {scan.name}
                 </h2>
               </div>
 
-              <span className="rounded-md border border-emerald-800/60 bg-emerald-950/40 px-2.5 py-1 text-xs font-mono font-medium text-emerald-400">
-                Match Verified
-              </span>
+              <div className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-black text-emerald-400">
+                ✓ SCANNED
+              </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <DataField label="Manufacturer" value={scan.manufacturer} />
-              <DataField label="Model Number" value={scan.model} />
-              <DataField label="Serial Number" value={scan.serial} />
-              <DataField label="Equipment Category" value={scan.equipment_type || "Unspecified"} />
+            <div className="grid gap-3 sm:grid-cols-2">
+              <ResultCard label="Manufacturer" value={scan.manufacturer} />
+              <ResultCard label="Model" value={scan.model} />
+              <ResultCard label="Serial" value={scan.serial} />
+              <ResultCard label="Equipment Type" value={scan.equipment_type || "Not visible"} />
             </div>
 
             {scan.confidence !== undefined && (
               <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-2">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-400">Match Confidence</span>
-                  <span className="font-mono font-semibold text-slate-200">
-                    {(scan.confidence * 100).toFixed(1)}%
+                  <span className="font-bold text-slate-400">
+                    Identification Confidence
+                  </span>
+                  <span className="font-black text-cyan-400">
+                    {Math.round(scan.confidence * 100)}%
                   </span>
                 </div>
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
+
+                <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
                   <div
-                    className="h-full bg-slate-300 transition-all duration-500"
-                    style={{ width: `${Math.round(scan.confidence * 100)}%` }}
+                    className="h-full rounded-full bg-cyan-400 transition-all duration-300"
+                    style={{
+                      width: `${Math.round(scan.confidence * 100)}%`,
+                    }}
                   />
                 </div>
               </div>
             )}
 
             {scan.analysis && (
-              <details className="group rounded-xl border border-slate-800 bg-slate-950 p-4 transition">
-                <summary className="cursor-pointer text-xs font-semibold text-slate-300 hover:text-white">
-                  Technical Scan Breakdown
+              <details className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+                <summary className="cursor-pointer font-bold text-xs text-cyan-400 hover:text-cyan-300">
+                  View Scan Details
                 </summary>
-                <div className="mt-3 border-t border-slate-800 pt-3 text-xs leading-relaxed font-mono text-slate-400 whitespace-pre-wrap">
+
+                <pre className="mt-3 whitespace-pre-wrap text-xs leading-relaxed text-slate-300 font-sans border-t border-slate-800 pt-3">
                   {scan.analysis}
-                </div>
+                </pre>
               </details>
             )}
 
             <button
-              className="w-full rounded-xl border border-slate-700 bg-slate-800 py-3 text-xs font-semibold text-slate-200 hover:bg-slate-700 hover:text-white transition"
-              onClick={() => alert("Saved to BAM Hub database.")}
+              className="w-full rounded-xl border border-cyan-500/30 bg-cyan-500/10 py-3 text-xs font-black text-cyan-300 hover:bg-cyan-500/20 transition"
+              onClick={() => alert("BAM Hub™ save feature coming next.")}
             >
-              Save Record to Workspace
+              SAVE TO BAM HUB™
             </button>
           </section>
         )}
 
-        {/* TECHNICAL ASSISTANT CHAT */}
-        <section className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 sm:p-8 space-y-6">
+        {/* BAM AI ASSIST™ SECTION */}
+        <section className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 space-y-6">
           <div className="flex items-center justify-between border-b border-slate-800 pb-4">
             <div>
-              <h2 className="text-lg font-bold text-white">Equipment Knowledge Base</h2>
-              <p className="text-xs text-slate-400">Query specifications, manuals, or maintenance logs</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
+                BAM AI
+              </p>
+              <h2 className="mt-0.5 text-2xl font-black text-white">
+                BAM AI Assist™
+              </h2>
             </div>
 
-            <span
-              className={`rounded-md px-2.5 py-1 text-xs font-mono font-medium ${
+            <div
+              className={`rounded-full px-3 py-1.5 text-xs font-black border ${
                 scan
-                  ? "bg-slate-800 text-slate-300 border border-slate-700"
-                  : "bg-slate-950 text-slate-600 border border-slate-800"
+                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
+                  : "bg-slate-950 border-slate-800 text-slate-500"
               }`}
             >
-              {scan ? "Session Active" : "Standby"}
-            </span>
+              {scan ? "● CONNECTED" : "● STANDBY"}
+            </div>
           </div>
 
           {!scan ? (
             <p className="text-xs text-slate-500 py-2">
-              Run an equipment scan to load technical context and ask questions.
+              Run a BAM Scan™ to connect AI Assist.
             </p>
           ) : (
             <div className="space-y-5">
-              {/* Quick Actions */}
-              <div className="flex flex-wrap gap-2">
+              {/* QUICK QUESTIONS */}
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {[
-                  "Maintenance schedule",
-                  "Common error codes",
-                  "Parts catalog",
-                  "Operating limits",
+                  "What is this?",
+                  "Troubleshoot it",
+                  "Find the manual",
+                  "What parts do I need?",
                 ].map((text) => (
                   <button
                     key={text}
                     onClick={() => askBam(text)}
                     disabled={asking}
-                    className="rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs font-medium text-slate-300 transition hover:border-slate-700 hover:text-white disabled:opacity-50"
+                    className="rounded-xl border border-slate-800 bg-slate-950 p-3 text-left text-xs font-bold text-cyan-300 hover:border-slate-700 hover:bg-slate-900 transition disabled:opacity-50"
                   >
                     {text}
                   </button>
                 ))}
               </div>
 
-              {/* Message History */}
-              <div className="space-y-3 pt-2">
+              {/* MESSAGES */}
+              <div className="space-y-3 pt-1">
                 {messages.map((message, index) => (
                   <div
                     key={index}
                     className={`rounded-xl p-4 text-xs leading-relaxed ${
                       message.role === "user"
-                        ? "ml-auto max-w-[80%] border border-slate-700 bg-slate-800 text-slate-100"
-                        : "mr-auto max-w-[90%] border border-slate-800 bg-slate-950 text-slate-300"
+                        ? "ml-auto max-w-[85%] border border-cyan-500/20 bg-cyan-950/20 text-cyan-100"
+                        : "mr-auto max-w-[90%] border border-slate-800 bg-slate-950 text-slate-200"
                     }`}
                   >
-                    <div className="mb-1 text-[10px] font-mono font-bold tracking-wider text-slate-500 uppercase">
-                      {message.role === "user" ? "Operator Inquiry" : "System Response"}
+                    <div className="mb-1 text-[10px] font-black text-cyan-400 uppercase tracking-wider">
+                      {message.role === "user" ? "YOU" : "BAM AI ASSIST™"}
                     </div>
-                    <div className="whitespace-pre-wrap">{message.text}</div>
+
+                    <div className="whitespace-pre-wrap text-xs leading-normal">
+                      {message.text}
+                    </div>
                   </div>
                 ))}
               </div>
 
-              {/* Input Control */}
-              <div className="flex gap-2 pt-2">
+              {/* QUESTION INPUT */}
+              <div className="flex gap-2 pt-1">
                 <input
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && askBam()}
-                  placeholder="Ask a technical question regarding this component..."
+                  placeholder="Ask BAM about this equipment..."
                   disabled={asking}
-                  className="min-w-0 flex-1 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-xs text-slate-100 placeholder-slate-500 outline-none focus:border-slate-600 transition"
+                  className="min-w-0 flex-1 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-xs text-white placeholder-slate-500 outline-none focus:border-cyan-500/50 transition"
                 />
 
                 <button
                   onClick={() => askBam()}
                   disabled={!question.trim() || asking}
-                  className="rounded-xl bg-slate-100 px-5 text-xs font-semibold text-slate-950 hover:bg-white transition disabled:opacity-30"
+                  className="rounded-xl bg-cyan-400 px-5 text-xs font-black text-slate-950 hover:bg-cyan-300 transition disabled:opacity-30"
                 >
-                  Submit
+                  ASK
                 </button>
               </div>
             </div>
@@ -410,8 +424,8 @@ export default function BamScanPage() {
         </section>
 
         {/* FOOTER */}
-        <footer className="pt-2 text-center text-xs font-mono text-slate-600">
-          BAM Industrial Data Systems
+        <footer className="py-6 text-center text-xs text-slate-600">
+          BAM Scan™ • BAMToolz™ • Ball AI Metrics™
         </footer>
 
       </div>
@@ -419,13 +433,13 @@ export default function BamScanPage() {
   );
 }
 
-function DataField({ label, value }: { label: string; value: string }) {
+function ResultCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-950 p-3.5">
-      <div className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500">
+    <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+      <div className="text-[10px] font-black uppercase text-cyan-400 tracking-wider">
         {label}
       </div>
-      <div className="mt-1 text-xs font-medium text-slate-200">
+      <div className="mt-1.5 text-xs font-bold text-white">
         {value || "Not visible"}
       </div>
     </div>
