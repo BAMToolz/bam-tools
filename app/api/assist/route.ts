@@ -6,14 +6,39 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// TEMPORARY TEST SWITCH
+// true = BAM AI Assist works
+// false = BAM AI Assist is locked
+const TEST_PAID_ACCESS =
+  process.env.BAM_TEST_PAID_ACCESS === "true";
+
 export async function POST(req: Request) {
   try {
+    // 🔒 PAID ACCESS CHECK
+    if (!TEST_PAID_ACCESS) {
+      return Response.json(
+        {
+          success: false,
+          locked: true,
+          error: "BAM AI Assist™ requires a BAM Pro subscription.",
+        },
+        { status: 402 }
+      );
+    }
+
     const body = await req.json();
-    const question = body.question || "";
+
+    const question = String(body.question || "").trim();
     const scanData = body.scanData || "";
 
     if (!question) {
-      return Response.json({ error: "No question provided." }, { status: 400 });
+      return Response.json(
+        {
+          success: false,
+          error: "No question provided.",
+        },
+        { status: 400 }
+      );
     }
 
     const response = await openai.responses.create({
@@ -34,17 +59,14 @@ Style:
 - Keep answers short.
 - Use plain technician language.
 - Do not repeat the full scan report.
-- Do not lead every answer with safety warnings.
-- Do not use long paragraphs.
-- Do not sound like a legal disclaimer.
 - Answer the technician's question directly.
+- Do not use long paragraphs.
 
 Safety Rules:
-- Do not tell a user to bypass, remove, disable, or ignore safety devices.
+- Do not bypass, remove, disable, or ignore safety devices.
 - Do not guarantee a repair.
 - Do not invent electrical, hydraulic, pneumatic, torque, wiring, part number, or OEM procedure details.
-- Only mention lockout/tagout or safety when the question asks for repair, inspection, electrical work, moving parts, stored energy, or physical service.
-- If the user only asks "what is this" or asks for identification, do not include a safety section.
+- Mention safety precautions when the question involves repair, inspection, electrical work, moving parts, or stored energy.
 
 BAM Scan™ Data:
 ${scanData || "No scan data provided."}
@@ -69,13 +91,19 @@ Next:
     });
 
     return Response.json({
-      result: response.output_text,
+      success: true,
+      locked: false,
+      result: response.output_text || "No answer returned.",
     });
   } catch (error) {
     console.error("BAM Assist error:", error);
 
     return Response.json(
-      { error: "BAM Assist failed. Check OpenAI key, credits, or Vercel logs." },
+      {
+        success: false,
+        error:
+          "BAM Assist failed. Check OpenAI key, credits, or Vercel logs.",
+      },
       { status: 500 }
     );
   }
