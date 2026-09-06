@@ -39,6 +39,7 @@ export default function BamScanPage() {
 
     try {
       const formData = new FormData();
+
       formData.append("image", file);
       formData.append("mode", "industrial");
 
@@ -59,8 +60,11 @@ export default function BamScanPage() {
         model: data.model || "Not visible",
         serial: data.serial || "Not visible",
         equipment_type: data.equipment_type || "Not visible",
-        confidence: data.confidence,
-        analysis: data.analysis,
+        confidence:
+          typeof data.confidence === "number"
+            ? data.confidence
+            : undefined,
+        analysis: data.analysis || "",
       });
 
       setMessages([
@@ -83,7 +87,9 @@ export default function BamScanPage() {
   async function askBam(text = question) {
     const userText = text.trim();
 
-    if (!userText || !scan) return;
+    if (!userText || !scan || asking) {
+      return;
+    }
 
     setAsking(true);
     setQuestion("");
@@ -115,7 +121,9 @@ export default function BamScanPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "BAM AI Assist failed.");
+        throw new Error(
+          data.error || "BAM AI Assist failed."
+        );
       }
 
       setMessages((prev) => [
@@ -141,6 +149,17 @@ export default function BamScanPage() {
     }
   }
 
+  function handleFileChange(
+    e: React.ChangeEvent<HTMLInputElement>
+  ) {
+    const selectedFile = e.target.files?.[0] || null;
+
+    setFile(selectedFile);
+    setError("");
+    setScan(null);
+    setMessages([]);
+  }
+
   return (
     <main className="min-h-screen bg-[#020617] px-4 py-6 text-white">
       <div className="mx-auto max-w-5xl">
@@ -163,7 +182,7 @@ export default function BamScanPage() {
 
           <a
             href="/"
-            className="rounded-xl border border-cyan-400/30 px-4 py-2 text-sm font-bold text-cyan-300"
+            className="rounded-xl border border-cyan-400/30 px-4 py-2 text-sm font-bold text-cyan-300 transition hover:bg-cyan-400/10"
           >
             Home
           </a>
@@ -173,9 +192,10 @@ export default function BamScanPage() {
         <section className="rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
           <div className="text-center">
 
+            {/* SCANNER ICON */}
             <div className="mx-auto flex h-40 w-40 items-center justify-center rounded-3xl border-2 border-cyan-300 bg-slate-900">
               <div className="h-20 w-20 rounded-2xl border-2 border-cyan-300">
-                <div className="mx-auto mt-8 h-4 w-4 rounded-full bg-cyan-300" />
+                <div className="mx-auto mt-8 h-4 w-4 rounded-full bg-cyan-300 shadow-lg shadow-cyan-300/50" />
               </div>
             </div>
 
@@ -188,9 +208,11 @@ export default function BamScanPage() {
               part, tool, or maintenance issue.
             </p>
 
-            {/* FILE */}
-            <label className="mx-auto mt-6 block max-w-md cursor-pointer rounded-2xl border border-dashed border-cyan-400/50 bg-slate-900 p-5 hover:bg-slate-800">
-              <div className="text-3xl">📷</div>
+            {/* FILE INPUT */}
+            <label className="mx-auto mt-6 block max-w-md cursor-pointer rounded-2xl border border-dashed border-cyan-400/50 bg-slate-900 p-5 transition hover:bg-slate-800">
+              <div className="text-3xl">
+                📷
+              </div>
 
               <div className="mt-2 font-black text-cyan-300">
                 Take Photo / Select Image
@@ -204,15 +226,14 @@ export default function BamScanPage() {
                 type="file"
                 accept="image/*"
                 capture="environment"
-                onChange={(e) =>
-                  setFile(e.target.files?.[0] || null)
-                }
+                onChange={handleFileChange}
                 className="hidden"
               />
             </label>
 
+            {/* SELECTED FILE */}
             {file && (
-              <div className="mx-auto mt-4 max-w-md rounded-xl bg-cyan-400/10 p-3 text-sm text-cyan-300">
+              <div className="mx-auto mt-4 max-w-md rounded-xl border border-cyan-400/20 bg-cyan-400/10 p-3 text-sm text-cyan-300">
                 ✓ {file.name}
               </div>
             )}
@@ -221,19 +242,21 @@ export default function BamScanPage() {
             <button
               onClick={runScan}
               disabled={!file || loading}
-              className="mx-auto mt-5 block w-full max-w-md rounded-2xl bg-cyan-400 p-4 font-black text-slate-950 disabled:cursor-not-allowed disabled:opacity-40"
+              className="mx-auto mt-5 block w-full max-w-md rounded-2xl bg-cyan-400 p-4 font-black text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {loading
                 ? "BAM SCAN™ ANALYZING..."
                 : "RUN BAM SCAN™"}
             </button>
 
+            {/* LOADING BAR */}
             {loading && (
               <div className="mx-auto mt-5 h-2 max-w-md overflow-hidden rounded-full bg-slate-800">
                 <div className="h-full w-full animate-pulse bg-cyan-300" />
               </div>
             )}
 
+            {/* ERROR */}
             {error && (
               <div className="mx-auto mt-4 max-w-md rounded-xl border border-red-400/30 bg-red-400/10 p-3 text-sm text-red-300">
                 {error}
@@ -246,7 +269,7 @@ export default function BamScanPage() {
         {scan && (
           <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-xs font-black tracking-widest text-cyan-400">
                   EQUIPMENT IDENTIFIED
@@ -257,11 +280,12 @@ export default function BamScanPage() {
                 </h2>
               </div>
 
-              <div className="rounded-full bg-emerald-400/10 px-3 py-2 text-xs font-black text-emerald-300">
+              <div className="shrink-0 rounded-full bg-emerald-400/10 px-3 py-2 text-xs font-black text-emerald-300">
                 ✓ SCANNED
               </div>
             </div>
 
+            {/* IDENTIFICATION GRID */}
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
 
               <Result
@@ -281,36 +305,52 @@ export default function BamScanPage() {
 
               <Result
                 label="Equipment Type"
-                value={scan.equipment_type || "Not visible"}
+                value={
+                  scan.equipment_type ||
+                  "Not visible"
+                }
               />
 
             </div>
 
+            {/* CONFIDENCE */}
             {scan.confidence !== undefined && (
               <div className="mt-4 rounded-xl bg-slate-900 p-4">
+
                 <div className="flex justify-between text-xs">
                   <span className="font-bold text-slate-400">
                     Identification Confidence
                   </span>
 
                   <span className="font-black text-cyan-300">
-                    {Math.round(scan.confidence * 100)}%
+                    {Math.round(
+                      scan.confidence * 100
+                    )}
+                    %
                   </span>
                 </div>
 
-                <div className="mt-2 h-2 rounded-full bg-slate-800">
+                <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-800">
                   <div
-                    className="h-2 rounded-full bg-cyan-300"
+                    className="h-2 rounded-full bg-cyan-300 transition-all duration-500"
                     style={{
-                      width: `${Math.round(
-                        scan.confidence * 100
+                      width: `${Math.min(
+                        100,
+                        Math.max(
+                          0,
+                          Math.round(
+                            scan.confidence * 100
+                          )
+                        )
                       )}%`,
                     }}
                   />
                 </div>
+
               </div>
             )}
 
+            {/* SCAN DETAILS */}
             {scan.analysis && (
               <details className="mt-4 rounded-xl bg-slate-900 p-4">
                 <summary className="cursor-pointer font-bold text-cyan-300">
@@ -325,20 +365,25 @@ export default function BamScanPage() {
 
             {/* SAVE */}
             <button
-              className="mt-5 w-full rounded-2xl border border-cyan-400/40 bg-cyan-400/10 p-4 font-black text-cyan-300 hover:bg-cyan-400/20"
+              className="mt-5 w-full rounded-2xl border border-cyan-400/40 bg-cyan-400/10 p-4 font-black text-cyan-300 transition hover:bg-cyan-400/20"
               onClick={() =>
-                alert("BAM Hub™ save feature coming next.")
+                alert(
+                  "BAM Hub™ save feature coming next."
+                )
               }
             >
               SAVE TO BAM HUB™
             </button>
+
           </section>
         )}
 
         {/* AI ASSIST */}
         <section className="mt-6 rounded-3xl border border-cyan-400/30 bg-slate-950 p-6 shadow-2xl">
 
-          <div className="flex items-center justify-between">
+          {/* AI HEADER */}
+          <div className="flex items-center justify-between gap-4">
+
             <div>
               <p className="text-xs font-black tracking-widest text-cyan-400">
                 BAM AI
@@ -356,18 +401,24 @@ export default function BamScanPage() {
                   : "bg-slate-900 text-slate-500"
               }`}
             >
-              {scan ? "● CONNECTED" : "● STANDBY"}
+              {scan
+                ? "● CONNECTED"
+                : "● STANDBY"}
             </div>
+
           </div>
 
+          {/* NO SCAN */}
           {!scan && (
             <p className="mt-5 text-sm text-slate-500">
               Run a BAM Scan™ to connect AI Assist.
             </p>
           )}
 
+          {/* CONNECTED */}
           {scan && (
             <>
+
               {/* QUICK QUESTIONS */}
               <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
 
@@ -379,9 +430,11 @@ export default function BamScanPage() {
                 ].map((text) => (
                   <button
                     key={text}
-                    onClick={() => askBam(text)}
+                    onClick={() =>
+                      askBam(text)
+                    }
                     disabled={asking}
-                    className="rounded-xl border border-cyan-400/20 bg-slate-900 p-3 text-left text-xs font-bold text-cyan-300 hover:bg-slate-800 disabled:opacity-50"
+                    className="rounded-xl border border-cyan-400/20 bg-slate-900 p-3 text-left text-xs font-bold text-cyan-300 transition hover:bg-slate-800 disabled:opacity-50"
                   >
                     {text}
                   </button>
@@ -391,59 +444,80 @@ export default function BamScanPage() {
 
               {/* MESSAGES */}
               <div className="mt-5 space-y-3">
-                {messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`rounded-2xl p-4 ${
-                      message.role === "user"
-                        ? "bg-cyan-400/10 text-cyan-100"
-                        : "bg-slate-900 text-slate-200"
-                    }`}
-                  >
-                    <div className="mb-2 text-xs font-black text-cyan-400">
-                      {message.role === "user"
-                        ? "YOU"
-                        : "BAM AI ASSIST™"}
-                    </div>
 
-                    <div className="whitespace-pre-wrap text-sm leading-6">
-                      {message.text}
+                {messages.map(
+                  (message, index) => (
+                    <div
+                      key={index}
+                      className={`rounded-2xl p-4 ${
+                        message.role === "user"
+                          ? "bg-cyan-400/10 text-cyan-100"
+                          : "bg-slate-900 text-slate-200"
+                      }`}
+                    >
+
+                      <div className="mb-2 text-xs font-black text-cyan-400">
+                        {message.role ===
+                        "user"
+                          ? "YOU"
+                          : "BAM AI ASSIST™"}
+                      </div>
+
+                      <div className="whitespace-pre-wrap text-sm leading-6">
+                        {message.text}
+                      </div>
+
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
+
               </div>
 
-              {/* QUESTION */}
+              {/* QUESTION INPUT */}
               <div className="mt-5 flex gap-2">
 
                 <input
                   value={question}
                   onChange={(e) =>
-                    setQuestion(e.target.value)
+                    setQuestion(
+                      e.target.value
+                    )
                   }
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") {
+                    if (
+                      e.key === "Enter" &&
+                      !e.shiftKey
+                    ) {
+                      e.preventDefault();
                       askBam();
                     }
                   }}
                   placeholder="Ask BAM about this equipment..."
                   disabled={asking}
-                  className="min-w-0 flex-1 rounded-xl border border-cyan-400/30 bg-slate-900 p-4 text-sm text-white outline-none"
+                  className="min-w-0 flex-1 rounded-xl border border-cyan-400/30 bg-slate-900 p-4 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300"
                 />
 
                 <button
                   onClick={() => askBam()}
-                  disabled={!question.trim() || asking}
-                  className="rounded-xl bg-cyan-400 px-5 font-black text-slate-950 disabled:opacity-30"
+                  disabled={
+                    !question.trim() ||
+                    asking
+                  }
+                  className="rounded-xl bg-cyan-400 px-5 font-black text-slate-950 transition hover:bg-cyan-300 disabled:opacity-30"
                 >
-                  ASK
+                  {asking
+                    ? "..."
+                    : "ASK"}
                 </button>
 
               </div>
+
             </>
           )}
+
         </section>
 
+        {/* FOOTER */}
         <footer className="py-8 text-center text-xs text-slate-600">
           BAM Scan™ • BAMToolz™ • Ball AI Metrics™
         </footer>
@@ -453,6 +527,8 @@ export default function BamScanPage() {
   );
 }
 
+/* RESULT COMPONENT */
+
 function Result({
   label,
   value,
@@ -461,4 +537,16 @@ function Result({
   value: string;
 }) {
   return (
-    <div className="rounded-xl bg-slate-900 p-4
+    <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
+
+      <div className="text-xs font-black uppercase tracking-wider text-slate-500">
+        {label}
+      </div>
+
+      <div className="mt-2 break-words text-lg font-black text-white">
+        {value || "Not visible"}
+      </div>
+
+    </div>
+  );
+}
