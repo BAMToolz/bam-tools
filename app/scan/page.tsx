@@ -188,8 +188,10 @@ export default function BamScanPage() {
         {/* HEADER */}
         <header className="flex items-center justify-between rounded-2xl border border-slate-800/80 bg-slate-900/60 p-4 sm:p-6 backdrop-blur-md shadow-xl">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 font-black text-xl shadow-lg shadow-cyan-400/10">
-              ⚡
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-400 shadow-lg shadow-cyan-400/10">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -223,8 +225,11 @@ export default function BamScanPage() {
                   
                   {/* CAMERA CAPTURE OPTION */}
                   <label className="group relative flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-950/80 p-6 transition hover:border-cyan-400/60 hover:bg-slate-900/60">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/5 group-hover:scale-105 transition-transform">
-                      <span className="text-2xl">📷</span>
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/5 group-hover:scale-105 transition-transform text-cyan-400">
+                      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M68 68h0M3 9a2 2 0 012-2h3.172a2 2 0 001.414-.586l1.828-1.828A2 2 0 0112.828 4h2.343a2 2 0 011.414.586l1.828 1.828A2 2 0 0019.828 7H21a2 2 0 012 2v9a2 2 0 01-2 2H3a2 2 0 01-2-2V9z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
                     </div>
 
                     <div className="mt-3 text-sm font-black text-white group-hover:text-cyan-300 transition-colors">
@@ -245,8 +250,10 @@ export default function BamScanPage() {
 
                   {/* FILE BROWSER OPTION */}
                   <label className="group relative flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-950/80 p-6 transition hover:border-cyan-400/60 hover:bg-slate-900/60">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/5 group-hover:scale-105 transition-transform">
-                      <span className="text-2xl">📁</span>
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/5 group-hover:scale-105 transition-transform text-cyan-400">
+                      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                      </svg>
                     </div>
 
                     <div className="mt-3 text-sm font-black text-white group-hover:text-cyan-300 transition-colors">
@@ -280,8 +287,10 @@ export default function BamScanPage() {
                   ) : (
                     /* PDF / DOCUMENT DISPLAY PREVIEW */
                     <div className="flex flex-col items-center justify-center py-12 px-4 bg-slate-900/50">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-3xl text-cyan-300">
-                        📄
+                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-400">
+                        <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
                       </div>
                       <div className="mt-3 text-sm font-bold text-white">
                         {file.name}
@@ -364,10 +373,10 @@ export default function BamScanPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <ResultTile label="Manufacturer" value={scan.manufacturer} icon="🏢" />
-              <ResultTile label="Model" value={scan.model} icon="⚙️" />
-              <ResultTile label="Serial" value={scan.serial} icon="🏷️" />
-              <ResultTile label="Type" value={scan.equipment_type || "Not visible"} icon="📦" />
+              <ResultTile label="Manufacturer" value={scan.manufacturer} />
+              <ResultTile label="Model" value={scan.model} />
+              <ResultTile label="Serial" value={scan.serial} />
+              <ResultTile label="Type" value={scan.equipment_type || "Not visible"} />
             </div>
 
             {scan.confidence !== undefined && (
@@ -402,7 +411,7 @@ export default function BamScanPage() {
             {scan.analysis && (
               <details className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
                 <summary className="cursor-pointer font-bold text-xs text-cyan-400 hover:text-cyan-300">
-                  🔍 View Detailed Diagnostic Analysis
+                  View Detailed Diagnostic Analysis
                 </summary>
 
                 <pre className="mt-3 whitespace-pre-wrap text-xs leading-relaxed text-slate-300 font-sans border-t border-slate-800/80 pt-3">
@@ -424,8 +433,10 @@ export default function BamScanPage() {
         <section className="rounded-3xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
           <div className="flex items-center justify-between border-b border-slate-800 pb-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 font-black">
-                🤖
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/10 border border-cyan-400/30 text-cyan-400">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h-0a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
               </div>
               <div>
                 <p className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
@@ -467,7 +478,7 @@ export default function BamScanPage() {
                     disabled={asking}
                     className="rounded-xl border border-slate-800 bg-slate-950 p-3 text-left text-xs font-bold text-cyan-300 hover:border-cyan-400/40 hover:bg-slate-900 transition disabled:opacity-50"
                   >
-                    💡 {text}
+                    {text}
                   </button>
                 ))}
               </div>
@@ -483,7 +494,7 @@ export default function BamScanPage() {
                     }`}
                   >
                     <div className="mb-1 text-[10px] font-black text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <span>{message.role === "user" ? "👤 YOU" : "⚡ BAM AI ASSIST™"}</span>
+                      <span>{message.role === "user" ? "YOU" : "BAM AI ASSIST™"}</span>
                     </div>
 
                     <div className="whitespace-pre-wrap text-xs leading-normal">
@@ -525,12 +536,11 @@ export default function BamScanPage() {
   );
 }
 
-function ResultTile({ label, value, icon }: { label: string; value: string; icon: string }) {
+function ResultTile({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-      <div className="flex items-center gap-2 text-[10px] font-black uppercase text-cyan-400 tracking-wider">
-        <span>{icon}</span>
-        <span>{label}</span>
+      <div className="text-[10px] font-black uppercase text-cyan-400 tracking-wider">
+        {label}
       </div>
       <div className="mt-2 text-xs font-bold text-white truncate">
         {value || "Not visible"}
